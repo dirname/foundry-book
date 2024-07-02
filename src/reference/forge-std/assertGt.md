@@ -1,6 +1,6 @@
 ## `assertGt`
 
-### Signature
+### 签名
 
 ```solidity
 function assertGt(uint256 left, uint256 right) internal;
@@ -18,13 +18,13 @@ function assertGt(int256 left, int256 right) internal;
 function assertGt(int256 left, int256 right, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `left` is strictly greater than than `right`.
+断言 `left` 严格大于 `right`。
 
-Optionally includes an error message in the revert string.
+可选地包含一个错误消息在回退字符串中。
 
-### SEE ALSO
+### 另请参阅
 
 - [`assertGtDecimal`](./assertGtDecimal.md)
 - [`assertGe`](./assertGe.md)

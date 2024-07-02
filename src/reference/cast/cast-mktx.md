@@ -1,27 +1,27 @@
 ## cast mktx
 
-### NAME
+### 名称
 
-cast-mktx - Build and sign a transaction.
+cast-mktx - 构建并签署交易。
 
-### SYNOPSIS
+### 概要
 
-``cast mktx`` [*options*] *to* [*sig*] [*args...*]
+``cast mktx`` [*选项*] *to* [*sig*] [*args...*]
 
-### DESCRIPTION
+### 描述
 
-Build and sign a transaction, without publishing it.
+构建并签署交易，但不发布它。
 
-The destination (*to*) can be an ENS name or an address.
+目标地址（*to*）可以是 ENS 名称或地址。
 
 {{#include sig-description.md}}
 
-### OPTIONS
+### 选项
 
 {{#include ../common/transaction-options.md}}
 
 `--create` *code* [*sig* *args...*]  
-&nbsp;&nbsp;&nbsp;&nbsp;Deploy a contract by specifying raw bytecode, in place of specifying a *to* address.
+&nbsp;&nbsp;&nbsp;&nbsp;通过指定原始字节码而不是指定 *to* 地址来部署合约。
 
 {{#include ../common/wallet-options-raw.md}}
 
@@ -35,19 +35,19 @@ The destination (*to*) can be an ENS name or an address.
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Sign a transaction that sends some ether to Vitalik using your Ledger:
+1. 使用 Ledger 签署向 Vitalik 发送一些以太币的交易：
     ```sh
     cast mktx --ledger vitalik.eth --value 0.1ether
     ```
 
-2. Sign a transaction that calls `deposit(address token, uint256 amount)` on a contract:
+2. 签署调用合约上 `deposit(address token, uint256 amount)` 函数的交易：
     ```sh
     cast mktx --ledger 0x... "deposit(address,uint256)" 0x... 1
     ```
 
-3. Sign a transaction that calls a function that expects a `struct`:
+3. 签署调用期望 `struct` 的函数的交易：
 
     ```solidity
     contract Test {
@@ -59,17 +59,17 @@ The destination (*to*) can be an ENS name or an address.
     }
     ```
 
-    Structs are encoded as tuples (see [struct encoding](../../misc/struct-encoding.md))
+    结构体被编码为元组（参见 [struct encoding](../../misc/struct-encoding.md)）
 
     ```sh
     cast mktx 0x... "myfunction((address,uint256))" "(0x...,1)"
     ```
 
-4. Sign a transaction with hex data in the `input` field of the transaction object:
+4. 在交易的 `input` 字段中使用十六进制数据签署交易：
     ```sh
     cast mktx 0x... 0x68656c6c6f20776f726c64
     ```
 
-### SEE ALSO
+### 参见
 
 [cast](./cast.md), [cast publish](./cast-publish.md), [cast send](./cast-send.md), [struct encoding](../../misc/struct-encoding.md)

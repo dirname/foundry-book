@@ -1,50 +1,5 @@
-# cast bind
-
-Generate a rust binding from a given ABI
-
-```bash
-$ cast bind --help
-Usage: cast bind [OPTIONS] <PATH_OR_ADDRESS>
-
-Arguments:
-  <PATH_OR_ADDRESS>
-          The contract address, or the path to an ABI Directory
-          
-          If an address is specified, then the ABI is fetched from Etherscan.
-
-Options:
-  -o, --output-dir <PATH>
-          Path to where bindings will be stored
-
-      --crate-name <NAME>
-          The name of the Rust crate to generate.
-          
-          This should be a valid crates.io crate name. However, this is currently not validated by
-          this command.
-          
-          [default: foundry-contracts]
-
-      --crate-version <VERSION>
-          The version of the Rust crate to generate.
-          
-          This should be a standard semver version string. However, it is not currently validated by
-          this command.
-          
-          [default: 0.0.1]
-
-      --separate-files
-          Generate bindings as separate files
-
-  -e, --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
-          
-          [env: ETHERSCAN_API_KEY=]
-
-  -c, --chain <CHAIN>
-          The chain name or EIP-155 chain ID
-          
-          [env: CHAIN=]
-
-  -h, --help
-          Print help (see a summary with '-h')
+```json
+{
+  "translation": "# cast bind\n\n从给定的 ABI 生成 Rust 绑定\n\n```bash\n$ cast bind --help\nUsage: cast bind [OPTIONS] <PATH_OR_ADDRESS>\n\nArguments:\n  <PATH_OR_ADDRESS>\n          合约地址，或 ABI 目录的路径\n          \n          如果指定了地址，则从 Etherscan 获取 ABI。\n\nOptions:\n  -o, --output-dir <PATH>\n          绑定文件存储的路径\n\n      --crate-name <NAME>\n          Rust crate 的名称。\n          \n          这应该是一个有效的 crates.io crate 名称。然而，目前该命令不会验证这一点。\n          \n          [default: foundry-contracts]\n\n      --crate-version <VERSION>\n          Rust crate 的版本。\n          \n          这应该是一个标准的 semver 版本字符串。然而，目前该命令不会验证这一点。\n          \n          [default: 0.0.1]\n\n      --separate-files\n          生成单独的绑定文件\n\n  -e, --etherscan-api-key <KEY>\n          Etherscan（或类似的）API 密钥\n          \n          [env: ETHERSCAN_API_KEY=]\n\n  -c, --chain <CHAIN>\n          链名称或 EIP-155 链 ID\n          \n          [env: CHAIN=]\n\n  -h, --help\n          打印帮助信息（使用 '-h' 查看摘要）\n```"
+}
 ```

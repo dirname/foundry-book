@@ -1,6 +1,7 @@
+```markdown
 # forge doc
 
-Generate documentation for the project
+生成项目的文档
 
 ```bash
 $ forge doc --help
@@ -8,37 +9,37 @@ Usage: forge doc [OPTIONS]
 
 Options:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下，如果是 Git 仓库，则为仓库的根目录，否则为当前工作目录。
 
   -o, --out <PATH>
-          The doc's output path.
+          文档的输出路径。
           
-          By default, it is the `docs/` in project root.
+          默认情况下，它是项目根目录下的 `docs/` 目录。
 
   -b, --build
-          Build the `mdbook` from generated files
+          从生成的文件构建 `mdbook`
 
   -s, --serve
-          Serve the documentation
+          提供文档服务
 
       --open
-          Open the documentation in a browser after serving
+          在浏览器中打开文档服务后
 
       --hostname <HOSTNAME>
-          Hostname for serving documentation
+          提供文档服务的主机名
 
   -p, --port <PORT>
-          Port for serving documentation
+          提供文档服务的端口
 
       --deployments [<DEPLOYMENTS>]
-          The relative path to the `hardhat-deploy` or `forge-deploy` artifact directory. Leave
-          blank for default
+          到 `hardhat-deploy` 或 `forge-deploy` 工件目录的相对路径。留空为默认值
 
   -i, --include-libraries
-          Whether to create docs for external libraries
+          是否为外部库创建文档
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
+```
 ```

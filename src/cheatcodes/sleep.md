@@ -1,18 +1,17 @@
 ## `sleep`
 
-### Signature
+### 签名
 
 ```solidity
 function sleep(uint256 milliseconds) external;
 ```
 
-### Description
+### 描述
 
-Sleeps for a given amount of milliseconds.
+休眠指定毫秒数。
 
-### Examples
+### 示例
 
 ```solidity
-vm.sleep(10_000); // Halts execution for 10 seconds
+vm.sleep(10_000); // 暂停执行 10 秒
 ```
-

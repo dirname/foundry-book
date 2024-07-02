@@ -1,51 +1,5 @@
-# cast wallet import
-
-Import a private key into an encrypted keystore
-
-```bash
-$ cast wallet import --help
-Usage: cast wallet import [OPTIONS] <ACCOUNT_NAME>
-
-Arguments:
-  <ACCOUNT_NAME>
-          The name for the account in the keystore
-
-Options:
-  -k, --keystore-dir <KEYSTORE_DIR>
-          If provided, keystore will be saved here instead of the default keystores directory
-          (~/.foundry/keystores)
-
-      --unsafe-password <PASSWORD>
-          Password for the JSON keystore in cleartext This is unsafe, we recommend using the default
-          hidden password prompt
-          
-          [env: CAST_UNSAFE_PASSWORD=]
-
-  -h, --help
-          Print help (see a summary with '-h')
-
-Wallet options - raw:
-  -i, --interactive
-          Open an interactive prompt to enter your private key
-
-      --private-key <RAW_PRIVATE_KEY>
-          Use the provided private key
-
-      --mnemonic <MNEMONIC>
-          Use the mnemonic phrase of mnemonic file at the specified path
-
-      --mnemonic-passphrase <PASSPHRASE>
-          Use a BIP39 passphrase for the mnemonic
-
-      --mnemonic-derivation-path <PATH>
-          The wallet derivation path.
-          
-          Works with both --mnemonic-path and hardware wallets.
-
-      --mnemonic-index <INDEX>
-          Use the private key from the given mnemonic index.
-          
-          Used with --mnemonic-path.
-          
-          [default: 0]
+```json
+{
+  "translation": "# cast wallet import\n\n将私钥导入加密密钥库\n\n```bash\n$ cast wallet import --help\nUsage: cast wallet import [OPTIONS] <ACCOUNT_NAME>\n\nArguments:\n  <ACCOUNT_NAME>\n          密钥库中账户的名称\n\nOptions:\n  -k, --keystore-dir <KEYSTORE_DIR>\n          如果提供，密钥库将保存在这里，而不是默认的密钥库目录\n          (~/.foundry/keystores)\n\n      --unsafe-password <PASSWORD>\n          明文密码用于JSON密钥库。这是不安全的，我们建议使用默认的隐藏密码提示\n          \n          [env: CAST_UNSAFE_PASSWORD=]\n\n  -h, --help\n          打印帮助信息（使用'-h'查看摘要）\n\n钱包选项 - 原始:\n  -i, --interactive\n          打开一个交互式提示以输入您的私钥\n\n      --private-key <RAW_PRIVATE_KEY>\n          使用提供的私钥\n\n      --mnemonic <MNEMONIC>\n          使用指定路径的助记词短语或助记词文件\n\n      --mnemonic-passphrase <PASSPHRASE>\n          使用BIP39助记词的密码\n\n      --mnemonic-derivation-path <PATH>\n          钱包派生路径。\n          \n          适用于--mnemonic-path和硬件钱包。\n\n      --mnemonic-index <INDEX>\n          使用给定助记词索引的私钥。\n          \n          与--mnemonic-path一起使用。\n          \n          [default: 0]\n```"
+}
 ```

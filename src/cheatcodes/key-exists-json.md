@@ -1,17 +1,17 @@
 ## `keyExistsJson`
 
-### Signature
+### 签名
 
 ```solidity
-// Check if a key exists in a JSON string.
+// 检查 JSON 字符串中是否存在某个键。
 vm.keyExistsJson(string memory json, string memory key) returns (bool)
 ```
 
-### Description
+### 描述
 
-Checks if a key exists in a JSON string.
+检查 JSON 字符串中是否存在某个键。
 
-### Examples
+### 示例
 
 ```solidity
 string memory path = "./path/to/jsonfile.json";

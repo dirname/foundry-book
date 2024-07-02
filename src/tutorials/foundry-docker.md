@@ -1,32 +1,32 @@
-## Dockerizing a Foundry project
+## 使用 Docker 化 Foundry 项目
 
-This tutorial shows you how to build, test, and deploy a smart contract using Foundry's Docker image. It adapts code from the [solmate nft](./solmate-nft.md) tutorial. If you haven't completed that tutorial yet, and are new to solidity, you may want to start with it first. Alternatively, if you have some familiarity with Docker and Solidity, you can use your own existing project and adjust accordingly. The full source code for both the NFT and the Docker stuff is available [here](https://github.com/dmfxyz/foundry-docker-tutorial).
+本教程将向您展示如何使用 Foundry 的 Docker 镜像构建、测试和部署智能合约。它改编自 [solmate nft](./solmate-nft.md) 教程中的代码。如果您还没有完成该教程，并且对 Solidity 还不熟悉，建议您先从该教程开始。或者，如果您对 Docker 和 Solidity 有一定的了解，可以使用您现有的项目并相应调整。NFT 和 Docker 部分的完整源代码可在 [这里](https://github.com/dmfxyz/foundry-docker-tutorial) 找到。
 
-> This tutorial is for illustrative purposes only and provided on an as-is basis. The tutorial is not audited nor fully tested. No code in this tutorial should be used in a production environment.
+> 本教程仅用于说明目的，并按原样提供。教程未经过审计也未完全测试。本教程中的代码不应在生产环境中使用。
 
-### Installation and Setup
+### 安装和设置
 
-The only installation required to run this tutorial is Docker, and optionally, an IDE of your choice. 
-Follow the [Docker installation instructions](/getting-started/installation.html#using-with-docker).
+运行本教程所需的唯一安装是 Docker，以及可选的您选择的 IDE。
+请按照 [Docker 安装说明](/getting-started/installation.html#using-with-docker) 进行操作。
 
- To keep future commands succinct, let's re-tag the image:  
- `docker tag ghcr.io/foundry-rs/foundry:latest foundry:latest`
+为了使未来的命令更简洁，让我们重新标记镜像：
+`docker tag ghcr.io/foundry-rs/foundry:latest foundry:latest`
 
-Having Foundry installed locally is not strictly required, but it may be helpful for debugging. You can install it using [foundryup](/getting-started/installation.html#using-foundryup).
+本地安装 Foundry 不是严格要求的，但可能有助于调试。您可以使用 [foundryup](/getting-started/installation.html#using-foundryup) 进行安装。
 
-Finally, to use any of the `cast` or `forge create` portions of this tutorial, you will need access to an Ethereum node. If you don't have your own node running (likely), you can use a 3rd party node service. We won't recommend a specific provider in this tutorial. A good place to start learning about Nodes-as-a-Service is [Ethereum's article](https://ethereum.org/en/developers/docs/nodes-and-clients/nodes-as-a-service/) on the subject.
+最后，要使用本教程中的 `cast` 或 `forge create` 部分，您需要访问一个以太坊节点。如果您没有运行自己的节点（很可能），可以使用第三方节点服务。本教程中不会推荐特定的提供商。了解节点即服务的好地方是 [Ethereum 的文章](https://ethereum.org/en/developers/docs/nodes-and-clients/nodes-as-a-service/)。
 
-**For the rest of this tutorial, it is assumed that the RPC endpoint of your ethereum node is set like this**: `export RPC_URL=<YOUR_RPC_URL>`
+**在本教程的其余部分中，假设您的以太坊节点的 RPC 端点设置如下**：`export RPC_URL=<YOUR_RPC_URL>`
 
-### A tour around the Foundry docker image
+### Foundry Docker 镜像的介绍
 
-The docker image can be used in two primary ways:
-1. As an interface directly to forge and cast
-2. As a base image for building your own containerized test, build, and deployment tooling
+Docker 镜像主要有两种使用方式：
+1. 直接作为 forge 和 cast 的接口
+2. 作为构建您自己的容器化测试、构建和部署工具的基础镜像
 
-We will cover both, but let's start by taking a look at interfacing with foundry using docker. This is also a good test that your local installation worked!
+我们将涵盖这两种方式，但首先让我们看看如何使用 Docker 与 Foundry 进行交互。这也是测试本地安装是否成功的好方法！
 
-We can run any of the `cast` [commands](/reference/cast/) against our docker image. Let's fetch the latest block information:
+我们可以对 Docker 镜像运行任何 `cast` [命令](/reference/cast/)。让我们获取最新的区块信息：
 ```sh
 $ docker run foundry "cast block --rpc-url $RPC_URL latest"
 baseFeePerGas        "0xb634241e3"
@@ -52,41 +52,41 @@ transactions         [...]
 uncles               []
 ```
 
-If we're in a directory with some Solidity [source code](https://github.com/dmfxyz/foundry-docker-tutorial), we can mount that directory into docker and use `forge` however we wish. For example:
+如果我们在包含一些 Solidity [源代码](https://github.com/dmfxyz/foundry-docker-tutorial) 的目录中，我们可以将该目录挂载到 Docker 中，并按需使用 `forge`。例如：
 
 ```sh
 $ docker run -v $PWD:/app foundry "forge test --root /app --watch"
 {{#include ../output/nft_tutorial/forge-test:output}}
 ```
-You can see our code was compiled and tested entirely within the container. Also, since we passed the `--watch` option, the container will recompile the code whenever a change is detected.
+您可以看到我们的代码完全在容器中编译和测试。此外，由于我们传递了 `--watch` 选项，容器将在检测到更改时重新编译代码。
 
-> Note: The Foundry docker image is built on alpine and designed to be as slim as possible. For this reason, it does not currently include development resources like `git`. If you are planning to manage your entire development lifecycle within the container, you should build a custom development image on top of Foundry's image.
+> 注意：Foundry Docker 镜像基于 alpine 构建，旨在尽可能精简。因此，它目前不包括 `git` 等开发资源。如果您计划在容器中管理整个开发生命周期，应在 Foundry 镜像之上构建自定义开发镜像。
 
-### Creating a "build and test" image
-Let's use the Foundry docker image as a base for using our own Docker image. We'll use the image to:
-1. Build our solidity code
-2. Run our solidity tests
+### 创建“构建和测试”镜像
+让我们使用 Foundry Docker 镜像作为基础来构建我们自己的 Docker 镜像。我们将使用该镜像来：
+1. 构建我们的 Solidity 代码
+2. 运行我们的 Solidity 测试
 
-A simple `Dockerfile` can accomplish these two goals:
+一个简单的 `Dockerfile` 可以实现这两个目标：
 ```docker
-# Use the latest foundry image
+# 使用最新的 foundry 镜像
 FROM ghcr.io/foundry-rs/foundry
 
-# Copy our source code into the container
+# 将我们的源代码复制到容器中
 WORKDIR /app
 
-# Build and test the source code
+# 构建和测试源代码
 COPY . .
 RUN forge build
 RUN forge test
 ```
 
-You can build this docker image and watch forge build/run the tests within the container:
+您可以构建这个 Docker 镜像，并在容器中观察 forge 构建/运行测试：
 ```sh
 $ docker build --no-cache --progress=plain .
 ```
 
-Now, what happens if one of our tests fails? Modify `src/test/NFT.t.sol` as you please to make one of the tests fails. Try to build image again.
+现在，如果我们的一个测试失败会发生什么？随意修改 `src/test/NFT.t.sol` 以使其中一个测试失败。尝试再次构建镜像。
 
 ```sh
 $ docker build --no-cache --progress=plain .
@@ -99,36 +99,36 @@ $ docker build --no-cache --progress=plain .
 error: failed to solve: executor failed running [/bin/sh -c forge test]: exit code: 1
 ```
 
-Our image failed to build because our tests failed! This is actually a nice property, because it means if we have a Docker image that successfully built (and therefore is available for use), we know the code inside the image passed the tests.*
-> *Of course, chain of custody of your docker images is very important. Docker layer hashes can be very useful for verification. In a production environment, consider [signing your docker images](https://docs.docker.com/engine/security/trust/#:~:text=To%20sign%20a%20Docker%20Image,the%20local%20Docker%20trust%20repository).
+我们的镜像构建失败了，因为我们的测试失败了！这实际上是一个很好的特性，因为这意味着如果我们有一个成功构建的 Docker 镜像（因此可供使用），我们就知道镜像中的代码通过了测试。*
+> *当然，您的 Docker 镜像的保管链非常重要。Docker 层哈希对于验证非常有用。在生产环境中，考虑 [签署您的 Docker 镜像](https://docs.docker.com/engine/security/trust/#:~:text=To%20sign%20a%20Docker%20Image,the%20local%20Docker%20trust%20repository)。
 
-### Creating a deployer image
+### 创建部署镜像
 
-Now, we'll move on to a bit more of an advanced Dockerfile. Let's add an entrypoint that allows us to deploy our code by using the built (and tested!) image. We can target the Rinkeby testnet first.
+现在，我们将继续构建一个更高级的 Dockerfile。让我们添加一个入口点，允许我们使用构建（并测试！）的镜像来部署我们的代码。我们先针对 Rinkeby 测试网。
 
 ```docker
-# Use the latest foundry image
+# 使用最新的 foundry 镜像
 FROM ghcr.io/foundry-rs/foundry
 
-# Copy our source code into the container
+# 将我们的源代码复制到容器中
 WORKDIR /app
 
-# Build and test the source code
+# 构建和测试源代码
 COPY . .
 RUN forge build
 RUN forge test
 
-# Set the entrypoint to the forge deployment command
+# 设置入口点为 forge 部署命令
 ENTRYPOINT ["forge", "create"]
 ```
 
-Let's build the image, this time giving it a name:
+让我们构建镜像，这次给它一个名称：
 
 ```sh
 $ docker build --no-cache --progress=plain -t nft-deployer .
 ```
 
-Here's how we can use our docker image to deploy:
+以下是我们如何使用 Docker 镜像进行部署：
 ```sh
 $ docker run nft-deployer --rpc-url $RPC_URL --constructor-args "ForgeNFT" "FNFT" "https://ethereum.org" --private-key $PRIVATE_KEY ./src/NFT.sol:NFT
 No files changed, compilation skipped
@@ -137,20 +137,19 @@ Deployed to: 0x23d465eaa80ad2e5cdb1a2345e4b54edd12560d3
 Transaction hash: 0xf88c68c4a03a86b0e7ecb05cae8dea36f2896cd342a6af978cab11101c6224a9
 ```
 
-We've just built, tested, and deployed our contract entirely within a docker container! This tutorial was intended for testnet, but you can run the exact same Docker image targeting mainnet and be confident that the same code is being deployed by the same tooling.
+我们刚刚完全在 Docker 容器中构建、测试和部署了我们的合约！本教程旨在用于测试网，但您可以运行完全相同的 Docker 镜像针对主网，并确信相同的代码由相同的工具部署。
 
-### Why is this useful?
+### 为什么这很有用？
 
-Docker is about portability, reproducibility, and environment invariance. This means you can be less concerned about unexpected changes when you switch between environments, networks, developers, etc. Here are a few basic examples of why **I** like to use Docker images for smart contract deployment:
+Docker 是关于可移植性、可重复性和环境不变性的。这意味着您可以减少在不同环境、网络、开发人员等之间切换时对意外变化的担忧。以下是一些基本的例子，说明为什么 **我** 喜欢使用 Docker 镜像进行智能合约部署：
 
-* Reduces overhead of ensuring system level dependencies match between deployment environments (e.g. does your production runner always have the same version of `forge` as your dev runner?)
-* Increases confidence that code has been tested prior to deployment and has not been altered (e.g. if, in the above image, your code re-compiles on deployment, that's a major red flag).
-* Eases pain points around segregation of duties: people with your mainnet credentials do not need to ensure they have the latest compiler, codebase, etc. It's easy to ensure that the docker deploy image someone ran in testnet is identical to the one targeting mainnet.
-* At the risk of sounding web2, Docker is an accepted standard on virtually all public cloud providers. It makes it easy to schedule jobs, tasks, etc that need to interact with the blockchain.
+* 减少确保系统级依赖在部署环境之间匹配的开销（例如，您的生产运行器是否总是与您的开发运行器具有相同版本的 `forge`？）
+* 增加信心，确保代码在部署前经过测试且未被更改（例如，如果在上述镜像中，您的代码在部署时重新编译，这是一个重大危险信号）。
+* 减轻职责分离的痛点：拥有您主网凭证的人不需要确保他们拥有最新的编译器、代码库等。很容易确保在测试网中某人运行的 Docker 部署镜像与针对主网的镜像相同。
+* 冒着听起来像 Web2 的风险，Docker 在几乎所有公共云提供商中都是一个被接受的标准。它使得与区块链交互的作业、任务等的调度变得容易。
 
-
-### Troubleshooting
-As noted above, the Foundry image does not include `git` by default. This can cause certain commands to fail without a clear cause. For example:
+### 故障排除
+如上所述，Foundry 镜像默认不包括 `git`。这可能会导致某些命令在没有明确原因的情况下失败。例如：
 ```bash
 $ docker run foundry "forge init --no-git /test"
 Initializing /test...
@@ -161,5 +160,4 @@ Error:
 Location:
    cli/src/cmd/forge/install.rs:107
 ```
-In this case, the failure is still caused by a missing `git` installation. The recommended fix is to build off the existing Foundry image and install any additional development dependencies you need.
-
+在这种情况下，失败仍然是由缺少 `git` 安装引起的。推荐的解决方法是基于现有的 Foundry 镜像构建，并安装任何其他所需的开发依赖项。

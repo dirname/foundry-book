@@ -1,17 +1,17 @@
-## Shell Autocompletion
+## 自动补全脚本
 
-You can generate autocompletion shell scripts for `bash`, `elvish`, `fish`, `powershell`, and `zsh`.
+你可以为 `bash`、`elvish`、`fish`、`powershell` 和 `zsh` 生成自动补全脚本。
 
 ### zsh
 
-First, ensure that the following is present somewhere in your `~/.zshrc` file (if not, add it):
+首先，确保在你的 `~/.zshrc` 文件中包含以下内容（如果没有，请添加）：
 
 ```sh
 autoload -U compinit
 compinit -i
 ```
 
-Then run:
+然后运行：
 
 ```sh
 forge completions zsh | sudo tee /usr/local/share/zsh/site-functions/_forge
@@ -19,7 +19,7 @@ cast completions zsh | sudo tee /usr/local/share/zsh/site-functions/_cast
 anvil completions zsh | sudo tee /usr/local/share/zsh/site-functions/_anvil
 ```
 
-For macOS:
+对于 macOS：
 
 ```sh
 forge completions zsh > /opt/homebrew/completions/zsh/_forge

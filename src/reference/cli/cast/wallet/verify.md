@@ -1,16 +1,18 @@
+```markdown
 # cast wallet verify
 
-Verify the signature of a message
+验证消息的签名
 
 ```bash
 $ cast wallet verify --help
 Usage: cast wallet verify --address <ADDRESS> <MESSAGE> <SIGNATURE>
 
 Arguments:
-  <MESSAGE>    The original message
-  <SIGNATURE>  The signature to verify
+  <MESSAGE>    原始消息
+  <SIGNATURE>  要验证的签名
 
 Options:
-  -a, --address <ADDRESS>  The address of the message signer
-  -h, --help               Print help
+  -a, --address <ADDRESS>  消息签名者的地址
+  -h, --help               打印帮助信息
+```
 ```

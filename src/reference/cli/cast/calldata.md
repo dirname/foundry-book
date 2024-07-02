@@ -1,15 +1,17 @@
-# cast calldata
+```markdown
+# 编码调用数据
 
-ABI-encode a function with arguments
+ABI 编码带有参数的函数
 
 ```bash
 $ cast calldata --help
 Usage: cast calldata <SIG> [ARGS]...
 
 Arguments:
-  <SIG>      The function signature in the format `<name>(<in-types>)(<out-types>)`
-  [ARGS]...  The arguments to encode
+  <SIG>      函数签名，格式为 `<name>(<in-types>)(<out-types>)`
+  [ARGS]...  要编码的参数
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

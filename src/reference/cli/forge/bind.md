@@ -1,6 +1,6 @@
 # forge bind
 
-Generate Rust bindings for smart contracts
+生成智能合约的 Rust 绑定
 
 ```bash
 $ forge bind --help
@@ -8,183 +8,179 @@ Usage: forge bind [OPTIONS]
 
 Options:
   -b, --bindings-path <PATH>
-          Path to where the contract artifacts are stored
+          存储合约工件的路径
 
       --select <SELECT>
-          Create bindings only for contracts whose names match the specified filter(s)
+          仅生成名称匹配指定过滤器的合约的绑定
 
       --select-all
-          Explicitly generate bindings for all contracts
+          显式生成所有合约的绑定
           
-          By default all contracts ending with `Test` or `Script` are excluded.
+          默认情况下，所有以 `Test` 或 `Script` 结尾的合约会被排除。
 
       --crate-name <NAME>
-          The name of the Rust crate to generate.
+          生成的 Rust crate 的名称。
           
-          This should be a valid crates.io crate name, however, this is not currently validated by
-          this command.
+          这应该是一个有效的 crates.io crate 名称，然而，此命令目前不会验证这一点。
           
-          [default: foundry-contracts]
+          [默认值: foundry-contracts]
 
       --crate-version <VERSION>
-          The version of the Rust crate to generate.
+          生成的 Rust crate 的版本。
           
-          This should be a standard semver version string, however, this is not currently validated
-          by this command.
+          这应该是一个标准的 semver 版本字符串，然而，此命令目前不会验证这一点。
           
-          [default: 0.1.0]
+          [默认值: 0.1.0]
 
       --module
-          Generate the bindings as a module instead of a crate
+          将绑定生成为模块而不是 crate
 
       --overwrite
-          Overwrite existing generated bindings.
+          覆盖现有的生成绑定。
           
-          By default, the command will check that the bindings are correct, and then exit. If
-          --overwrite is passed, it will instead delete and overwrite the bindings.
+          默认情况下，命令会检查绑定是否正确，然后退出。如果传递了 --overwrite，则会删除并覆盖绑定。
 
       --single-file
-          Generate bindings as a single file
+          将绑定生成为单个文件
 
       --skip-cargo-toml
-          Skip Cargo.toml consistency checks
+          跳过 Cargo.toml 一致性检查
 
       --skip-build
-          Skips running forge build before generating binding
+          在生成绑定之前跳过运行 forge build
 
       --skip-extra-derives
-          Don't add any additional derives to generated bindings
+          不在生成的绑定中添加任何额外的 derives
 
       --alloy
-          Generate bindings for the `alloy` library, instead of `ethers`
+          为 `alloy` 库生成绑定，而不是 `ethers`
 
       --alloy-version <ALLOY_VERSION>
-          Specify the alloy version
+          指定 alloy 版本
 
       --ethers
-          Generate bindings for the `ethers` library, instead of `alloy` (default, deprecated)
+          为 `ethers` 库生成绑定，而不是 `alloy`（默认，已弃用）
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
-Cache options:
+缓存选项:
       --force
-          Clear the cache and artifacts folder and recompile
+          清除缓存和工件文件夹并重新编译
 
-Build options:
+构建选项:
       --no-cache
-          Disable the cache
+          禁用缓存
 
       --skip <SKIP>...
-          Skip building files whose names contain the given filter.
+          跳过构建名称包含给定过滤器的文件。
           
-          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
+          `test` 和 `script` 是 `.t.sol` 和 `.s.sol` 的别名。
 
-Linker options:
+链接器选项:
       --libraries <LIBRARIES>
-          Set pre-linked libraries
+          设置预链接的库
           
-          [env: DAPP_LIBRARIES=]
+          [环境变量: DAPP_LIBRARIES=]
 
-Compiler options:
+编译器选项:
       --ignored-error-codes <ERROR_CODES>
-          Ignore solc warnings by error code
+          忽略 solc 警告的错误代码
 
       --deny-warnings
-          Warnings will trigger a compiler error
+          警告将触发编译器错误
 
       --no-auto-detect
-          Do not auto-detect the `solc` version
+          不自动检测 `solc` 版本
 
       --use <SOLC_VERSION>
-          Specify the solc version, or a path to a local solc, to build with.
+          指定用于构建的 solc 版本或本地 solc 的路径。
           
-          Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+          有效值格式为 `x.y.z`、`solc:x.y.z` 或 `path/to/solc`。
 
       --offline
-          Do not access the network.
+          不访问网络。
           
-          Missing solc versions will not be installed.
+          缺失的 solc 版本不会被安装。
 
       --via-ir
-          Use the Yul intermediate representation compilation pipeline
+          使用 Yul 中间表示编译管道
 
       --no-metadata
-          Do not append any metadata to the bytecode.
+          不在字节码中附加任何元数据。
           
-          This is equivalent to setting `bytecode_hash` to `none` and `cbor_metadata` to `false`.
+          这相当于将 `bytecode_hash` 设置为 `none` 并将 `cbor_metadata` 设置为 `false`。
 
       --silent
-          Don't print anything on startup
+          启动时不打印任何内容
 
       --ast
-          Includes the AST as JSON in the compiler output
+          在编译器输出中包含 AST 作为 JSON
 
       --evm-version <VERSION>
-          The target EVM version
+          目标 EVM 版本
 
       --optimize
-          Activate the Solidity optimizer
+          激活 Solidity 优化器
 
       --optimizer-runs <RUNS>
-          The number of optimizer runs
+          优化器运行次数
 
       --extra-output <SELECTOR>...
-          Extra output to include in the contract's artifact.
+          在合约的工件中包含的额外输出。
           
-          Example keys: evm.assembly, ewasm, ir, irOptimized, metadata
+          示例键: evm.assembly, ewasm, ir, irOptimized, metadata
           
-          For a full description, see
+          完整描述请参见
           <https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description>
 
       --extra-output-files <SELECTOR>...
-          Extra output to write to separate files.
+          写入单独文件的额外输出。
           
-          Valid values: metadata, ir, irOptimized, ewasm, evm.assembly
+          有效值: metadata, ir, irOptimized, ewasm, evm.assembly
 
-Project options:
+项目选项:
   -o, --out <PATH>
-          The path to the contract artifacts folder
+          合约工件文件夹的路径
 
       --revert-strings <REVERT>
-          Revert string configuration.
+          回退字符串配置。
           
-          Possible values are "default", "strip" (remove), "debug" (Solidity-generated revert
-          strings) and "verboseDebug"
+          可能的值为 "default"、"strip"（移除）、"debug"（Solidity 生成的回退字符串）和 "verboseDebug"
 
       --build-info
-          Generate build info files
+          生成构建信息文件
 
       --build-info-path <PATH>
-          Output path to directory that build info files will be written to
+          构建信息文件的输出路径目录
 
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在 Git 仓库中），或者当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的重映射
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境获取项目的重映射
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存的路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹的路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这相当于使用: `--contracts contracts --lib-paths node_modules`。
           
-          [aliases: hh]
+          [别名: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件的路径
 ```

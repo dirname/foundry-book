@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-wei - Convert an eth amount to wei.
+cast-to-wei - 将以太币数量转换为wei。
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-to-wei - Convert an eth amount to wei.
 
 ### DESCRIPTION
 
-Convert an eth amount to wei.
+将以太币数量转换为wei。
 
-Consider using [`cast to-unit`](./cast-to-unit.md).
+建议使用 [`cast to-unit`](./cast-to-unit.md)。
 
 ### OPTIONS
 

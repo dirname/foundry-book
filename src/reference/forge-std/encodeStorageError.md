@@ -1,11 +1,11 @@
 ## `encodeStorageError`
 
-### Signature
+### 签名
 
 ```solidity
 stdError.encodeStorageError
 ```
 
-### Description
+### 描述
 
-The internal Solidity error when trying to access data in storage that is corrupted. Data cannot be corrupted unless assembly had been used.
+当尝试访问存储中已损坏的数据时，Solidity 内部错误。除非使用汇编，否则数据不会损坏。

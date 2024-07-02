@@ -1,6 +1,7 @@
+```markdown
 # forge tree
 
-Display a tree visualization of the project's dependency graph
+显示项目的依赖关系图的树状可视化
 
 ```bash
 $ forge tree --help
@@ -8,46 +9,47 @@ Usage: forge tree [OPTIONS]
 
 Options:
       --no-dedupe
-          Do not de-duplicate (repeats all shared dependencies)
+          不要去重（重复所有共享依赖）
 
       --charset <CHARSET>
-          Character set to use in output.
+          在输出中使用的字符集。
           
-          [possible values: utf8, ascii]
+          [可能的值: utf8, ascii]
           
-          [default: utf8]
+          [默认值: utf8]
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
-Project options:
+项目选项:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在仓库中），或者当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源代码目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的重映射
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境获取的项目重映射
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这等同于使用: `--contracts contracts --lib-paths node_modules`。
           
-          [aliases: hh]
+          [别名: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件路径
+```
 ```

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-max-uint - Get the maximum uint256 value.
+cast-max-uint - 获取最大 uint256 值。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-max-uint - Get the maximum uint256 value.
 
 ### DESCRIPTION
 
-Get the maximum uint256 value.
+获取最大 uint256 值。
 
 ### OPTIONS
 

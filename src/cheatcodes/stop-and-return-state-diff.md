@@ -1,6 +1,6 @@
 ## `stopAndReturnStateDiff`
 
-### Signature
+### 签名
 
 ```solidity
 enum AccountAccessKind {
@@ -50,93 +50,92 @@ struct StorageAccess {
 function stopAndReturnStateDiff() external returns (AccountAccess[] memory accesses);
 ```
 
-### Description
+### 描述
 
-Retrieves state changes recorded after a call to [`startStateDiffRecording`](./start-state-diff-recording.md). This function will consume the recorded state diffs when called and disable state diff recording. One may call `startStateDiffRecording` to resume recording.
+检索在调用 [`startStateDiffRecording`](./start-state-diff-recording.md) 之后记录的状态变化。此函数将在调用时消耗记录的状态差异并禁用状态差异记录。可以调用 `startStateDiffRecording` 以恢复记录。
 
-There are two types of state change records; account accesses and storage accesses represented as `AccountAccess` and `StorageAccess`.
+有两种类型的状态变化记录；账户访问和存储访问，分别表示为 `AccountAccess` 和 `StorageAccess`。
 
-Account state changes (`AccountAccess`) are recorded at the start of a new EVM context; i.e. induced by the various CREATE, CALL and SELFDESTRUCT operations.
-An `AccountAccess` record contain storage accesses, represented as `StorageAccess`, that occurred before it was preempted via sub-calls or create operations.
+账户状态变化（`AccountAccess`）在新的 EVM 上下文开始时记录；即由各种 CREATE、CALL 和 SELFDESTRUCT 操作引起。
+一个 `AccountAccess` 记录包含存储访问，表示为 `StorageAccess`，这些访问在通过子调用或创建操作被抢占之前发生。
 
-The ordering of `AccountAccess` records reflect the EVM execution order of their associated operations. An `AccountAccess` is created whenever an EVM context is created or resumed.
-If a sub-context is created, a `Resume` `AccountAccess` is recorded to indicate that a previous `AccountAccess` that was pre-empted has been resumed.
+`AccountAccess` 记录的顺序反映了其相关操作的 EVM 执行顺序。每当创建或恢复 EVM 上下文时，都会创建一个 `AccountAccess`。
+如果创建了子上下文，则记录一个 `Resume` `AccountAccess`，以指示之前被抢占的 `AccountAccess` 已恢复。
 
 ### `AccountAccessKind`
 
-The kind of account access that determines the `account` that was accessed. This is typically designated by the EVM operation that initiated the account's execution context.
-If kind is `Call`, `DelegateCall`, `StaticCall` or `CallCode`, then the `account` is the callee.
-If kind is Create, then the account is the newly created account.
-If kind is SelfDestruct, then the account is the selfdestruct recipient.
-If kind is a Resume, then account represents an execution context that had resumed.
+访问账户的类型，决定了被访问的 `account`。这通常由启动账户执行上下文的 EVM 操作指定。
+如果类型是 `Call`、`DelegateCall`、`StaticCall` 或 `CallCode`，则 `account` 是被调用者。
+如果类型是 Create，则账户是新创建的账户。
+如果类型是 SelfDestruct，则账户是自毁接收者。
+如果类型是 Resume，则账户表示已恢复的执行上下文。
 
-- `Call` - The account was called
-- `DelegateCall` - The account was called via delegate call
-- `CallCode` - The account was called via callcode
-- `StaticCall` - The account was called via staticcall
-- `Create` - The account was created
-- `SelfDestruct` - The account was selfdestructed
-- `Resume` - Indicates that a previously pre-emptyed account access was resumed
-- `Balance` - The account's codesize was read
-- `Extcodesize` - The account's codesize was read
-- `Extcodehash` - The account's codehash was read
-- `Extcodecopy` - The account's code was copied
+- `Call` - 账户被调用
+- `DelegateCall` - 账户通过委托调用被调用
+- `CallCode` - 账户通过 callcode 被调用
+- `StaticCall` - 账户通过 staticcall 被调用
+- `Create` - 账户被创建
+- `SelfDestruct` - 账户被自毁
+- `Resume` - 指示之前被抢占的账户访问已恢复
+- `Balance` - 账户的代码大小被读取
+- `Extcodesize` - 账户的代码大小被读取
+- `Extcodehash` - 账户的代码哈希被读取
+- `Extcodecopy` - 账户的代码被复制
 
 ### `AccountAccess`
 
-- `chainInfo` - The chain and fork the accessed occurred.
-- `kind` - The kind of account access. This determines how to interpret the `AccountAccess`
-- `account` - The account that was accessed. It's the account created for `AccountAccessKind.Create`.
- In the case of an `AccountAccessKind.SelfDestruct`, it's the selfdestruct recipient.
- For all other types of `AccountAccessKind`, it's the account of the current EVM context.
-- `accessor` - What accessed `account`. That is either the account creator, caller or the account being selfdestructed.
-- `initialized` - If the account was initialized or empty prior to the access.
-An account is considered initialized if it has code, a
-non-zero nonce, or a non-zero balance.
-- `oldBalance`: The previous balance of the accessed `account`.
-- `newBalance` - The potential new balance of the accessed account.
-That is, all balance changes are recorded here, even if reverts occurred.
-- `deployedCode` - Code of the `account` deployed in the case of `AccountAccessKind.Create`. This field is empty For all other account access kinds.
-- `value` - The value passed along with the account access.
-- `data` - Input data provided (i.e. `msg.data`) in the case of a `CREATE` or `CALL` type access.
-- `reverted` - If this access reverted in either the current or parent context.
-- `storageAccesses` - An ordered list of storage accesses made while the account access is non-preemptive.
-- `depth` - Call depth traversed during the recording of state differences.
+- `chainInfo` - 访问发生的链和分叉
+- `kind` - 账户访问的类型。这决定了如何解释 `AccountAccess`
+- `account` - 被访问的账户。对于 `AccountAccessKind.Create`，它是创建的账户。
+  在 `AccountAccessKind.SelfDestruct` 的情况下，它是自毁接收者。
+  对于所有其他类型的 `AccountAccessKind`，它是当前 EVM 上下文的账户。
+- `accessor` - 访问 `account` 的对象。即账户创建者、调用者或被自毁的账户。
+- `initialized` - 访问前账户是否已初始化或为空。
+  如果账户有代码、非零 nonce 或非零余额，则认为已初始化。
+- `oldBalance` - 被访问 `account` 之前的余额。
+- `newBalance` - 被访问账户的潜在新余额。
+  即，即使发生回滚，所有余额变化也会记录在此。
+- `deployedCode` - 在 `AccountAccessKind.Create` 情况下部署的 `account` 的代码。对于所有其他账户访问类型，此字段为空。
+- `value` - 随账户访问传递的值。
+- `data` - 提供的输入数据（即 `msg.data`），在 `CREATE` 或 `CALL` 类型的访问中。
+- `reverted` - 如果此访问在当前或父上下文中回滚。
+- `storageAccesses` - 在账户访问未被抢占时进行的存储访问的有序列表。
+- `depth` - 记录状态差异时遍历的调用深度。
 
 ### `StorageAccess`
 
-The storage accesses made during an `AccountAccess`. `StorageAccess` cannot exist without an associated `AccountAccess`. This means that when state diffs begins on the given context, storage accesses made during that context are not recorded as the context (but not its sub-contexts) isn't recorded.
+在 `AccountAccess` 期间进行的存储访问。`StorageAccess` 不能在没有关联的 `AccountAccess` 的情况下存在。这意味着当在给定上下文开始记录状态差异时，在该上下文期间进行的存储访问不会被记录，因为该上下文（但不是其子上下文）未被记录。
 
-`StorageAccess` contains the following fields:
+`StorageAccess` 包含以下字段：
 
-- `account` - A account whose storage was accessed
-- `slot` - The slot that was accessed
-- `isWrite` - If the access was a write
-- `previousValue` - The value of the slot prior to this storage access
-- `newValue` - The value of the slot after this storage access
-- `reverted` - If this access was reverted
+- `account` - 其存储被访问的账户
+- `slot` - 被访问的槽
+- `isWrite` - 访问是否为写操作
+- `previousValue` - 此存储访问前的槽值
+- `newValue` - 此存储访问后的槽值
+- `reverted` - 如果此访问被回滚
 
-### Resumed `AccountAccess`
+### 恢复的 `AccountAccess`
 
-This type of AccountAccess is generated when a sub-context returns to its parent context. It retains the same values as the original context, including `accessor`, `account`, `initialized`, `storageAccesses`, and `reverted`.
-The following control flow table illustrate how Resume AccountAccesses are recorded.
+当子上下文返回到其父上下文时，会生成这种类型的 AccountAccess。它保留与原始上下文相同的值，包括 `accessor`、`account`、`initialized`、`storageAccesses` 和 `reverted`。
+以下控制流表说明了如何记录恢复的 AccountAccess。
 
-| Step in Contract A's `alpha()` | Step in Contract B's `beta()` | AccountAccess Records State              |
+| 合约 A 的 `alpha()` 步骤 | 合约 B 的 `beta()` 步骤 | AccountAccess 记录状态              |
 |--------------------------------|-------------------------------|------------------------------------------|
-| Call A.alpha()                |                               | [A.call]              |
-| Access state                |                               | [A.call[A.access]]              |
-| Call B.beta()               | B.beta() begins               | [A.call[A.access], B.call]                  |
-| (Execution Paused)          | Access state               | [A.call[A.access], B.call[B.access]]                  |
-|                             |   Return                     |                        |
-| Resume execution            | (Return to A.alpha())         | [A.call[A.access], B.call[B.access]]             |
-| Access state                 |                              | [<br>&emsp;A.call[A.access], <br>&emsp;B.call[B.access], <br>&emsp;A.resume[A.access']<br>]       |
+| 调用 A.alpha()                |                               | [A.call]              |
+| 访问状态                |                               | [A.call[A.access]]              |
+| 调用 B.beta()               | B.beta() 开始               | [A.call[A.access], B.call]                  |
+| (执行暂停)          | 访问状态               | [A.call[A.access], B.call[B.access]]                  |
+|                             |   返回                     |                        |
+| 恢复执行            | (返回到 A.alpha())         | [A.call[A.access], B.call[B.access]]             |
+| 访问状态                 |                              | [<br>&emsp;A.call[A.access], <br>&emsp;B.call[B.access], <br>&emsp;A.resume[A.access']<br>]       |
 
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> A Resumed AccountAccess is created only if storage accesses occurred after a context was resumed.
+> 仅当上下文恢复后发生存储访问时，才会创建恢复的 AccountAccess。
 
-### Example: Recording storage state changes during a CREATE operation
+### 示例：在 CREATE 操作期间记录存储状态变化
 ```solidity
 contract Contract {
     uint256 internal _reserved;
@@ -169,9 +168,9 @@ assertEq(records[0].storageAccesses[0].newValue, bytes32(uint(100)));
 assertEq(records[0].storageAccesses[0].reverted, false);
 ```
 
-Note that there are no `Resume` account accesses in this example.
+注意，此示例中没有 `Resume` 账户访问。
 
-### Example: Resumed Account Access
+### 示例：恢复的账户访问
 ```solidity
 contract Foo {
     Bar b;
@@ -199,7 +198,7 @@ Vm.AccountAccess memory fooCall = records[0];
 assertEq(fooCall.kind, Vm.AccountAccessKind.Call);
 assertEq(fooCall.account, address(foo));
 assertEq(fooCall.accessor, address(this));
-// foo.val increment
+// foo.val 增加
 assertEq(fooCall.storageAccesses.length, 2);
 assertEq(fooCall.storageAccesses[0].isWrite, false);
 assertEq(fooCall.storageAccesses[1].isWrite, true);
@@ -215,7 +214,7 @@ assertEq(barCall.accessor, address(foo));
 // foo.run RESUME
 Vm.AccountAccess memory fooResume = records[2];
 assertEq(fooResume.kind, Vm.AccountAccessKind.Resume);
-// foo.val increment
+// foo.val 增加
 assertEq(fooResume.storageAccesses.length, 2);
 assertEq(fooResume.storageAccesses[0].isWrite, false);
 assertEq(fooResume.storageAccesses[1].isWrite, true);

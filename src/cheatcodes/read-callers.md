@@ -1,6 +1,6 @@
 ## `readCallers`
 
-### Signature
+### 签名
 
 ```solidity
 enum CallerMode {
@@ -16,53 +16,53 @@ external
 returns (CallerMode callerMode, address msgSender, address txOrigin);
 ```
 
-### Description
+### 描述
 
-Reads the current `CallerMode`, `msg.sender`, and `tx.origin`.
+读取当前的 `CallerMode`、`msg.sender` 和 `tx.origin`。
 
-The `CallerMode` enum indicates if there is an active caller modification and the type.
+`CallerMode` 枚举指示是否有活动的调用者修改及其类型。
 
-- If there is an active prank:
-  - `callerMode` will be equal to:
-    - `CallerMode.Prank` if the prank has been set with [`prank`](./prank.md).
-    - `CallerMode.RecurrentPrank` if the prank has been set with [`startPrank`](./start-prank.md).
+- 如果有活动的 prank：
+  - `callerMode` 将等于：
+    - `CallerMode.Prank` 如果 prank 已通过 [`prank`](./prank.md) 设置。
+    - `CallerMode.RecurrentPrank` 如果 prank 已通过 [`startPrank`](./start-prank.md) 设置。
 
-- If there is an active broadcast:
-  - `callerMode` will be equal to:
-    - `CallerMode.Broadcast` if the broadcast has been set with [`broadcast`](./broadcast.md).
-    - `CallerMode.RecurrentBroadcast` if the broadcast has been set with [`startBroadcast`](./start-broadcast.md).
+- 如果有活动的 broadcast：
+  - `callerMode` 将等于：
+    - `CallerMode.Broadcast` 如果 broadcast 已通过 [`broadcast`](./broadcast.md) 设置。
+    - `CallerMode.RecurrentBroadcast` 如果 broadcast 已通过 [`startBroadcast`](./start-broadcast.md) 设置。
 
-- If no caller modification is active:
-  - `callerMode` will be equal to `CallerMode.None`.
+- 如果没有活动的调用者修改：
+  - `callerMode` 将等于 `CallerMode.None`。
 
-### Examples
+### 示例
 
 ```solidity
 CallerMode callerMode;
 address msgSender;
 address txOrigin;
 
-// Example 1
+// 示例 1
 (callerMode, msgSender, txOrigin) = vm.readCallers();
 assertEq(callerMode, CallerMode.None);
 assertEq(msgSender, defaultSenderAddress);
 assertEq(txOrigin, defaultOriginAddress);
 
-// Example 2
+// 示例 2
 vm.prank(senderPrankAddress);
 (callerMode, msgSender, txOrigin) = vm.readCallers();
 assertEq(callerMode, CallerMode.Prank);
 assertEq(msgSender, senderPrankAddress);
 assertEq(txOrigin, defaultOriginAddress);
 
-// Example 3
+// 示例 3
 vm.prank(senderPrankAddress, originPrankAddress);
 (callerMode, msgSender, txOrigin) = vm.readCallers();
 assertEq(callerMode, CallerMode.Prank);
 assertEq(msgSender, senderPrankAddress);
 assertEq(txOrigin, originPrankAddress);
 
-// Example 4
+// 示例 4
 vm.broadcast(broadcastAddress);
 (callerMode, msgSender, txOrigin) = vm.readCallers();
 assertEq(callerMode, CallerMode.Broadcast);
@@ -70,7 +70,7 @@ assertEq(msgSender, broadcastAddress);
 assertEq(txOrigin, broadcastAddress);
 ```
 
-### SEE ALSO
+### 参见
 
 - [prank](./prank.md)
 - [startPrank](./start-prank.md)

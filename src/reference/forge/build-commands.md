@@ -1,4 +1,4 @@
-## Build Commands
+## 构建命令
 
 - [forge build](./forge-build.md)
 - [forge clean](./forge-clean.md)

@@ -1,22 +1,22 @@
 ## `fail`
 
-### Signature
+### 签名
 
 ```solidity
 function fail(string memory err) internal virtual;
 ```
 
-### Description
+### 描述
 
-Fail a test with a message if a certain branch or execution point is hit.
+如果命中某个分支或执行点，则使用消息使测试失败。
 
-### Examples
+### 示例
 
 ```solidity
 function test() external {
     for(uint256 place; place < 10; ++i){
         if(game.leaderboard(place) == address(this)) return;
     }
-    fail("Not in the top 10.");
+    fail("不在前10名。");
 }
 ```

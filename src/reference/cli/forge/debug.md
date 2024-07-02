@@ -1,6 +1,7 @@
+```markdown
 # forge debug
 
-Debugs a single smart contract as a script
+调试单个智能合约作为脚本
 
 ```bash
 $ forge debug --help
@@ -8,279 +9,273 @@ Usage: forge debug [OPTIONS] <PATH> [ARGS]...
 
 Arguments:
   <PATH>
-          The contract you want to run. Either the file path or contract name.
+          你要运行的合约。可以是文件路径或合约名称。
           
-          If multiple contracts exist in the same file you must specify the target contract with
-          --target-contract.
+          如果同一个文件中存在多个合约，你必须使用 --target-contract 指定目标合约。
 
   [ARGS]...
-          Arguments to pass to the script function
+          传递给脚本函数的参数
 
 Options:
       --target-contract <CONTRACT_NAME>
-          The name of the contract you want to run
+          你要运行的合约名称
           
           [aliases: tc]
 
   -s, --sig <SIGNATURE>
-          The signature of the function you want to call in the contract, or raw calldata
+          你要调用的合约函数签名，或原始调用数据
           
           [default: run()]
 
       --debug
-          Open the script in the debugger
+          在调试器中打开脚本
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
-Cache options:
+缓存选项：
       --force
-          Clear the cache and artifacts folder and recompile
+          清除缓存和 artifacts 文件夹并重新编译
 
-Build options:
       --no-cache
-          Disable the cache
+          禁用缓存
 
       --skip <SKIP>...
-          Skip building files whose names contain the given filter.
+          跳过构建名称包含给定过滤器的文件。
           
-          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
+          `test` 和 `script` 是 `.t.sol` 和 `.s.sol` 的别名。
 
-Linker options:
+链接器选项：
       --libraries <LIBRARIES>
-          Set pre-linked libraries
+          设置预链接的库
           
           [env: DAPP_LIBRARIES=]
 
-Compiler options:
+编译器选项：
       --ignored-error-codes <ERROR_CODES>
-          Ignore solc warnings by error code
+          忽略 solc 警告的错误代码
 
       --deny-warnings
-          Warnings will trigger a compiler error
+          警告将触发编译器错误
 
       --no-auto-detect
-          Do not auto-detect the `solc` version
+          不要自动检测 `solc` 版本
 
       --use <SOLC_VERSION>
-          Specify the solc version, or a path to a local solc, to build with.
+          指定用于构建的 solc 版本，或本地 solc 的路径。
           
-          Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+          有效值格式为 `x.y.z`、`solc:x.y.z` 或 `path/to/solc`。
 
       --offline
-          Do not access the network.
+          不要访问网络。
           
-          Missing solc versions will not be installed.
+          缺失的 solc 版本将不会被安装。
 
       --via-ir
-          Use the Yul intermediate representation compilation pipeline
+          使用 Yul 中间表示编译管道
 
       --no-metadata
-          Do not append any metadata to the bytecode.
+          不要在字节码中附加任何元数据。
           
-          This is equivalent to setting `bytecode_hash` to `none` and `cbor_metadata` to `false`.
+          这相当于将 `bytecode_hash` 设置为 `none` 并将 `cbor_metadata` 设置为 `false`。
 
       --silent
-          Don't print anything on startup
+          启动时不要打印任何内容
 
       --ast
-          Includes the AST as JSON in the compiler output
+          在编译器输出中包含 AST 作为 JSON
 
       --evm-version <VERSION>
-          The target EVM version
+          目标 EVM 版本
 
       --optimize
-          Activate the Solidity optimizer
+          激活 Solidity 优化器
 
       --optimizer-runs <RUNS>
-          The number of optimizer runs
+          优化器运行次数
 
       --extra-output <SELECTOR>...
-          Extra output to include in the contract's artifact.
+          在合约的 artifact 中包含的额外输出。
           
-          Example keys: evm.assembly, ewasm, ir, irOptimized, metadata
+          示例键：evm.assembly, ewasm, ir, irOptimized, metadata
           
-          For a full description, see
+          完整描述请参见
           <https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description>
 
       --extra-output-files <SELECTOR>...
-          Extra output to write to separate files.
+          写入单独文件的额外输出。
           
-          Valid values: metadata, ir, irOptimized, ewasm, evm.assembly
+          有效值：metadata, ir, irOptimized, ewasm, evm.assembly
 
-Project options:
+项目选项：
   -o, --out <PATH>
-          The path to the contract artifacts folder
+          合约 artifacts 文件夹的路径
 
       --revert-strings <REVERT>
-          Revert string configuration.
+          回退字符串配置。
           
-          Possible values are "default", "strip" (remove), "debug" (Solidity-generated revert
-          strings) and "verboseDebug"
+          可能的值为 "default"、"strip"（移除）、"debug"（Solidity 生成的回退字符串）和 "verboseDebug"
 
       --build-info
-          Generate build info files
+          生成构建信息文件
 
       --build-info-path <PATH>
-          Output path to directory that build info files will be written to
+          构建信息文件的输出路径目录
 
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在 Git 仓库中），或当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的 remappings
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境获取的项目的 remappings
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存的路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹的路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这相当于使用：`--contracts contracts --lib-paths node_modules`。
           
           [aliases: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件的路径
 
-EVM options:
+EVM 选项：
   -f, --fork-url <URL>
-          Fetch state over a remote endpoint instead of starting from an empty state.
+          从远程端点获取状态，而不是从空状态开始。
           
-          If you want to fetch state from a specific block number, see --fork-block-number.
+          如果你想从特定区块号获取状态，请参见 --fork-block-number。
           
           [aliases: rpc-url]
 
       --fork-block-number <BLOCK>
-          Fetch state from a specific block number over a remote endpoint.
+          从远程端点获取特定区块号的状态。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --fork-retries <RETRIES>
-          Number of retries.
+          重试次数。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --fork-retry-backoff <BACKOFF>
-          Initial retry backoff on encountering errors.
+          遇到错误时的初始重试退避。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --no-storage-caching
-          Explicitly disables the use of RPC caching.
+          显式禁用 RPC 缓存。
           
-          All storage slots are read entirely from the endpoint.
+          所有存储槽完全从端点读取。
           
-          This flag overrides the project's configuration file.
+          此标志覆盖项目的配置文件。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --initial-balance <BALANCE>
-          The initial balance of deployed test contracts
+          部署的测试合约的初始余额
 
       --sender <ADDRESS>
-          The address which will be executing tests
+          将执行测试的地址
 
       --ffi
-          Enable the FFI cheatcode
+          启用 FFI 作弊码
 
       --always-use-create-2-factory
-          Use the create 2 factory in all cases including tests and non-broadcasting scripts
+          在所有情况下（包括测试和非广播脚本）使用 create 2 工厂
 
   -v, --verbosity...
-          Verbosity of the EVM.
+          EVM 的详细程度。
           
-          Pass multiple times to increase the verbosity (e.g. -v, -vv, -vvv).
+          多次传递以增加详细程度（例如 -v、-vv、-vvv）。
           
-          Verbosity levels:
-          - 2: Print logs for all tests
-          - 3: Print execution traces for failing tests
-          - 4: Print execution traces for all tests, and setup traces for failing tests
-          - 5: Print execution and setup traces for all tests
+          详细程度级别：
+          - 2：打印所有测试的日志
+          - 3：打印失败测试的执行 traces
+          - 4：打印所有测试的执行 traces，以及失败测试的设置 traces
+          - 5：打印所有测试的执行和设置 traces
 
-Fork config:
+Fork 配置：
       --compute-units-per-second <CUPS>
-          Sets the number of assumed available compute units per second for this provider
+          设置此提供者假设可用的计算单元每秒数量
           
-          default value: 330
+          默认值：330
           
-          See also --fork-url and
+          请参见 --fork-url 和
           <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
 
       --no-rpc-rate-limit
-          Disables rate limiting for this node's provider.
+          禁用此节点提供者的速率限制。
           
-          See also --fork-url and
+          请参见 --fork-url 和
           <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
           
           [aliases: no-rate-limit]
 
-Executor environment config:
+执行环境配置：
       --gas-limit <GAS_LIMIT>
-          The block gas limit
+          区块 gas 限制
 
       --code-size-limit <CODE_SIZE>
-          EIP-170: Contract code size limit in bytes. Useful to increase this because of tests. By
-          default, it is 0x6000 (~25kb)
+          EIP-170：合约代码大小限制（字节）。增加此值有助于测试。默认值为 0x6000（~25kb）
 
       --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+          链名称或 EIP-155 链 ID
           
           [aliases: chain-id]
 
       --gas-price <GAS_PRICE>
-          The gas price
+          gas 价格
 
       --block-base-fee-per-gas <FEE>
-          The base fee in a block
+          区块的基础费用
           
           [aliases: base-fee]
 
       --tx-origin <ADDRESS>
-          The transaction origin
+          交易发起者
 
       --block-coinbase <ADDRESS>
-          The coinbase of the block
+          区块的 coinbase
 
       --block-timestamp <TIMESTAMP>
-          The timestamp of the block
+          区块的时间戳
 
       --block-number <BLOCK>
-          The block number
+          区块号
 
       --block-difficulty <DIFFICULTY>
-          The block difficulty
+          区块难度
 
       --block-prevrandao <PREVRANDAO>
-          The block prevrandao value. NOTE: Before merge this field was mix_hash
+          区块的 prevrandao 值。注意：合并前此字段为 mix_hash
 
       --block-gas-limit <GAS_LIMIT>
-          The block gas limit
+          区块 gas 限制
 
       --memory-limit <MEMORY_LIMIT>
-          The memory limit per EVM execution in bytes. If this limit is exceeded, a `MemoryLimitOOG`
-          result is thrown.
+          EVM 执行的内存限制（字节）。如果超过此限制，将抛出 `MemoryLimitOOG` 结果。
           
-          The default is 128MiB.
+          默认值为 128MiB。
 
       --disable-block-gas-limit
-          Whether to disable the block gas limit checks
+          是否禁用区块 gas 限制检查
           
           [aliases: no-gas-limit]
 
       --isolate
-          Whether to enable isolation of calls. In isolation mode all top-level calls are executed
-          as a separate transaction in a separate EVM context, enabling more precise gas accounting
-          and transaction state changes
+          是否启用调用的隔离。在隔离模式下，所有顶级调用都作为单独的交易在单独的 EVM 上下文中执行，实现更精确的 gas 计算和交易状态变化
+```
 ```

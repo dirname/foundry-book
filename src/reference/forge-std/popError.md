@@ -1,11 +1,11 @@
 ## `popError`
 
-### Signature
+### 签名
 
 ```solidity
 stdError.popError
 ```
 
-### Description
+### 描述
 
-The internal Solidity error when trying to pop an element off of an empty array.
+当尝试从空数组中弹出元素时，Solidity 的内部错误。

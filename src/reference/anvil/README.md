@@ -1,51 +1,51 @@
 ## anvil
 
-### NAME
+### 名称
 
-anvil - Create a local testnet node for deploying and testing smart contracts. It can also be used to fork other EVM compatible networks.
+anvil - 创建一个本地测试网节点，用于部署和测试智能合约。它还可以用于分叉其他 EVM 兼容网络。
 
-### SYNOPSIS
+### 概要
 
-`anvil` [*options*]
+`anvil` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Create a local testnet node for deploying and testing smart contracts. It can also be used to fork other EVM compatible networks.
+创建一个本地测试网节点，用于部署和测试智能合约。它还可以用于分叉其他 EVM 兼容网络。
 
-This section covers an extensive list of information about Mining Modes, Supported Transport Layers, Supported RPC Methods, Anvil flags and their usages. You can run multiple flags at the same time.
+本节涵盖了关于挖矿模式、支持的传输层、支持的 RPC 方法、Anvil 标志及其用法的广泛信息列表。你可以同时运行多个标志。
 
-#### Mining Modes
-Mining modes refer to how frequent blocks are mined using Anvil. By default, it automatically generates a new block as soon as a transaction is submitted.
+#### 挖矿模式
+挖矿模式指的是使用 Anvil 挖矿的频率。默认情况下，它会在提交交易时自动生成一个新区块。
 
-You can change this setting to interval mining if you will, which means that a new block will be generated in a given period of time selected by the user. If you want to go for this type of mining, you can do it by adding the `--block-time <block-time-in-seconds>` flag, like in the following example.
+你可以更改此设置为间隔挖矿，这意味着将在用户选择的给定时间段内生成一个新区块。如果你想要这种类型的挖矿，可以通过添加 `--block-time <block-time-in-seconds>` 标志来实现，如下例所示。
 ```sh
-# Produces a new block every 10 seconds
+# 每 10 秒生成一个新区块
 anvil --block-time 10
 ```
 
-There's also a third mining mode called never. In this case, it disables auto and interval mining, and mine on demand instead. You can do this by typing:
+还有一种第三种挖矿模式称为从不。在这种情况下，它禁用自动和间隔挖矿，改为按需挖矿。你可以通过输入以下命令来实现：
 ```sh
-# Enables never mining mode
+# 启用从不挖矿模式
 anvil --no-mining
 ```
 
-To speed up the finalization of blocks, you can use the `--slots-in-an-epoch` flag with a value of `1` for example. This will lead to the block at height `N-2` being finalized, where `N` is the latest block.
+为了加快区块的最终确定，你可以使用 `--slots-in-an-epoch` 标志并设置值为 `1`。这将导致高度为 `N-2` 的区块被最终确定，其中 `N` 是最新区块。
 
-#### Supported Transport Layers
-HTTP and Websocket connections are supported. The server listens on port 8545 by default, but it can be changed by running the following command:
+#### 支持的传输层
+支持 HTTP 和 Websocket 连接。服务器默认监听端口 8545，但可以通过运行以下命令进行更改：
 
 ```sh
-anvil --port <PORT>
+anvil --port <端口>
 ```
 
-#### Default CREATE2 Deployer
-Anvil, when used without forking, includes the [default CREATE2 deployer proxy](https://github.com/Arachnid/deterministic-deployment-proxy) at the address `0x4e59b44847b379578588920ca78fbf26c0b4956c`.
+#### 默认 CREATE2 部署者
+Anvil 在未分叉时，包含 [默认 CREATE2 部署者代理](https://github.com/Arachnid/deterministic-deployment-proxy) 在地址 `0x4e59b44847b379578588920ca78fbf26c0b4956c`。
 
-This allows you to test CREATE2 deployments locally without forking.
+这允许你在本地测试 CREATE2 部署而无需分叉。
 
-#### Supported RPC Methods
-##### Standard Methods
-The standard methods are based on [this](https://eth.wiki/json-rpc/API) reference.
+#### 支持的 RPC 方法
+##### 标准方法
+标准方法基于 [此](https://eth.wiki/json-rpc/API) 参考。
 
 * `web3_clientVersion`
 
@@ -138,305 +138,305 @@ The standard methods are based on [this](https://eth.wiki/json-rpc/API) referenc
 * `eth_getProof`
 
 * `debug_traceTransaction`
-Use `anvil --steps-tracing` to get `structLogs`
+使用 `anvil --steps-tracing` 获取 `structLogs`
 
 * `debug_traceCall`
-Note that non-standard traces are not yet supported.  This means you can't pass any arguments to the `trace` parameter.
+注意，非标准追踪尚未支持。这意味着你不能传递任何参数给 `trace` 参数。
 
 * `trace_transaction`
 
 * `trace_block`
 
-##### Custom Methods
-The `anvil_*` namespace is an alias for `hardhat`. For more info, refer to the [Hardhat documentation](https://hardhat.org/hardhat-network/reference#hardhat-network-methods).
+##### 自定义方法
+`anvil_*` 命名空间是 `hardhat` 的别名。更多信息，请参考 [Hardhat 文档](https://hardhat.org/hardhat-network/reference#hardhat-network-methods)。
 
 `anvil_impersonateAccount`
-Send transactions impersonating an externally owned account or contract.
+发送交易伪装成外部拥有的账户或合约。
 
 `anvil_stopImpersonatingAccount`
-Stops impersonating an account or contract if previously set with `anvil_impersonateAccount`.
+停止伪装账户或合约，如果之前通过 `anvil_impersonateAccount` 设置。
 
 `anvil_autoImpersonateAccount`
-Accepts `true` to enable auto impersonation of accounts, and `false` to disable it. When enabled, any transaction's sender will be automatically impersonated. Same as `anvil_impersonateAccount`.
+接受 `true` 启用自动伪装账户，`false` 禁用。启用后，任何交易的 sender 将自动伪装。与 `anvil_impersonateAccount` 相同。
 
 `anvil_getAutomine`
-Returns true if automatic mining is enabled, and false if it is not.
+如果启用自动挖矿，返回 true，否则返回 false。
 
 `anvil_mine`
-Mines a series of blocks.
+挖一系列区块。
 
 `anvil_dropTransaction`
-Removes transactions from the pool.
+从池中移除交易。
 
 `anvil_reset`
-Reset the fork to a fresh forked state, and optionally update the fork config.
+重置分叉到新的分叉状态，并可选地更新分叉配置。
 
 `anvil_setRpcUrl`
-Sets the backend RPC URL.
+设置后端 RPC URL。
 
 `anvil_setBalance`
-Modifies the balance of an account.
+修改账户的余额。
 
 `anvil_setCode`
-Sets the code of a contract.
+设置合约的代码。
 
 `anvil_setNonce`
-Sets the nonce of an address.
+设置地址的 nonce。
 
 `anvil_setStorageAt`
-Writes a single slot of the account's storage.
+写入账户存储的单个槽。
 
 `anvil_setCoinbase`
-Sets the coinbase address.
+设置 coinbase 地址。
 
 `anvil_setLoggingEnabled`
-Enable or disable logging.
+启用或禁用日志记录。
 
 `anvil_setMinGasPrice`
-Set the minimum gas price for the node.
+设置节点的最低 gas 价格。
 
 `anvil_setNextBlockBaseFeePerGas`
-Sets the base fee of the next block.
+设置下一个区块的基础费用。
 
 `anvil_setChainId`
-Sets the chain ID of the current EVM instance.
+设置当前 EVM 实例的链 ID。
 
 `anvil_dumpState`
-Returns a hex string representing the complete state of the chain. Can be re-imported into a fresh/restarted instance of Anvil to reattain the same state.
+返回表示链完整状态的十六进制字符串。可以重新导入到 Anvil 的新实例中以重新获得相同的状态。
 
 `anvil_loadState`
-When given a hex string previously returned by `anvil_dumpState`, merges the contents into the current chain state. Will overwrite any colliding accounts/storage slots.
+当给定之前由 `anvil_dumpState` 返回的十六进制字符串时，将内容合并到当前链状态中。将覆盖任何冲突的账户/存储槽。
 
 `anvil_nodeInfo`
-Retrieves the configuration params for the currently running Anvil node.
+检索当前运行的 Anvil 节点的配置参数。
 
-##### Special Methods
-The special methods come from Ganache. You can take a look at the documentation [here](https://github.com/trufflesuite/ganache-cli-archive/blob/master/README.md).
+##### 特殊方法
+特殊方法来自 Ganache。你可以查看文档 [这里](https://github.com/trufflesuite/ganache-cli-archive/blob/master/README.md)。
 
 `evm_setAutomine`
-Enables or disables, based on the single boolean argument, the automatic mining of new blocks with each new transaction submitted to the network.
+根据单个布尔参数启用或禁用自动挖矿，即每次向网络提交新交易时自动挖矿。
 
 `evm_setIntervalMining`
-Sets the mining behavior to interval with the given interval (seconds).
+将挖矿行为设置为间隔，并设置给定的间隔（秒）。
 
 `evm_snapshot`
-Snapshot the state of the blockchain at the current block.
+在当前区块快照区块链状态。
 
 `evm_revert`
-Revert the state of the blockchain to a previous snapshot. Takes a single parameter, which is the snapshot id to revert to.
+将区块链状态恢复到之前的快照。接受单个参数，即要恢复到的快照 ID。
 
 `evm_increaseTime`
-Jump forward in time by the given amount of time, in seconds.
+向前跳跃给定的时间量，以秒为单位。
 
 `evm_setNextBlockTimestamp`
-Similar to `evm_increaseTime` but takes the exact timestamp that you want in the next block.
+类似于 `evm_increaseTime`，但接受下一个区块的确切时间戳。
 
 `anvil_setBlockTimestampInterval`
-Similar to `evm_increaseTime` but sets a block timestamp `interval`. The timestamp of the next block will be computed as `lastBlock_timestamp + interval`.
+类似于 `evm_increaseTime`，但设置区块时间戳 `interval`。下一个区块的时间戳将计算为 `lastBlock_timestamp + interval`。
 
 `evm_setBlockGasLimit`
-Sets the block gas limit for the following blocks.
+设置后续区块的区块 gas 限制。
 
 `anvil_removeBlockTimestampInterval`
-Removes an `anvil_setBlockTimestampInterval` if it exists.
+移除存在的 `anvil_setBlockTimestampInterval`。
 
 `evm_mine`
-Mine a single block.
+挖一个区块。
 
 `anvil_enableTraces`
-Turn on call traces for transactions that are returned to the user when they execute a transaction (instead of just txhash/receipt).
+为返回给用户的交易开启调用追踪（而不是仅返回 txhash/receipt）。
 
 `eth_sendUnsignedTransaction`
-Execute a transaction regardless of signature status.
+无论签名状态如何，执行交易。
 
-For the next three methods, make sure to read [Geth's documentation](https://geth.ethereum.org/docs/rpc/ns-txpool).
+对于接下来的三个方法，请确保阅读 [Geth 的文档](https://geth.ethereum.org/docs/rpc/ns-txpool)。
 
 `txpool_status`
-Returns the number of transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
+返回当前等待包含在下一个区块中的交易数量，以及仅计划未来执行的交易。
 
 `txpool_inspect`
-Returns a summary of all the transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
+返回当前等待包含在下一个区块中的所有交易的摘要，以及仅计划未来执行的交易。
 
 `txpool_content`
-Returns the details of all transactions currently pending for inclusion in the next block(s), as well as the ones that are being scheduled for future execution only.
+返回当前等待包含在下一个区块中的所有交易的详细信息，以及仅计划未来执行的交易。
 
-##### Otterscan Methods
-The `ots_*` namespace implements the [Otterscan specification](https://github.com/otterscan/otterscan/blob/develop/docs/custom-jsonrpc.md).
+##### Otterscan 方法
+`ots_*` 命名空间实现了 [Otterscan 规范](https://github.com/otterscan/otterscan/blob/develop/docs/custom-jsonrpc.md)。
 
 `ots_getApiLevel`
-Used by Otterscan to check if it\'s connecting to a compatible node and display a friendly message if it is not.
+由 Otterscan 用于检查是否连接到兼容节点，并在不兼容时显示友好消息。
 
 `ots_getInternalOperations`
-Returns the internal ETH transfers inside a transaction.
+返回交易中的内部 ETH 转账。
 
 `ots_hasCode`
-Check if a certain address contains a deployed code.
+检查某个地址是否包含已部署的代码。
 
 `ots_getTransactionError`
-Extract the transaction raw error output.
+提取交易的原始错误输出。
 
 `ots_traceTransaction`
-Extract all variations of calls, contract creation and self-destructs and returns a call tree.
+提取所有类型的调用、合约创建和自毁，并返回调用树。
 
 `ots_getBlockDetails`
-Tailor-made and expanded version of eth_getBlock* for block details page in Otterscan.
+为 Otterscan 的区块详情页面定制和扩展的 eth_getBlock*。
 
 `ots_getBlockTransactions`
-Get paginated transactions for a certain block, And removes some verbose fields such logs.
+获取某个区块的分页交易，并移除一些冗余字段如 logs。
 
 `ots_searchTransactionsBefore`
-Gets paginated inbound/outbound transaction calls for a certain address, and before a given target block.
+获取某个地址的分页入站/出站交易调用，并在给定目标区块之前。
 
 `ots_searchTransactionsAfter`
-Gets paginated inbound/outbound transaction calls for a certain address, and after a given target block.
+获取某个地址的分页入站/出站交易调用，并在给定目标区块之后。
 
 `ots_getTransactionBySenderAndNonce`
-Gets the transaction hash for a certain sender address, given its nonce.
+获取某个发送者地址的给定 nonce 的交易哈希。
 
 `ots_getContractCreator`
-Gets the transaction hash and the address which created a contract.
+获取创建合约的交易哈希和地址。
 
 
-### OPTIONS
-#### General Options
-`-a, --accounts <ACCOUNTS>`
-&nbsp;&nbsp;&nbsp;&nbsp; Set the number of accounts. [default: 10]
+### 选项
+#### 通用选项
+`-a, --accounts <账户数>`
+&nbsp;&nbsp;&nbsp;&nbsp; 设置账户数量。[默认: 10]
 
 `--auto-impersonate`
-&nbsp;&nbsp;&nbsp;&nbsp; Enable autoImpersonate on startup.
+&nbsp;&nbsp;&nbsp;&nbsp; 启动时启用 autoImpersonate。
 
-`-b, --block-time <block-time>`
-&nbsp;&nbsp;&nbsp;&nbsp; Block time in seconds for interval mining.
+`-b, --block-time <区块时间>`
+&nbsp;&nbsp;&nbsp;&nbsp; 间隔挖矿的区块时间（秒）。
 
-`--balance <BALANCE>`
-&nbsp;&nbsp;&nbsp;&nbsp; Set the balance of the accounts. [default: 10000]
+`--balance <余额>`
+&nbsp;&nbsp;&nbsp;&nbsp; 设置账户的余额。[默认: 10000]
 
-`--derivation-path <DERIVATION_PATH>`
-&nbsp;&nbsp;&nbsp;&nbsp; Set the derivation path of the child key to be derived. [default: m/44'/60'/0'/0/]
+`--derivation-path <派生路径>`
+&nbsp;&nbsp;&nbsp;&nbsp; 设置要派生的子密钥的派生路径。[默认: m/44'/60'/0'/0/]
 
 `-h, --help`
-&nbsp;&nbsp;&nbsp;&nbsp; Print help information.
+&nbsp;&nbsp;&nbsp;&nbsp; 打印帮助信息。
 
-`--hardfork <HARDFORK>`
-&nbsp;&nbsp;&nbsp;&nbsp; Choose the EVM hardfork to use e.g. `shanghai`, `paris`, `london`, etc... [default: latest]
+`--hardfork <硬分叉>`
+&nbsp;&nbsp;&nbsp;&nbsp; 选择要使用的 EVM 硬分叉，例如 `shanghai`, `paris`, `london` 等... [默认: latest]
 
-`--init <PATH>`
-&nbsp;&nbsp;&nbsp;&nbsp; Initialize the genesis block with the given `genesis.json` file.
+`--init <路径>`
+&nbsp;&nbsp;&nbsp;&nbsp; 使用给定的 `genesis.json` 文件初始化创世区块。
 
-`-m, --mnemonic <MNEMONIC>`
-&nbsp;&nbsp;&nbsp;&nbsp; BIP39 mnemonic phrase used for generating accounts.
+`-m, --mnemonic <助记词>`
+&nbsp;&nbsp;&nbsp;&nbsp; 用于生成账户的 BIP39 助记词短语。
 
 `--no-mining`
-&nbsp;&nbsp;&nbsp;&nbsp; Disable auto and interval mining, and mine on demand instead.
+&nbsp;&nbsp;&nbsp;&nbsp; 禁用自动和间隔挖矿，改为按需挖矿。
 
-`--order <ORDER>`
-&nbsp;&nbsp;&nbsp;&nbsp; How transactions are sorted in the mempool. [default: fees]
+`--order <排序>`
+&nbsp;&nbsp;&nbsp;&nbsp; 交易在 mempool 中的排序方式。[默认: fees]
 
-`-p, --port <PORT>`
-&nbsp;&nbsp;&nbsp;&nbsp; Port number to listen on. [default: 8545]
+`-p, --port <端口>`
+&nbsp;&nbsp;&nbsp;&nbsp; 监听的端口号。[默认: 8545]
 
 `--steps-tracing`
-&nbsp;&nbsp;&nbsp;&nbsp; Enable steps tracing used for debug calls returning geth-style traces. [aliases: tracing]
+&nbsp;&nbsp;&nbsp;&nbsp; 启用用于 debug 调用返回 geth 风格追踪的步骤追踪。[别名: tracing]
 
-`--ipc [<PATH>]`
-&nbsp;&nbsp;&nbsp;&nbsp; Starts an IPC endpoint at the given `PATH` argument or the default path: unix: `tmp/anvil.ipc`, windows: `\\.\pipe\anvil.ipc`.
+`--ipc [<路径>]`
+&nbsp;&nbsp;&nbsp;&nbsp; 在给定的 `路径` 参数或默认路径启动 IPC 端点：unix: `tmp/anvil.ipc`，windows: `\\.\pipe\anvil.ipc`。
 
 `--silent`
-&nbsp;&nbsp;&nbsp;&nbsp; Don't print anything on startup.
+&nbsp;&nbsp;&nbsp;&nbsp; 启动时不打印任何内容。
 
-`--timestamp <TIMESTAMP>`
-&nbsp;&nbsp;&nbsp;&nbsp; Set the timestamp of the genesis block.
+`--timestamp <时间戳>`
+&nbsp;&nbsp;&nbsp;&nbsp; 设置创世区块的时间戳。
 
 `-V, --version`
-&nbsp;&nbsp;&nbsp;&nbsp; Print version information.
+&nbsp;&nbsp;&nbsp;&nbsp; 打印版本信息。
 
 `--disable-default-create2-deployer`
-&nbsp;&nbsp;&nbsp;&nbsp; Disables deploying the default CREATE2 factory when running Anvil without forking.
+&nbsp;&nbsp;&nbsp;&nbsp; 禁用在未分叉时运行 Anvil 的默认 CREATE2 工厂部署。
 
-#### EVM Options
+#### EVM 选项
 `-f, --fork-url <URL>`
-&nbsp;&nbsp;&nbsp;&nbsp; Fetch state over a remote endpoint instead of starting from an empty state.
+&nbsp;&nbsp;&nbsp;&nbsp; 从远程端点获取状态，而不是从空状态开始。
 
-`--fork-block-number <BLOCK>`
-&nbsp;&nbsp;&nbsp;&nbsp; Fetch state from a specific block number over a remote endpoint (Must pass `--fork-url` in the same command-line).
+`--fork-block-number <区块>`
+&nbsp;&nbsp;&nbsp;&nbsp; 从远程端点获取特定区块号的状态（必须在同一命令行中传递 `--fork-url`）。
 
-`--fork-retry-backoff <BACKOFF>`
-&nbsp;&nbsp;&nbsp;&nbsp; Initial retry backoff on encountering errors.
+`--fork-retry-backoff <回退>`
+&nbsp;&nbsp;&nbsp;&nbsp; 遇到错误时的初始重试回退。
 
-`--retries <retries>`
-&nbsp;&nbsp;&nbsp;&nbsp; Number of retry requests for spurious networks (timed out requests). [default: 5]
+`--retries <重试次数>`
+&nbsp;&nbsp;&nbsp;&nbsp; 虚假网络的重试请求次数（超时请求）。[默认: 5]
 
-`--timeout <timeout>`
-&nbsp;&nbsp;&nbsp;&nbsp; Timeout in ms for requests sent to remote JSON-RPC server in forking mode. [default: 45000]
+`--timeout <超时>`
+&nbsp;&nbsp;&nbsp;&nbsp; 分叉模式下发送给远程 JSON-RPC 服务器的请求超时（毫秒）。[默认: 45000]
 
 `--compute-units-per-second <CUPS>`
-&nbsp;&nbsp;&nbsp;&nbsp; Sets the number of assumed available compute units per second for this provider. [default: 330]
-&nbsp;&nbsp;&nbsp;&nbsp; See also, [Alchemy Ratelimits](https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups).
+&nbsp;&nbsp;&nbsp;&nbsp; 设置此提供者假设的每秒可用计算单元数。[默认: 330]
+&nbsp;&nbsp;&nbsp;&nbsp; 另见，[Alchemy Ratelimits](https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups)。
 
 `--no-rate-limit`
-&nbsp;&nbsp;&nbsp;&nbsp; Disables rate limiting for this node's provider. Will always override `--compute-units-per-second` if present. [default: false]
-&nbsp;&nbsp;&nbsp;&nbsp; See also, [Alchemy Ratelimits](https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups).
+&nbsp;&nbsp;&nbsp;&nbsp; 禁用此节点的提供者速率限制。如果存在，将始终覆盖 `--compute-units-per-second`。[默认: false]
+&nbsp;&nbsp;&nbsp;&nbsp; 另见，[Alchemy Ratelimits](https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups)。
 
 `--no-storage-caching`
-&nbsp;&nbsp;&nbsp;&nbsp; Disables RPC caching; all storage slots are read from the endpoint. This flag overrides the project's configuration file (Must pass --fork-url in the same command-line).
+&nbsp;&nbsp;&nbsp;&nbsp; 禁用 RPC 缓存；所有存储槽都从端点读取。此标志覆盖项目的配置文件（必须在同一命令行中传递 --fork-url）。
 
 
-#### Executor Environment Config
-`--base-fee <FEE>`
-`--block-base-fee-per-gas <FEE>`
-&nbsp;&nbsp;&nbsp;&nbsp; The base fee in a block.
+#### 执行环境配置
+`--base-fee <费用>`
+`--block-base-fee-per-gas <费用>`
+&nbsp;&nbsp;&nbsp;&nbsp; 区块中的基础费用。
 
-`--chain-id <CHAIN_ID>`
-&nbsp;&nbsp;&nbsp;&nbsp; The chain ID. [default: 31337]
+`--chain-id <链ID>`
+&nbsp;&nbsp;&nbsp;&nbsp; 链 ID。[默认: 31337]
 
-`--code-size-limit <CODE_SIZE>`
-&nbsp;&nbsp;&nbsp;&nbsp; EIP-170: Contract code size limit in bytes. Useful to increase for tests. [default: 0x6000 (~25kb)]
+`--code-size-limit <代码大小>`
+&nbsp;&nbsp;&nbsp;&nbsp; EIP-170: 合约代码大小限制（字节）。用于增加测试的限制。[默认: 0x6000 (~25kb)]
 
-`--gas-limit <GAS_LIMIT>`
-&nbsp;&nbsp;&nbsp;&nbsp; The block gas limit.
+`--gas-limit <gas限制>`
+&nbsp;&nbsp;&nbsp;&nbsp; 区块 gas 限制。
 
-`--gas-price <GAS_PRICE>`
-&nbsp;&nbsp;&nbsp;&nbsp; The gas price.
+`--gas-price <gas价格>`
+&nbsp;&nbsp;&nbsp;&nbsp; gas 价格。
 
-#### Server Options
-`--allow-origin <allow-origin>`
-&nbsp;&nbsp;&nbsp;&nbsp; Set the CORS `allow_origin`. [default: *]
+#### 服务器选项
+`--allow-origin <允许来源>`
+&nbsp;&nbsp;&nbsp;&nbsp; 设置 CORS `allow_origin`。[默认: *]
 
 `--no-cors`
-&nbsp;&nbsp;&nbsp;&nbsp; Disable CORS.
+&nbsp;&nbsp;&nbsp;&nbsp; 禁用 CORS。
 
-`--host <HOST>`
-&nbsp;&nbsp;&nbsp;&nbsp; The IP address the server will listen on.
+`--host <主机>`
+&nbsp;&nbsp;&nbsp;&nbsp; 服务器将监听的 IP 地址。
 
-`--config-out <OUT_FILE>`
-&nbsp;&nbsp;&nbsp;&nbsp; Writes output of `anvil` as json to user-specified file.
+`--config-out <输出文件>`
+&nbsp;&nbsp;&nbsp;&nbsp; 将 `anvil` 的输出作为 json 写入用户指定的文件。
 
 `--prune-history`
-&nbsp;&nbsp;&nbsp;&nbsp; Don't keep full chain history.
+&nbsp;&nbsp;&nbsp;&nbsp; 不保留完整的链历史。
 
-### EXAMPLES
-1. Set the number of accounts to 15 and their balance to 300 ETH
+### 示例
+1. 设置账户数量为 15 且余额为 300 ETH
   ```sh
   anvil --accounts 15 --balance 300
   ```
 
-2. Choose the address which will execute the tests
+2. 选择将执行测试的地址
   ```sh
   anvil --sender 0xC8479C45EE87E0B437c09d3b8FE8ED14ccDa825E
   ```
 
-3. Change how transactions are sorted in the mempool to FIFO
+3. 将交易在 mempool 中的排序方式更改为 FIFO
   ```sh
   anvil --order fifo
   ```
 
-### Shell Completions
+### Shell 补全
 
 ``anvil completions`` *shell*
 
-Generates a shell completions script for the given shell.
+为给定的 shell 生成 shell 补全脚本。
 
-Supported shells are:
+支持的 shell 有：
 
 - bash
 - elvish
@@ -444,37 +444,37 @@ Supported shells are:
 - powershell
 - zsh
 
-#### EXAMPLES
+#### 示例
 
-1. Generate shell completions script for zsh:
+1. 为 zsh 生成 shell 补全脚本：
     ```sh
     anvil completions zsh > $HOME/.oh-my-zsh/completions/_anvil
     ```
 
 
-### Usage within Docker
+### 在 Docker 中使用
 
-In order to run anvil as a service in Github Actions with the [Docker container](../../tutorials/foundry-docker.md), where passing arguments to the entrypoint command is not possible, use the `ANVIL_IP_ADDR` environment variable to set the host's IP. `ANVIL_IP_ADDR=0.0.0.0` is equivalent to providing the `--host <ip>` option.
+为了在 Github Actions 中以 [Docker 容器](../../tutorials/foundry-docker.md) 运行 anvil 作为服务，其中无法向 entrypoint 命令传递参数，使用 `ANVIL_IP_ADDR` 环境变量设置主机的 IP。`ANVIL_IP_ADDR=0.0.0.0` 等同于提供 `--host <ip>` 选项。
 
-#### Using `genesis.json` 
+#### 使用 `genesis.json`
 
-The `genesis.json` file in Anvil serves a similar purpose as in Geth, defining the network's initial state, consensus rules, and preallocated accounts to ensure all nodes start consistently and maintain network integrity. All values, including balance, gas limit and such, are to be defined as hexadecimals.
+Anvil 中的 `genesis.json` 文件与 Geth 中的作用类似，定义网络的初始状态、共识规则和预分配账户，以确保所有节点一致启动并维护网络完整性。所有值，包括余额、gas 限制等，均定义为十六进制。
 
-- `chainId`: Identifier for the blockchain, unique to each network.
-- `nonce`: A counter used in hashing algorithms to ensure data integrity.
-- `timestamp`: The creation time of the genesis block in Unix time.
-- `extraData`: Additional data that can be included by the creator of the genesis block.
-- `gasLimit`: The maximum amount of gas that can be used in the block.
-- `difficulty`: A measure of how difficult it is to mine a new block.
-- `mixHash`: A unique identifier proving a sufficient amount of computation for the block.
-- `coinbase`: The Ethereum address of the miner who mined this block.
-- `stateRoot`: The root of the state trie, reflecting the final state after all transactions.
-- `alloc`: Allows pre-allocating Ether to a set of addresses with predefined balances.
-- `number`: The block number, with the genesis block being 0.
-- `gasUsed`: The total gas used in the block.
-- `parentHash`: The hash of the parent block, all zeros for the genesis block since there is no parent.
+- `chainId`: 区块链的标识符，每个网络唯一。
+- `nonce`: 用于确保数据完整性的哈希算法中的计数器。
+- `timestamp`: 创世区块的创建时间，Unix 时间。
+- `extraData`: 创世区块创建者可以包含的额外数据。
+- `gasLimit`: 区块中可以使用的最大 gas 量。
+- `difficulty`: 挖矿新区块的难度。
+- `mixHash`: 证明区块有足够计算量的唯一标识符。
+- `coinbase`: 挖出此区块的矿工的以太坊地址。
+- `stateRoot`: 状态 trie 的根，反映所有交易后的最终状态。
+- `alloc`: 允许预分配以太币到一组具有预定义余额的地址。
+- `number`: 区块号，创世区块为 0。
+- `gasUsed`: 区块中使用的总 gas。
+- `parentHash`: 父区块的哈希，创世区块为全零，因为没有父区块。
 
-A sample for simulating mainnet via genesis can be found [here](https://github.com/paradigmxyz/reth/blob/8f3e4a15738d8174d41f4aede5570ecead141a77/crates/primitives/res/genesis/mainnet.json).
+模拟主网的 genesis 示例可以在这里找到 [这里](https://github.com/paradigmxyz/reth/blob/8f3e4a15738d8174d41f4aede5570ecead141a77/crates/primitives/res/genesis/mainnet.json)。
 
 ```json
 {

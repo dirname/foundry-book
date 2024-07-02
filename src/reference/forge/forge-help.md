@@ -1,29 +1,29 @@
 ## forge help
 
-### NAME
+### 名称
 
-forge-help - Get help for a Forge command
+forge-help - 获取 Forge 命令的帮助信息
 
-### SYNOPSIS
+### 概要
 
-``forge help`` [*subcommand*]
+``forge help`` [*子命令*]
 
-### DESCRIPTION
+### 描述
 
-Prints a help message for the given command.
+打印给定命令的帮助信息。
 
-### EXAMPLES
+### 示例
 
-1. Get help for a command:
+1. 获取命令的帮助信息：
     ```sh
     forge help build
     ```
 
-2. Help is also available with the `--help` flag:
+2. 也可以使用 `--help` 标志获取帮助信息：
     ```sh
     forge build --help
     ```
 
-### SEE ALSO
+### 参见
 
 [forge](./forge.md)

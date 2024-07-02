@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-namehash - Calculate the ENS namehash of a name.
+cast-namehash - 计算 ENS 名称的 namehash。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-namehash - Calculate the ENS namehash of a name.
 
 ### DESCRIPTION
 
-Calculate the ENS namehash of a name.
+计算 ENS 名称的 namehash。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Calculate the ENS namehash of a name.
 
 ### EXAMPLES
 
-1. Calculate the namehash of an ENS name.
+1. 计算 ENS 名称的 namehash。
     ```sh
     cast namehash vitalik.eth
     ```

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-bytes32 - Right-pads hex data to 32 bytes.
+cast-to-bytes32 - 将十六进制数据右填充到32字节。
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-to-bytes32 - Right-pads hex data to 32 bytes.
 
 ### DESCRIPTION
 
-Right-pads hex data to 32 bytes.
+将十六进制数据右填充到32字节。
 
-Note that this command is for padding a byte string only. If you're looking to format a [Solidity string literal](https://docs.soliditylang.org/en/v0.8.16/types.html#string-literals-and-types) into `bytes32`, use [format-bytes32-string](./cast-format-bytes32-string.md) instead.
+请注意，此命令仅用于填充字节字符串。如果您想将[Solidity字符串字面量](https://docs.soliditylang.org/en/v0.8.16/types.html#string-literals-and-types)格式化为`bytes32`，请使用[format-bytes32-string](./cast-format-bytes32-string.md)。
 
 ### OPTIONS
 

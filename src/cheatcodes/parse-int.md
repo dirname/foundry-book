@@ -1,16 +1,16 @@
 ## `parseInt`
 
-### Signature
+### 签名
 
 ```solidity
 function parseInt(string calldata stringifiedValue) external pure returns (int256 parsedValue);
 ```
 
-### Description
+### 描述
 
-Parses the value of `string` into `int256`
+将 `string` 类型的值解析为 `int256` 类型。
 
-### Examples
+### 示例
 
 ```solidity
 string memory intAsString = "-12345";

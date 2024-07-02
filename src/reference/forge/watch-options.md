@@ -1,24 +1,28 @@
-#### Watch Options
+```metadata
+id: watch-options
+```
 
-`-w` [*path...*]  
-`--watch` [*path...*]  
-&nbsp;&nbsp;&nbsp;&nbsp;Watch specific file(s) or folder(s).
+#### 监视选项
 
-&nbsp;&nbsp;&nbsp;&nbsp;By default, the project's source directory is watched.
+`-w` [*路径...*]  
+`--watch` [*路径...*]  
+&nbsp;&nbsp;&nbsp;&nbsp;监视特定的文件或文件夹。
 
-`-d` *delay*  
-`--delay` *delay*  
-&nbsp;&nbsp;&nbsp;&nbsp;File update debounce delay.
+&nbsp;&nbsp;&nbsp;&nbsp;默认情况下，监视项目的源目录。
 
-&nbsp;&nbsp;&nbsp;&nbsp;During the delay, incoming change events are accumulated and only once the delay has passed, is an action taken.  
-&nbsp;&nbsp;&nbsp;&nbsp;Note that this does not mean a command will be started: if `--no-restart` is given and a command is already running, the outcome of the action will be to do nothing.
+`-d` *延迟*  
+`--delay` *延迟*  
+&nbsp;&nbsp;&nbsp;&nbsp;文件更新防抖延迟。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Defaults to 50ms. Parses as decimal seconds by default, but using an integer with the `ms` suffix may be more convenient.
+&nbsp;&nbsp;&nbsp;&nbsp;在延迟期间，传入的更改事件会被累积，只有在延迟结束后才会采取行动。  
+&nbsp;&nbsp;&nbsp;&nbsp;注意，这并不意味着命令会启动：如果给出了 `--no-restart`，并且命令已经在运行，行动的结果将是什么都不做。
 
-&nbsp;&nbsp;&nbsp;&nbsp;When using `--poll` mode, you'll want a larger duration, or risk overloading disk I/O.
+&nbsp;&nbsp;&nbsp;&nbsp;默认值为 50 毫秒。默认情况下解析为十进制秒，但使用带有 `ms` 后缀的整数可能更方便。
+
+&nbsp;&nbsp;&nbsp;&nbsp;在使用 `--poll` 模式时，你可能需要更大的持续时间，以避免过度占用磁盘 I/O。
 
 `--no-restart`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not restart the command while it's running.
+&nbsp;&nbsp;&nbsp;&nbsp;在命令运行时不重启。
 
 `--run-all`  
-&nbsp;&nbsp;&nbsp;&nbsp;Explicitly re-run the command on all files when a change is made.
+&nbsp;&nbsp;&nbsp;&nbsp;当发生更改时，显式地重新运行所有文件的命令。

@@ -1,11 +1,11 @@
 ## `enumConversionError`
 
-### Signature
+### 签名
 
 ```solidity
 stdError.enumConversionError
 ```
 
-### Description
+### 描述
 
-The internal Solidity error when trying to convert a number to a variant of an enum, if the number is larger than the number of variants in the enum (counting from 0).
+当尝试将一个数字转换为枚举的一个变体时，如果该数字大于枚举中的变体数量（从0开始计数），则会出现内部 Solidity 错误。

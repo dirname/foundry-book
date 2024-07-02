@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-sig-event - Generate event signatures from event string.
+cast-sig-event - 从事件字符串生成事件签名。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-sig-event - Generate event signatures from event string.
 
 ### DESCRIPTION
 
-Generate event signatures from event string.
+从事件字符串生成事件签名。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Generate event signatures from event string.
 
 ### EXAMPLES
 
-1. Get the hash for the log `Transfer(address indexed from, address indexed to, uint256 amount)`:
+1. 获取日志 `Transfer(address indexed from, address indexed to, uint256 amount)` 的哈希：
     ```sh
     cast sig-event "Transfer(address indexed from, address indexed to, uint256 amount)"
     ```

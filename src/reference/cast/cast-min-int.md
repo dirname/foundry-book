@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-min-int - Get the minimum i256 value.
+cast-min-int - 获取最小 i256 值。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-min-int - Get the minimum i256 value.
 
 ### DESCRIPTION
 
-Get the minimum i256 value.
+获取最小 i256 值。
 
 ### OPTIONS
 

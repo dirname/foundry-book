@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-balance - Get the balance of an account in wei.
+cast-balance - 获取账户余额（以 wei 为单位）。
 
 ### SYNOPSIS
 
@@ -10,25 +10,25 @@ cast-balance - Get the balance of an account in wei.
 
 ### DESCRIPTION
 
-Get the balance of an account.
+获取账户余额。
 
-The argument *who* can be an ENS name or an address.
+参数 *who* 可以是 ENS 名称或地址。
 
 ### OPTIONS
 
-#### Query Options
+#### 查询选项
 
 `-B` *block*  
 `--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
+&nbsp;&nbsp;&nbsp;&nbsp;你想查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，或任何标签：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。
 
 `-e` *ether*  
 `--ether` *ether*  
-&nbsp;&nbsp;&nbsp;&nbsp; If this flag is used then balance will be shown in ether
+&nbsp;&nbsp;&nbsp;&nbsp;如果使用此标志，则余额将以 ether 显示。
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -36,16 +36,16 @@ The argument *who* can be an ENS name or an address.
 
 ### EXAMPLES
 
-1. Get the balance of beer.eth
+1. 获取 beer.eth 的余额
     ```sh
     cast balance beer.eth
     ```
-2. Get the ERC20 balance of any address using RPC URL
+2. 使用 RPC URL 获取任何地址的 ERC20 余额
     ```sh
-    # To load the variables in the .env file
+    # 加载 .env 文件中的变量
     source .env
 
-    # To get the USDT balance of Binance
+    # 获取 Binance 的 USDT 余额
     cast balance --erc20 0xdAC17F958D2ee523a2206206994597C13D831ec7 0xF977814e90dA44bFA03b6295A0616a897441aceC --rpc-url $MAINNET_RPC_URL
     ```
 

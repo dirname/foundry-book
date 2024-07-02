@@ -1,6 +1,7 @@
+```markdown
 # forge inspect
 
-Get specialized information about a smart contract
+获取智能合约的专门信息
 
 ```bash
 $ forge inspect --help
@@ -8,140 +9,139 @@ Usage: forge inspect [OPTIONS] <CONTRACT> <FIELD>
 
 Arguments:
   <CONTRACT>
-          The identifier of the contract to inspect in the form `(<path>:)?<contractname>`
+          要检查的合约标识符，格式为 `(<路径>:)?<合约名称>`
 
   <FIELD>
-          The contract artifact field to inspect
+          要检查的合约构件字段
           
-          [possible values: abi, bytecode, deployedBytecode, assembly, assemblyOptimized,
+          [可能的值: abi, bytecode, deployedBytecode, assembly, assemblyOptimized,
           methodIdentifiers, gasEstimates, storageLayout, devdoc, ir, irOptimized, metadata,
           userdoc, ewasm, errors, events]
 
 Options:
       --pretty
-          Pretty print the selected field, if supported
+          如果支持，以漂亮的格式打印选定的字段
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
-Cache options:
+缓存选项:
       --force
-          Clear the cache and artifacts folder and recompile
+          清除缓存和构件文件夹并重新编译
 
-Build options:
       --no-cache
-          Disable the cache
+          禁用缓存
 
       --skip <SKIP>...
-          Skip building files whose names contain the given filter.
+          跳过构建名称包含给定过滤器的文件。
           
-          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
+          `test` 和 `script` 是 `.t.sol` 和 `.s.sol` 的别名。
 
-Linker options:
+链接器选项:
       --libraries <LIBRARIES>
-          Set pre-linked libraries
+          设置预链接的库
           
-          [env: DAPP_LIBRARIES=]
+          [环境变量: DAPP_LIBRARIES=]
 
-Compiler options:
+编译器选项:
       --ignored-error-codes <ERROR_CODES>
-          Ignore solc warnings by error code
+          忽略 solc 警告的错误代码
 
       --deny-warnings
-          Warnings will trigger a compiler error
+          警告将触发编译器错误
 
       --no-auto-detect
-          Do not auto-detect the `solc` version
+          不要自动检测 `solc` 版本
 
       --use <SOLC_VERSION>
-          Specify the solc version, or a path to a local solc, to build with.
+          指定用于构建的 solc 版本或本地 solc 的路径。
           
-          Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+          有效值格式为 `x.y.z`、`solc:x.y.z` 或 `path/to/solc`。
 
       --offline
-          Do not access the network.
+          不要访问网络。
           
-          Missing solc versions will not be installed.
+          缺失的 solc 版本将不会被安装。
 
       --via-ir
-          Use the Yul intermediate representation compilation pipeline
+          使用 Yul 中间表示编译管道
 
       --no-metadata
-          Do not append any metadata to the bytecode.
+          不要在字节码中附加任何元数据。
           
-          This is equivalent to setting `bytecode_hash` to `none` and `cbor_metadata` to `false`.
+          这相当于将 `bytecode_hash` 设置为 `none` 并将 `cbor_metadata` 设置为 `false`。
 
       --silent
-          Don't print anything on startup
+          启动时不要打印任何内容
 
       --ast
-          Includes the AST as JSON in the compiler output
+          在编译器输出中包含 AST 的 JSON
 
       --evm-version <VERSION>
-          The target EVM version
+          目标 EVM 版本
 
       --optimize
-          Activate the Solidity optimizer
+          激活 Solidity 优化器
 
       --optimizer-runs <RUNS>
-          The number of optimizer runs
+          优化器运行的次数
 
       --extra-output <SELECTOR>...
-          Extra output to include in the contract's artifact.
+          在合约的构件中包含额外的输出。
           
-          Example keys: evm.assembly, ewasm, ir, irOptimized, metadata
+          示例键: evm.assembly, ewasm, ir, irOptimized, metadata
           
-          For a full description, see
+          完整描述请参见
           <https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description>
 
       --extra-output-files <SELECTOR>...
-          Extra output to write to separate files.
+          写入单独文件的额外输出。
           
-          Valid values: metadata, ir, irOptimized, ewasm, evm.assembly
+          有效值: metadata, ir, irOptimized, ewasm, evm.assembly
 
-Project options:
+项目选项:
   -o, --out <PATH>
-          The path to the contract artifacts folder
+          合约构件文件夹的路径
 
       --revert-strings <REVERT>
-          Revert string configuration.
+          回退字符串配置。
           
-          Possible values are "default", "strip" (remove), "debug" (Solidity-generated revert
-          strings) and "verboseDebug"
+          可能的值为 "default"、"strip"（移除）、"debug"（Solidity 生成的回退字符串）和 "verboseDebug"
 
       --build-info
-          Generate build info files
+          生成构建信息文件
 
       --build-info-path <PATH>
-          Output path to directory that build info files will be written to
+          构建信息文件将写入的目录输出路径
 
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在 Git 仓库中），或者当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的重映射
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境变量中获取项目的重映射
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存的路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹的路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这相当于使用: `--contracts contracts --lib-paths node_modules`。
           
-          [aliases: hh]
+          [别名: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件的路径
+```
 ```

@@ -1,4 +1,4 @@
-## Project Commands
+## 项目命令
 
 - [forge init](./forge-init.md)
 - [forge clone](./forge-clone.md)

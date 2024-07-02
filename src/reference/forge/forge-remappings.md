@@ -2,7 +2,7 @@
 
 ### NAME
 
-forge-remappings - Get the automatically inferred remappings for the project.
+forge-remappings - 获取项目自动推断的重映射。
 
 ### SYNOPSIS
 
@@ -10,23 +10,23 @@ forge-remappings - Get the automatically inferred remappings for the project.
 
 ### DESCRIPTION
 
-Get the automatically inferred remappings for the project.
+获取项目自动推断的重映射。
 
 ### OPTIONS
 
-#### Project Options
+#### 项目选项
 
 `--root` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;The project's root path. By default, this is the root directory of the current git repository, or the current working directory.
+&nbsp;&nbsp;&nbsp;&nbsp;项目的根路径。默认情况下，这是当前 git 仓库的根目录，或者当前工作目录。
 
 `--lib-path` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;The path to the library folder.
+&nbsp;&nbsp;&nbsp;&nbsp;库文件夹的路径。
 
 {{#include common-options.md}}
 
 ### EXAMPLES
 
-1. Create a `remappings.txt` file from the inferred remappings:
+1. 从推断的重映射创建一个 `remappings.txt` 文件：
     ```sh
     forge remappings > remappings.txt
     ```

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-uint256 - Convert a number to a hex-encoded uint256.
+cast-to-uint256 - 将一个数字转换为十六进制编码的 uint256。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-to-uint256 - Convert a number to a hex-encoded uint256.
 
 ### DESCRIPTION
 
-Convert a number to a hex-encoded uint256.
+将一个数字转换为十六进制编码的 uint256。
 
 ### OPTIONS
 

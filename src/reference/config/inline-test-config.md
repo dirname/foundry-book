@@ -1,9 +1,9 @@
-## In-line test configuration
-Foundry users are enabled to specify overall test configurations, using a combination of ENV variables and config statements in the `foundry.toml`. Checkout the [`Testing reference`][Testing Reference] for a detailed description.
+## 内联测试配置
+Foundry 用户可以使用环境变量和 `foundry.toml` 中的配置语句来指定总体测试配置。详细描述请查看 [`测试参考`][Testing Reference]。
 
-Despite this may work in the general case, some tests may need finer control over their configuration. For such reason Forge provides a way to specify per-test configs for invariant and fuzz testing scenarios. 
+尽管这在一般情况下可能有效，但某些测试可能需要更精细的配置控制。为此，Forge 提供了一种方法，可以在不变测试和模糊测试场景中指定每项测试的配置。
 
-Users can in-line test config statements directly in Solidity comments. This would affect the behavior of the `forge test` command for a specific test instance, as illustrated in the example below.
+用户可以直接在 Solidity 注释中内联测试配置语句。这将影响 `forge test` 命令在特定测试实例中的行为，如下例所示。
 
 ```solidity
 contract MyTest is Test {
@@ -15,10 +15,10 @@ contract MyTest is Test {
 }
 ```
 
-What we are asking here is to run our fuzzer `100` and `500` times for the `default` and `ci` profiles respectively. The interesting fact is that this would override any fuzz `runs` setup existing at a global level. All other configs would be inherited from the global context, making this acting as a fallback for all possible configurations.
+这里我们要求模糊测试器分别在 `default` 和 `ci` 配置文件中运行 `100` 次和 `500` 次。有趣的是，这将覆盖任何全局级别的模糊测试 `runs` 设置。所有其他配置将从全局上下文中继承，使其成为所有可能配置的回退。
 
-### Block comments
-In-line test configurations can also be expressed in block comments, as illustrated in the example.
+### 块注释
+内联测试配置也可以在块注释中表示，如下例所示。
 
 ```solidity
 contract MyTest is Test {
@@ -32,15 +32,15 @@ contract MyTest is Test {
 }
 ```
 
-### In-line fuzz configs
-Users can specify the configs described in the table. Each statement must have a prefix of the form `forge-config: ${PROFILE}.fuzz.`
+### 内联模糊测试配置
+用户可以指定表格中描述的配置。每个语句必须具有 `forge-config: ${PROFILE}.fuzz.` 形式的前缀。
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |-|-|-|
-|`runs`|integer|The amount of fuzz runs to perform for this specific test case. [`Reference`][testing].|
-|`max-test-rejects`|integer|The maximum number of combined inputs that may be rejected before the test as a whole aborts. [`Reference`][Max test rejects].|
+|`runs`|整数|为此特定测试用例执行的模糊测试次数。[`参考`][testing]。|
+|`max-test-rejects`|整数|在测试整体中止之前可能被拒绝的组合输入的最大数量。[`参考`][Max test rejects]。|
 
-Fuzz config example
+模糊测试配置示例
 ```solidity
 contract MyFuzzTest is Test {
   /// forge-config: default.fuzz.runs = 100
@@ -51,17 +51,17 @@ contract MyFuzzTest is Test {
 }
 ```
 
-### In-line invariant configs
-Users can specify the configs described in the table. Each statement must have a prefix of the form `forge-config: ${PROFILE}.invariant.`
+### 内联不变测试配置
+用户可以指定表格中描述的配置。每个语句必须具有 `forge-config: ${PROFILE}.invariant.` 形式的前缀。
 
-| Parameter | Type | Description |
+| 参数 | 类型 | 描述 |
 |-|-|-|
-|`runs`|integer|The amount of invariant runs to perform for this specific test case. [`Reference`][Invariant runs].
-|`depth`|integer|The number of calls executed to attempt to break invariant in one run. [`Reference`][Invariant depth].
-|`fail-on-revert`|boolean|Fails the invariant fuzzing if a revert occurs. [`Reference`][Fail on revert].
-|`call-override`|boolean|Overrides unsafe external calls when running invariant test. [`Reference`][Invariant call override].
+|`runs`|整数|为此特定测试用例执行的不变测试次数。[`参考`][Invariant runs]。
+|`depth`|整数|在一次运行中尝试破坏不变性的调用次数。[`参考`][Invariant depth]。
+|`fail-on-revert`|布尔值|如果在不变模糊测试中发生回滚，则失败。[`参考`][Fail on revert]。
+|`call-override`|布尔值|在运行不变测试时覆盖不安全的对外调用。[`参考`][Invariant call override]。
 
-Invariant config example
+不变测试配置示例
 ```solidity
 contract MyInvariantTest is Test {
   /// forge-config: default.invariant.runs = 100
@@ -73,15 +73,3 @@ contract MyInvariantTest is Test {
   }
 }
 ```
-
-
-
-
-
-[Testing Reference]: ./testing.md
-[testing]: ./testing.md#runs
-[Max test rejects]: ./testing.md#max_test_rejects
-[Invariant runs]: ./testing.md#runs-1
-[Invariant depth]: ./testing.md#depth
-[Fail on revert]: ./testing.md#fail_on_revert
-[Invariant call override]: ./testing.md#call_override

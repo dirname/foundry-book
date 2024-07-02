@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-completions - Generate shell completions script
+cast-completions - 生成 shell 自动补全脚本
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-completions - Generate shell completions script
 
 ### DESCRIPTION
 
-Generates a shell completions script for the given shell.
+为指定的 shell 生成自动补全脚本。
 
-Supported shells are:
+支持的 shell 有：
 
 - bash
 - elvish
@@ -26,7 +26,7 @@ Supported shells are:
 
 ### EXAMPLES
 
-1. Generate shell completions script for zsh:
+1. 为 zsh 生成 shell 自动补全脚本：
     ```sh
     cast completions zsh > $HOME/.oh-my-zsh/completions/_cast
     ```

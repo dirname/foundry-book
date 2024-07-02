@@ -1,49 +1,49 @@
 ## `rollFork`
 
-### Signature
+### 签名
 
 ```solidity
-// roll the _active_ fork to the given block
+// 将_active_分叉滚动到给定的区块
 function rollFork(uint256 blockNumber) external;
 ```
 
 ```solidity
-// roll the _active_ fork to the block in which the transaction was mined it and replays all previously executed transactions
+// 将_active_分叉滚动到交易被挖出的区块，并重放所有之前执行的交易
 function rollFork(bytes32 transaction) external;
 ```
 
 ```solidity
-// Same as `rollFork(uint256 blockNumber)` but uses the fork corresponding to the `forkId`
+// 与`rollFork(uint256 blockNumber)`相同，但使用对应于`forkId`的分叉
 function rollFork(uint256 forkId, uint256 blockNumber) external;
 ```
 
 ```solidity
-// Same as `rollFork(bytes32 transaction)` but uses the fork corresponding to the `forkId`
+// 与`rollFork(bytes32 transaction)`相同，但使用对应于`forkId`的分叉
 function rollFork(uint256 forkId, bytes32 transaction) external;
 ```
 
-### Description
+### 描述
 
-Sets `block.number`. If a fork identifier is passed as an argument, it will update that fork, otherwise it will update the currently active fork.
+设置 `block.number`。如果传递了分叉标识符作为参数，它将更新该分叉，否则将更新当前活动的分叉。
 
-If a transaction hash is provided, it will roll the fork to the block the transaction was mined in and replays all previously executed transactions.
+如果提供了交易哈希，它将把分叉滚动到交易被挖出的区块，并重放所有之前执行的交易。
 
-### Examples
+### 示例
 
-Set `block.number` for the currently active fork:
+为当前活动的分叉设置 `block.number`：
 
 ```solidity
 uint256 forkId = vm.createFork(MAINNET_RPC_URL);
 vm.selectFork(forkId);
 
-assertEq(block.number, 15_171_037); // as of time of writing, 2022-07-19 04:55:27 UTC
+assertEq(block.number, 15_171_037); // 截至撰写时，2022-07-19 04:55:27 UTC
 
 vm.rollFork(15_171_057);
 
 assertEq(block.number, 15_171_057);
 ```
 
-Set `block.number` for the fork identified by the passed `forkId` argument:
+为传递的 `forkId` 参数标识的分叉设置 `block.number`：
 
 ```solidity
 uint256 optimismForkId = vm.createFork(OPTIMISM_RPC_URL);
@@ -55,7 +55,7 @@ vm.selectFork(optimismForkId);
 assertEq(block.number, 1_337_000);
 ```
 
-### SEE ALSO
+### 参见
 
 - [roll](./roll.md)
 - [createFork](./create-fork.md)

@@ -1,14 +1,16 @@
+```markdown
 # cast 4byte-decode
 
-Decode ABI-encoded calldata using https://openchain.xyz
+使用 https://openchain.xyz 解码 ABI 编码的调用数据
 
 ```bash
 $ cast 4byte-decode --help
 Usage: cast 4byte-decode [CALLDATA]
 
 Arguments:
-  [CALLDATA]  The ABI-encoded calldata
+  [CALLDATA]   ABI 编码的调用数据
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

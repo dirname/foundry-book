@@ -1,74 +1,74 @@
-## File cheat codes
+## 文件作弊码
 
-### Signature
+### 签名
 
 ```solidity
-// Reads the entire content of file to string, (path) => (data)
+// 读取文件的全部内容到字符串，(路径) => (数据)
 function readFile(string calldata) external returns (string memory);
-/// Reads the entire content of file as binary. `path` is relative to the project root.
+/// 以二进制形式读取文件的全部内容。`路径`相对于项目根目录。
 function readFileBinary(string calldata path) external view returns (bytes memory data);
-/// Reads the directory at the given path recursively, up to `maxDepth`.
-/// `maxDepth` defaults to 1, meaning only the direct children of the given directory will be returned.
-/// Follows symbolic links if `followLinks` is true.
+/// 递归读取给定路径的目录，最多到`最大深度`。
+/// `最大深度`默认为1，表示只返回给定目录的直接子目录。
+/// 如果`跟随链接`为真，则跟随符号链接。
 function readDir(string calldata path) external view returns (DirEntry[] memory entries);
-// Reads next line of file to string, (path) => (line)
+// 读取文件的下一行到字符串，(路径) => (行)
 function readLine(string calldata) external returns (string memory);
-/// Reads a symbolic link, returning the path that the link points to.
-/// This cheatcode will revert in the following situations, but is not limited to just these cases:
-/// - `path` is not a symbolic link.
-/// - `path` does not exist.
+/// 读取符号链接，返回链接指向的路径。
+/// 此作弊码在以下情况下会回滚，但不限于这些情况：
+/// - `路径`不是符号链接。
+/// - `路径`不存在。
 function readLink(string calldata linkPath) external view returns (string memory targetPath);
-// Writes data to file, creating a file if it does not exist, and entirely replacing its contents if it does.
-// (path, data) => ()
+// 写入数据到文件，如果不存在则创建文件，如果存在则完全替换其内容。
+// (路径, 数据) => ()
 function writeFile(string calldata, string calldata) external;
-// Writes line to file, creating a file if it does not exist.
-// (path, data) => ()
+// 写入行到文件，如果不存在则创建文件。
+// (路径, 数据) => ()
 function writeLine(string calldata, string calldata) external;
-// Closes file for reading, resetting the offset and allowing to read it from beginning with readLine.
-// (path) => ()
+// 关闭文件以进行读取，重置偏移量，允许从开头用readLine读取。
+// (路径) => ()
 function closeFile(string calldata) external;
-// Removes file. This cheatcode will revert in the following situations, but is not limited to just these cases:
-// - Path points to a directory.
-// - The file doesn't exist.
-// - The user lacks permissions to remove the file.
-// (path) => ()
+// 删除文件。此作弊码在以下情况下会回滚，但不限于这些情况：
+// - 路径指向目录。
+// - 文件不存在。
+// - 用户缺乏删除文件的权限。
+// (路径) => ()
 function removeFile(string calldata) external;
-// Returns true if the given path points to an existing entity, else returns false
-// (path) => (bool)
+// 如果给定路径指向现有实体，则返回真，否则返回假
+// (路径) => (布尔值)
 function exists(string calldata) external returns (bool);
-// Returns true if the path exists on disk and is pointing at a regular file, else returns false
-// (path) => (bool)
+// 如果路径存在于磁盘上并且指向常规文件，则返回真，否则返回假
+// (路径) => (布尔值)
 function isFile(string calldata) external returns (bool);
-// Returns true if the path exists on disk and is pointing at a directory, else returns false
-// (path) => (bool)
+// 如果路径存在于磁盘上并且指向目录，则返回真，否则返回假
+// (路径) => (布尔值)
 function isDir(string calldata) external returns (bool);
 ```
 
-### Description
+### 描述
 
-These cheatcodes provided by [forge-std](https://github.com/foundry-rs/forge-std) can be used for filesystem manipulation operations.
+这些由 [forge-std](https://github.com/foundry-rs/forge-std) 提供的作弊码可用于文件系统操作。
 
-By default, filesystem access is disallowed and requires the `fs_permission` setting in `foundry.toml`:
+默认情况下，文件系统访问是被禁止的，需要在 `foundry.toml` 中设置 `fs_permission`：
 
 ```toml
-# Configures permissions for cheatcodes that touch the filesystem like `vm.writeFile`
-# `access` restricts how the `path` can be accessed via cheatcodes
-#    `read-write` | `true`   => `read` + `write` access allowed (`vm.readFile` + `vm.writeFile`)
-#    `none`| `false` => no access
-#    `read` => only read access (`vm.readFile`)
-#    `write` => only write access (`vm.writeFile`)
-# The `allowed_paths` further lists the paths that are considered, e.g. `./` represents the project root directory
-# By default _no_ fs access permission is granted, and _no_ paths are allowed
-# following example enables read access for the project dir _only_:
+# 配置作弊码的权限，这些作弊码涉及文件系统操作，如 `vm.writeFile`
+# `access` 限制通过作弊码访问 `路径` 的方式
+#    `read-write` | `true`   => 允许 `读` + `写` 访问 (`vm.readFile` + `vm.writeFile`)
+#    `none`| `false` => 无访问权限
+#    `read` => 仅读访问 (`vm.readFile`)
+#    `write` => 仅写访问 (`vm.writeFile`)
+# `allowed_paths` 进一步列出被考虑的路径，例如 `./` 表示项目根目录
+# 默认情况下 _无_ 文件系统访问权限，且 _无_ 路径被允许
+# 以下示例仅启用对项目目录的读访问权限：
 #       `fs_permissions = [{ access = "read", path = "./"}]`
-fs_permissions = [] # default: all file cheat codes are disabled
+fs_permissions = [] # 默认：所有文件作弊码都被禁用
 ```
 
-### Examples
+### 示例
 
-Append a line to a file, this will create the file if it does not exist yet
+追加一行到文件，如果文件不存在则创建文件
 
-This requires read access to the file / project root
+这需要对文件 / 项目根目录的读访问权限
 
 ```toml
 fs_permissions = [{ access = "read", path = "./"}]
@@ -84,9 +84,9 @@ string memory line2 = "second line";
 vm.writeLine(path, line2);
 ```
 
-Write to and read from a file
+写入和读取文件
 
-This requires read-write access to file / project root:
+这需要对文件 / 项目根目录的读写访问权限：
 
 ```toml
 fs_permissions = [{ access = "read-write", path = "./"}]
@@ -100,9 +100,9 @@ vm.writeFile(path, data);
 assertEq(vm.readFile(path), data);
 ```
 
-Remove a file
+删除文件
 
-This requires write access to file / project root:
+这需要对文件 / 项目根目录的写访问权限：
 
 ```toml
 fs_permissions = [{ access = "write", path = "./"}]
@@ -115,22 +115,22 @@ vm.removeFile(path);
 assertFalse(vm.exists(validPath));
 ```
 
-Verify that a filesystem path is valid
+验证文件系统路径是否有效
 
 ```solidity
-// Verify that path 'foo/files/bar.txt' exists
+// 验证路径 'foo/files/bar.txt' 是否存在
 string memory validPath = "foo/files/bar.txt";
 assertTrue(vm.exists(validPath));
 ```
 
-Verify that a filesystem path points to a file or directory
+验证文件系统路径是否指向文件或目录
 
 ```solidity
-// Verify that path 'foo/file/bar.txt' points to a file
+// 验证路径 'foo/file/bar.txt' 是否指向文件
 string memory validFilePath = "foo/files/bar.txt";
 assertTrue(vm.isFile(validFilePath));
 
-// Verify that 'foo/file' points to a directory
+// 验证 'foo/file' 是否指向目录
 string memory validDirPath = "foo/files";
 assertTrue(vm.isDir(validDirPath));
 ```

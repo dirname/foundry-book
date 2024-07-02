@@ -1,6 +1,6 @@
 ## `writeToml`
 
-### Signature
+### 签名
 
 ```solidity
 function writeToml(string calldata json, string calldata path) external;
@@ -8,31 +8,31 @@ function writeToml(string calldata json, string calldata path) external;
 function writeToml(string calldata json, string calldata path, string calldata valueKey) external;
 ```
 
-### Description
+### 描述
 
-Writes a serialized JSON object to a TOML file after conversion.
+将序列化的 JSON 对象转换后写入 TOML 文件。
 
-The argument `json` must be a JSON object in stringified form. For example:
+参数 `json` 必须是一个字符串化的 JSON 对象。例如：
 
 ```text
 { "boolean": true, "number": 342, "object": { "title": "finally json serialization" } }
 ```
 
-This is usually built through [serializeJson](./serialize-json.md).
+这通常通过 [serializeJson](./serialize-json.md) 构建。
 
-The argument `path` is the path of the TOML file to write to.
+参数 `path` 是要写入的 TOML 文件的路径。
 
-If no `valueKey` is provided, then the TOML object will be written to a new file. If the file already exists, it will be overwritten.
+如果没有提供 `valueKey`，则会将 TOML 对象写入一个新文件。如果文件已存在，它将被覆盖。
 
-If a `valueKey` is provided, then the file must already exist and be a valid TOML file. The object in that file will be updated by replacing the value at the *JSON path* `valueKey` with the JSON object `json` after TOML conversion.
+如果提供了 `valueKey`，则文件必须已经存在并且是一个有效的 TOML 文件。该文件中的对象将通过将 *JSON 路径* `valueKey` 处的值替换为 JSON 对象 `json` 转换后的值来更新。
 
-This is useful to replace some values in a TOML file without having to first parse and then reserialize it. Note that the TOML path must indicate an existing key, so it's not possible to add new keys this way.
+这对于在不先解析然后重新序列化文件的情况下替换 TOML 文件中的某些值非常有用。请注意，TOML 路径必须指示一个现有键，因此无法通过这种方式添加新键。
 
-**Remember:** The file path `path` needs to be in the allowed paths. Read more in [File cheatcodes](./fs.md).
+**记住：** 文件路径 `path` 需要在允许的路径中。更多信息请阅读 [File cheatcodes](./fs.md)。
 
-#### JSON Paths
+#### JSON 路径
 
-Let's consider the following JSON object:
+让我们考虑以下 JSON 对象：
 
 ```json
 {
@@ -50,28 +50,28 @@ Let's consider the following JSON object:
 }
 ```
 
-The root object is always assumed, so we can refer to one of its children by starting the path with a dot (`.`). For instance, `.boolean`, `.number`, and `.obj1`.
-We can go as deep as we want: `.obj1.aNumber`, or `.obj1.obj2.aNumber`.
-We can even search for a key in a subtree: `.obj1..veryDeep`, or just `..veryDeep` since there's no ambiguity.
+根对象总是被假定，因此我们可以通过以点 (`.`) 开始路径来引用其子对象。例如，`.boolean`、`.number` 和 `.obj1`。
+我们可以深入到任意深度：`.obj1.aNumber` 或 `.obj1.obj2.aNumber`。
+我们甚至可以在子树中搜索键：`.obj1..veryDeep` 或只是 `..veryDeep`，因为没有歧义。
 
-See the examples to see this in action.
+请参见示例以查看实际操作。
 
-### Examples
+### 示例
 
-#### A simple example
+#### 一个简单的示例
 
 ```solidity
 string memory jsonObj = '{ "boolean": true, "number": 342, "myObject": { "title": "finally json serialization" } }';
 vm.writeToml(jsonObj, "./output/example.toml");
 
-// replaces the value of `myObject` with a new object
+// 将 `myObject` 的值替换为一个新的对象
 string memory newJsonObj = '{ "aNumber": 123, "aString": "asd" }';
 vm.writeToml(newJsonObj, "./output/example.toml", ".myObject");
 
-// replaces the value of `aString` in the new object
+// 将新对象中的 `aString` 的值替换
 vm.writeToml("my new string", "./output/example.toml", ".myObject.aString");
 
-// Here's example.toml:
+// 这里是 example.toml 的内容：
 // 
 // boolean = true
 // number = 342
@@ -81,7 +81,7 @@ vm.writeToml("my new string", "./output/example.toml", ".myObject.aString");
 // aString = "my new string"
 ```
 
-#### A more complex example
+#### 一个更复杂的示例
 
 ```solidity
 string memory jsonObj = '{ "boolean": true, "number": 342, "obj1": { "foo": "bar" } }';
@@ -93,7 +93,7 @@ vm.writeToml(jsonObj2, "./output/example2.toml", ".obj1");
 string memory jsonObj3 = '{ "aNumber": 123, "obj3": { "veryDeep": 3 } }';
 vm.writeToml(jsonObj3, "./output/example2.toml", ".obj1.obj2");
 
-// Here's example2.toml so far:
+// 这里是 example2.toml 的内容：
 //
 // boolean = true
 // number = 342
@@ -107,10 +107,10 @@ vm.writeToml(jsonObj3, "./output/example2.toml", ".obj1.obj2");
 // [obj1.obj2.obj3]
 // veryDeep = 3
 
-// Note that the JSON object is just the value 13371337 in this case.
+// 注意在这种情况下，JSON 对象只是值 13371337。
 vm.writeToml("13371337", "./output/example2.toml", "..veryDeep");
 
-// Here's the final example2.toml:
+// 这里是最终的 example2.toml 内容：
 //
 // boolean = true
 // number = 342
@@ -125,6 +125,6 @@ vm.writeToml("13371337", "./output/example2.toml", "..veryDeep");
 // veryDeep = 13371337
 ```
 
-### SEE ALSO
+### 参见
 
 - [serializeJson](./serialize-json.md)

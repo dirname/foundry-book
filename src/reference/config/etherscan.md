@@ -1,21 +1,5 @@
-## Etherscan
-
-Configuration related to Etherscan, such as API keys. This configuration is used in various places by Forge.
-
-The `[etherscan]` section is a mapping of keys to Etherscan configuration tables. The Etherscan configuration tables hold the following keys:
-
-- `key` (string) (**required**): The Etherscan API key for the given network. The value of this property can also point to an environment variable.
-- `chain`: The chain name or ID of the chain this Etherscan configuration is for.
-- `url`: The Etherscan API URL.
-
-If the key of the configuration is a chain name, then `chain` is not required, otherwise it is. `url` can be used to explicitly set the Etherscan API URL for chains not natively supported by name.
-
-Using TOML inline table syntax, all of these are valid:
-
-```toml
-[etherscan]
-mainnet = { key = "${ETHERSCAN_MAINNET_KEY}" }
-mainnet2 = { key = "ABCDEFG", chain = "mainnet" }
-optimism = { key = "1234567" }
-unknown_chain = { key = "ABCDEFG", url = "<etherscan api url for this chain>" }
+```json
+{
+  "translation": "## Etherscan\n\n与Etherscan相关的配置，例如API密钥。Forge在多个地方使用此配置。\n\n`[etherscan]`部分是将键映射到Etherscan配置表的映射。Etherscan配置表包含以下键：\n\n- `key` (字符串) (**必需**): 给定网络的Etherscan API密钥。此属性的值也可以指向环境变量。\n- `chain`: 此Etherscan配置所针对的链的名称或ID。\n- `url`: Etherscan API URL。\n\n如果配置的键是链名称，则不需要`chain`，否则需要。`url`可以用于显式设置名称不原生支持的链的Etherscan API URL。\n\n使用TOML内联表语法，所有这些都是有效的：\n\n```toml\n[etherscan]\nmainnet = { key = \"${ETHERSCAN_MAINNET_KEY}\" }\nmainnet2 = { key = \"ABCDEFG\", chain = \"mainnet\" }\noptimism = { key = \"1234567\" }\nunknown_chain = { key = \"ABCDEFG\", url = \"<etherscan api url for this chain>\" }\n```"
+}
 ```

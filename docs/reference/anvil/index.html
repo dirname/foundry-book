@@ -1,0 +1,671 @@
+<!DOCTYPE HTML>
+<html lang="en" class="ayu" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>anvil 参考 - Foundry Book</title>
+
+
+        <!-- Custom HTML head -->
+                <meta name="twitter:card" content="summary">
+                <meta property="og:title" content="Foundry Book" />
+                <meta property="og:description" content="A book on all things Foundry" />
+                <meta name="twitter:image:src" content="https://raw.githubusercontent.com/foundry-rs/book/master/theme/card.png" />
+
+        <meta name="description" content="A book on all things Foundry">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="shortcut icon" href="../../favicon.png">
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../../src/static/custom.css">
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../../index.html">介绍</a></li><li class="chapter-item expanded affix "><li class="part-title">入门</li><li class="chapter-item expanded "><a href="../../getting-started/installation.html"><strong aria-hidden="true">1.</strong> 安装</a></li><li class="chapter-item expanded "><a href="../../getting-started/first-steps.html"><strong aria-hidden="true">2.</strong> Foundry 的第一步</a></li><li class="chapter-item expanded affix "><li class="part-title">项目</li><li class="chapter-item expanded "><a href="../../projects/creating-a-new-project.html"><strong aria-hidden="true">3.</strong> 创建一个新项目</a></li><li class="chapter-item expanded "><a href="../../projects/working-on-an-existing-project.html"><strong aria-hidden="true">4.</strong> 在现有项目上工作</a></li><li class="chapter-item expanded "><a href="../../projects/clone-a-verified-contract.html"><strong aria-hidden="true">5.</strong> 在链上克隆已验证的合约</a></li><li class="chapter-item expanded "><a href="../../projects/dependencies.html"><strong aria-hidden="true">6.</strong> 依赖项</a></li><li class="chapter-item expanded "><a href="../../projects/soldeer.html"><strong aria-hidden="true">7.</strong> Soldeer</a></li><li class="chapter-item expanded "><a href="../../projects/project-layout.html"><strong aria-hidden="true">8.</strong> 项目布局</a></li><li class="chapter-item expanded affix "><li class="part-title">Forge 概述</li><li class="chapter-item expanded "><a href="../../forge/index.html"><strong aria-hidden="true">9.</strong> Forge 概述</a></li><li class="chapter-item expanded "><a href="../../forge/tests.html"><strong aria-hidden="true">10.</strong> 测试</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../forge/writing-tests.html"><strong aria-hidden="true">10.1.</strong> 编写测试</a></li><li class="chapter-item "><a href="../../forge/cheatcodes.html"><strong aria-hidden="true">10.2.</strong> 作弊码</a></li><li class="chapter-item "><a href="../../forge/forge-std.html"><strong aria-hidden="true">10.3.</strong> Forge 标准库概述</a></li><li class="chapter-item "><a href="../../forge/traces.html"><strong aria-hidden="true">10.4.</strong> 理解追踪</a></li><li class="chapter-item "><a href="../../forge/fork-testing.html"><strong aria-hidden="true">10.5.</strong> 分叉测试</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/advanced-testing.html"><strong aria-hidden="true">11.</strong> 高级测试</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../forge/fuzz-testing.html"><strong aria-hidden="true">11.1.</strong> 模糊测试</a></li><li class="chapter-item "><a href="../../forge/invariant-testing.html"><strong aria-hidden="true">11.2.</strong> 不变性测试</a></li><li class="chapter-item "><a href="../../forge/differential-ffi-testing.html"><strong aria-hidden="true">11.3.</strong> 差异测试</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/deploying.html"><strong aria-hidden="true">12.</strong> 部署和验证</a></li><li class="chapter-item expanded "><a href="../../forge/gas-tracking.html"><strong aria-hidden="true">13.</strong> Gas 跟踪</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../forge/gas-reports.html"><strong aria-hidden="true">13.1.</strong> Gas 报告</a></li><li class="chapter-item "><a href="../../forge/gas-snapshots.html"><strong aria-hidden="true">13.2.</strong> Gas 快照</a></li></ol></li><li class="chapter-item expanded "><a href="../../forge/debugger.html"><strong aria-hidden="true">14.</strong> 调试器</a></li><li class="chapter-item expanded affix "><li class="part-title">Cast 概述</li><li class="chapter-item expanded "><a href="../../cast/index.html"><strong aria-hidden="true">15.</strong> Cast 概述</a></li><li class="chapter-item expanded affix "><li class="part-title">Anvil 概述</li><li class="chapter-item expanded "><a href="../../anvil/index.html"><strong aria-hidden="true">16.</strong> Anvil 概述</a></li><li class="chapter-item expanded affix "><li class="part-title">Chisel 概述</li><li class="chapter-item expanded "><a href="../../chisel/index.html"><strong aria-hidden="true">17.</strong> Chisel 概述</a></li><li class="chapter-item expanded affix "><li class="part-title">配置</li><li class="chapter-item expanded "><a href="../../config/index.html"><strong aria-hidden="true">18.</strong> 使用 foundry.toml 配置</a></li><li class="chapter-item expanded "><a href="../../config/continuous-integration.html"><strong aria-hidden="true">19.</strong> 持续集成</a></li><li class="chapter-item expanded "><a href="../../config/vscode.html"><strong aria-hidden="true">20.</strong> 与 VSCode 集成</a></li><li class="chapter-item expanded "><a href="../../config/shell-autocompletion.html"><strong aria-hidden="true">21.</strong> Shell 自动补全</a></li><li class="chapter-item expanded "><a href="../../config/static-analyzers.html"><strong aria-hidden="true">22.</strong> 静态分析器</a></li><li class="chapter-item expanded "><a href="../../config/hardhat.html"><strong aria-hidden="true">23.</strong> 与 Hardhat 集成</a></li><li class="chapter-item expanded "><a href="../../config/vyper.html"><strong aria-hidden="true">24.</strong> Vyper 支持</a></li><li class="chapter-item expanded affix "><li class="part-title">教程</li><li class="chapter-item expanded "><a href="../../tutorials/best-practices.html"><strong aria-hidden="true">25.</strong> 最佳实践</a></li><li class="chapter-item expanded "><a href="../../tutorials/solmate-nft.html"><strong aria-hidden="true">26.</strong> 使用 Solmate 创建 NFT</a></li><li class="chapter-item expanded "><a href="../../tutorials/foundry-docker.html"><strong aria-hidden="true">27.</strong> Docker 和 Foundry</a></li><li class="chapter-item expanded "><a href="../../tutorials/testing-eip712.html"><strong aria-hidden="true">28.</strong> 测试 EIP-712 签名</a></li><li class="chapter-item expanded "><a href="../../tutorials/solidity-scripting.html"><strong aria-hidden="true">29.</strong> Solidity 脚本</a></li><li class="chapter-item expanded "><a href="../../tutorials/create2-tutorial.html"><strong aria-hidden="true">30.</strong> 使用 CREATE2 进行确定性部署</a></li><li class="chapter-item expanded "><a href="../../tutorials/forking-mainnet-with-cast-anvil.html"><strong aria-hidden="true">31.</strong> 使用 Cast 和 Anvil 分叉主网</a></li><li class="chapter-item expanded "><a href="../../tutorials/learn-foundry.html"><strong aria-hidden="true">32.</strong> 学习 Foundry 视频</a></li><li class="chapter-item expanded affix "><li class="part-title">附录</li><li class="chapter-item expanded "><a href="../../faq.html"><strong aria-hidden="true">33.</strong> 常见问题</a></li><li class="chapter-item expanded "><a href="../../contributing.html"><strong aria-hidden="true">34.</strong> 帮助我们改进 Foundry</a></li><li class="chapter-item expanded "><a href="../../reference/index.html"><strong aria-hidden="true">35.</strong> 参考</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/index.html"><strong aria-hidden="true">35.1.</strong> CLI 参考</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/forge.html"><strong aria-hidden="true">35.1.1.</strong> forge</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/forge/bind.html"><strong aria-hidden="true">35.1.1.1.</strong> forge bind</a></li><li class="chapter-item "><a href="../../reference/cli/forge/build.html"><strong aria-hidden="true">35.1.1.2.</strong> forge build</a></li><li class="chapter-item "><a href="../../reference/cli/forge/cache.html"><strong aria-hidden="true">35.1.1.3.</strong> forge cache</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/forge/cache/clean.html"><strong aria-hidden="true">35.1.1.3.1.</strong> forge cache clean</a></li><li class="chapter-item "><a href="../../reference/cli/forge/cache/ls.html"><strong aria-hidden="true">35.1.1.3.2.</strong> forge cache ls</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/forge/clean.html"><strong aria-hidden="true">35.1.1.4.</strong> forge clean</a></li><li class="chapter-item "><a href="../../reference/cli/forge/clone.html"><strong aria-hidden="true">35.1.1.5.</strong> forge clone</a></li><li class="chapter-item "><a href="../../reference/cli/forge/completions.html"><strong aria-hidden="true">35.1.1.6.</strong> forge completions</a></li><li class="chapter-item "><a href="../../reference/cli/forge/config.html"><strong aria-hidden="true">35.1.1.7.</strong> forge config</a></li><li class="chapter-item "><a href="../../reference/cli/forge/coverage.html"><strong aria-hidden="true">35.1.1.8.</strong> forge coverage</a></li><li class="chapter-item "><a href="../../reference/cli/forge/create.html"><strong aria-hidden="true">35.1.1.9.</strong> forge create</a></li><li class="chapter-item "><a href="../../reference/cli/forge/debug.html"><strong aria-hidden="true">35.1.1.10.</strong> forge debug</a></li><li class="chapter-item "><a href="../../reference/cli/forge/doc.html"><strong aria-hidden="true">35.1.1.11.</strong> forge doc</a></li><li class="chapter-item "><a href="../../reference/cli/forge/flatten.html"><strong aria-hidden="true">35.1.1.12.</strong> forge flatten</a></li><li class="chapter-item "><a href="../../reference/cli/forge/fmt.html"><strong aria-hidden="true">35.1.1.13.</strong> forge fmt</a></li><li class="chapter-item "><a href="../../reference/cli/forge/geiger.html"><strong aria-hidden="true">35.1.1.14.</strong> forge geiger</a></li><li class="chapter-item "><a href="../../reference/cli/forge/generate.html"><strong aria-hidden="true">35.1.1.15.</strong> forge generate</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/forge/generate/test.html"><strong aria-hidden="true">35.1.1.15.1.</strong> forge generate test</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/forge/generate-fig-spec.html"><strong aria-hidden="true">35.1.1.16.</strong> forge generate-fig-spec</a></li><li class="chapter-item "><a href="../../reference/cli/forge/init.html"><strong aria-hidden="true">35.1.1.17.</strong> forge init</a></li><li class="chapter-item "><a href="../../reference/cli/forge/inspect.html"><strong aria-hidden="true">35.1.1.18.</strong> forge inspect</a></li><li class="chapter-item "><a href="../../reference/cli/forge/install.html"><strong aria-hidden="true">35.1.1.19.</strong> forge install</a></li><li class="chapter-item "><a href="../../reference/cli/forge/remappings.html"><strong aria-hidden="true">35.1.1.20.</strong> forge remappings</a></li><li class="chapter-item "><a href="../../reference/cli/forge/remove.html"><strong aria-hidden="true">35.1.1.21.</strong> forge remove</a></li><li class="chapter-item "><a href="../../reference/cli/forge/script.html"><strong aria-hidden="true">35.1.1.22.</strong> forge script</a></li><li class="chapter-item "><a href="../../reference/cli/forge/selectors.html"><strong aria-hidden="true">35.1.1.23.</strong> forge selectors</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/forge/selectors/collision.html"><strong aria-hidden="true">35.1.1.23.1.</strong> forge selectors collision</a></li><li class="chapter-item "><a href="../../reference/cli/forge/selectors/upload.html"><strong aria-hidden="true">35.1.1.23.2.</strong> forge selectors upload</a></li><li class="chapter-item "><a href="../../reference/cli/forge/selectors/list.html"><strong aria-hidden="true">35.1.1.23.3.</strong> forge selectors list</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/forge/snapshot.html"><strong aria-hidden="true">35.1.1.24.</strong> forge snapshot</a></li><li class="chapter-item "><a href="../../reference/cli/forge/soldeer.html"><strong aria-hidden="true">35.1.1.25.</strong> forge soldeer</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/forge/soldeer/install.html"><strong aria-hidden="true">35.1.1.25.1.</strong> forge soldeer install</a></li><li class="chapter-item "><a href="../../reference/cli/forge/soldeer/update.html"><strong aria-hidden="true">35.1.1.25.2.</strong> forge soldeer update</a></li><li class="chapter-item "><a href="../../reference/cli/forge/soldeer/login.html"><strong aria-hidden="true">35.1.1.25.3.</strong> forge soldeer login</a></li><li class="chapter-item "><a href="../../reference/cli/forge/soldeer/push.html"><strong aria-hidden="true">35.1.1.25.4.</strong> forge soldeer push</a></li><li class="chapter-item "><a href="../../reference/cli/forge/soldeer/version-dry-run.html"><strong aria-hidden="true">35.1.1.25.5.</strong> forge soldeer version-dry-run</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/forge/test.html"><strong aria-hidden="true">35.1.1.26.</strong> forge test</a></li><li class="chapter-item "><a href="../../reference/cli/forge/tree.html"><strong aria-hidden="true">35.1.1.27.</strong> forge tree</a></li><li class="chapter-item "><a href="../../reference/cli/forge/update.html"><strong aria-hidden="true">35.1.1.28.</strong> forge update</a></li><li class="chapter-item "><a href="../../reference/cli/forge/verify-bytecode.html"><strong aria-hidden="true">35.1.1.29.</strong> forge verify-bytecode</a></li><li class="chapter-item "><a href="../../reference/cli/forge/verify-check.html"><strong aria-hidden="true">35.1.1.30.</strong> forge verify-check</a></li><li class="chapter-item "><a href="../../reference/cli/forge/verify-contract.html"><strong aria-hidden="true">35.1.1.31.</strong> forge verify-contract</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/cast.html"><strong aria-hidden="true">35.1.2.</strong> cast</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/cast/4byte.html"><strong aria-hidden="true">35.1.2.1.</strong> cast 4byte</a></li><li class="chapter-item "><a href="../../reference/cli/cast/4byte-decode.html"><strong aria-hidden="true">35.1.2.2.</strong> cast 4byte-decode</a></li><li class="chapter-item "><a href="../../reference/cli/cast/4byte-event.html"><strong aria-hidden="true">35.1.2.3.</strong> cast 4byte-event</a></li><li class="chapter-item "><a href="../../reference/cli/cast/abi-decode.html"><strong aria-hidden="true">35.1.2.4.</strong> cast abi-decode</a></li><li class="chapter-item "><a href="../../reference/cli/cast/abi-encode.html"><strong aria-hidden="true">35.1.2.5.</strong> cast abi-encode</a></li><li class="chapter-item "><a href="../../reference/cli/cast/access-list.html"><strong aria-hidden="true">35.1.2.6.</strong> cast access-list</a></li><li class="chapter-item "><a href="../../reference/cli/cast/address-zero.html"><strong aria-hidden="true">35.1.2.7.</strong> cast address-zero</a></li><li class="chapter-item "><a href="../../reference/cli/cast/admin.html"><strong aria-hidden="true">35.1.2.8.</strong> cast admin</a></li><li class="chapter-item "><a href="../../reference/cli/cast/age.html"><strong aria-hidden="true">35.1.2.9.</strong> cast age</a></li><li class="chapter-item "><a href="../../reference/cli/cast/balance.html"><strong aria-hidden="true">35.1.2.10.</strong> cast balance</a></li><li class="chapter-item "><a href="../../reference/cli/cast/base-fee.html"><strong aria-hidden="true">35.1.2.11.</strong> cast base-fee</a></li><li class="chapter-item "><a href="../../reference/cli/cast/bind.html"><strong aria-hidden="true">35.1.2.12.</strong> cast bind</a></li><li class="chapter-item "><a href="../../reference/cli/cast/block.html"><strong aria-hidden="true">35.1.2.13.</strong> cast block</a></li><li class="chapter-item "><a href="../../reference/cli/cast/block-number.html"><strong aria-hidden="true">35.1.2.14.</strong> cast block-number</a></li><li class="chapter-item "><a href="../../reference/cli/cast/call.html"><strong aria-hidden="true">35.1.2.15.</strong> cast call</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/cast/call/--create.html"><strong aria-hidden="true">35.1.2.15.1.</strong> cast call --create</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/cast/calldata.html"><strong aria-hidden="true">35.1.2.16.</strong> cast calldata</a></li><li class="chapter-item "><a href="../../reference/cli/cast/calldata-decode.html"><strong aria-hidden="true">35.1.2.17.</strong> cast calldata-decode</a></li><li class="chapter-item "><a href="../../reference/cli/cast/chain.html"><strong aria-hidden="true">35.1.2.18.</strong> cast chain</a></li><li class="chapter-item "><a href="../../reference/cli/cast/chain-id.html"><strong aria-hidden="true">35.1.2.19.</strong> cast chain-id</a></li><li class="chapter-item "><a href="../../reference/cli/cast/client.html"><strong aria-hidden="true">35.1.2.20.</strong> cast client</a></li><li class="chapter-item "><a href="../../reference/cli/cast/code.html"><strong aria-hidden="true">35.1.2.21.</strong> cast code</a></li><li class="chapter-item "><a href="../../reference/cli/cast/codesize.html"><strong aria-hidden="true">35.1.2.22.</strong> cast codesize</a></li><li class="chapter-item "><a href="../../reference/cli/cast/completions.html"><strong aria-hidden="true">35.1.2.23.</strong> cast completions</a></li><li class="chapter-item "><a href="../../reference/cli/cast/compute-address.html"><strong aria-hidden="true">35.1.2.24.</strong> cast compute-address</a></li><li class="chapter-item "><a href="../../reference/cli/cast/concat-hex.html"><strong aria-hidden="true">35.1.2.25.</strong> cast concat-hex</a></li><li class="chapter-item "><a href="../../reference/cli/cast/create2.html"><strong aria-hidden="true">35.1.2.26.</strong> cast create2</a></li><li class="chapter-item "><a href="../../reference/cli/cast/decode-transaction.html"><strong aria-hidden="true">35.1.2.27.</strong> cast decode-transaction</a></li><li class="chapter-item "><a href="../../reference/cli/cast/disassemble.html"><strong aria-hidden="true">35.1.2.28.</strong> cast disassemble</a></li><li class="chapter-item "><a href="../../reference/cli/cast/estimate.html"><strong aria-hidden="true">35.1.2.29.</strong> cast estimate</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/cast/estimate/--create.html"><strong aria-hidden="true">35.1.2.29.1.</strong> cast estimate --create</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/cast/etherscan-source.html"><strong aria-hidden="true">35.1.2.30.</strong> cast etherscan-source</a></li><li class="chapter-item "><a href="../../reference/cli/cast/find-block.html"><strong aria-hidden="true">35.1.2.31.</strong> cast find-block</a></li><li class="chapter-item "><a href="../../reference/cli/cast/format-bytes32-string.html"><strong aria-hidden="true">35.1.2.32.</strong> cast format-bytes32-string</a></li><li class="chapter-item "><a href="../../reference/cli/cast/from-bin.html"><strong aria-hidden="true">35.1.2.33.</strong> cast from-bin</a></li><li class="chapter-item "><a href="../../reference/cli/cast/from-fixed-point.html"><strong aria-hidden="true">35.1.2.34.</strong> cast from-fixed-point</a></li><li class="chapter-item "><a href="../../reference/cli/cast/from-rlp.html"><strong aria-hidden="true">35.1.2.35.</strong> cast from-rlp</a></li><li class="chapter-item "><a href="../../reference/cli/cast/from-utf8.html"><strong aria-hidden="true">35.1.2.36.</strong> cast from-utf8</a></li><li class="chapter-item "><a href="../../reference/cli/cast/from-wei.html"><strong aria-hidden="true">35.1.2.37.</strong> cast from-wei</a></li><li class="chapter-item "><a href="../../reference/cli/cast/gas-price.html"><strong aria-hidden="true">35.1.2.38.</strong> cast gas-price</a></li><li class="chapter-item "><a href="../../reference/cli/cast/generate-fig-spec.html"><strong aria-hidden="true">35.1.2.39.</strong> cast generate-fig-spec</a></li><li class="chapter-item "><a href="../../reference/cli/cast/hash-zero.html"><strong aria-hidden="true">35.1.2.40.</strong> cast hash-zero</a></li><li class="chapter-item "><a href="../../reference/cli/cast/implementation.html"><strong aria-hidden="true">35.1.2.41.</strong> cast implementation</a></li><li class="chapter-item "><a href="../../reference/cli/cast/index.html"><strong aria-hidden="true">35.1.2.42.</strong> cast index</a></li><li class="chapter-item "><a href="../../reference/cli/cast/index-erc7201.html"><strong aria-hidden="true">35.1.2.43.</strong> cast index-erc7201</a></li><li class="chapter-item "><a href="../../reference/cli/cast/interface.html"><strong aria-hidden="true">35.1.2.44.</strong> cast interface</a></li><li class="chapter-item "><a href="../../reference/cli/cast/keccak.html"><strong aria-hidden="true">35.1.2.45.</strong> cast keccak</a></li><li class="chapter-item "><a href="../../reference/cli/cast/logs.html"><strong aria-hidden="true">35.1.2.46.</strong> cast logs</a></li><li class="chapter-item "><a href="../../reference/cli/cast/lookup-address.html"><strong aria-hidden="true">35.1.2.47.</strong> cast lookup-address</a></li><li class="chapter-item "><a href="../../reference/cli/cast/max-int.html"><strong aria-hidden="true">35.1.2.48.</strong> cast max-int</a></li><li class="chapter-item "><a href="../../reference/cli/cast/max-uint.html"><strong aria-hidden="true">35.1.2.49.</strong> cast max-uint</a></li><li class="chapter-item "><a href="../../reference/cli/cast/min-int.html"><strong aria-hidden="true">35.1.2.50.</strong> cast min-int</a></li><li class="chapter-item "><a href="../../reference/cli/cast/mktx.html"><strong aria-hidden="true">35.1.2.51.</strong> cast mktx</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/cast/mktx/--create.html"><strong aria-hidden="true">35.1.2.51.1.</strong> cast mktx --create</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/cast/namehash.html"><strong aria-hidden="true">35.1.2.52.</strong> cast namehash</a></li><li class="chapter-item "><a href="../../reference/cli/cast/nonce.html"><strong aria-hidden="true">35.1.2.53.</strong> cast nonce</a></li><li class="chapter-item "><a href="../../reference/cli/cast/parse-bytes32-address.html"><strong aria-hidden="true">35.1.2.54.</strong> cast parse-bytes32-address</a></li><li class="chapter-item "><a href="../../reference/cli/cast/parse-bytes32-string.html"><strong aria-hidden="true">35.1.2.55.</strong> cast parse-bytes32-string</a></li><li class="chapter-item "><a href="../../reference/cli/cast/pretty-calldata.html"><strong aria-hidden="true">35.1.2.56.</strong> cast pretty-calldata</a></li><li class="chapter-item "><a href="../../reference/cli/cast/proof.html"><strong aria-hidden="true">35.1.2.57.</strong> cast proof</a></li><li class="chapter-item "><a href="../../reference/cli/cast/publish.html"><strong aria-hidden="true">35.1.2.58.</strong> cast publish</a></li><li class="chapter-item "><a href="../../reference/cli/cast/receipt.html"><strong aria-hidden="true">35.1.2.59.</strong> cast receipt</a></li><li class="chapter-item "><a href="../../reference/cli/cast/resolve-name.html"><strong aria-hidden="true">35.1.2.60.</strong> cast resolve-name</a></li><li class="chapter-item "><a href="../../reference/cli/cast/rpc.html"><strong aria-hidden="true">35.1.2.61.</strong> cast rpc</a></li><li class="chapter-item "><a href="../../reference/cli/cast/run.html"><strong aria-hidden="true">35.1.2.62.</strong> cast run</a></li><li class="chapter-item "><a href="../../reference/cli/cast/selectors.html"><strong aria-hidden="true">35.1.2.63.</strong> cast selectors</a></li><li class="chapter-item "><a href="../../reference/cli/cast/send.html"><strong aria-hidden="true">35.1.2.64.</strong> cast send</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/cast/send/--create.html"><strong aria-hidden="true">35.1.2.64.1.</strong> cast send --create</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/cast/shl.html"><strong aria-hidden="true">35.1.2.65.</strong> cast shl</a></li><li class="chapter-item "><a href="../../reference/cli/cast/shr.html"><strong aria-hidden="true">35.1.2.66.</strong> cast shr</a></li><li class="chapter-item "><a href="../../reference/cli/cast/sig.html"><strong aria-hidden="true">35.1.2.67.</strong> cast sig</a></li><li class="chapter-item "><a href="../../reference/cli/cast/sig-event.html"><strong aria-hidden="true">35.1.2.68.</strong> cast sig-event</a></li><li class="chapter-item "><a href="../../reference/cli/cast/storage.html"><strong aria-hidden="true">35.1.2.69.</strong> cast storage</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-ascii.html"><strong aria-hidden="true">35.1.2.70.</strong> cast to-ascii</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-base.html"><strong aria-hidden="true">35.1.2.71.</strong> cast to-base</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-bytes32.html"><strong aria-hidden="true">35.1.2.72.</strong> cast to-bytes32</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-check-sum-address.html"><strong aria-hidden="true">35.1.2.73.</strong> cast to-check-sum-address</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-dec.html"><strong aria-hidden="true">35.1.2.74.</strong> cast to-dec</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-fixed-point.html"><strong aria-hidden="true">35.1.2.75.</strong> cast to-fixed-point</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-hex.html"><strong aria-hidden="true">35.1.2.76.</strong> cast to-hex</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-hexdata.html"><strong aria-hidden="true">35.1.2.77.</strong> cast to-hexdata</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-int256.html"><strong aria-hidden="true">35.1.2.78.</strong> cast to-int256</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-rlp.html"><strong aria-hidden="true">35.1.2.79.</strong> cast to-rlp</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-uint256.html"><strong aria-hidden="true">35.1.2.80.</strong> cast to-uint256</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-unit.html"><strong aria-hidden="true">35.1.2.81.</strong> cast to-unit</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-utf8.html"><strong aria-hidden="true">35.1.2.82.</strong> cast to-utf8</a></li><li class="chapter-item "><a href="../../reference/cli/cast/to-wei.html"><strong aria-hidden="true">35.1.2.83.</strong> cast to-wei</a></li><li class="chapter-item "><a href="../../reference/cli/cast/tx.html"><strong aria-hidden="true">35.1.2.84.</strong> cast tx</a></li><li class="chapter-item "><a href="../../reference/cli/cast/upload-signature.html"><strong aria-hidden="true">35.1.2.85.</strong> cast upload-signature</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet.html"><strong aria-hidden="true">35.1.2.86.</strong> cast wallet</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/cast/wallet/new.html"><strong aria-hidden="true">35.1.2.86.1.</strong> cast wallet new</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/new-mnemonic.html"><strong aria-hidden="true">35.1.2.86.2.</strong> cast wallet new-mnemonic</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/vanity.html"><strong aria-hidden="true">35.1.2.86.3.</strong> cast wallet vanity</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/address.html"><strong aria-hidden="true">35.1.2.86.4.</strong> cast wallet address</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/sign.html"><strong aria-hidden="true">35.1.2.86.5.</strong> cast wallet sign</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/verify.html"><strong aria-hidden="true">35.1.2.86.6.</strong> cast wallet verify</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/import.html"><strong aria-hidden="true">35.1.2.86.7.</strong> cast wallet import</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/list.html"><strong aria-hidden="true">35.1.2.86.8.</strong> cast wallet list</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/private-key.html"><strong aria-hidden="true">35.1.2.86.9.</strong> cast wallet private-key</a></li><li class="chapter-item "><a href="../../reference/cli/cast/wallet/decrypt-keystore.html"><strong aria-hidden="true">35.1.2.86.10.</strong> cast wallet decrypt-keystore</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../reference/cli/anvil.html"><strong aria-hidden="true">35.1.3.</strong> anvil</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/anvil/completions.html"><strong aria-hidden="true">35.1.3.1.</strong> anvil completions</a></li><li class="chapter-item "><a href="../../reference/cli/anvil/generate-fig-spec.html"><strong aria-hidden="true">35.1.3.2.</strong> anvil generate-fig-spec</a></li></ol></li><li class="chapter-item "><a href="../../reference/cli/chisel.html"><strong aria-hidden="true">35.1.4.</strong> chisel</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cli/chisel/list.html"><strong aria-hidden="true">35.1.4.1.</strong> chisel list</a></li><li class="chapter-item "><a href="../../reference/cli/chisel/load.html"><strong aria-hidden="true">35.1.4.2.</strong> chisel load</a></li><li class="chapter-item "><a href="../../reference/cli/chisel/view.html"><strong aria-hidden="true">35.1.4.3.</strong> chisel view</a></li><li class="chapter-item "><a href="../../reference/cli/chisel/clear-cache.html"><strong aria-hidden="true">35.1.4.4.</strong> chisel clear-cache</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../reference/forge/index.html"><strong aria-hidden="true">35.2.</strong> forge 命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge/general-commands.html"><strong aria-hidden="true">35.2.1.</strong> 通用命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge/forge.html"><strong aria-hidden="true">35.2.1.1.</strong> forge</a></li><li class="chapter-item "><a href="../../reference/forge/forge-help.html"><strong aria-hidden="true">35.2.1.2.</strong> forge help</a></li><li class="chapter-item "><a href="../../reference/forge/forge-completions.html"><strong aria-hidden="true">35.2.1.3.</strong> forge completions</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge/project-commands.html"><strong aria-hidden="true">35.2.2.</strong> 项目命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge/forge-init.html"><strong aria-hidden="true">35.2.2.1.</strong> forge init</a></li><li class="chapter-item "><a href="../../reference/forge/forge-clone.html"><strong aria-hidden="true">35.2.2.2.</strong> forge clone</a></li><li class="chapter-item "><a href="../../reference/forge/forge-install.html"><strong aria-hidden="true">35.2.2.3.</strong> forge install</a></li><li class="chapter-item "><a href="../../reference/forge/forge-update.html"><strong aria-hidden="true">35.2.2.4.</strong> forge update</a></li><li class="chapter-item "><a href="../../reference/forge/forge-remove.html"><strong aria-hidden="true">35.2.2.5.</strong> forge remove</a></li><li class="chapter-item "><a href="../../reference/forge/forge-config.html"><strong aria-hidden="true">35.2.2.6.</strong> forge config</a></li><li class="chapter-item "><a href="../../reference/forge/forge-remappings.html"><strong aria-hidden="true">35.2.2.7.</strong> forge remappings</a></li><li class="chapter-item "><a href="../../reference/forge/forge-tree.html"><strong aria-hidden="true">35.2.2.8.</strong> forge tree</a></li><li class="chapter-item "><a href="../../reference/forge/forge-geiger.html"><strong aria-hidden="true">35.2.2.9.</strong> forge geiger</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge/build-commands.html"><strong aria-hidden="true">35.2.3.</strong> 构建命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge/forge-build.html"><strong aria-hidden="true">35.2.3.1.</strong> forge build</a></li><li class="chapter-item "><a href="../../reference/forge/forge-clean.html"><strong aria-hidden="true">35.2.3.2.</strong> forge clean</a></li><li class="chapter-item "><a href="../../reference/forge/forge-inspect.html"><strong aria-hidden="true">35.2.3.3.</strong> forge inspect</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge/test-commands.html"><strong aria-hidden="true">35.2.4.</strong> 测试命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge/forge-test.html"><strong aria-hidden="true">35.2.4.1.</strong> forge test</a></li><li class="chapter-item "><a href="../../reference/forge/forge-snapshot.html"><strong aria-hidden="true">35.2.4.2.</strong> forge snapshot</a></li><li class="chapter-item "><a href="../../reference/forge/forge-coverage.html"><strong aria-hidden="true">35.2.4.3.</strong> forge coverage</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge/deploy-commands.html"><strong aria-hidden="true">35.2.5.</strong> 部署命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge/forge-create.html"><strong aria-hidden="true">35.2.5.1.</strong> forge create</a></li><li class="chapter-item "><a href="../../reference/forge/forge-verify-contract.html"><strong aria-hidden="true">35.2.5.2.</strong> forge verify-contract</a></li><li class="chapter-item "><a href="../../reference/forge/forge-verify-check.html"><strong aria-hidden="true">35.2.5.3.</strong> forge verify-check</a></li><li class="chapter-item "><a href="../../reference/forge/forge-flatten.html"><strong aria-hidden="true">35.2.5.4.</strong> forge flatten</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge/utility-commands.html"><strong aria-hidden="true">35.2.6.</strong> 实用命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge/forge-debug.html"><strong aria-hidden="true">35.2.6.1.</strong> forge debug</a></li><li class="chapter-item "><a href="../../reference/forge/forge-bind.html"><strong aria-hidden="true">35.2.6.2.</strong> forge bind</a></li><li class="chapter-item "><a href="../../reference/forge/forge-cache.html"><strong aria-hidden="true">35.2.6.3.</strong> forge cache</a></li><li class="chapter-item "><a href="../../reference/forge/forge-cache-clean.html"><strong aria-hidden="true">35.2.6.4.</strong> forge cache clean</a></li><li class="chapter-item "><a href="../../reference/forge/forge-cache-ls.html"><strong aria-hidden="true">35.2.6.5.</strong> forge cache ls</a></li><li class="chapter-item "><a href="../../reference/forge/forge-script.html"><strong aria-hidden="true">35.2.6.6.</strong> forge script</a></li><li class="chapter-item "><a href="../../reference/forge/forge-upload-selectors.html"><strong aria-hidden="true">35.2.6.7.</strong> forge upload-selectors</a></li><li class="chapter-item "><a href="../../reference/forge/forge-doc.html"><strong aria-hidden="true">35.2.6.8.</strong> forge doc</a></li></ol></li></ol></li><li class="chapter-item "><a href="../../reference/cast/index.html"><strong aria-hidden="true">35.3.</strong> cast 命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/general-commands.html"><strong aria-hidden="true">35.3.1.</strong> 通用命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast.html"><strong aria-hidden="true">35.3.1.1.</strong> cast</a></li><li class="chapter-item "><a href="../../reference/cast/cast-help.html"><strong aria-hidden="true">35.3.1.2.</strong> cast help</a></li><li class="chapter-item "><a href="../../reference/cast/cast-completions.html"><strong aria-hidden="true">35.3.1.3.</strong> cast completions</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/chain-commands.html"><strong aria-hidden="true">35.3.2.</strong> 链命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-chain-id.html"><strong aria-hidden="true">35.3.2.1.</strong> cast chain-id</a></li><li class="chapter-item "><a href="../../reference/cast/cast-chain.html"><strong aria-hidden="true">35.3.2.2.</strong> cast chain</a></li><li class="chapter-item "><a href="../../reference/cast/cast-client.html"><strong aria-hidden="true">35.3.2.3.</strong> cast client</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/transaction-commands.html"><strong aria-hidden="true">35.3.3.</strong> 交易命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-publish.html"><strong aria-hidden="true">35.3.3.1.</strong> cast publish</a></li><li class="chapter-item "><a href="../../reference/cast/cast-receipt.html"><strong aria-hidden="true">35.3.3.2.</strong> cast receipt</a></li><li class="chapter-item "><a href="../../reference/cast/cast-send.html"><strong aria-hidden="true">35.3.3.3.</strong> cast send</a></li><li class="chapter-item "><a href="../../reference/cast/cast-mktx.html"><strong aria-hidden="true">35.3.3.4.</strong> cast mktx</a></li><li class="chapter-item "><a href="../../reference/cast/cast-call.html"><strong aria-hidden="true">35.3.3.5.</strong> cast call</a></li><li class="chapter-item "><a href="../../reference/cast/cast-rpc.html"><strong aria-hidden="true">35.3.3.6.</strong> cast rpc</a></li><li class="chapter-item "><a href="../../reference/cast/cast-tx.html"><strong aria-hidden="true">35.3.3.7.</strong> cast tx</a></li><li class="chapter-item "><a href="../../reference/cast/cast-run.html"><strong aria-hidden="true">35.3.3.8.</strong> cast run</a></li><li class="chapter-item "><a href="../../reference/cast/cast-estimate.html"><strong aria-hidden="true">35.3.3.9.</strong> cast estimate</a></li><li class="chapter-item "><a href="../../reference/cast/cast-access-list.html"><strong aria-hidden="true">35.3.3.10.</strong> cast access-list</a></li><li class="chapter-item "><a href="../../reference/cast/cast-logs.html"><strong aria-hidden="true">35.3.3.11.</strong> cast logs</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/block-commands.html"><strong aria-hidden="true">35.3.4.</strong> 区块命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-find-block.html"><strong aria-hidden="true">35.3.4.1.</strong> cast find-block</a></li><li class="chapter-item "><a href="../../reference/cast/cast-gas-price.html"><strong aria-hidden="true">35.3.4.2.</strong> cast gas-price</a></li><li class="chapter-item "><a href="../../reference/cast/cast-block-number.html"><strong aria-hidden="true">35.3.4.3.</strong> cast block-number</a></li><li class="chapter-item "><a href="../../reference/cast/cast-basefee.html"><strong aria-hidden="true">35.3.4.4.</strong> cast basefee</a></li><li class="chapter-item "><a href="../../reference/cast/cast-block.html"><strong aria-hidden="true">35.3.4.5.</strong> cast block</a></li><li class="chapter-item "><a href="../../reference/cast/cast-age.html"><strong aria-hidden="true">35.3.4.6.</strong> cast age</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/account-commands.html"><strong aria-hidden="true">35.3.5.</strong> 账户命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-balance.html"><strong aria-hidden="true">35.3.5.1.</strong> cast balance</a></li><li class="chapter-item "><a href="../../reference/cast/cast-storage.html"><strong aria-hidden="true">35.3.5.2.</strong> cast storage</a></li><li class="chapter-item "><a href="../../reference/cast/cast-proof.html"><strong aria-hidden="true">35.3.5.3.</strong> cast proof</a></li><li class="chapter-item "><a href="../../reference/cast/cast-nonce.html"><strong aria-hidden="true">35.3.5.4.</strong> cast nonce</a></li><li class="chapter-item "><a href="../../reference/cast/cast-code.html"><strong aria-hidden="true">35.3.5.5.</strong> cast code</a></li><li class="chapter-item "><a href="../../reference/cast/cast-codesize.html"><strong aria-hidden="true">35.3.5.6.</strong> cast codesize</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/ens-commands.html"><strong aria-hidden="true">35.3.6.</strong> ENS 命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-lookup-address.html"><strong aria-hidden="true">35.3.6.1.</strong> cast lookup-address</a></li><li class="chapter-item "><a href="../../reference/cast/cast-resolve-name.html"><strong aria-hidden="true">35.3.6.2.</strong> cast resolve-name</a></li><li class="chapter-item "><a href="../../reference/cast/cast-namehash.html"><strong aria-hidden="true">35.3.6.3.</strong> cast namehash</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/etherscan-commands.html"><strong aria-hidden="true">35.3.7.</strong> Etherscan 命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-etherscan-source.html"><strong aria-hidden="true">35.3.7.1.</strong> cast etherscan-source</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/abi-commands.html"><strong aria-hidden="true">35.3.8.</strong> ABI 命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-abi-decode.html"><strong aria-hidden="true">35.3.8.1.</strong> cast abi-decode</a></li><li class="chapter-item "><a href="../../reference/cast/cast-abi-encode.html"><strong aria-hidden="true">35.3.8.2.</strong> cast abi-encode</a></li><li class="chapter-item "><a href="../../reference/cast/cast-4byte.html"><strong aria-hidden="true">35.3.8.3.</strong> cast 4byte</a></li><li class="chapter-item "><a href="../../reference/cast/cast-4byte-decode.html"><strong aria-hidden="true">35.3.8.4.</strong> cast 4byte-decode</a></li><li class="chapter-item "><a href="../../reference/cast/cast-4byte-event.html"><strong aria-hidden="true">35.3.8.5.</strong> cast 4byte-event</a></li><li class="chapter-item "><a href="../../reference/cast/cast-calldata.html"><strong aria-hidden="true">35.3.8.6.</strong> cast calldata</a></li><li class="chapter-item "><a href="../../reference/cast/cast-calldata-decode.html"><strong aria-hidden="true">35.3.8.7.</strong> cast calldata-decode</a></li><li class="chapter-item "><a href="../../reference/cast/cast-pretty-calldata.html"><strong aria-hidden="true">35.3.8.8.</strong> cast pretty-calldata</a></li><li class="chapter-item "><a href="../../reference/cast/cast-selectors.html"><strong aria-hidden="true">35.3.8.9.</strong> cast selectors</a></li><li class="chapter-item "><a href="../../reference/cast/cast-upload-signature.html"><strong aria-hidden="true">35.3.8.10.</strong> cast upload-signature</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/conversion-commands.html"><strong aria-hidden="true">35.3.9.</strong> 转换命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-format-bytes32-string.html"><strong aria-hidden="true">35.3.9.1.</strong> cast format-bytes32-string</a></li><li class="chapter-item "><a href="../../reference/cast/cast-from-bin.html"><strong aria-hidden="true">35.3.9.2.</strong> cast from-bin</a></li><li class="chapter-item "><a href="../../reference/cast/cast-from-fixed-point.html"><strong aria-hidden="true">35.3.9.3.</strong> cast from-fixed-point</a></li><li class="chapter-item "><a href="../../reference/cast/cast-from-rlp.html"><strong aria-hidden="true">35.3.9.4.</strong> cast from-rlp</a></li><li class="chapter-item "><a href="../../reference/cast/cast-from-utf8.html"><strong aria-hidden="true">35.3.9.5.</strong> cast from-utf8</a></li><li class="chapter-item "><a href="../../reference/cast/cast-from-wei.html"><strong aria-hidden="true">35.3.9.6.</strong> cast from-wei</a></li><li class="chapter-item "><a href="../../reference/cast/cast-parse-bytes32-address.html"><strong aria-hidden="true">35.3.9.7.</strong> cast parse-bytes32-address</a></li><li class="chapter-item "><a href="../../reference/cast/cast-parse-bytes32-string.html"><strong aria-hidden="true">35.3.9.8.</strong> cast parse-bytes32-string</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-ascii.html"><strong aria-hidden="true">35.3.9.9.</strong> cast to-ascii</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-base.html"><strong aria-hidden="true">35.3.9.10.</strong> cast to-base</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-bytes32.html"><strong aria-hidden="true">35.3.9.11.</strong> cast to-bytes32</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-dec.html"><strong aria-hidden="true">35.3.9.12.</strong> cast to-dec</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-fixed-point.html"><strong aria-hidden="true">35.3.9.13.</strong> cast to-fixed-point</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-hex.html"><strong aria-hidden="true">35.3.9.14.</strong> cast to-hex</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-hexdata.html"><strong aria-hidden="true">35.3.9.15.</strong> cast to-hexdata</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-int256.html"><strong aria-hidden="true">35.3.9.16.</strong> cast to-int256</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-rlp.html"><strong aria-hidden="true">35.3.9.17.</strong> cast to-rlp</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-uint256.html"><strong aria-hidden="true">35.3.9.18.</strong> cast to-uint256</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-unit.html"><strong aria-hidden="true">35.3.9.19.</strong> cast to-unit</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-wei.html"><strong aria-hidden="true">35.3.9.20.</strong> cast to-wei</a></li><li class="chapter-item "><a href="../../reference/cast/cast-shl.html"><strong aria-hidden="true">35.3.9.21.</strong> cast shl</a></li><li class="chapter-item "><a href="../../reference/cast/cast-shr.html"><strong aria-hidden="true">35.3.9.22.</strong> cast shr</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/utility-commands.html"><strong aria-hidden="true">35.3.10.</strong> 实用命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-address-zero.html"><strong aria-hidden="true">35.3.10.1.</strong> cast address-zero</a></li><li class="chapter-item "><a href="../../reference/cast/cast-sig.html"><strong aria-hidden="true">35.3.10.2.</strong> cast sig</a></li><li class="chapter-item "><a href="../../reference/cast/cast-sig-event.html"><strong aria-hidden="true">35.3.10.3.</strong> cast sig-event</a></li><li class="chapter-item "><a href="../../reference/cast/cast-keccak.html"><strong aria-hidden="true">35.3.10.4.</strong> cast keccak</a></li><li class="chapter-item "><a href="../../reference/cast/cast-compute-address.html"><strong aria-hidden="true">35.3.10.5.</strong> cast compute-address</a></li><li class="chapter-item "><a href="../../reference/cast/cast-create2.html"><strong aria-hidden="true">35.3.10.6.</strong> cast create2</a></li><li class="chapter-item "><a href="../../reference/cast/cast-interface.html"><strong aria-hidden="true">35.3.10.7.</strong> cast interface</a></li><li class="chapter-item "><a href="../../reference/cast/cast-index.html"><strong aria-hidden="true">35.3.10.8.</strong> cast index</a></li><li class="chapter-item "><a href="../../reference/cast/cast-concat-hex.html"><strong aria-hidden="true">35.3.10.9.</strong> cast concat-hex</a></li><li class="chapter-item "><a href="../../reference/cast/cast-max-int.html"><strong aria-hidden="true">35.3.10.10.</strong> cast max-int</a></li><li class="chapter-item "><a href="../../reference/cast/cast-min-int.html"><strong aria-hidden="true">35.3.10.11.</strong> cast min-int</a></li><li class="chapter-item "><a href="../../reference/cast/cast-max-uint.html"><strong aria-hidden="true">35.3.10.12.</strong> cast max-uint</a></li><li class="chapter-item "><a href="../../reference/cast/cast-to-check-sum-address.html"><strong aria-hidden="true">35.3.10.13.</strong> cast to-check-sum-address</a></li></ol></li><li class="chapter-item "><a href="../../reference/cast/wallet-commands.html"><strong aria-hidden="true">35.3.11.</strong> 钱包命令</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/cast/cast-wallet.html"><strong aria-hidden="true">35.3.11.1.</strong> cast wallet</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-new.html"><strong aria-hidden="true">35.3.11.2.</strong> cast wallet new</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-new-mnemonic.html"><strong aria-hidden="true">35.3.11.3.</strong> cast wallet new-mnemonic</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-address.html"><strong aria-hidden="true">35.3.11.4.</strong> cast wallet address</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-sign.html"><strong aria-hidden="true">35.3.11.5.</strong> cast wallet sign</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-vanity.html"><strong aria-hidden="true">35.3.11.6.</strong> cast wallet vanity</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-verify.html"><strong aria-hidden="true">35.3.11.7.</strong> cast wallet verify</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-import.html"><strong aria-hidden="true">35.3.11.8.</strong> cast wallet import</a></li><li class="chapter-item "><a href="../../reference/cast/cast-wallet-list.html"><strong aria-hidden="true">35.3.11.9.</strong> cast wallet list</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../reference/anvil/index.html" class="active"><strong aria-hidden="true">35.4.</strong> anvil 参考</a></li><li class="chapter-item "><a href="../../reference/chisel/index.html"><strong aria-hidden="true">35.5.</strong> chisel 参考</a></li><li class="chapter-item "><a href="../../reference/config/index.html"><strong aria-hidden="true">35.6.</strong> 配置参考</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/config/overview.html"><strong aria-hidden="true">35.6.1.</strong> 概述</a></li><li class="chapter-item "><a href="../../reference/config/project.html"><strong aria-hidden="true">35.6.2.</strong> 项目</a></li><li class="chapter-item "><a href="../../reference/config/solidity-compiler.html"><strong aria-hidden="true">35.6.3.</strong> Solidity 编译器</a></li><li class="chapter-item "><a href="../../reference/config/testing.html"><strong aria-hidden="true">35.6.4.</strong> 测试</a></li><li class="chapter-item "><a href="../../reference/config/inline-test-config.html"><strong aria-hidden="true">35.6.5.</strong> 内联配置测试</a></li><li class="chapter-item "><a href="../../reference/config/formatter.html"><strong aria-hidden="true">35.6.6.</strong> 格式化器</a></li><li class="chapter-item "><a href="../../reference/config/doc-generator.html"><strong aria-hidden="true">35.6.7.</strong> 文档生成器</a></li><li class="chapter-item "><a href="../../reference/config/etherscan.html"><strong aria-hidden="true">35.6.8.</strong> Etherscan</a></li></ol></li><li class="chapter-item "><a href="../../cheatcodes/index.html"><strong aria-hidden="true">35.7.</strong> 作弊码参考</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../cheatcodes/environment.html"><strong aria-hidden="true">35.7.1.</strong> 环境</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../cheatcodes/warp.html"><strong aria-hidden="true">35.7.1.1.</strong> warp</a></li><li class="chapter-item "><a href="../../cheatcodes/roll.html"><strong aria-hidden="true">35.7.1.2.</strong> roll</a></li><li class="chapter-item "><a href="../../cheatcodes/fee.html"><strong aria-hidden="true">35.7.1.3.</strong> fee</a></li><li class="chapter-item "><a href="../../cheatcodes/get-block-timestamp.html"><strong aria-hidden="true">35.7.1.4.</strong> getBlockTimestamp</a></li><li class="chapter-item "><a href="../../cheatcodes/get-block-number.html"><strong aria-hidden="true">35.7.1.5.</strong> getBlockNumber</a></li><li class="chapter-item "><a href="../../cheatcodes/difficulty.html"><strong aria-hidden="true">35.7.1.6.</strong> difficulty</a></li><li class="chapter-item "><a href="../../cheatcodes/prevrandao.html"><strong aria-hidden="true">35.7.1.7.</strong> prevrandao</a></li><li class="chapter-item "><a href="../../cheatcodes/chain-id.html"><strong aria-hidden="true">35.7.1.8.</strong> chainId</a></li><li class="chapter-item "><a href="../../cheatcodes/store.html"><strong aria-hidden="true">35.7.1.9.</strong> store</a></li><li class="chapter-item "><a href="../../cheatcodes/load.html"><strong aria-hidden="true">35.7.1.10.</strong> load</a></li><li class="chapter-item "><a href="../../cheatcodes/etch.html"><strong aria-hidden="true">35.7.1.11.</strong> etch</a></li><li class="chapter-item "><a href="../../cheatcodes/deal.html"><strong aria-hidden="true">35.7.1.12.</strong> deal</a></li><li class="chapter-item "><a href="../../cheatcodes/prank.html"><strong aria-hidden="true">35.7.1.13.</strong> prank</a></li><li class="chapter-item "><a href="../../cheatcodes/start-prank.html"><strong aria-hidden="true">35.7.1.14.</strong> startPrank</a></li><li class="chapter-item "><a href="../../cheatcodes/stop-prank.html"><strong aria-hidden="true">35.7.1.15.</strong> stopPrank</a></li><li class="chapter-item "><a href="../../cheatcodes/read-callers.html"><strong aria-hidden="true">35.7.1.16.</strong> readCallers</a></li><li class="chapter-item "><a href="../../cheatcodes/record.html"><strong aria-hidden="true">35.7.1.17.</strong> record</a></li><li class="chapter-item "><a href="../../cheatcodes/accesses.html"><strong aria-hidden="true">35.7.1.18.</strong> accesses</a></li><li class="chapter-item "><a href="../../cheatcodes/record-logs.html"><strong aria-hidden="true">35.7.1.19.</strong> recordLogs</a></li><li class="chapter-item "><a href="../../cheatcodes/get-recorded-logs.html"><strong aria-hidden="true">35.7.1.20.</strong> getRecordedLogs</a></li><li class="chapter-item "><a href="../../cheatcodes/set-nonce.html"><strong aria-hidden="true">35.7.1.21.</strong> setNonce</a></li><li class="chapter-item "><a href="../../cheatcodes/get-nonce.html"><strong aria-hidden="true">35.7.1.22.</strong> getNonce</a></li><li class="chapter-item "><a href="../../cheatcodes/mock-call.html"><strong aria-hidden="true">35.7.1.23.</strong> mockCall</a></li><li class="chapter-item "><a href="../../cheatcodes/mock-call-revert.html"><strong aria-hidden="true">35.7.1.24.</strong> mockCallRevert</a></li><li class="chapter-item "><a href="../../cheatcodes/clear-mocked-calls.html"><strong aria-hidden="true">35.7.1.25.</strong> clearMockedCalls</a></li><li class="chapter-item "><a href="../../cheatcodes/coinbase.html"><strong aria-hidden="true">35.7.1.26.</strong> coinbase</a></li><li class="chapter-item "><a href="../../cheatcodes/broadcast.html"><strong aria-hidden="true">35.7.1.27.</strong> broadcast</a></li><li class="chapter-item "><a href="../../cheatcodes/start-broadcast.html"><strong aria-hidden="true">35.7.1.28.</strong> startBroadcast</a></li><li class="chapter-item "><a href="../../cheatcodes/stop-broadcast.html"><strong aria-hidden="true">35.7.1.29.</strong> stopBroadcast</a></li><li class="chapter-item "><a href="../../cheatcodes/pause-gas-metering.html"><strong aria-hidden="true">35.7.1.30.</strong> pauseGasMetering</a></li><li class="chapter-item "><a href="../../cheatcodes/resume-gas-metering.html"><strong aria-hidden="true">35.7.1.31.</strong> resumeGasMetering</a></li><li class="chapter-item "><a href="../../cheatcodes/tx-gas-price.html"><strong aria-hidden="true">35.7.1.32.</strong> txGasPrice</a></li><li class="chapter-item "><a href="../../cheatcodes/start-state-diff-recording.html"><strong aria-hidden="true">35.7.1.33.</strong> startStateDiffRecording</a></li><li class="chapter-item "><a href="../../cheatcodes/stop-and-return-state-diff.html"><strong aria-hidden="true">35.7.1.34.</strong> stopAndReturnStateDiff</a></li></ol></li><li class="chapter-item "><a href="../../cheatcodes/assertions.html"><strong aria-hidden="true">35.7.2.</strong> 断言</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../cheatcodes/expect-revert.html"><strong aria-hidden="true">35.7.2.1.</strong> expectRevert</a></li><li class="chapter-item "><a href="../../cheatcodes/expect-emit.html"><strong aria-hidden="true">35.7.2.2.</strong> expectEmit</a></li><li class="chapter-item "><a href="../../cheatcodes/expect-call.html"><strong aria-hidden="true">35.7.2.3.</strong> expectCall</a></li></ol></li><li class="chapter-item "><a href="../../cheatcodes/fuzzer.html"><strong aria-hidden="true">35.7.3.</strong> 模糊器</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../cheatcodes/assume.html"><strong aria-hidden="true">35.7.3.1.</strong> assume</a></li></ol></li><li class="chapter-item "><a href="../../cheatcodes/forking.html"><strong aria-hidden="true">35.7.4.</strong> 分叉</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../cheatcodes/create-fork.html"><strong aria-hidden="true">35.7.4.1.</strong> createFork</a></li><li class="chapter-item "><a href="../../cheatcodes/select-fork.html"><strong aria-hidden="true">35.7.4.2.</strong> selectFork</a></li><li class="chapter-item "><a href="../../cheatcodes/create-select-fork.html"><strong aria-hidden="true">35.7.4.3.</strong> createSelectFork</a></li><li class="chapter-item "><a href="../../cheatcodes/active-fork.html"><strong aria-hidden="true">35.7.4.4.</strong> activeFork</a></li><li class="chapter-item "><a href="../../cheatcodes/roll-fork.html"><strong aria-hidden="true">35.7.4.5.</strong> rollFork</a></li><li class="chapter-item "><a href="../../cheatcodes/make-persistent.html"><strong aria-hidden="true">35.7.4.6.</strong> makePersistent</a></li><li class="chapter-item "><a href="../../cheatcodes/revoke-persistent.html"><strong aria-hidden="true">35.7.4.7.</strong> revokePersistent</a></li><li class="chapter-item "><a href="../../cheatcodes/is-persistent.html"><strong aria-hidden="true">35.7.4.8.</strong> isPersistent</a></li><li class="chapter-item "><a href="../../cheatcodes/allow-cheatcodes.html"><strong aria-hidden="true">35.7.4.9.</strong> allowCheatcodes</a></li><li class="chapter-item "><a href="../../cheatcodes/transact.html"><strong aria-hidden="true">35.7.4.10.</strong> transact</a></li></ol></li><li class="chapter-item "><a href="../../cheatcodes/external.html"><strong aria-hidden="true">35.7.5.</strong> 外部</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../cheatcodes/ffi.html"><strong aria-hidden="true">35.7.5.1.</strong> ffi</a></li><li class="chapter-item "><a href="../../cheatcodes/prompt.html"><strong aria-hidden="true">35.7.5.2.</strong> prompt</a></li><li class="chapter-item "><a href="../../cheatcodes/project-root.html"><strong aria-hidden="true">35.7.5.3.</strong> projectRoot</a></li><li class="chapter-item "><a href="../../cheatcodes/get-code.html"><strong aria-hidden="true">35.7.5.4.</strong> getCode</a></li><li class="chapter-item "><a href="../../cheatcodes/get-deployed-code.html"><strong aria-hidden="true">35.7.5.5.</strong> getDeployedCode</a></li><li class="chapter-item "><a href="../../cheatcodes/sleep.html"><strong aria-hidden="true">35.7.5.6.</strong> sleep</a></li><li class="chapter-item "><a href="../../cheatcodes/unix-time.html"><strong aria-hidden="true">35.7.5.7.</strong> unixTime</a></li><li class="chapter-item "><a href="../../cheatcodes/set-env.html"><strong aria-hidden="true">35.7.5.8.</strong> setEnv</a></li><li class="chapter-item "><a href="../../cheatcodes/env-or.html"><strong aria-hidden="true">35.7.5.9.</strong> envOr</a></li><li class="chapter-item "><a href="../../cheatcodes/env-bool.html"><strong aria-hidden="true">35.7.5.10.</strong> envBool</a></li><li class="chapter-item "><a href="../../cheatcodes/env-uint.html"><strong aria-hidden="true">35.7.5.11.</strong> envUint</a></li><li class="chapter-item "><a href="../../cheatcodes/env-int.html"><strong aria-hidden="true">35.7.5.12.</strong> envInt</a></li><li class="chapter-item "><a href="../../cheatcodes/env-address.html"><strong aria-hidden="true">35.7.5.13.</strong> envAddress</a></li><li class="chapter-item "><a href="../../cheatcodes/env-bytes32.html"><strong aria-hidden="true">35.7.5.14.</strong> envBytes32</a></li><li class="chapter-item "><a href="../../cheatcodes/env-string.html"><strong aria-hidden="true">35.7.5.15.</strong> envString</a></li><li class="chapter-item "><a href="../../cheatcodes/env-bytes.html"><strong aria-hidden="true">35.7.5.16.</strong> envBytes</a></li><li class="chapter-item "><a href="../../cheatcodes/key-exists.html"><strong aria-hidden="true">35.7.5.17.</strong> keyExists</a></li><li class="chapter-item "><a href="../../cheatcodes/key-exists-json.html"><strong aria-hidden="true">35.7.5.18.</strong> keyExistsJson</a></li><li class="chapter-item "><a href="../../cheatcodes/key-exists-toml.html"><strong aria-hidden="true">35.7.5.19.</strong> keyExistsToml</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-json.html"><strong aria-hidden="true">35.7.5.20.</strong> parseJson</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-toml.html"><strong aria-hidden="true">35.7.5.21.</strong> parseToml</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-json-keys.html"><strong aria-hidden="true">35.7.5.22.</strong> parseJsonKeys</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-toml-keys.html"><strong aria-hidden="true">35.7.5.23.</strong> parseTomlKeys</a></li><li class="chapter-item "><a href="../../cheatcodes/serialize-json.html"><strong aria-hidden="true">35.7.5.24.</strong> serializeJson</a></li><li class="chapter-item "><a href="../../cheatcodes/write-json.html"><strong aria-hidden="true">35.7.5.25.</strong> writeJson</a></li><li class="chapter-item "><a href="../../cheatcodes/write-toml.html"><strong aria-hidden="true">35.7.5.26.</strong> writeToml</a></li></ol></li><li class="chapter-item "><a href="../../cheatcodes/utilities.html"><strong aria-hidden="true">35.7.6.</strong> 实用工具</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../cheatcodes/addr.html"><strong aria-hidden="true">35.7.6.1.</strong> addr</a></li><li class="chapter-item "><a href="../../cheatcodes/sign.html"><strong aria-hidden="true">35.7.6.2.</strong> sign</a></li><li class="chapter-item "><a href="../../cheatcodes/skip.html"><strong aria-hidden="true">35.7.6.3.</strong> skip</a></li><li class="chapter-item "><a href="../../cheatcodes/label.html"><strong aria-hidden="true">35.7.6.4.</strong> label</a></li><li class="chapter-item "><a href="../../cheatcodes/get-label.html"><strong aria-hidden="true">35.7.6.5.</strong> getLabel</a></li><li class="chapter-item "><a href="../../cheatcodes/derive-key.html"><strong aria-hidden="true">35.7.6.6.</strong> deriveKey</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-bytes.html"><strong aria-hidden="true">35.7.6.7.</strong> parseBytes</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-address.html"><strong aria-hidden="true">35.7.6.8.</strong> parseAddress</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-uint.html"><strong aria-hidden="true">35.7.6.9.</strong> parseUint</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-int.html"><strong aria-hidden="true">35.7.6.10.</strong> parseInt</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-bytes32.html"><strong aria-hidden="true">35.7.6.11.</strong> parseBytes32</a></li><li class="chapter-item "><a href="../../cheatcodes/parse-bool.html"><strong aria-hidden="true">35.7.6.12.</strong> parseBool</a></li><li class="chapter-item "><a href="../../cheatcodes/remember-key.html"><strong aria-hidden="true">35.7.6.13.</strong> rememberKey</a></li><li class="chapter-item "><a href="../../cheatcodes/to-string.html"><strong aria-hidden="true">35.7.6.14.</strong> toString</a></li><li class="chapter-item "><a href="../../cheatcodes/breakpoint.html"><strong aria-hidden="true">35.7.6.15.</strong> breakpoint</a></li><li class="chapter-item "><a href="../../cheatcodes/create-wallet.html"><strong aria-hidden="true">35.7.6.16.</strong> createWallet</a></li></ol></li><li class="chapter-item "><a href="../../cheatcodes/snapshots.html"><strong aria-hidden="true">35.7.7.</strong> 快照</a></li><li class="chapter-item "><a href="../../cheatcodes/rpc.html"><strong aria-hidden="true">35.7.8.</strong> RPC</a></li><li class="chapter-item "><a href="../../cheatcodes/fs.html"><strong aria-hidden="true">35.7.9.</strong> 文件</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge-std/index.html"><strong aria-hidden="true">35.8.</strong> Forge 标准库参考</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge-std/std-logs.html"><strong aria-hidden="true">35.8.1.</strong> Std Logs</a></li><li class="chapter-item "><a href="../../reference/forge-std/std-assertions.html"><strong aria-hidden="true">35.8.2.</strong> Std 断言</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge-std/fail.html"><strong aria-hidden="true">35.8.2.1.</strong> fail</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertTrue.html"><strong aria-hidden="true">35.8.2.2.</strong> assertTrue</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertFalse.html"><strong aria-hidden="true">35.8.2.3.</strong> assertFalse</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertEq.html"><strong aria-hidden="true">35.8.2.4.</strong> assertEq</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertEqDecimal.html"><strong aria-hidden="true">35.8.2.5.</strong> assertEqDecimal</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertNotEq.html"><strong aria-hidden="true">35.8.2.6.</strong> assertNotEq</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertNotEqDecimal.html"><strong aria-hidden="true">35.8.2.7.</strong> assertNotEqDecimal</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertLt.html"><strong aria-hidden="true">35.8.2.8.</strong> assertLt</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertLtDecimal.html"><strong aria-hidden="true">35.8.2.9.</strong> assertLtDecimal</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertGt.html"><strong aria-hidden="true">35.8.2.10.</strong> assertGt</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertGtDecimal.html"><strong aria-hidden="true">35.8.2.11.</strong> assertGtDecimal</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertLe.html"><strong aria-hidden="true">35.8.2.12.</strong> assertLe</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertLeDecimal.html"><strong aria-hidden="true">35.8.2.13.</strong> assertLeDecimal</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertGe.html"><strong aria-hidden="true">35.8.2.14.</strong> assertGe</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertGeDecimal.html"><strong aria-hidden="true">35.8.2.15.</strong> assertGeDecimal</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertApproxEqAbs.html"><strong aria-hidden="true">35.8.2.16.</strong> assertApproxEqAbs</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertApproxEqAbsDecimal.html"><strong aria-hidden="true">35.8.2.17.</strong> assertApproxEqAbsDecimal</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertApproxEqRel.html"><strong aria-hidden="true">35.8.2.18.</strong> assertApproxEqRel</a></li><li class="chapter-item "><a href="../../reference/forge-std/assertApproxEqRelDecimal.html"><strong aria-hidden="true">35.8.2.19.</strong> assertApproxEqRelDecimal</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge-std/std-cheats.html"><strong aria-hidden="true">35.8.3.</strong> Std 作弊</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge-std/skip.html"><strong aria-hidden="true">35.8.3.1.</strong> skip</a></li><li class="chapter-item "><a href="../../reference/forge-std/rewind.html"><strong aria-hidden="true">35.8.3.2.</strong> rewind</a></li><li class="chapter-item "><a href="../../reference/forge-std/hoax.html"><strong aria-hidden="true">35.8.3.3.</strong> hoax</a></li><li class="chapter-item "><a href="../../reference/forge-std/startHoax.html"><strong aria-hidden="true">35.8.3.4.</strong> startHoax</a></li><li class="chapter-item "><a href="../../reference/forge-std/deal.html"><strong aria-hidden="true">35.8.3.5.</strong> deal</a></li><li class="chapter-item "><a href="../../reference/forge-std/deployCode.html"><strong aria-hidden="true">35.8.3.6.</strong> deployCode</a></li><li class="chapter-item "><a href="../../reference/forge-std/deployCodeTo.html"><strong aria-hidden="true">35.8.3.7.</strong> deployCodeTo</a></li><li class="chapter-item "><a href="../../reference/forge-std/bound.html"><strong aria-hidden="true">35.8.3.8.</strong> bound</a></li><li class="chapter-item "><a href="../../reference/forge-std/change-prank.html"><strong aria-hidden="true">35.8.3.9.</strong> changePrank</a></li><li class="chapter-item "><a href="../../reference/forge-std/make-addr.html"><strong aria-hidden="true">35.8.3.10.</strong> makeAddr</a></li><li class="chapter-item "><a href="../../reference/forge-std/make-addr-and-key.html"><strong aria-hidden="true">35.8.3.11.</strong> makeAddrAndKey</a></li><li class="chapter-item "><a href="../../reference/forge-std/noGasMetering.html"><strong aria-hidden="true">35.8.3.12.</strong> noGasMetering</a></li><li class="chapter-item "><a href="../../reference/forge-std/assume-no-precompiles.html"><strong aria-hidden="true">35.8.3.13.</strong> assumeNoPrecompiles</a></li><li class="chapter-item "><a href="../../reference/forge-std/assume-payable.html"><strong aria-hidden="true">35.8.3.14.</strong> assumePayable</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge-std/std-errors.html"><strong aria-hidden="true">35.8.4.</strong> Std 错误</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge-std/assertionError.html"><strong aria-hidden="true">35.8.4.1.</strong> assertionError</a></li><li class="chapter-item "><a href="../../reference/forge-std/arithmeticError.html"><strong aria-hidden="true">35.8.4.2.</strong> arithmeticError</a></li><li class="chapter-item "><a href="../../reference/forge-std/divisionError.html"><strong aria-hidden="true">35.8.4.3.</strong> divisionError</a></li><li class="chapter-item "><a href="../../reference/forge-std/enumConversionError.html"><strong aria-hidden="true">35.8.4.4.</strong> enumConversionError</a></li><li class="chapter-item "><a href="../../reference/forge-std/encodeStorageError.html"><strong aria-hidden="true">35.8.4.5.</strong> encodeStorageError</a></li><li class="chapter-item "><a href="../../reference/forge-std/popError.html"><strong aria-hidden="true">35.8.4.6.</strong> popError</a></li><li class="chapter-item "><a href="../../reference/forge-std/indexOOBError.html"><strong aria-hidden="true">35.8.4.7.</strong> indexOOBError</a></li><li class="chapter-item "><a href="../../reference/forge-std/memOverflowError.html"><strong aria-hidden="true">35.8.4.8.</strong> memOverflowError</a></li><li class="chapter-item "><a href="../../reference/forge-std/zeroVarError.html"><strong aria-hidden="true">35.8.4.9.</strong> zeroVarError</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge-std/std-storage.html"><strong aria-hidden="true">35.8.5.</strong> Std 存储</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge-std/target.html"><strong aria-hidden="true">35.8.5.1.</strong> target</a></li><li class="chapter-item "><a href="../../reference/forge-std/sig.html"><strong aria-hidden="true">35.8.5.2.</strong> sig</a></li><li class="chapter-item "><a href="../../reference/forge-std/with_key.html"><strong aria-hidden="true">35.8.5.3.</strong> with_key</a></li><li class="chapter-item "><a href="../../reference/forge-std/depth.html"><strong aria-hidden="true">35.8.5.4.</strong> depth</a></li><li class="chapter-item "><a href="../../reference/forge-std/checked_write.html"><strong aria-hidden="true">35.8.5.5.</strong> checked_write</a></li><li class="chapter-item "><a href="../../reference/forge-std/find.html"><strong aria-hidden="true">35.8.5.6.</strong> find</a></li><li class="chapter-item "><a href="../../reference/forge-std/read.html"><strong aria-hidden="true">35.8.5.7.</strong> read</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge-std/std-math.html"><strong aria-hidden="true">35.8.6.</strong> Std 数学</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge-std/abs.html"><strong aria-hidden="true">35.8.6.1.</strong> abs</a></li><li class="chapter-item "><a href="../../reference/forge-std/delta.html"><strong aria-hidden="true">35.8.6.2.</strong> delta</a></li><li class="chapter-item "><a href="../../reference/forge-std/percentDelta.html"><strong aria-hidden="true">35.8.6.3.</strong> percentDelta</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge-std/script-utils.html"><strong aria-hidden="true">35.8.7.</strong> 脚本实用工具</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../reference/forge-std/compute-create-address.html"><strong aria-hidden="true">35.8.7.1.</strong> computeCreateAddress</a></li><li class="chapter-item "><a href="../../reference/forge-std/derive-remember-key.html"><strong aria-hidden="true">35.8.7.2.</strong> deriveRememberKey</a></li></ol></li><li class="chapter-item "><a href="../../reference/forge-std/console-log.html"><strong aria-hidden="true">35.8.8.</strong> 控制台日志</a></li></ol></li><li class="chapter-item "><a href="../../reference/ds-test.html"><strong aria-hidden="true">35.9.</strong> DSTest 参考</a></li></ol></li><li class="chapter-item expanded "><a href="../../misc/index.html"><strong aria-hidden="true">36.</strong> 杂项</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../../misc/struct-encoding.html"><strong aria-hidden="true">36.1.</strong> 结构编码</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Foundry Book</h1>
+
+                    <div class="right-buttons">
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/foundry-rs/book" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/foundry-rs/book/edit/master/src/reference/anvil/README.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h2 id="anvil"><a class="header" href="#anvil">anvil</a></h2>
+<h3 id="名称"><a class="header" href="#名称">名称</a></h3>
+<p>anvil - 创建一个本地测试网节点，用于部署和测试智能合约。它还可以用于分叉其他 EVM 兼容网络。</p>
+<h3 id="概要"><a class="header" href="#概要">概要</a></h3>
+<p><code>anvil</code> [<em>选项</em>]</p>
+<h3 id="描述"><a class="header" href="#描述">描述</a></h3>
+<p>创建一个本地测试网节点，用于部署和测试智能合约。它还可以用于分叉其他 EVM 兼容网络。</p>
+<p>本节涵盖了关于挖矿模式、支持的传输层、支持的 RPC 方法、Anvil 标志及其用法的广泛信息列表。你可以同时运行多个标志。</p>
+<h4 id="挖矿模式"><a class="header" href="#挖矿模式">挖矿模式</a></h4>
+<p>挖矿模式指的是使用 Anvil 挖矿的频率。默认情况下，它会在提交交易时自动生成一个新区块。</p>
+<p>你可以更改此设置为间隔挖矿，这意味着将在用户选择的给定时间段内生成一个新区块。如果你想要这种类型的挖矿，可以通过添加 <code>--block-time &lt;block-time-in-seconds&gt;</code> 标志来实现，如下例所示。</p>
+<pre><code class="language-sh"># 每 10 秒生成一个新区块
+anvil --block-time 10
+</code></pre>
+<p>还有一种第三种挖矿模式称为从不。在这种情况下，它禁用自动和间隔挖矿，改为按需挖矿。你可以通过输入以下命令来实现：</p>
+<pre><code class="language-sh"># 启用从不挖矿模式
+anvil --no-mining
+</code></pre>
+<p>为了加快区块的最终确定，你可以使用 <code>--slots-in-an-epoch</code> 标志并设置值为 <code>1</code>。这将导致高度为 <code>N-2</code> 的区块被最终确定，其中 <code>N</code> 是最新区块。</p>
+<h4 id="支持的传输层"><a class="header" href="#支持的传输层">支持的传输层</a></h4>
+<p>支持 HTTP 和 Websocket 连接。服务器默认监听端口 8545，但可以通过运行以下命令进行更改：</p>
+<pre><code class="language-sh">anvil --port &lt;端口&gt;
+</code></pre>
+<h4 id="默认-create2-部署者"><a class="header" href="#默认-create2-部署者">默认 CREATE2 部署者</a></h4>
+<p>Anvil 在未分叉时，包含 <a href="https://github.com/Arachnid/deterministic-deployment-proxy" title="" target="_blank">默认 CREATE2 部署者代理</a> 在地址 <code>0x4e59b44847b379578588920ca78fbf26c0b4956c</code>。</p>
+<p>这允许你在本地测试 CREATE2 部署而无需分叉。</p>
+<h4 id="支持的-rpc-方法"><a class="header" href="#支持的-rpc-方法">支持的 RPC 方法</a></h4>
+<h5 id="标准方法"><a class="header" href="#标准方法">标准方法</a></h5>
+<p>标准方法基于 <a href="https://eth.wiki/json-rpc/API" title="" target="_blank">此</a> 参考。</p>
+<ul>
+<li>
+<p><code>web3_clientVersion</code></p>
+</li>
+<li>
+<p><code>web3_sha3</code></p>
+</li>
+<li>
+<p><code>eth_chainId</code></p>
+</li>
+<li>
+<p><code>eth_networkId</code></p>
+</li>
+<li>
+<p><code>eth_gasPrice</code></p>
+</li>
+<li>
+<p><code>eth_accounts</code></p>
+</li>
+<li>
+<p><code>eth_blockNumber</code></p>
+</li>
+<li>
+<p><code>eth_getBalance</code></p>
+</li>
+<li>
+<p><code>eth_getStorageAt</code></p>
+</li>
+<li>
+<p><code>eth_getBlockByHash</code></p>
+</li>
+<li>
+<p><code>eth_getBlockByNumber</code></p>
+</li>
+<li>
+<p><code>eth_getTransactionCount</code></p>
+</li>
+<li>
+<p><code>eth_getBlockTransactionCountByHash</code></p>
+</li>
+<li>
+<p><code>eth_getBlockTransactionCountByNumber</code></p>
+</li>
+<li>
+<p><code>eth_getUncleCountByBlockHash</code></p>
+</li>
+<li>
+<p><code>eth_getUncleCountByBlockNumber</code></p>
+</li>
+<li>
+<p><code>eth_getCode</code></p>
+</li>
+<li>
+<p><code>eth_sign</code></p>
+</li>
+<li>
+<p><code>eth_signTypedData_v4</code></p>
+</li>
+<li>
+<p><code>eth_sendTransaction</code></p>
+</li>
+<li>
+<p><code>eth_sendRawTransaction</code></p>
+</li>
+<li>
+<p><code>eth_call</code></p>
+</li>
+<li>
+<p><code>eth_createAccessList</code></p>
+</li>
+<li>
+<p><code>eth_estimateGas</code></p>
+</li>
+<li>
+<p><code>eth_getTransactionByHash</code></p>
+</li>
+<li>
+<p><code>eth_getTransactionByBlockHashAndIndex</code></p>
+</li>
+<li>
+<p><code>eth_getTransactionByBlockNumberAndIndex</code></p>
+</li>
+<li>
+<p><code>eth_getTransactionReceipt</code></p>
+</li>
+<li>
+<p><code>eth_getUncleByBlockHashAndIndex</code></p>
+</li>
+<li>
+<p><code>eth_getUncleByBlockNumberAndIndex</code></p>
+</li>
+<li>
+<p><code>eth_getLogs</code></p>
+</li>
+<li>
+<p><code>eth_newFilter</code></p>
+</li>
+<li>
+<p><code>eth_getFilterChanges</code></p>
+</li>
+<li>
+<p><code>eth_newBlockFilter</code></p>
+</li>
+<li>
+<p><code>eth_newPendingTransactionFilter</code></p>
+</li>
+<li>
+<p><code>eth_getFilterLogs</code></p>
+</li>
+<li>
+<p><code>eth_uninstallFilter</code></p>
+</li>
+<li>
+<p><code>eth_getWork</code></p>
+</li>
+<li>
+<p><code>eth_subscribe</code></p>
+</li>
+<li>
+<p><code>eth_unsubscribe</code></p>
+</li>
+<li>
+<p><code>eth_syncing</code></p>
+</li>
+<li>
+<p><code>eth_submitWork</code></p>
+</li>
+<li>
+<p><code>eth_submitHashrate</code></p>
+</li>
+<li>
+<p><code>eth_feeHistory</code></p>
+</li>
+<li>
+<p><code>eth_getProof</code></p>
+</li>
+<li>
+<p><code>debug_traceTransaction</code>
+使用 <code>anvil --steps-tracing</code> 获取 <code>structLogs</code></p>
+</li>
+<li>
+<p><code>debug_traceCall</code>
+注意，非标准追踪尚未支持。这意味着你不能传递任何参数给 <code>trace</code> 参数。</p>
+</li>
+<li>
+<p><code>trace_transaction</code></p>
+</li>
+<li>
+<p><code>trace_block</code></p>
+</li>
+</ul>
+<h5 id="自定义方法"><a class="header" href="#自定义方法">自定义方法</a></h5>
+<p><code>anvil_*</code> 命名空间是 <code>hardhat</code> 的别名。更多信息，请参考 <a href="https://hardhat.org/hardhat-network/reference#hardhat-network-methods" title="" target="_blank">Hardhat 文档</a>。</p>
+<p><code>anvil_impersonateAccount</code>
+发送交易伪装成外部拥有的账户或合约。</p>
+<p><code>anvil_stopImpersonatingAccount</code>
+停止伪装账户或合约，如果之前通过 <code>anvil_impersonateAccount</code> 设置。</p>
+<p><code>anvil_autoImpersonateAccount</code>
+接受 <code>true</code> 启用自动伪装账户，<code>false</code> 禁用。启用后，任何交易的 sender 将自动伪装。与 <code>anvil_impersonateAccount</code> 相同。</p>
+<p><code>anvil_getAutomine</code>
+如果启用自动挖矿，返回 true，否则返回 false。</p>
+<p><code>anvil_mine</code>
+挖一系列区块。</p>
+<p><code>anvil_dropTransaction</code>
+从池中移除交易。</p>
+<p><code>anvil_reset</code>
+重置分叉到新的分叉状态，并可选地更新分叉配置。</p>
+<p><code>anvil_setRpcUrl</code>
+设置后端 RPC URL。</p>
+<p><code>anvil_setBalance</code>
+修改账户的余额。</p>
+<p><code>anvil_setCode</code>
+设置合约的代码。</p>
+<p><code>anvil_setNonce</code>
+设置地址的 nonce。</p>
+<p><code>anvil_setStorageAt</code>
+写入账户存储的单个槽。</p>
+<p><code>anvil_setCoinbase</code>
+设置 coinbase 地址。</p>
+<p><code>anvil_setLoggingEnabled</code>
+启用或禁用日志记录。</p>
+<p><code>anvil_setMinGasPrice</code>
+设置节点的最低 gas 价格。</p>
+<p><code>anvil_setNextBlockBaseFeePerGas</code>
+设置下一个区块的基础费用。</p>
+<p><code>anvil_setChainId</code>
+设置当前 EVM 实例的链 ID。</p>
+<p><code>anvil_dumpState</code>
+返回表示链完整状态的十六进制字符串。可以重新导入到 Anvil 的新实例中以重新获得相同的状态。</p>
+<p><code>anvil_loadState</code>
+当给定之前由 <code>anvil_dumpState</code> 返回的十六进制字符串时，将内容合并到当前链状态中。将覆盖任何冲突的账户/存储槽。</p>
+<p><code>anvil_nodeInfo</code>
+检索当前运行的 Anvil 节点的配置参数。</p>
+<h5 id="特殊方法"><a class="header" href="#特殊方法">特殊方法</a></h5>
+<p>特殊方法来自 Ganache。你可以查看文档 <a href="https://github.com/trufflesuite/ganache-cli-archive/blob/master/README.md" title="" target="_blank">这里</a>。</p>
+<p><code>evm_setAutomine</code>
+根据单个布尔参数启用或禁用自动挖矿，即每次向网络提交新交易时自动挖矿。</p>
+<p><code>evm_setIntervalMining</code>
+将挖矿行为设置为间隔，并设置给定的间隔（秒）。</p>
+<p><code>evm_snapshot</code>
+在当前区块快照区块链状态。</p>
+<p><code>evm_revert</code>
+将区块链状态恢复到之前的快照。接受单个参数，即要恢复到的快照 ID。</p>
+<p><code>evm_increaseTime</code>
+向前跳跃给定的时间量，以秒为单位。</p>
+<p><code>evm_setNextBlockTimestamp</code>
+类似于 <code>evm_increaseTime</code>，但接受下一个区块的确切时间戳。</p>
+<p><code>anvil_setBlockTimestampInterval</code>
+类似于 <code>evm_increaseTime</code>，但设置区块时间戳 <code>interval</code>。下一个区块的时间戳将计算为 <code>lastBlock_timestamp + interval</code>。</p>
+<p><code>evm_setBlockGasLimit</code>
+设置后续区块的区块 gas 限制。</p>
+<p><code>anvil_removeBlockTimestampInterval</code>
+移除存在的 <code>anvil_setBlockTimestampInterval</code>。</p>
+<p><code>evm_mine</code>
+挖一个区块。</p>
+<p><code>anvil_enableTraces</code>
+为返回给用户的交易开启调用追踪（而不是仅返回 txhash/receipt）。</p>
+<p><code>eth_sendUnsignedTransaction</code>
+无论签名状态如何，执行交易。</p>
+<p>对于接下来的三个方法，请确保阅读 <a href="https://geth.ethereum.org/docs/rpc/ns-txpool" title="" target="_blank">Geth 的文档</a>。</p>
+<p><code>txpool_status</code>
+返回当前等待包含在下一个区块中的交易数量，以及仅计划未来执行的交易。</p>
+<p><code>txpool_inspect</code>
+返回当前等待包含在下一个区块中的所有交易的摘要，以及仅计划未来执行的交易。</p>
+<p><code>txpool_content</code>
+返回当前等待包含在下一个区块中的所有交易的详细信息，以及仅计划未来执行的交易。</p>
+<h5 id="otterscan-方法"><a class="header" href="#otterscan-方法">Otterscan 方法</a></h5>
+<p><code>ots_*</code> 命名空间实现了 <a href="https://github.com/otterscan/otterscan/blob/develop/docs/custom-jsonrpc.md" title="" target="_blank">Otterscan 规范</a>。</p>
+<p><code>ots_getApiLevel</code>
+由 Otterscan 用于检查是否连接到兼容节点，并在不兼容时显示友好消息。</p>
+<p><code>ots_getInternalOperations</code>
+返回交易中的内部 ETH 转账。</p>
+<p><code>ots_hasCode</code>
+检查某个地址是否包含已部署的代码。</p>
+<p><code>ots_getTransactionError</code>
+提取交易的原始错误输出。</p>
+<p><code>ots_traceTransaction</code>
+提取所有类型的调用、合约创建和自毁，并返回调用树。</p>
+<p><code>ots_getBlockDetails</code>
+为 Otterscan 的区块详情页面定制和扩展的 eth_getBlock*。</p>
+<p><code>ots_getBlockTransactions</code>
+获取某个区块的分页交易，并移除一些冗余字段如 logs。</p>
+<p><code>ots_searchTransactionsBefore</code>
+获取某个地址的分页入站/出站交易调用，并在给定目标区块之前。</p>
+<p><code>ots_searchTransactionsAfter</code>
+获取某个地址的分页入站/出站交易调用，并在给定目标区块之后。</p>
+<p><code>ots_getTransactionBySenderAndNonce</code>
+获取某个发送者地址的给定 nonce 的交易哈希。</p>
+<p><code>ots_getContractCreator</code>
+获取创建合约的交易哈希和地址。</p>
+<h3 id="选项"><a class="header" href="#选项">选项</a></h3>
+<h4 id="通用选项"><a class="header" href="#通用选项">通用选项</a></h4>
+<p><code>-a, --accounts &lt;账户数&gt;</code>
+     设置账户数量。[默认: 10]</p>
+<p><code>--auto-impersonate</code>
+     启动时启用 autoImpersonate。</p>
+<p><code>-b, --block-time &lt;区块时间&gt;</code>
+     间隔挖矿的区块时间（秒）。</p>
+<p><code>--balance &lt;余额&gt;</code>
+     设置账户的余额。[默认: 10000]</p>
+<p><code>--derivation-path &lt;派生路径&gt;</code>
+     设置要派生的子密钥的派生路径。[默认: m/44’/60’/0’/0/]</p>
+<p><code>-h, --help</code>
+     打印帮助信息。</p>
+<p><code>--hardfork &lt;硬分叉&gt;</code>
+     选择要使用的 EVM 硬分叉，例如 <code>shanghai</code>, <code>paris</code>, <code>london</code> 等… [默认: latest]</p>
+<p><code>--init &lt;路径&gt;</code>
+     使用给定的 <code>genesis.json</code> 文件初始化创世区块。</p>
+<p><code>-m, --mnemonic &lt;助记词&gt;</code>
+     用于生成账户的 BIP39 助记词短语。</p>
+<p><code>--no-mining</code>
+     禁用自动和间隔挖矿，改为按需挖矿。</p>
+<p><code>--order &lt;排序&gt;</code>
+     交易在 mempool 中的排序方式。[默认: fees]</p>
+<p><code>-p, --port &lt;端口&gt;</code>
+     监听的端口号。[默认: 8545]</p>
+<p><code>--steps-tracing</code>
+     启用用于 debug 调用返回 geth 风格追踪的步骤追踪。[别名: tracing]</p>
+<p><code>--ipc [&lt;路径&gt;]</code>
+     在给定的 <code>路径</code> 参数或默认路径启动 IPC 端点：unix: <code>tmp/anvil.ipc</code>，windows: <code>\\.\pipe\anvil.ipc</code>。</p>
+<p><code>--silent</code>
+     启动时不打印任何内容。</p>
+<p><code>--timestamp &lt;时间戳&gt;</code>
+     设置创世区块的时间戳。</p>
+<p><code>-V, --version</code>
+     打印版本信息。</p>
+<p><code>--disable-default-create2-deployer</code>
+     禁用在未分叉时运行 Anvil 的默认 CREATE2 工厂部署。</p>
+<h4 id="evm-选项"><a class="header" href="#evm-选项">EVM 选项</a></h4>
+<p><code>-f, --fork-url &lt;URL&gt;</code>
+     从远程端点获取状态，而不是从空状态开始。</p>
+<p><code>--fork-block-number &lt;区块&gt;</code>
+     从远程端点获取特定区块号的状态（必须在同一命令行中传递 <code>--fork-url</code>）。</p>
+<p><code>--fork-retry-backoff &lt;回退&gt;</code>
+     遇到错误时的初始重试回退。</p>
+<p><code>--retries &lt;重试次数&gt;</code>
+     虚假网络的重试请求次数（超时请求）。[默认: 5]</p>
+<p><code>--timeout &lt;超时&gt;</code>
+     分叉模式下发送给远程 JSON-RPC 服务器的请求超时（毫秒）。[默认: 45000]</p>
+<p><code>--compute-units-per-second &lt;CUPS&gt;</code>
+     设置此提供者假设的每秒可用计算单元数。[默认: 330]
+     另见，<a href="https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups" title="" target="_blank">Alchemy Ratelimits</a>。</p>
+<p><code>--no-rate-limit</code>
+     禁用此节点的提供者速率限制。如果存在，将始终覆盖 <code>--compute-units-per-second</code>。[默认: false]
+     另见，<a href="https://github.com/alchemyplatform/alchemy-docs/blob/master/documentation/compute-units.md#rate-limits-cups" title="" target="_blank">Alchemy Ratelimits</a>。</p>
+<p><code>--no-storage-caching</code>
+     禁用 RPC 缓存；所有存储槽都从端点读取。此标志覆盖项目的配置文件（必须在同一命令行中传递 –fork-url）。</p>
+<h4 id="执行环境配置"><a class="header" href="#执行环境配置">执行环境配置</a></h4>
+<p><code>--base-fee &lt;费用&gt;</code>
+<code>--block-base-fee-per-gas &lt;费用&gt;</code>
+     区块中的基础费用。</p>
+<p><code>--chain-id &lt;链ID&gt;</code>
+     链 ID。[默认: 31337]</p>
+<p><code>--code-size-limit &lt;代码大小&gt;</code>
+     EIP-170: 合约代码大小限制（字节）。用于增加测试的限制。[默认: 0x6000 (~25kb)]</p>
+<p><code>--gas-limit &lt;gas限制&gt;</code>
+     区块 gas 限制。</p>
+<p><code>--gas-price &lt;gas价格&gt;</code>
+     gas 价格。</p>
+<h4 id="服务器选项"><a class="header" href="#服务器选项">服务器选项</a></h4>
+<p><code>--allow-origin &lt;允许来源&gt;</code>
+     设置 CORS <code>allow_origin</code>。[默认: *]</p>
+<p><code>--no-cors</code>
+     禁用 CORS。</p>
+<p><code>--host &lt;主机&gt;</code>
+     服务器将监听的 IP 地址。</p>
+<p><code>--config-out &lt;输出文件&gt;</code>
+     将 <code>anvil</code> 的输出作为 json 写入用户指定的文件。</p>
+<p><code>--prune-history</code>
+     不保留完整的链历史。</p>
+<h3 id="示例"><a class="header" href="#示例">示例</a></h3>
+<ol>
+<li>设置账户数量为 15 且余额为 300 ETH</li>
+</ol>
+<pre><code class="language-sh">anvil --accounts 15 --balance 300
+</code></pre>
+<ol start="2">
+<li>选择将执行测试的地址</li>
+</ol>
+<pre><code class="language-sh">anvil --sender 0xC8479C45EE87E0B437c09d3b8FE8ED14ccDa825E
+</code></pre>
+<ol start="3">
+<li>将交易在 mempool 中的排序方式更改为 FIFO</li>
+</ol>
+<pre><code class="language-sh">anvil --order fifo
+</code></pre>
+<h3 id="shell-补全"><a class="header" href="#shell-补全">Shell 补全</a></h3>
+<p><code>anvil completions</code> <em>shell</em></p>
+<p>为给定的 shell 生成 shell 补全脚本。</p>
+<p>支持的 shell 有：</p>
+<ul>
+<li>bash</li>
+<li>elvish</li>
+<li>fish</li>
+<li>powershell</li>
+<li>zsh</li>
+</ul>
+<h4 id="示例-1"><a class="header" href="#示例-1">示例</a></h4>
+<ol>
+<li>为 zsh 生成 shell 补全脚本：
+<pre><code class="language-sh">anvil completions zsh &gt; $HOME/.oh-my-zsh/completions/_anvil
+</code></pre>
+</li>
+</ol>
+<h3 id="在-docker-中使用"><a class="header" href="#在-docker-中使用">在 Docker 中使用</a></h3>
+<p>为了在 Github Actions 中以 <a href="../../tutorials/foundry-docker.html">Docker 容器</a> 运行 anvil 作为服务，其中无法向 entrypoint 命令传递参数，使用 <code>ANVIL_IP_ADDR</code> 环境变量设置主机的 IP。<code>ANVIL_IP_ADDR=0.0.0.0</code> 等同于提供 <code>--host &lt;ip&gt;</code> 选项。</p>
+<h4 id="使用-genesisjson"><a class="header" href="#使用-genesisjson">使用 <code>genesis.json</code></a></h4>
+<p>Anvil 中的 <code>genesis.json</code> 文件与 Geth 中的作用类似，定义网络的初始状态、共识规则和预分配账户，以确保所有节点一致启动并维护网络完整性。所有值，包括余额、gas 限制等，均定义为十六进制。</p>
+<ul>
+<li><code>chainId</code>: 区块链的标识符，每个网络唯一。</li>
+<li><code>nonce</code>: 用于确保数据完整性的哈希算法中的计数器。</li>
+<li><code>timestamp</code>: 创世区块的创建时间，Unix 时间。</li>
+<li><code>extraData</code>: 创世区块创建者可以包含的额外数据。</li>
+<li><code>gasLimit</code>: 区块中可以使用的最大 gas 量。</li>
+<li><code>difficulty</code>: 挖矿新区块的难度。</li>
+<li><code>mixHash</code>: 证明区块有足够计算量的唯一标识符。</li>
+<li><code>coinbase</code>: 挖出此区块的矿工的以太坊地址。</li>
+<li><code>stateRoot</code>: 状态 trie 的根，反映所有交易后的最终状态。</li>
+<li><code>alloc</code>: 允许预分配以太币到一组具有预定义余额的地址。</li>
+<li><code>number</code>: 区块号，创世区块为 0。</li>
+<li><code>gasUsed</code>: 区块中使用的总 gas。</li>
+<li><code>parentHash</code>: 父区块的哈希，创世区块为全零，因为没有父区块。</li>
+</ul>
+<p>模拟主网的 genesis 示例可以在这里找到 <a href="https://github.com/paradigmxyz/reth/blob/8f3e4a15738d8174d41f4aede5570ecead141a77/crates/primitives/res/genesis/mainnet.json" title="" target="_blank">这里</a>。</p>
+<pre><code class="language-json">{
+  "chainId": "0x2323",
+  "nonce": "0x42",
+  "timestamp": "0x0",
+  "extraData": "0x11bbe8db4e347b4e8c937c1c8370e4b5ed33adb3db69cbdb7a38e1e50b1b82fa",
+  "gasLimit": "0x1388",
+  "difficulty": "0x400000000",
+  "mixHash": "0x0000000000000000000000000000000000000000000000000000000000000000",
+  "coinbase": "0x0000000000000000000000000000000000000000",
+  "stateRoot": "0xd7f8974fb5ac78d9ac099b9ad5018bedc2ce0a72dad1827a1709da30580f0544",
+  "alloc": {
+    "000d836201318ec6899a67540690382780743280": {
+      "balance": "0xad78ebc5ac6200000"
+    }
+  },
+  "number": "0x0",
+  "gasUsed": "0x0",
+  "parentHash": "0x0000000000000000000000000000000000000000000000000000000000000000"
+}
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../../reference/cast/cast-wallet-list.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../../reference/chisel/index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../../reference/cast/cast-wallet-list.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../../reference/chisel/index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../../elasticlunr.min.js"></script>
+        <script src="../../mark.min.js"></script>
+        <script src="../../searcher.js"></script>
+
+        <script src="../../clipboard.min.js"></script>
+        <script src="../../highlight.js"></script>
+        <script src="../../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../../src/static/solidity.min.js"></script>
+
+
+    </div>
+    </body>
+</html>

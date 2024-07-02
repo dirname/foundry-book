@@ -1,14 +1,16 @@
+```markdown
 # chisel view
 
-View the source of a cached session
+查看缓存会话的源代码
 
 ```bash
 $ chisel view --help
 Usage: chisel view <ID>
 
 Arguments:
-  <ID>  The ID of the session to load
+  <ID>  要加载的会话的ID
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

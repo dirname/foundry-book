@@ -1,6 +1,7 @@
+```markdown
 # forge script
 
-Run a smart contract as a script, building transactions that can be sent onchain
+运行智能合约作为脚本，构建可以发送到链上的交易
 
 ```bash
 $ forge script --help
@@ -8,444 +9,438 @@ Usage: forge script [OPTIONS] <PATH> [ARGS]...
 
 Arguments:
   <PATH>
-          The contract you want to run. Either the file path or contract name.
+          你要运行的合约。可以是文件路径或合约名称。
           
-          If multiple contracts exist in the same file you must specify the target contract with
-          --target-contract.
+          如果同一个文件中存在多个合约，你必须使用
+          --target-contract 指定目标合约。
 
   [ARGS]...
-          Arguments to pass to the script function
+          传递给脚本函数的参数
 
 Options:
       --target-contract <CONTRACT_NAME>
-          The name of the contract you want to run
+          你要运行的合约名称
           
           [aliases: tc]
 
   -s, --sig <SIG>
-          The signature of the function you want to call in the contract, or raw calldata
+          你要在合约中调用的函数的签名，或原始调用数据
           
           [default: run()]
 
       --priority-gas-price <PRICE>
-          Max priority fee per gas for EIP1559 transactions
+          EIP1559 交易的每单位 gas 的最大优先费用
           
           [env: ETH_PRIORITY_GAS_PRICE=]
 
       --legacy
-          Use legacy transactions instead of EIP1559 ones.
+          使用传统交易而不是 EIP1559 交易。
           
-          This is auto-enabled for common networks without EIP1559.
+          对于没有 EIP1559 的常见网络会自动启用。
 
       --broadcast
-          Broadcasts the transactions
+          广播交易
 
       --batch-size <BATCH_SIZE>
-          Batch size of transactions.
+          交易的批量大小。
           
-          This is ignored and set to 1 if batching is not available or `--slow` is enabled.
+          如果批量处理不可用或启用了 `--slow`，则忽略并设置为 1。
           
           [default: 100]
 
       --skip-simulation
-          Skips on-chain simulation
+          跳过链上模拟
 
   -g, --gas-estimate-multiplier <GAS_ESTIMATE_MULTIPLIER>
-          Relative percentage to multiply gas estimates by
+          相对百分比乘以 gas 估计值
           
           [default: 130]
 
       --unlocked
-          Send via `eth_sendTransaction` using the `--from` argument or `$ETH_FROM` as sender
+          通过 `eth_sendTransaction` 发送，使用 `--from` 参数或 `$ETH_FROM` 作为发送者
 
       --resume
-          Resumes submitting transactions that failed or timed-out previously.
+          恢复提交之前失败或超时的交易。
           
-          It DOES NOT simulate the script again and it expects nonces to have remained the same.
+          它不会再次模拟脚本，并且期望 nonce 保持不变。
           
-          Example: If transaction N has a nonce of 22, then the account should have a nonce of 22,
-          otherwise it fails.
+          例如：如果交易 N 的 nonce 为 22，那么账户应该有 nonce 22，否则会失败。
 
       --multi
-          If present, --resume or --verify will be assumed to be a multi chain deployment
+          如果存在，--resume 或 --verify 将被假定为多链部署
 
       --debug
-          Open the script in the debugger.
+          在调试器中打开脚本。
           
-          Takes precedence over broadcast.
+          优先于 broadcast。
 
       --slow
-          Makes sure a transaction is sent, only after its previous one has been confirmed and
-          succeeded
+          确保交易在其前一个交易被确认并成功后才发送
 
       --non-interactive
-          Disables interactive prompts that might appear when deploying big contracts.
+          禁用部署大合约时可能出现的交互提示。
           
-          For more info on the contract size limit, see EIP-170:
+          有关合约大小限制的更多信息，请参见 EIP-170：
           <https://eips.ethereum.org/EIPS/eip-170>
 
       --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
+          Etherscan（或等效）API 密钥
           
           [env: ETHERSCAN_API_KEY=]
 
       --verify
-          Verifies all the contracts found in the receipts of a script, if any
+          验证脚本收据中找到的所有合约（如果有）
 
       --json
-          Output results in JSON format
+          以 JSON 格式输出结果
 
       --with-gas-price <PRICE>
-          Gas price for legacy transactions, or max fee per gas for EIP1559 transactions
+          传统交易的 gas 价格，或 EIP1559 交易的每单位 gas 的最大费用
           
           [env: ETH_GAS_PRICE=]
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
 Cache options:
       --force
-          Clear the cache and artifacts folder and recompile
+          清除缓存和 artifacts 文件夹并重新编译
 
 Build options:
       --no-cache
-          Disable the cache
+          禁用缓存
 
       --skip <SKIP>...
-          Skip building files whose names contain the given filter.
+          跳过构建名称包含给定过滤器的文件。
           
-          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
+          `test` 和 `script` 是 `.t.sol` 和 `.s.sol` 的别名。
 
 Linker options:
       --libraries <LIBRARIES>
-          Set pre-linked libraries
+          设置预链接的库
           
           [env: DAPP_LIBRARIES=]
 
 Compiler options:
       --ignored-error-codes <ERROR_CODES>
-          Ignore solc warnings by error code
+          忽略 solc 警告的错误代码
 
       --deny-warnings
-          Warnings will trigger a compiler error
+          警告将触发编译器错误
 
       --no-auto-detect
-          Do not auto-detect the `solc` version
+          不自动检测 `solc` 版本
 
       --use <SOLC_VERSION>
-          Specify the solc version, or a path to a local solc, to build with.
+          指定用于构建的 solc 版本或本地 solc 路径。
           
-          Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+          有效值格式为 `x.y.z`、`solc:x.y.z` 或 `path/to/solc`。
 
       --offline
-          Do not access the network.
+          不访问网络。
           
-          Missing solc versions will not be installed.
+          缺失的 solc 版本不会被安装。
 
       --via-ir
-          Use the Yul intermediate representation compilation pipeline
+          使用 Yul 中间表示编译管道
 
       --no-metadata
-          Do not append any metadata to the bytecode.
+          不在字节码中附加任何元数据。
           
-          This is equivalent to setting `bytecode_hash` to `none` and `cbor_metadata` to `false`.
+          这相当于将 `bytecode_hash` 设置为 `none` 并将 `cbor_metadata` 设置为 `false`。
 
       --silent
-          Don't print anything on startup
+          启动时不打印任何内容
 
       --ast
-          Includes the AST as JSON in the compiler output
+          在编译器输出中包含 AST 作为 JSON
 
       --evm-version <VERSION>
-          The target EVM version
+          目标 EVM 版本
 
       --optimize
-          Activate the Solidity optimizer
+          激活 Solidity 优化器
 
       --optimizer-runs <RUNS>
-          The number of optimizer runs
+          优化器运行次数
 
       --extra-output <SELECTOR>...
-          Extra output to include in the contract's artifact.
+          在合约的 artifact 中包含额外的输出。
           
-          Example keys: evm.assembly, ewasm, ir, irOptimized, metadata
+          示例键：evm.assembly、ewasm、ir、irOptimized、metadata
           
-          For a full description, see
+          完整描述请参见
           <https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description>
 
       --extra-output-files <SELECTOR>...
-          Extra output to write to separate files.
+          写入单独文件的额外输出。
           
-          Valid values: metadata, ir, irOptimized, ewasm, evm.assembly
+          有效值：metadata、ir、irOptimized、ewasm、evm.assembly
 
 Project options:
   -o, --out <PATH>
-          The path to the contract artifacts folder
+          合约 artifacts 文件夹的路径
 
       --revert-strings <REVERT>
-          Revert string configuration.
+          回退字符串配置。
           
-          Possible values are "default", "strip" (remove), "debug" (Solidity-generated revert
-          strings) and "verboseDebug"
+          可能的值为 "default"、"strip"（移除）、"debug"（Solidity 生成的回退字符串）和 "verboseDebug"
 
       --build-info
-          Generate build info files
+          生成构建信息文件
 
       --build-info-path <PATH>
-          Output path to directory that build info files will be written to
+          构建信息文件将写入的目录输出路径
 
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在 Git 仓库中），或当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的 remappings
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境获取项目的 remappings
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存的路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹的路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这相当于使用：`--contracts contracts --lib-paths node_modules`。
           
           [aliases: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件的路径
 
 Wallet options - raw:
   -a, --froms [<ADDRESSES>...]
-          The sender accounts
+          发送者账户
           
           [env: ETH_FROM=]
 
   -i, --interactives <NUM>
-          Open an interactive prompt to enter your private key.
+          打开一个交互提示以输入你的私钥。
           
-          Takes a value for the number of keys to enter.
+          取一个值表示要输入的密钥数量。
           
           [default: 0]
 
       --private-keys <RAW_PRIVATE_KEYS>
-          Use the provided private keys
+          使用提供的私钥
 
       --private-key <RAW_PRIVATE_KEY>
-          Use the provided private key
+          使用提供的私钥
 
       --mnemonics <MNEMONICS>
-          Use the mnemonic phrases of mnemonic files at the specified paths
+          使用指定路径的助记词文件的助记词短语
 
       --mnemonic-passphrases <PASSPHRASE>
-          Use a BIP39 passphrases for the mnemonic
+          使用 BIP39 助记词的密码短语
 
       --mnemonic-derivation-paths <PATH>
-          The wallet derivation path.
+          钱包派生路径。
           
-          Works with both --mnemonic-path and hardware wallets.
+          适用于 --mnemonic-path 和硬件钱包。
 
       --mnemonic-indexes <INDEXES>
-          Use the private key from the given mnemonic index.
+          使用给定助记词索引的私钥。
           
-          Can be used with --mnemonics, --ledger, --aws and --trezor.
+          可与 --mnemonics、--ledger、--aws 和 --trezor 一起使用。
           
           [default: 0]
 
 Wallet options - keystore:
       --keystore <PATHS>
-          Use the keystore in the given folder or file
+          使用给定文件夹或文件中的 keystore
           
           [env: ETH_KEYSTORE=]
           [aliases: keystores]
 
       --account <ACCOUNT_NAMES>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          使用默认 keystores 文件夹（~/.foundry/keystores）中按文件名指定的 keystore
           
           [env: ETH_KEYSTORE_ACCOUNT=]
           [aliases: accounts]
 
       --password <PASSWORDS>
-          The keystore password.
+          keystore 密码。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
 
       --password-file <PATHS>
-          The keystore password file path.
+          keystore 密码文件路径。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
           
           [env: ETH_PASSWORD=]
 
 Wallet options - hardware wallet:
   -l, --ledger
-          Use a Ledger hardware wallet
+          使用 Ledger 硬件钱包
 
   -t, --trezor
-          Use a Trezor hardware wallet
+          使用 Trezor 硬件钱包
 
 Wallet options - remote:
       --aws
-          Use AWS Key Management Service
+          使用 AWS Key Management Service
 
 EVM options:
   -f, --fork-url <URL>
-          Fetch state over a remote endpoint instead of starting from an empty state.
+          通过远程端点获取状态，而不是从空状态开始。
           
-          If you want to fetch state from a specific block number, see --fork-block-number.
+          如果你想从特定区块号获取状态，请参见 --fork-block-number。
           
           [aliases: rpc-url]
 
       --fork-block-number <BLOCK>
-          Fetch state from a specific block number over a remote endpoint.
+          通过远程端点从特定区块号获取状态。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --fork-retries <RETRIES>
-          Number of retries.
+          重试次数。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --fork-retry-backoff <BACKOFF>
-          Initial retry backoff on encountering errors.
+          遇到错误时的初始重试退避。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --no-storage-caching
-          Explicitly disables the use of RPC caching.
+          显式禁用 RPC 缓存。
           
-          All storage slots are read entirely from the endpoint.
+          所有存储槽都完全从端点读取。
           
-          This flag overrides the project's configuration file.
+          此标志覆盖项目的配置文件。
           
-          See --fork-url.
+          请参见 --fork-url。
 
       --initial-balance <BALANCE>
-          The initial balance of deployed test contracts
+          部署测试合约的初始余额
 
       --sender <ADDRESS>
-          The address which will be executing tests
+          执行测试的地址
 
       --ffi
-          Enable the FFI cheatcode
+          启用 FFI cheatcode
 
       --always-use-create-2-factory
-          Use the create 2 factory in all cases including tests and non-broadcasting scripts
+          在所有情况下（包括测试和非广播脚本）使用 create 2 工厂
 
   -v, --verbosity...
-          Verbosity of the EVM.
+          EVM 的详细程度。
           
-          Pass multiple times to increase the verbosity (e.g. -v, -vv, -vvv).
+          多次传递以增加详细程度（例如 -v、-vv、-vvv）。
           
-          Verbosity levels:
-          - 2: Print logs for all tests
-          - 3: Print execution traces for failing tests
-          - 4: Print execution traces for all tests, and setup traces for failing tests
-          - 5: Print execution and setup traces for all tests
+          详细程度级别：
+          - 2：打印所有测试的日志
+          - 3：打印失败测试的执行 traces
+          - 4：打印所有测试的执行 traces，以及失败测试的设置 traces
+          - 5：打印所有测试的执行和设置 traces
 
 Fork config:
       --compute-units-per-second <CUPS>
-          Sets the number of assumed available compute units per second for this provider
+          设置此提供商假设可用的每秒计算单位数
           
-          default value: 330
+          默认值：330
           
-          See also --fork-url and
+          请参见 --fork-url 和
           <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
 
       --no-rpc-rate-limit
-          Disables rate limiting for this node's provider.
+          禁用此节点提供商的速率限制。
           
-          See also --fork-url and
+          请参见 --fork-url 和
           <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
           
           [aliases: no-rate-limit]
 
 Executor environment config:
       --gas-limit <GAS_LIMIT>
-          The block gas limit
+          区块 gas 限制
 
       --code-size-limit <CODE_SIZE>
-          EIP-170: Contract code size limit in bytes. Useful to increase this because of tests. By
-          default, it is 0x6000 (~25kb)
+          EIP-170：合约代码大小限制（字节）。增加此值有助于测试。默认值为 0x6000（~25kb）
 
       --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+          链名称或 EIP-155 链 ID
           
           [aliases: chain-id]
 
       --gas-price <GAS_PRICE>
-          The gas price
+          gas 价格
 
       --block-base-fee-per-gas <FEE>
-          The base fee in a block
+          区块的基础费用
           
           [aliases: base-fee]
 
       --tx-origin <ADDRESS>
-          The transaction origin
+          交易发起者
 
       --block-coinbase <ADDRESS>
-          The coinbase of the block
+          区块的 coinbase
 
       --block-timestamp <TIMESTAMP>
-          The timestamp of the block
+          区块的时间戳
 
       --block-number <BLOCK>
-          The block number
+          区块号
 
       --block-difficulty <DIFFICULTY>
-          The block difficulty
+          区块难度
 
       --block-prevrandao <PREVRANDAO>
-          The block prevrandao value. NOTE: Before merge this field was mix_hash
+          区块的 prevrandao 值。注意：合并前此字段为 mix_hash
 
       --block-gas-limit <GAS_LIMIT>
-          The block gas limit
+          区块 gas 限制
 
       --memory-limit <MEMORY_LIMIT>
-          The memory limit per EVM execution in bytes. If this limit is exceeded, a `MemoryLimitOOG`
-          result is thrown.
+          EVM 执行的每单位内存限制（字节）。如果超过此限制，将抛出 `MemoryLimitOOG` 结果。
           
-          The default is 128MiB.
+          默认值为 128MiB。
 
       --disable-block-gas-limit
-          Whether to disable the block gas limit checks
+          是否禁用区块 gas 限制检查
           
           [aliases: no-gas-limit]
 
       --isolate
-          Whether to enable isolation of calls. In isolation mode all top-level calls are executed
-          as a separate transaction in a separate EVM context, enabling more precise gas accounting
-          and transaction state changes
+          是否启用调用的隔离。在隔离模式下，所有顶级调用都作为单独的交易在单独的 EVM 上下文中执行，实现更精确的 gas 会计和交易状态更改
 
       --retries <RETRIES>
-          Number of attempts for retrying verification
+          验证重试次数
           
           [default: 5]
 
       --delay <DELAY>
-          Optional delay to apply inbetween verification attempts, in seconds
+          验证尝试之间的可选延迟（秒）
           
           [default: 5]
 
 Verifier options:
       --verifier <VERIFIER>
-          The contract verification provider to use
+          使用的合约验证提供商
           
           [default: etherscan]
           [possible values: etherscan, sourcify, blockscout, oklink]
 
       --verifier-url <VERIFIER_URL>
-          The verifier URL, if using a custom provider
+          如果使用自定义提供商，则设置验证 URL
           
           [env: VERIFIER_URL=]
+```
 ```

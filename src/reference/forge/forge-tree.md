@@ -1,35 +1,35 @@
 ## forge tree
 
-### NAME
+### 名称
 
-forge-tree - Display a tree visualization of the project's dependency graph.
+forge-tree - 显示项目依赖图的树形可视化。
 
-### SYNOPSIS
+### 概要
 
-``forge tree`` [*options*]
+``forge tree`` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Display a visualization of the project's dependency graph.
+显示项目依赖图的可视化。
 
 ```ignore
 {{#include ../../output/forge_tree/forge-tree:all}}
 ```
 
-### OPTIONS
+### 选项
 
-#### Flatten Options
+#### 扁平化选项
 
-`--charset` *charset*  
-&nbsp;&nbsp;&nbsp;&nbsp;Character set to use in output: utf8, ascii. Default: utf8
+`--charset` *字符集*  
+&nbsp;&nbsp;&nbsp;&nbsp;在输出中使用的字符集：utf8, ascii。默认：utf8
 
 `--no-dedupe`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not de-duplicate (repeats all shared dependencies)
+&nbsp;&nbsp;&nbsp;&nbsp;不进行去重（重复所有共享依赖）
 
 {{#include project-options.md}}
 
 {{#include common-options.md}}
 
-### SEE ALSO
+### 另见
 
 [forge](./forge.md)

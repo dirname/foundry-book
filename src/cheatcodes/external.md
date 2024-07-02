@@ -1,4 +1,4 @@
-## External
+## 外部
 
 - [`ffi`](./ffi.md)
 - [`prompt`](./prompt.md)

@@ -1,14 +1,14 @@
 # chisel load
 
-Load a cached session
+加载缓存的会话
 
 ```bash
 $ chisel load --help
 Usage: chisel load <ID>
 
 Arguments:
-  <ID>  The ID of the session to load
+  <ID>  要加载的会话的ID
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
 ```

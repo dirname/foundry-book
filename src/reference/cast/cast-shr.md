@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-shr - Perform a right shifting operation.
+cast-shr - 执行右移操作。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-shr - Perform a right shifting operation.
 
 ### DESCRIPTION
 
-Perform a right shifting operation.
+执行右移操作。
 
 ### OPTIONS
 
@@ -20,12 +20,12 @@ Perform a right shifting operation.
 
 ### EXAMPLES
 
-1. Perform a single right bit shift of 0x12
+1. 对 0x12 执行一次右移位操作
     ```sh
     cast shr --base-in 16 0x12 1
     ```
 
-> Note: The --base-in parameter is not enforced but will be needed if the input is ambiguous.
+> 注意：--base-in 参数不是强制的，但如果输入不明确，则需要使用。
 
 ### SEE ALSO
 

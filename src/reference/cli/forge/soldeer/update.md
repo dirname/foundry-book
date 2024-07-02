@@ -1,13 +1,13 @@
 # forge soldeer update
 
-Update dependencies by reading the config file.
+更新依赖项通过读取配置文件。
 
 ```bash
 $ forge soldeer update --help
 Usage: soldeer update
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
 
-For more information, read the README.md
+更多信息，请阅读 README.md
 ```

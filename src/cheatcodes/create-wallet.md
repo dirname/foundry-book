@@ -1,6 +1,6 @@
 ## `createWallet`
 
-### Signature
+### 签名
 
 ```solidity
   struct Wallet {
@@ -23,15 +23,15 @@
   function createWallet(uint256, string calldata) external returns (Wallet memory);
 ```
 
-### Description
+### 描述
 
-Creates a new Wallet struct when given a parameter to derive the private key from.
+在给定一个参数来派生私钥时，创建一个新的 Wallet 结构体。
 
-### Tips
+### 提示
 
-[`sign()`](./sign.md) and [`getNonce()`](./get-nonce.md) both have supported function overloads for the Wallet struct as well.
+[`sign()`](./sign.md) 和 [`getNonce()`](./get-nonce.md) 也都支持 Wallet 结构体的函数重载。
 
-### Examples
+### 示例
 
 #### `uint256`
 
@@ -77,7 +77,7 @@ emit log_address(
 emit log_string(vm.getLabel(wallet.addr)); // "bob's wallet"
 ```
 
-#### `uint256` and `string`
+#### `uint256` 和 `string`
 
 ```solidity
 Wallet memory wallet = vm.createWallet(uint256(keccak256(bytes("1"))), "bob's wallet");

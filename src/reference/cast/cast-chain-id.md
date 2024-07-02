@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-chain-id - Get the Ethereum chain ID.
+cast-chain-id - 获取以太坊链 ID。
 
 ### SYNOPSIS
 
@@ -10,11 +10,11 @@ cast-chain-id - Get the Ethereum chain ID.
 
 ### DESCRIPTION
 
-Get the Ethereum [chain ID][chain-id] from the RPC endpoint we are connected to.
+从我们连接的 RPC 端点获取以太坊 [链 ID][chain-id]。
 
 ### OPTIONS
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -22,12 +22,12 @@ Get the Ethereum [chain ID][chain-id] from the RPC endpoint we are connected to.
 
 ### EXAMPLES
 
-1. Get the chain ID when talking to `$RPC`:
+1. 在与 `$RPC` 通信时获取链 ID：
     ```sh
     cast chain-id --rpc-url $RPC
     ```
 
-2. Get the chain ID when `$ETH_RPC_URL` is set:
+2. 当 `$ETH_RPC_URL` 已设置时获取链 ID：
     ```sh
     cast chain-id
     ```

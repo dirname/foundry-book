@@ -1,46 +1,48 @@
-#### Compiler Options
+```markdown
+#### 编译器选项
 
 `--optimize`  
-&nbsp;&nbsp;&nbsp;&nbsp;Activate the Solidity optimizer.
+&nbsp;&nbsp;&nbsp;&nbsp;激活 Solidity 优化器。
 
 `--optimizer-runs` *runs*  
-&nbsp;&nbsp;&nbsp;&nbsp;The number of optimizer runs.
+&nbsp;&nbsp;&nbsp;&nbsp;优化器运行的次数。
 
 `--via-ir`  
-&nbsp;&nbsp;&nbsp;&nbsp;Use the Yul intermediate representation compilation pipeline.
+&nbsp;&nbsp;&nbsp;&nbsp;使用 Yul 中间表示编译管道。
 
 `--revert-strings`  
-&nbsp;&nbsp;&nbsp;&nbsp;How to treat revert and require reason strings.
+&nbsp;&nbsp;&nbsp;&nbsp;如何处理 revert 和 require 原因字符串。
 
 `--use` *solc_version*  
-&nbsp;&nbsp;&nbsp;&nbsp;Specify the solc version, or a path to a local solc, to build with.
+&nbsp;&nbsp;&nbsp;&nbsp;指定 solc 版本或本地 solc 的路径进行构建。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+&nbsp;&nbsp;&nbsp;&nbsp;有效值格式为 `x.y.z`、`solc:x.y.z` 或 `path/to/solc`。
 
 `--offline`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not access the network. Missing solc versions will not be installed.
+&nbsp;&nbsp;&nbsp;&nbsp;不访问网络。缺失的 solc 版本不会被安装。
 
 `--no-auto-detect`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not auto-detect solc.
+&nbsp;&nbsp;&nbsp;&nbsp;不自动检测 solc。
 
 `--ignored-error-codes` *error_codes*  
-&nbsp;&nbsp;&nbsp;&nbsp;Ignore solc warnings by error code. The parameter is a comma-separated list of error codes.
+&nbsp;&nbsp;&nbsp;&nbsp;通过错误代码忽略 solc 警告。参数是以逗号分隔的错误代码列表。
 
 `--extra-output` *selector*  
-&nbsp;&nbsp;&nbsp;&nbsp;Extra output to include in the contract's artifact.
+&nbsp;&nbsp;&nbsp;&nbsp;在合约的构件中包含的额外输出。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Example keys: `abi`, `storageLayout`, `evm.assembly`, `ewasm`, `ir`, `ir-optimized`, `metadata`.
+&nbsp;&nbsp;&nbsp;&nbsp;示例键：`abi`、`storageLayout`、`evm.assembly`、`ewasm`、`ir`、`ir-optimized`、`metadata`。
 
-&nbsp;&nbsp;&nbsp;&nbsp;For a full description, see the [Solidity docs][output-desc].
+&nbsp;&nbsp;&nbsp;&nbsp;完整描述请参见 [Solidity 文档][output-desc]。
 
 `--extra-output-files` *selector*  
-&nbsp;&nbsp;&nbsp;&nbsp;Extra output to write to separate files.
+&nbsp;&nbsp;&nbsp;&nbsp;写入单独文件的额外输出。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Example keys: `abi`, `storageLayout`, `evm.assembly`, `ewasm`, `ir`, `ir-optimized`, `metadata`.
+&nbsp;&nbsp;&nbsp;&nbsp;示例键：`abi`、`storageLayout`、`evm.assembly`、`ewasm`、`ir`、`ir-optimized`、`metadata`。
 
-&nbsp;&nbsp;&nbsp;&nbsp;For a full description, see the [Solidity docs][output-desc].
+&nbsp;&nbsp;&nbsp;&nbsp;完整描述请参见 [Solidity 文档][output-desc]。
 
 `--evm-version` *version*  
-&nbsp;&nbsp;&nbsp;&nbsp;The target EVM version.
+&nbsp;&nbsp;&nbsp;&nbsp;目标 EVM 版本。
 
 [output-desc]: https://docs.soliditylang.org/en/latest/using-the-compiler.html#compiler-api
+```

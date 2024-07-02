@@ -1,6 +1,6 @@
 ## `assertApproxEqAbs`
 
-### Signature
+### 签名
 
 ```solidity
 function assertApproxEqAbs(uint256 left, uint256 right, uint256 maxDelta) internal;
@@ -18,13 +18,13 @@ function assertApproxEqAbs(int256 left, int256 right, uint256 maxDelta) internal
 function assertApproxEqAbs(int256 left, int256 right, uint256 maxDelta, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `left` is approximately equal to `right` with delta in absolute value.
+断言 `left` 与 `right` 在绝对值上近似相等，允许的最大差值为 `maxDelta`。
 
-Optionally includes an error message in the revert string.
+可选地包含一个错误信息在回滚字符串中。
 
-### Examples
+### 示例
 
 ```solidity
 function testFail() external {
@@ -45,7 +45,7 @@ Logs:
        Delta: 100
 ```
 
-### SEE ALSO
+### 参见
 
 - [`assertApproxEqAbsDecimal`](./assertApproxEqAbsDecimal.md)
 - [`assertApproxEqRel`](./assertApproxEqRel.md)

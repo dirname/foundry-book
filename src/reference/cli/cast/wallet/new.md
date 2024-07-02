@@ -1,36 +1,40 @@
-# cast wallet new
-
-Create a new random keypair
+```json
+{
+  "id": "cast-wallet-new",
+  "title": "cast wallet new",
+  "description": "创建一个新的随机密钥对"
+}
+```
 
 ```bash
 $ cast wallet new --help
-Usage: cast wallet new [OPTIONS] [PATH]
+用法: cast wallet new [选项] [路径]
 
-Arguments:
-  [PATH]
-          If provided, then keypair will be written to an encrypted JSON keystore
+参数:
+  [路径]
+          如果提供，则密钥对将写入加密的 JSON 密钥库
 
-Options:
+选项:
   -p, --password
-          Triggers a hidden password prompt for the JSON keystore.
+          触发 JSON 密钥库的隐藏密码提示。
           
-          Deprecated: prompting for a hidden password is now the default.
+          已弃用: 现在默认提示隐藏密码。
 
       --unsafe-password <PASSWORD>
-          Password for the JSON keystore in cleartext.
+          JSON 密钥库的明文密码。
           
-          This is UNSAFE to use and we recommend using the --password.
+          这是不安全的用法，我们建议使用 --password。
           
           [env: CAST_PASSWORD=]
 
   -n, --number <NUMBER>
-          Number of wallets to generate
+          要生成的钱包数量
           
-          [default: 1]
+          [默认值: 1]
 
   -j, --json
-          Output generated wallets as JSON
+          以 JSON 格式输出生成的钱包
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 ```

@@ -2,46 +2,46 @@
 
 ### NAME
 
-cast-rpc -  Perform a raw JSON-RPC request
+cast-rpc - 执行原始 JSON-RPC 请求
 
-### SYNOPSIS
+### 概要
 
-``cast rpc`` [*options*] *METHOD* [*PARAMS...*]
+``cast rpc`` [*选项*] *方法* [*参数...*]
 
-### DESCRIPTION
+### 描述
 
-Perform a simple JSON-RPC POST request for the given method and with the params
+对给定的方法和参数执行简单的 JSON-RPC POST 请求。
 
-### OPTIONS
+### 选项
 
-#### Query Options
+#### 查询选项
 
 `-r` *url*  
 `--rpc-url` *url*  
-&nbsp;&nbsp;&nbsp;&nbsp;The URL of the provider
+&nbsp;&nbsp;&nbsp;&nbsp;提供者的 URL
 
 `-w`  
 `--raw`  
-&nbsp;&nbsp;&nbsp;&nbsp;Pass the "params" as is
-&nbsp;&nbsp;&nbsp;&nbsp; If --raw is passed the first PARAM will be taken as the value of "params". If no params are given, stdin will be used. For example:
+&nbsp;&nbsp;&nbsp;&nbsp;按原样传递“参数”
+&nbsp;&nbsp;&nbsp;&nbsp;如果传递了 --raw，第一个参数将被视为“参数”的值。如果没有给出参数，将使用标准输入。例如：
 &nbsp;&nbsp;&nbsp;&nbsp; rpc eth_getBlockByNumber '["0x123", false]' --raw
 &nbsp;&nbsp;&nbsp;&nbsp;   => {"method": "eth_getBlockByNumber", "params": ["0x123", false] ... }
 
-### EXAMPLES
+### 示例
 
-1. Get latest `eth_getBlockByNumber` on localhost:
+1. 在本地获取最新的 `eth_getBlockByNumber`：
 
     ```sh
     cast rpc eth_getBlockByNumber "latest" "false"
     ```
 
-2. Get `eth_getTransactionByHash` on localhost:
+2. 在本地获取 `eth_getTransactionByHash`：
 
     ```sh
     cast rpc eth_getTransactionByHash 0x2642e960d3150244e298d52b5b0f024782253e6d0b2c9a01dd4858f7b4665a3f
     ```
     
-3. Get latest `eth_getBlockByNumber` on etherum mainnet:
+3. 在以太坊主网获取最新的 `eth_getBlockByNumber`：
 
    ```sh
    cast rpc --rpc-url https://mainnet.infura.io/v3/ eth_getBlockByNumber "latest" "false"

@@ -1,27 +1,27 @@
-## Working on an Existing Project
+## 处理现有项目
 
-Foundry makes developing with existing projects have no overhead.
+Foundry 使得在现有项目上开发几乎没有开销。
 
-For this example, we will use [PaulRBerg][paul]'s [`foundry-template`][template].
+在这个示例中，我们将使用 [PaulRBerg][paul] 的 [`foundry-template`][template]。
 
-First, clone the project and run [`forge install`][install] inside the project directory.
+首先，克隆项目并在项目目录中运行 [`forge install`][install]。
 
 ```sh
 $ git clone https://github.com/PaulRBerg/foundry-template
 $ cd foundry-template 
 $ forge install
-$ bun install # install Solhint, Prettier, and other Node.js deps
+$ bun install # 安装 Solhint、Prettier 和其他 Node.js 依赖
 ```
 
-We run [`forge install`][install] to install the submodule dependencies that are in the project.
+我们运行 [`forge install`][install] 来安装项目中的子模块依赖。
 
-To build, use [`forge build`][build]:
+要构建，使用 [`forge build`][build]：
 
 ```sh
 {{#include ../output/foundry-template/forge-build:all}}
 ```
 
-And to test, use [`forge test`][test]:
+要测试，使用 [`forge test`][test]：
 
 ```sh
 {{#include ../output/foundry-template/forge-test:all}}

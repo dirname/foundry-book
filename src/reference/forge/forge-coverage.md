@@ -1,59 +1,59 @@
 ## forge coverage
 
-### NAME
+### 名称
 
-forge-coverage - Displays which parts of your code are covered by tests.
+forge-coverage - 显示代码中哪些部分被测试覆盖。
 
-### SYNOPSIS
+### 概要
 
-`forge coverage` [*options*]
+`forge coverage` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Displays which parts of your code are covered by tests.
+显示代码中哪些部分被测试覆盖。
 
-### Options
+### 选项
 
-#### Report Options
+#### 报告选项
 
-`--report` allows you to specify the report type to use for coverage. This flag can be used multiple times.
+`--report` 允许你指定用于覆盖率的报告类型。此标志可以多次使用。
 
-It has three different options and is set to `summary` by default.
+它有三种不同的选项，默认设置为 `summary`。
 
 `summary`  
-&nbsp;&nbsp;&nbsp;&nbsp;Outputs a chart showing what percentage of your code is covered by tests.
+&nbsp;&nbsp;&nbsp;&nbsp;输出一个图表，显示你的代码被测试覆盖的百分比。
 
 `lcov`  
-&nbsp;&nbsp;&nbsp;&nbsp;Creates a lcov.info file containing your coverage data in the root of your project's directory.
+&nbsp;&nbsp;&nbsp;&nbsp;在项目的根目录中创建一个包含覆盖数据的 lcov.info 文件。
 
 `debug`  
-&nbsp;&nbsp;&nbsp;&nbsp;Outputs lines describing the location of uncovered code.
+&nbsp;&nbsp;&nbsp;&nbsp;输出描述未覆盖代码位置的行。
 
 {{#include common-options.md}}
 
-#### Optimization Option
+#### 优化选项
 
-`--ir-minimum` allows you to run the coverage with `via-ir` enabled for the ["minimum amount of optimization"](https://github.com/ethereum/solidity/issues/12533#issuecomment-1013073350) necessary.
+`--ir-minimum` 允许你使用 `via-ir` 启用以进行“最少量的优化”（[minimum amount of optimization](https://github.com/ethereum/solidity/issues/12533#issuecomment-1013073350)）。
 
-### EXAMPLES
+### 示例
 
-1. View summarized coverage:
+1. 查看汇总覆盖率：
 
    ```sh
    forge coverage
    ```
 
-2. Create lcov file with coverage data:
+2. 创建包含覆盖数据的 lcov 文件：
 
    ```sh
    forge coverage --report lcov
    ```
 
-3. Output uncovered code locations:
+3. 输出未覆盖代码的位置：
    ```sh
    forge coverage --report debug
    ```
 
-### SEE ALSO
+### 另请参阅
 
 [forge](./forge.md), [forge test](./forge-test.md)

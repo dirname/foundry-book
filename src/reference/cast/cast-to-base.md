@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-base - Convert a number of one base to another.
+cast-to-base - 将一个基数的数字转换为另一个基数。
 
 ### SYNOPSIS
 
@@ -10,14 +10,14 @@ cast-to-base - Convert a number of one base to another.
 
 ### DESCRIPTION
 
-Convert a number of one base to another.
+将一个基数的数字转换为另一个基数。
 
 ### OPTIONS
 
 #### Base Options
 
 `--base-in` *base*
-&nbsp;&nbsp;&nbsp;&nbsp;The base of the input number. Available options:
+&nbsp;&nbsp;&nbsp;&nbsp;输入数字的基数。可用选项：
 
 &nbsp;&nbsp;&nbsp;&nbsp;10, d, dec, decimal
 
@@ -27,17 +27,17 @@ Convert a number of one base to another.
 
 ### EXAMPLES
 
-1. Convert the decimal number 64 to hexadecimal
+1. 将十进制数 64 转换为十六进制
     ```sh
     cast to-base 64 hex
     ```
 
-2. Convert the hexadecimal number 100 to binary
+2. 将十六进制数 100 转换为二进制
     ```sh
     cast to-base 0x100 2
     ```
 
-> Note: The --base-in parameter is not enforced but will be needed if the input is ambiguous.
+> 注意：--base-in 参数不是强制的，但如果输入不明确则需要使用。
 
 ### SEE ALSO
 

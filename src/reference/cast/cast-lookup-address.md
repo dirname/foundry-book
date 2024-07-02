@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-lookup-address - Perform an ENS reverse lookup.
+cast-lookup-address - 执行 ENS 反向查找。
 
 ### SYNOPSIS
 
@@ -10,19 +10,19 @@ cast-lookup-address - Perform an ENS reverse lookup.
 
 ### DESCRIPTION
 
-Perform an ENS reverse lookup.
+执行 ENS 反向查找。
 
-If `--verify` is passed, then a normal lookup is performed after the reverse lookup to verify that the address is correct.
+如果传递 `--verify`，则在反向查找之后执行正常查找以验证地址是否正确。
 
 ### OPTIONS
 
-#### Lookup Options
+#### 查找选项
 
 `-v`  
 `--verify`  
-&nbsp;&nbsp;&nbsp;&nbsp;Perform a normal lookup to verify that the address is correct.
+&nbsp;&nbsp;&nbsp;&nbsp;执行正常查找以验证地址是否正确。
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -30,12 +30,12 @@ If `--verify` is passed, then a normal lookup is performed after the reverse loo
 
 ### EXAMPLES
 
-1. Get the ENS name for an address.
+1. 获取地址的 ENS 名称。
     ```sh
     cast lookup-address $ADDRESS
     ```
 
-2. Perform both a reverse and a normal lookup:
+2. 执行反向查找和正常查找：
     ```sh
     cast lookup-address --verify $ADDRESS
     ```

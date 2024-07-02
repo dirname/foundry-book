@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-abi-encode - ABI encode the given function arguments, excluding the selector.
+cast-abi-encode - ABI 编码给定的函数参数，不包括选择器。
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-abi-encode - ABI encode the given function arguments, excluding the selecto
 
 ### DESCRIPTION
 
-ABI encode the given function, excluding the selector.
+ABI 编码给定的函数，不包括选择器。
 
-The signature (*sig*) is a fragment in the form `<function name>(<types...>)`.
+签名 (*sig*) 是一个形式为 `<function name>(<types...>)` 的片段。
 
 ### OPTIONS
 
@@ -20,12 +20,12 @@ The signature (*sig*) is a fragment in the form `<function name>(<types...>)`.
 
 ### EXAMPLES
 
-1. ABI-encode the arguments for a call to `someFunc(address,uint256)`:
+1. ABI 编码调用 `someFunc(address,uint256)` 的参数：
     ```sh
     cast abi-encode "someFunc(address,uint256)" 0x... 1
     ```
 
-2. For encoding a type with components (as a tuple, or custom struct):
+2. 对于编码包含组件的类型（如元组或自定义结构体）：
 
     ```sh
     cast abi-encode "someFunc((string,uint256))" "(myString,1)"

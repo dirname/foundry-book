@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-max-int - Get the maximum i256 value.
+cast-max-int - 获取最大 i256 值。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-max-int - Get the maximum i256 value.
 
 ### DESCRIPTION
 
-Get the maximum i256 value.
+获取最大 i256 值。
 
 ### OPTIONS
 

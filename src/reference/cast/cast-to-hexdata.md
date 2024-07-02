@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-hexdata - Normalize the input to lowercase, 0x-prefixed hex.
+cast-to-hexdata - 将输入规范化为小写、0x前缀的十六进制。
 
 ### SYNOPSIS
 
@@ -10,14 +10,14 @@ cast-to-hexdata - Normalize the input to lowercase, 0x-prefixed hex.
 
 ### DESCRIPTION
 
-Normalize the input to lowercase, 0x-prefixed hex.
+将输入规范化为小写、0x前缀的十六进制。
 
-The input data (*input*) can either be:
+输入数据（*input*）可以是以下几种形式：
 
-- Mixed case hex with or without the 0x prefix.
-- 0x prefixed hex that should be concatenated, separated by `:`.
-- An absolute path to a file containing hex.
-- A `@tag`, where the tag is defined in an environment variable.
+- 带有或不带有0x前缀的混合大小写十六进制。
+- 应该通过`:`分隔并连接的0x前缀十六进制。
+- 包含十六进制的文件的绝对路径。
+- 一个`@tag`，其中tag在环境变量中定义。
 
 ### OPTIONS
 
@@ -25,17 +25,17 @@ The input data (*input*) can either be:
 
 ### EXAMPLES
 
-1. Add 0x prefix:
+1. 添加0x前缀：
     ```sh
     cast to-hexdata deadbeef
     ```
 
-2. Concatenate hex values:
+2. 连接十六进制值：
     ```sh
     cast to-hexdata "deadbeef:0xbeef"
     ```
 
-3. Normalize hex value in `MY_VAR`:
+3. 规范化`MY_VAR`中的十六进制值：
     ```sh
     cast to-hexdata "@MY_VAR"
     ```

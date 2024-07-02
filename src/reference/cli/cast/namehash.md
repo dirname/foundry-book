@@ -1,6 +1,7 @@
+```markdown
 # cast namehash
 
-Calculate the ENS namehash of a name
+计算 ENS 名称的哈希值
 
 ```bash
 $ cast namehash --help
@@ -10,5 +11,6 @@ Arguments:
   [NAME]  
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

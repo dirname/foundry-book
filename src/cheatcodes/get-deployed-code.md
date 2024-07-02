@@ -1,33 +1,31 @@
 ## `getDeployedCode`
 
-### Signature
+### 签名
 
 ```solidity
 function getDeployedCode(string calldata) external returns (bytes memory);
 ```
 
-### Description
+### 描述
 
-This cheatcode works similar to [`getCode`](./get-code.md) but only returns the **deployed** bytecode (aka runtime
-bytecode) for a contract in the project given the path to the contract.
+这个作弊码与 [`getCode`](./get-code.md) 类似，但只返回项目中合约的**已部署**字节码（即运行时字节码），给定合约的路径。
 
-The main use case for this cheat code is as a shortcut to deploy stateless contracts to arbitrary addresses.
+这个作弊码的主要用例是作为将无状态合约部署到任意地址的快捷方式。
 
-The calldata parameter can either be in the form `ContractFile.sol` (if the filename and contract name are the same)
-, `ContractFile.sol:ContractName`, or the path to an artifact, relative to the root of your project.
+调用参数可以是 `ContractFile.sol`（如果文件名和合约名相同）、`ContractFile.sol:ContractName` 或项目根目录相对路径的构件路径。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> `getDeployedCode` requires read permission for the output directory, see [file cheatcodes](./fs.md).
+> `getDeployedCode` 需要读取输出目录的权限，请参阅 [文件作弊码](./fs.md)。
 >
-> To grant read access set `fs_permissions = [{ access = "read", path = "./out"}]` in your `foundry.toml`.
+> 要授予读取权限，请在 `foundry.toml` 中设置 `fs_permissions = [{ access = "read", path = "./out"}]`。
 
-### Examples
+### 示例
 
-Deploy a stateless contract at an arbitrary address using `getDeployedCode` and [`etch`](./etch.md).
+使用 `getDeployedCode` 和 [`etch`](./etch.md) 在任意地址部署一个无状态合约。
 
 ```solidity
-// A stateless contract that we want deployed at a specific address
+// 我们希望在特定地址部署的无状态合约
 contract Override {
     event Payload(address sender, address target, bytes data);
 
@@ -39,18 +37,18 @@ contract Override {
     }
 }
 
-// get the **deployedBytecode**
+// 获取**已部署字节码**
 bytes memory code = vm.getDeployedCode("Override.sol:Override");
 
-// set the code of an arbitrary address
+// 设置任意地址的代码
 address overrideAddress = address(64);
 vm.etch(overrideAddress, code);
 assertEq(overrideAddress.code, code);
 ```
 
-### Supported formats
+### 支持的格式
 
-You can fetch artifacts by either contract path or contract name. Fetching artifacts for a specific version is also supported. If not provided, cheatcode will default to the version of a test being executed or the only version artifact was compiled with.
+你可以通过合约路径或合约名称获取构件。也支持获取特定版本的构件。如果未提供，作弊码将默认使用正在执行测试的版本或构件编译的唯一版本。
 ```solidity
 vm.getDeployedCode("MyContract.sol:MyContract");
 vm.getDeployedCode("MyContract");
@@ -58,10 +56,9 @@ vm.getDeployedCode("MyContract.sol:0.8.18");
 vm.getDeployedCode("MyContract:0.8.18");
 ```
 
+### 另请参阅
 
-### SEE ALSO
-
-Forge Standard Library
+Forge 标准库
 
 [`getCode`](./get-code.md)
 [`etch`](./etch.md)

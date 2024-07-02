@@ -1,50 +1,50 @@
 ## `parseJson`
 
-### Signature
+### 签名
 
 ```solidity
-// Return the value(s) that correspond to 'key'
+// 返回与'key'对应的值
 vm.parseJson(string memory json, string memory key)
-// Return the entire JSON file
+// 返回整个JSON文件
 vm.parseJson(string memory json);
 ```
 
-### Description
+### 描述
 
-These cheatcodes are used to parse JSON files in the form of strings. Usually, it's coupled with `vm.readFile()` which returns an entire file in the form of a string.
+这些作弊码用于解析字符串形式的JSON文件。通常，它会与返回整个文件字符串的`vm.readFile()`结合使用。
 
-You can use `stdJson` from `forge-std`, as a helper library for better UX.
+你可以使用`forge-std`中的`stdJson`作为帮助库，以获得更好的用户体验。
 
-The cheatcode accepts either a `key` to search for a specific value in the JSON, or no key to return the entire JSON. It returns the value as an abi-encoded `bytes` array. That means that you will have to `abi.decode()` to the appropriate type for it to function properly, else it will `revert`.
+作弊码接受一个`key`来搜索JSON中的特定值，或者不带key以返回整个JSON。它将值作为abi编码的`bytes`数组返回。这意味着你需要将其`abi.decode()`为适当的类型才能正常工作，否则它会`revert`。
 
 ### JSONpath Key
 
-`parseJson` uses a syntax called JSONpath to form arbitrary keys for arbitrary JSON files. The same syntax (or rather a dialect) is used by the tool [`jq`](https://stedolan.github.io/jq/).
+`parseJson`使用一种称为JSONpath的语法来形成任意JSON文件的任意key。相同的语法（或更确切地说是一种方言）被工具[`jq`](https://stedolan.github.io/jq/)使用。
 
-To read more about the syntax, you can visit the [README](https://crates.io/crates/jsonpath-rust) of the rust library that we use under the hood to implement the feature. That way you can be certain that you are using the correct dialect of jsonPath.
+要了解更多关于语法的信息，你可以访问我们用于实现该功能的rust库的[README](https://crates.io/crates/jsonpath-rust)。这样你可以确保使用的是正确的jsonPath方言。
 
-### JSON Encoding Rules
+### JSON编码规则
 
-We use the terms `number`, `string`, `object`, `array`, `boolean`, `null` as they are defined in the [JSON spec](https://www.w3schools.com/js/js_json_datatypes.asp).
+我们使用术语`number`、`string`、`object`、`array`、`boolean`、`null`，因为它们在[JSON规范](https://www.w3schools.com/js/js_json_datatypes.asp)中定义。
 
-**Encoding Rules**
+**编码规则**
 
-- `null` is encoded as `bytes32(0)`
-- Numbers >= 0 are encoded as `uint256`
-- Negative numbers are encoded as `int256`
-- Floating point numbers with decimal digitals are not allowed.
-- Floating point numbers using the scientific notation can be `uint256` or `int256` depending on the value.
-- A string that can be decoded into a type of `H160` and starts with `0x` is encoded as an `address`. In other words, if it can be decoded into an address, it's probably an address
-- A string that starts with `0x` is encoded as `bytes32` if it has a length of `66` or else to `bytes`
-- A string that is neither an `address`, a `bytes32` or `bytes`, is encoded as a `string`
-- An array is encoded as a dynamic array of the type of its first element
-- An object (`{}`) is encoded as a `tuple`
+- `null`编码为`bytes32(0)`
+- 大于等于0的数字编码为`uint256`
+- 负数编码为`int256`
+- 不允许使用带小数位的浮点数。
+- 使用科学计数法的浮点数可以是`uint256`或`int256`，取决于值。
+- 可以解码为`H160`类型且以`0x`开头的字符串编码为`address`。换句话说，如果它可以解码为地址，那么它可能是一个地址
+- 以`0x`开头的字符串，如果长度为`66`则编码为`bytes32`，否则编码为`bytes`
+- 既不是`address`、`bytes32`也不是`bytes`的字符串，编码为`string`
+- 数组编码为其第一个元素类型的动态数组
+- 对象（`{}`）编码为`tuple`
 
-### Type Coercion
+### 类型强制
 
-As described above, `parseJson` needs to deduce the type of JSON value and that has some inherent limitations. For that reason, there is a sub-family of `parseJson*` cheatcodes that coerce the type of the returned value.
+如上所述，`parseJson`需要推断JSON值的类型，这有一些固有的限制。为此，有一组`parseJson*`作弊码强制返回值的类型。
 
-For example `vm.parseJsonUint(json, key)` will coerce the value to a `uint256`. That means that it can parse all the following values and return them as a `uint256`. That includes a number as type `number`, a stringified number as a `string` and of course it's hex representation.
+例如`vm.parseJsonUint(json, key)`会将值强制转换为`uint256`。这意味着它可以解析以下所有值并将其作为`uint256`返回。这包括类型为`number`的数字、作为`string`的字符串化数字及其十六进制表示。
 
 ```json
 {
@@ -54,15 +54,15 @@ For example `vm.parseJsonUint(json, key)` will coerce the value to a `uint256`. 
 }
 ```
 
-Similarly, there are cheatcodes for all types (including `bytes` and `bytes32`) and their arrays (`vm.parseJsonUintArray`).
+同样，有适用于所有类型（包括`bytes`和`bytes32`）及其数组（`vm.parseJsonUintArray`）的作弊码。
 
-### Decoding JSON objects into Solidity structs
+### 将JSON对象解码为Solidity结构体
 
-JSON objects are encoded as tuples, and can be decoded via tuples or structs. That means that you can define a `struct` in Solidity and it will decode the entire JSON object into that `struct`.
+JSON对象编码为元组，可以通过元组或结构体解码。这意味着你可以在Solidity中定义一个`struct`，它将整个JSON对象解码为该`struct`。
 
-For example:
+例如：
 
-The following JSON:
+以下JSON：
 
 ```json
 {
@@ -71,7 +71,7 @@ The following JSON:
 }
 ```
 
-will be decoded into:
+将被解码为：
 
 ```solidity
 struct Json {
@@ -80,7 +80,7 @@ struct Json {
 }
 ```
 
-As the values are returned as an abi-encoded tuple, the exact name of the attributes of the struct don't need to match the names of the keys in the JSON. The above json file could also be decoded as:
+由于值作为abi编码的元组返回，结构体属性的确切名称不需要与JSON中的键名称匹配。上述json文件也可以解码为：
 
 ```solidity
 struct Json {
@@ -89,15 +89,15 @@ struct Json {
 }
 ```
 
-What matters is the alphabetical order. As the JSON object is an unordered data structure but the tuple is an ordered one, we had to somehow give order to the JSON. The easiest way was to order the keys by alphabetical order. That means that in order to decode the JSON object correctly, you will need to define attributes of the struct with **types** that correspond to the values of the alphabetical order of the keys of the JSON.
+重要的是字母顺序。由于JSON对象是无序的数据结构，而元组是有序的，我们必须以某种方式为JSON赋予顺序。最简单的方法是按字母顺序排序键。这意味着为了正确解码JSON对象，你需要定义结构体的属性**类型**，这些类型对应于JSON键的字母顺序的值。
 
-- The struct is interpreted serially. That means that the tuple's first item will be decoded based on the first item of the struct definition (no alphabetical order).
-- The JSON will parsed alphabetically, not serially.
-- Note that this parsing uses Rust's BTreeMap crate under the hood, meaning that uppercase and lowercase strings are treated differently. Uppercase characters *precede* lowercase in this lexicographical ordering, ie "Zebra" would precede "apple".
+- 结构体是按顺序解释的。这意味着元组的第一个项目将根据结构体定义的第一个项目解码（不按字母顺序）。
+- JSON将按字母顺序解析，而不是按顺序。
+- 请注意，此解析使用Rust的BTreeMap crate，这意味着大写和小写字符的处理方式不同。大写字符*优先*于小写字符，即"Zebra"会优先于"apple"。
 
-Thus, the first (in alphabetical order) value of the JSON, will be abi-encoded and then tried to be abi-decoded, based on the type of the first attribute of the `struct`.
+因此，JSON的第一个（按字母顺序）值将被abi编码，然后根据`struct`的第一个属性的类型尝试abi解码。
 
-The above JSON would not be able to be decoded with the struct below:
+上述JSON无法用以下结构体解码：
 
 ```solidity
 struct Json {
@@ -106,9 +106,9 @@ struct Json {
 }
 ```
 
-The reason is that it would try to decode the string `"sigma"` as a uint. To be exact, it would be decoded, but it would result to a wrong number, since it would interpret the bytes incorrectly.
+原因是它会尝试将字符串`"sigma"`解码为uint。确切地说，它会解码，但会得到一个错误的数字，因为它会错误地解释字节。
 
-Another example, given the following JSON:
+另一个例子，给定以下JSON：
 
 ```json
 {
@@ -133,7 +133,7 @@ Another example, given the following JSON:
 }
 ```
 
-And Solidity structs defined as follows:
+并定义如下Solidity结构体：
 
 ```solidity
 struct Apple {
@@ -148,7 +148,7 @@ struct FruitStall {
 }
 ```
 
-One would decode the JSON as follows:
+可以如下解码JSON：
 
 ```solidity
 string memory root = vm.projectRoot();
@@ -157,13 +157,13 @@ string memory json = vm.readFile(path);
 bytes memory data = vm.parseJson(json);
 FruitStall memory fruitstall = abi.decode(data, (FruitStall));
 
-// Logs: Welcome to Fresh Fruit
+// 日志: Welcome to Fresh Fruit
 console2.log("Welcome to", fruitstall.name);
 
 for (uint256 i = 0; i < fruitstall.apples.length; i++) {
     Apple memory apple = fruitstall.apples[i];
 
-    // Logs:
+    // 日志:
     // Color: Red, Sourness: 3, Sweetness: 7
     // Color: Green, Sourness: 5, Sweetness: 5
     // Color: Yellow, Sourness: 1, Sweetness: 9
@@ -176,22 +176,22 @@ for (uint256 i = 0; i < fruitstall.apples.length; i++) {
 }
 ```
 
-### Decoding JSON Objects, a tip
+### 解码JSON对象的提示
 
-If your JSON object has `hex numbers`, they will be encoded as bytes. The way to decode them as `uint` for better UX, is to define two `struct`, one intermediary with the definition of these values as `bytes` and then a final `struct` that will be consumed by the user.
+如果你的JSON对象有`hex numbers`，它们将被编码为字节。为了更好的用户体验，将其解码为`uint`的方法是定义两个`struct`，一个中间结构体将这些值定义为`bytes`，然后是一个最终的`struct`，供用户使用。
 
-1. Decode the JSON into the intermediary `struct`
-2. Convert the intermediary struct to the final one, by converting the `bytes` to `uint`. We have a helper function in `forge-std` to do this
-3. Give the final `struct` to the user for consumption
+1. 将JSON解码为中间`struct`
+2. 通过将`bytes`转换为`uint`，将中间结构体转换为最终结构体。我们在`forge-std`中有一个帮助函数来完成这个任务
+3. 将最终的`struct`提供给用户使用
 
-### How to use StdJson
+### 如何使用StdJson
 
-1. Import the library `import "../StdJson.sol";`
-2. Define its usage with `string`: `using stdJson for string;`
-3. If you want to parse simple values (numbers, address, etc.) use the helper functions
-4. If you want to parse entire JSON objects:
-   1. Define the `struct` in Solidity. Make sure to follow the alphabetical order -- it's hard to debug
-   2. Use the `parseRaw()` helper function to return abi-encoded `bytes` and then decode them to your struct
+1. 导入库`import "../StdJson.sol";`
+2. 使用`string`定义其用法：`using stdJson for string;`
+3. 如果你想解析简单值（数字、地址等），使用帮助函数
+4. 如果你想解析整个JSON对象：
+   1. 在Solidity中定义`struct`。确保遵循字母顺序——调试起来很困难
+   2. 使用`parseRaw()`帮助函数返回abi编码的`bytes`，然后将其解码为你的结构体
 
 ```solidity
 string memory root = vm.projectRoot();
@@ -201,13 +201,13 @@ bytes memory transactionDetails = json.parseRaw(".transactions[0].tx");
 RawTx1559Detail memory rawTxDetail = abi.decode(transactionDetails, (RawTx1559Detail));
 ```
 
-### Forge script artifacts
+### Forge脚本工件
 
-We have gone ahead and created a handful of helper struct and functions to read the artifacts from broadcasting a forge script.
+我们已经创建了一些帮助结构体和函数来读取广播forge脚本的工件。
 
-Currently, we only support artifacts produced by EIP1559-compatible chains and we **don't** support yet the parsing of the entire `broadcast.json` artifact. You will need to parse for individual values such as the `transactions`, the `receipts`, etc.
+目前，我们仅支持由EIP1559兼容链生成的工件，并且**尚未**支持解析整个`broadcast.json`工件。你需要解析单个值，例如`transactions`、`receipts`等。
 
-To read the transactions, it's as easy as doing:
+要读取交易，只需执行以下操作：
 
 ```solidity
 function testReadEIP1559Transactions() public {
@@ -217,7 +217,7 @@ function testReadEIP1559Transactions() public {
 }
 ```
 
-and then you can access their various fields in these structs:
+然后你可以访问这些结构体中的各个字段：
 
 ```solidity
 struct Tx1559 {
@@ -242,16 +242,16 @@ struct Tx1559Detail {
 }
 ```
 
-### Troubleshooting
+### 故障排除
 
-#### Cannot read file
+#### 无法读取文件
 
 > FAIL. Reason: The path `<file-path>` is not allowed to be accessed for read operations
 
-If you receive this error, make sure that you enable read permissions in `foundry.toml` using the [`fs_permissions` key](./fs.md)
+如果你收到此错误，请确保在`foundry.toml`中使用[`fs_permissions`键](./fs.md)启用读取权限
 
-### References
+### 参考
 
-- Helper Library: [stdJson.sol](https://github.com/foundry-rs/forge-std/blob/master/src/StdJson.sol)
-- Usage examples: [stdCheats.t.sol](https://github.com/foundry-rs/forge-std/blob/ca8d6e00ea9cb035f6856ff732203c9a3c48b966/src/test/StdCheats.t.sol#L206)
-- [File Cheatcodes](./fs.md): cheatcodes for working with files
+- 帮助库: [stdJson.sol](https://github.com/foundry-rs/forge-std/blob/master/src/StdJson.sol)
+- 使用示例: [stdCheats.t.sol](https://github.com/foundry-rs/forge-std/blob/ca8d6e00ea9cb035f6856ff732203c9a3c48b966/src/test/StdCheats.t.sol#L206)
+- [文件作弊码](./fs.md): 用于处理文件的作弊码

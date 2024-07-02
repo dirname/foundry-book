@@ -1,17 +1,17 @@
 ## `parseTomlKeys`
 
-### Signature
+### 签名
 
 ```solidity
-// Get list of keys present in a TOML string
+// 获取TOML字符串中存在的键列表
 function parseTomlKeys(string calldata toml, string calldata key) external pure returns (string[] memory keys);
 ```
 
-### Description
+### 描述
 
-Gets list of keys present in a TOML string
+获取TOML字符串中存在的键列表。
 
-### Examples
+### 示例
 
 ```solidity
 // [key]

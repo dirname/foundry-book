@@ -1,14 +1,16 @@
+```markdown
 # cast 4byte-event
 
-Get the event signature for a given topic 0 from https://openchain.xyz
+从 https://openchain.xyz 获取给定 topic 0 的事件签名。
 
 ```bash
 $ cast 4byte-event --help
 Usage: cast 4byte-event [TOPIC_0]
 
 Arguments:
-  [TOPIC_0]  Topic 0
+  [TOPIC_0]  主题 0
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

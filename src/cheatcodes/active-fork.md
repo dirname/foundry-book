@@ -1,18 +1,18 @@
 ## `activeFork`
 
-### Signature
+### 签名
 
 ```solidity
 function activeFork() external returns (uint256);
 ```
 
-### Description
+### 描述
 
-Returns the identifier for the currently active fork. Reverts if no fork is currently active.
+返回当前活动分叉的标识符。如果没有当前活动的分叉，则回退。
 
-### Examples
+### 示例
 
-Get the currently active fork id:
+获取当前活动的分叉 ID：
 
 ```solidity
 uint256 mainnetForkId = vm.createFork(MAINNET_RPC_URL);
@@ -27,7 +27,7 @@ vm.selectFork(optimismForkId);
 assertEq(vm.activeFork(), optimismForkId);
 ```
 
-### SEE ALSO
+### 参见
 
 - [createFork](./create-fork.md)
 - [selectFork](./select-fork.md)

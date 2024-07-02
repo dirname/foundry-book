@@ -1,6 +1,6 @@
 ## `with_key`
 
-### Signature
+### 签名
 
 ```solidity
 function with_key(StdStorage storage self, address who) internal returns (StdStorage storage);
@@ -14,13 +14,13 @@ function with_key(StdStorage storage self, uint256 amt) internal returns (StdSto
 function with_key(StdStorage storage self, bytes32 key) internal returns (StdStorage storage);
 ```
 
-### Description
+### 描述
 
-Passes an argument to the function.
+传递一个参数给函数。
 
-Can be used multiple times to pass multiple arguments. The order matters.
+可以多次使用以传递多个参数。顺序很重要。
 
-### Examples
+### 示例
 
 ```solidity
 uint256 slot = stdstore

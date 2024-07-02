@@ -1,14 +1,14 @@
-## Advanced Testing
+## 高级测试
 
-Forge comes with a number of advanced testing methods:
+Forge 提供了多种高级测试方法：
 
-- [Fuzz Testing](./fuzz-testing.md)
-- [Invariant Testing](./invariant-testing.md)
-- [Differential Testing](./differential-ffi-testing.md)
+- [模糊测试](./fuzz-testing.md)
+- [不变性测试](./invariant-testing.md)
+- [差异测试](./differential-ffi-testing.md)
 
-In the future, Forge will also support these:
+未来，Forge 还将支持以下测试方法：
 
-- [Symbolic Execution](#)
-- [Mutation Testing](#)
+- [符号执行](#)
+- [变异测试](#)
 
-Each chapter dives into what problem the testing methods solve, and how to apply them to your own project.
+每个章节都会深入探讨这些测试方法解决的问题，以及如何将它们应用到您自己的项目中。

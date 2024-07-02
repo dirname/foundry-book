@@ -1,34 +1,34 @@
-## Integrating with Hardhat
+## 与 Hardhat 集成
 
-It's possible to have your Foundry project work alongside [Hardhat](https://hardhat.org/). This article assumes that you have Foundry and node installed in your system. This article also assumes familiarity with both Foundry and Hardhat.
+可以在 [Hardhat](https://hardhat.org/) 项目中使用 Foundry。本文假设您的系统中已经安装了 Foundry 和 node。本文还假设您熟悉 Foundry 和 Hardhat。
 
-### Why does this not work out of the box?
+### 为什么不能开箱即用？
 
-Hardhat by default expects libraries to be installed in `node_modules`, the default folder for all NodeJS dependencies. Foundry expects them to be in `lib`. Of course [we can configure Foundry](../reference/config/overview.md) but not easily to the directory structure of `node_modules`.
+Hardhat 默认期望库安装在 `node_modules` 中，这是所有 NodeJS 依赖项的默认文件夹。Foundry 期望它们在 `lib` 中。当然，[我们可以配置 Foundry](../reference/config/overview.md)，但不容易配置到 `node_modules` 的目录结构。
 
-For this reason, the recommended setup is to use [hardhat-foundry](https://www.npmjs.com/package/@nomicfoundation/hardhat-foundry). When hardhat-foundry is installed and used correctly, Hardhat will use the same contracts directory that is used by Foundry, and it will be able to use dependencies installed with forge install.
+因此，推荐的设置是使用 [hardhat-foundry](https://www.npmjs.com/package/@nomicfoundation/hardhat-foundry)。当正确安装和使用 hardhat-foundry 时，Hardhat 将使用 Foundry 使用的相同合约目录，并且能够使用通过 `forge install` 安装的依赖项。
 
-In this article we will cover both scenarios:
+本文将涵盖两种场景：
 
-1. Adding Hardhat to a Foundry project, and,
-2. Adding Foundry to a Hardhat project.
+1. 在 Foundry 项目中添加 Hardhat，以及，
+2. 在 Hardhat 项目中添加 Foundry。
 
-### Just show me the example repo!
+### 直接给我示例仓库！
 
-[Enjoy!](https://github.com/foundry-rs/HardhatInFoundry)
+[请看这里！](https://github.com/foundry-rs/HardhatInFoundry)
 
-If you want to adapt this to a Foundry project you already have or learn how it works, read below:
+如果您想将此示例应用到现有的 Foundry 项目或了解其工作原理，请继续阅读：
 
-### Adding Hardhat to a Foundry project
+### 在 Foundry 项目中添加 Hardhat
 
-Inside your Foundry project working directory:
+在您的 Foundry 项目工作目录中：
 
-1. `npm init -y` - This will set up a `package.json` file.
-2. `npm i --save-dev hardhat` - Install Hardhat as a dev dependency into your project.
-3. `npx hardhat init` - Initialize your Hardhat project inside the same directory and choose the  "**Create an empty hardhat.config.js**" option. This will create a basic `hardhat.config.js` file.
-4. `npm i --save-dev @nomicfoundation/hardhat-foundry @nomicfoundation/hardhat-toolbox` - This will install the hardhat-foundry plugin and the Hardhat toolbox plugin which is a combination of all the basic dependencies you need to run Hardhat tests.
+1. `npm init -y` - 这将设置一个 `package.json` 文件。
+2. `npm i --save-dev hardhat` - 将 Hardhat 作为开发依赖项安装到您的项目中。
+3. `npx hardhat init` - 在同一目录中初始化您的 Hardhat 项目，并选择“**Create an empty hardhat.config.js**”选项。这将创建一个基本的 `hardhat.config.js` 文件。
+4. `npm i --save-dev @nomicfoundation/hardhat-foundry @nomicfoundation/hardhat-toolbox` - 这将安装 hardhat-foundry 插件和 Hardhat 工具箱插件，这是运行 Hardhat 测试所需的所有基本依赖项的组合。
 
-Your hardhat.config.js file should look like this to make the plugins work:
+您的 hardhat.config.js 文件应如下所示以使插件工作：
 
 ```javascript
 require("@nomicfoundation/hardhat-toolbox");
@@ -39,8 +39,8 @@ module.exports = {
 };
 ```
 
-5. By default, a Foundry project ships with a simple `Counter.sol` contract and a couple of tests. Create a file named `Counter.t.js` inside the `test` directory parallel to the default `Counter.t.sol` file.
-6. Add the following code to the `Counter.t.js` file:
+5. 默认情况下，Foundry 项目附带一个简单的 `Counter.sol` 合约和几个测试。在与默认 `Counter.t.sol` 文件平行的 `test` 目录中创建一个名为 `Counter.t.js` 的文件。
+6. 将以下代码添加到 `Counter.t.js` 文件中：
 
 ```javascript
 const { expect } = require("chai");
@@ -61,7 +61,7 @@ describe("Counter contract", function () {
     expect(await counter.number()).to.equal(1);
   });
 
-  // This is not a fuzz test because Hardhat does not support fuzzing yet.
+  // 这不是模糊测试，因为 Hardhat 尚不支持模糊测试。
   it("Should set the number correctly", async function () {
     const { counter } = await loadFixture(CounterLockFixture);
     await counter.setNumber(100);
@@ -70,22 +70,22 @@ describe("Counter contract", function () {
 });
 ```
 
-This piece of code will execute the same tests as the default `Counter.t.sol` file.
+这段代码将执行与默认 `Counter.t.sol` 文件相同的测试。
 
-And this is it!
-You can create Hardhat and Foundry tests in the same `test` directory and run them with `npx hardhat test` and `forge test` respectively.
-Check out [Hardhat's documentation](https://hardhat.org/docs) to learn more.
+就是这样！
+您可以在同一个 `test` 目录中创建 Hardhat 和 Foundry 测试，并分别使用 `npx hardhat test` 和 `forge test` 运行它们。
+查看 [Hardhat 的文档](https://hardhat.org/docs) 以了解更多信息。
 
-### Adding Foundry to a Hardhat project
+### 在 Hardhat 项目中添加 Foundry
 
-Inside your Hardhat project working directory:
+在您的 Hardhat 项目工作目录中：
 
-1. `npm i --save-dev @nomicfoundation/hardhat-foundry`- Install the hardhat-foundry plugin.
-2. Add `require("@nomicfoundation/hardhat-foundry");` to the top of your `hardhat.config.js` file.
+1. `npm i --save-dev @nomicfoundation/hardhat-foundry` - 安装 hardhat-foundry 插件。
+2. 将 `require("@nomicfoundation/hardhat-foundry");` 添加到您的 `hardhat.config.js` 文件顶部。
 
-> ℹ️ **Note**
-> Step number 3 will only work if your directory is an initialized git repository. Run `git init` if you haven't already.
+> ℹ️ **注意**
+> 步骤 3 仅在您的目录是已初始化的 git 仓库时有效。如果尚未初始化，请运行 `git init`。
 
-3. Run `npx hardhat init-foundry` in your terminal. This will generate a `foundry.toml` file based on your Hardhat project's existing configuration, and will install the `forge-std` library.
+3. 在终端中运行 `npx hardhat init-foundry`。这将根据您现有 Hardhat 项目的配置生成一个 `foundry.toml` 文件，并安装 `forge-std` 库。
 
-Hardhat will now set up a basic Foundry project inside the same directory with a few configurations inside the `foundry.toml` file to make sure that Foundry knows where to look for your contracts, tests and dependencies. You can always change these configurations later by editing the `foundry.toml` file.
+Hardhat 现在将在同一目录中设置一个基本的 Foundry 项目，并在 `foundry.toml` 文件中进行一些配置，以确保 Foundry 知道在哪里查找您的合约、测试和依赖项。您可以随时通过编辑 `foundry.toml` 文件来更改这些配置。

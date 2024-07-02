@@ -1,28 +1,28 @@
-## Config Overview
+## 配置概述
 
-Foundry's configuration system allows you to configure its tools.
+Foundry 的配置系统允许您配置其工具。
 
-### Profiles
+### 配置文件
 
-Configuration can be arbitrarily namespaced into profiles. The default profile is named `default`, and all other profiles inherit values from this profile. Profiles are defined in the `profile` map.
+配置可以任意命名空间到配置文件中。默认配置文件名为 `default`，所有其他配置文件都继承自此配置文件的值。配置文件在 `profile` 映射中定义。
 
-To add a profile named `local`, you would add:
+要添加一个名为 `local` 的配置文件，您可以添加：
 
 ```toml
 [profile.local]
 ```
 
-You can select the profile to use by setting the `FOUNDRY_PROFILE` environment variable.
+您可以通过设置 `FOUNDRY_PROFILE` 环境变量来选择要使用的配置文件。
 
-### Global configuration
+### 全局配置
 
-You can create a `foundry.toml` file in `~/.foundry` folder to configure Foundry globally.
+您可以在 `~/.foundry` 文件夹中创建一个 `foundry.toml` 文件来全局配置 Foundry。
 
-### Environment variables
+### 环境变量
 
-Configuration can be overridden with `FOUNDRY_` and `DAPP_` prefixed environment variables.
+配置可以通过带有 `FOUNDRY_` 和 `DAPP_` 前缀的环境变量进行覆盖。
 
-Exceptions are:
+例外情况是：
 
 - `FOUNDRY_FFI`, `DAPP_FFI`, `DAPP_TEST_FFI`
 - `FOUNDRY_PROFILE`
@@ -33,12 +33,12 @@ Exceptions are:
 - `DAPP_TEST_FUZZ_RUNS`
 - `DAPP_TEST_FUZZ_DEPTH`
 
-### Configuration format
+### 配置格式
 
-Configuration files are written in the [TOML format](https://toml.io), with simple key-value pairs inside of sections.
+配置文件使用 [TOML 格式](https://toml.io) 编写，在各个部分中包含简单的键值对。
 
-This page describes each configuration key in detail. To see the default values, either refer to the specific key in this document, or see the [default config](/static/config.default.toml).
+本页详细描述了每个配置键。要查看默认值，请参阅本文档中的特定键，或查看 [默认配置](/static/config.default.toml)。
 
-### Configuration keys
+### 配置键
 
-This section documents all configuration keys. All configuration keys must live under a profile, such as `default`.
+本节记录所有配置键。所有配置键必须位于一个配置文件下，例如 `default`。

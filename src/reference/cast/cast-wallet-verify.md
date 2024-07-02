@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-wallet-verify - Verify the signature of a message.
+cast-wallet-verify - 验证消息的签名。
 
 ### SYNOPSIS
 
@@ -10,15 +10,15 @@ cast-wallet-verify - Verify the signature of a message.
 
 ### DESCRIPTION
 
-Verify the signature of a message.
+验证消息的签名。
 
 ### OPTIONS
 
-#### Signature Options
+#### 签名选项
 
 `-a` *address*  
 `--address` *address*  
-&nbsp;&nbsp;&nbsp;&nbsp;The address of the message signer.
+&nbsp;&nbsp;&nbsp;&nbsp;消息签名者的地址。
 
 {{#include common-options.md}}
 

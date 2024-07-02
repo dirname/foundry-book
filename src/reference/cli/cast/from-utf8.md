@@ -1,14 +1,14 @@
 # cast from-utf8
 
-Convert UTF8 text to hex
+将 UTF8 文本转换为十六进制
 
 ```bash
 $ cast from-utf8 --help
-Usage: cast from-utf8 [TEXT]
+用法: cast from-utf8 [文本]
 
-Arguments:
-  [TEXT]  The text to convert
+参数:
+  [文本]  要转换的文本
 
-Options:
-  -h, --help  Print help
+选项:
+  -h, --help  打印帮助信息
 ```

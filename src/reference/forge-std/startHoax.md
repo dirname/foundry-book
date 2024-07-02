@@ -1,6 +1,6 @@
 ## `startHoax`
 
-### Signature
+### 签名
 
 ```solidity
 function startHoax(address who) public;
@@ -18,8 +18,8 @@ function startHoax(address who, address origin) public;
 function startHoax(address who, address origin, uint256 give) public;
 ```
 
-### Description
+### 描述
 
-Start a [perpetual `prank`](../../cheatcodes/start-prank.md) from an address that has some ether.
+从一个有以太币的地址开始一个[永久的 `prank`](../../cheatcodes/start-prank.md)。
 
-If the balance is not specified, it will be set to 2^128 wei.
+如果没有指定余额，它将被设置为 2^128 wei。

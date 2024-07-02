@@ -1,6 +1,6 @@
 ## `toString`
 
-### Signature
+### 签名
 
 ```solidity
 function toString(address) external returns (string memory);
@@ -11,13 +11,13 @@ function toString(bytes32) external returns (string memory);
 function toString(bytes) external returns (string memory);
 ```
 
-### Description
+### 描述
 
-Convert any type to its string version. Very useful for operations that demand strings, such as the cheatcode `ffi`.
+将任何类型转换为其字符串版本。对于需要字符串的操作非常有用，例如 cheatcode `ffi`。
 
-Bytes are converted to a string of their hex representation with `0x` at the start, signifying that they are encoded in hex.
+字节被转换为以 `0x` 开头的十六进制表示字符串，表示它们以十六进制编码。
 
-### Examples
+### 示例
 
 ```solidity
 uint256 number = 420;

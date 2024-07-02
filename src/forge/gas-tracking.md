@@ -1,17 +1,15 @@
-## Gas Tracking
+## 燃气跟踪
 
-Forge can help you estimate how much gas your contract will consume.
+Forge 可以帮助您估算合约将消耗多少燃气。
 
-Currently, Forge ships with two different tools for this job, but they may be merged in the future:
+目前，Forge 提供了两种不同的工具来完成这项工作，但未来可能会合并它们：
 
-- [**Gas reports**](./gas-reports.md): Gas reports give you an overview of how much Forge thinks the
-  individual functions in your contracts will consume in gas.
-- [**Gas snapshots**](./gas-snapshots.md): Gas snapshots give you an overview of how much
-  each test consumes in gas.
+- [**燃气报告**](./gas-reports.md)：燃气报告为您提供了 Forge 认为合约中各个函数将消耗的燃气量的概览。
+- [**燃气快照**](./gas-snapshots.md)：燃气快照为您提供了每个测试消耗的燃气量的概览。
 
-Gas reports and gas snapshots differ in some ways:
+燃气报告和燃气快照在某些方面有所不同：
 
-- Gas reports use tracing to figure out gas costs for individual contract calls.  
-  This gives more granular insight, at the cost of speed.
-- Gas snapshots have more built-in tools, such as diffs and exporting the results to a file.  
-  Snapshots are not as granular as gas reports, but they are faster to generate.
+- 燃气报告使用跟踪来计算单个合约调用的燃气成本。  
+  这提供了更细粒度的洞察，但代价是速度较慢。
+- 燃气快照内置了更多工具，例如差异比较和将结果导出到文件。  
+  快照不如燃气报告那么细粒度，但生成速度更快。

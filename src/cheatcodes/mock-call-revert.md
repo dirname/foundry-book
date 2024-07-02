@@ -1,6 +1,6 @@
 ## `mockCallRevert`
 
-### Signature
+### 签名
 
 ```solidity
 function mockCallRevert(address where, bytes calldata data, bytes calldata retdata) external;
@@ -15,29 +15,28 @@ function mockCallRevert(
 ) external;
 ```
 
-### Description
+### 描述
 
-Reverts all calls to an address `where` if the call data either strictly or loosely matches `data` and returns `retdata`.
+如果调用数据严格或宽松匹配 `data`，则对地址 `where` 的所有调用都会被还原，并返回 `retdata`。
 
-`retdata` can be a raw return message or a custom error.
+`retdata` 可以是原始返回消息或自定义错误。
 
-When a call is made to `where` the call data is first checked to see if it matches in its entirety with `data`.
-If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.
+当对 `where` 进行调用时，首先检查调用数据是否与 `data` 完全匹配。
+如果不匹配，则检查调用数据是否存在部分匹配，匹配从调用数据的第一个字节开始。
 
-If a match is found, then the call is reverted and `retdata` is returned.
+如果找到匹配，则调用被还原，并返回 `retdata`。
 
+**使用第二个签名**，我们可以使用特定的 `msg.value` 模拟调用。如果存在歧义，调用数据匹配优先于 `msg.value`。
 
-**Using the second signature** we can mock the calls with a specific `msg.value`. `Calldata` match takes precedence over `msg.value` in case of ambiguity.
+被还原的模拟调用一直有效，直到调用 [`clearMockedCalls`](./clear-mocked-calls.md)。
 
-Reverted mock calls are in effect until [`clearMockedCalls`](./clear-mocked-calls.md) is called.
-
-> ℹ️ **Internal calls**
+> ℹ️ **内部调用**
 >
-> This cheatcode does not currently work on internal calls. See issue [#432](https://github.com/foundry-rs/foundry/issues/432).
+> 此作弊代码目前不适用于内部调用。请参见问题 [#432](https://github.com/foundry-rs/foundry/issues/432)。
 
-### Examples
+### 示例
 
-Reverting an exact call with a raw error message:
+使用原始错误消息还原精确调用：
 
 ```solidity
 function testMockCallRevert() public {
@@ -51,7 +50,7 @@ function testMockCallRevert() public {
 }
 ```
 
-Reverting a call with a custom error:
+使用自定义错误还原调用：
 
 ```solidity
 function testMockCallRevertWithCustomError() public {
@@ -66,7 +65,7 @@ function testMockCallRevertWithCustomError() public {
 }
 ```
 
-Mocking a call with a given `msg.value`:
+使用给定的 `msg.value` 模拟调用：
 
 ```solidity
 function testMockCallRevertWithValue() public {

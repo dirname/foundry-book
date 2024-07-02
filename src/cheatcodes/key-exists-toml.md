@@ -1,17 +1,17 @@
 ## `keyExistsToml`
 
-### Signature
+### 签名
 
 ```solidity
-// Check if a key exists in a TOML table.
+// 检查一个键是否存在于 TOML 表中。
 vm.keyExistsToml(string memory toml, string memory key) returns (bool)
 ```
 
-### Description
+### 描述
 
-Checks if a key exists in a TOML table.
+检查一个键是否存在于 TOML 表中。
 
-### Examples
+### 示例
 
 ```solidity
 string memory path = "./path/to/tomlfile.toml";

@@ -1,6 +1,7 @@
+```markdown
 # forge clean
 
-Remove the build artifacts and cache directories
+删除构建产物和缓存目录
 
 ```bash
 $ forge clean --help
@@ -8,10 +9,11 @@ Usage: forge clean [OPTIONS]
 
 Options:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下，如果在一个Git仓库中，则为Git仓库的根路径，否则为当前工作目录。
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用'-h'查看简要摘要）
+```
 ```

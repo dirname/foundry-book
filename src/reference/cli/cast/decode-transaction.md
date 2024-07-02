@@ -1,6 +1,7 @@
+```markdown
 # cast decode-transaction
 
-Decodes a raw signed EIP 2718 typed transaction
+解码原始的已签名 EIP 2718 类型交易
 
 ```bash
 $ cast decode-transaction --help
@@ -10,5 +11,6 @@ Arguments:
   [TX]  
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

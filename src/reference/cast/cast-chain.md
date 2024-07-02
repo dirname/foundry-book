@@ -1,37 +1,37 @@
 ## cast chain
 
-### NAME
+### 名称
 
-cast-chain - Get the symbolic name of the current chain.
+cast-chain - 获取当前链的符号名称。
 
-### SYNOPSIS
+### 概要
 
-``cast chain`` [*options*]
+``cast chain`` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Get the symbolic chain name from the RPC endpoint we are connected to.
+从我们连接的 RPC 端点获取符号链名称。
 
-### OPTIONS
+### 选项
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Get the chain name when talking to `$RPC`:
+1. 在与 `$RPC` 通信时获取链名称：
     ```sh
     cast chain --rpc-url $RPC
     ```
 
-2. Get the chain name when `$ETH_RPC_URL` is set:
+2. 当 `$ETH_RPC_URL` 已设置时获取链名称：
     ```sh
     cast chain
     ```
 
-### SEE ALSO
+### 另请参阅
 
 [cast](./cast.md), [cast chain-id](./cast-chain-id.md)

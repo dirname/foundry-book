@@ -1,18 +1,18 @@
 ## `deriveRememberKey`
 
-### Signature
+### 签名
 
 ```solidity
 function deriveRememberKey(string memory mnemonic, uint32 index) internal returns (address who, uint256 privateKey)
 ```
 
-### Description
+### 描述
 
-Derive a private key from a mnemonic and also store it in forge's local wallet. Returns the address and private key.
+从助记词派生一个私钥，并将其存储在 forge 的本地钱包中。返回地址和私钥。
 
-### Example
+### 示例
 
-Get a private key and address from the test mnemonic at path `m/44'/60'/0'/0/0`. Use them to sign some data and start broadcasting transactions:
+从测试助记词在路径 `m/44'/60'/0'/0/0` 中获取私钥和地址。使用它们来签名一些数据并开始广播交易：
 
 ```solidity
 string memory mnemonic = "test test test test test test test test test test test junk";
@@ -27,7 +27,7 @@ vm.startBroadcast(deployer);
 vm.stopBroadcast();
 ```
 
-Get an address from the test mnemonic at path `m/44'/60'/0'/0/0` to start broadcasting transactions:
+从测试助记词在路径 `m/44'/60'/0'/0/0` 中获取地址以开始广播交易：
 
 ```solidity
 string memory mnemonic = "test test test test test test test test test test test junk";
@@ -39,8 +39,8 @@ vm.startBroadcast(deployer);
 vm.stopBroadcast();
 ```
 
-### SEE ALSO
+### 另请参阅
 
-Cheatcodes:
+作弊码：
 - [deriveKey](../../cheatcodes/derive-key.md)
 - [rememberKey](../../cheatcodes/remember-key.md)

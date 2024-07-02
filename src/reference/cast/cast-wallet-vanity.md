@@ -1,54 +1,54 @@
 ## cast wallet vanity
 
-### NAME
+### 名称
 
-cast-wallet-vanity - Generate a vanity address.
+cast-wallet-vanity - 生成一个自定义地址。
 
-### SYNOPSIS
+### 概要
 
-``cast wallet vanity`` [*options*]
+``cast wallet vanity`` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Generate a vanity address.
+生成一个自定义地址。
 
-If `--nonce` is specified, then the command will try to generate a vanity contract address. The `--save-path` option allows specifying a custom file path to save the generated wallet details.
+如果指定了 `--nonce`，则该命令将尝试生成一个自定义合约地址。`--save-path` 选项允许指定一个自定义文件路径来保存生成的钱包详细信息。
 
-### OPTIONS
+### 选项
 
-#### Keystore Options
+#### 密钥库选项
 
 `--starts-with` *hex*  
-&nbsp;&nbsp;&nbsp;&nbsp;Prefix for the vanity address.
+&nbsp;&nbsp;&nbsp;&nbsp;自定义地址的前缀。
 
 `--ends-with` *hex*  
-&nbsp;&nbsp;&nbsp;&nbsp;Suffix for the vanity address.
+&nbsp;&nbsp;&nbsp;&nbsp;自定义地址的后缀。
 
 `--nonce` *nonce*  
-&nbsp;&nbsp;&nbsp;&nbsp;Generate a vanity contract address created by the generated keypair with the specified nonce.
+&nbsp;&nbsp;&nbsp;&nbsp;生成一个由生成的密钥对创建的自定义合约地址，并指定 nonce。
 
 `--save-path` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;Path to save the generated vanity wallet. If provided, the wallet details will be saved in a JSON file at this location.
+&nbsp;&nbsp;&nbsp;&nbsp;保存生成的自定义钱包的路径。如果提供，钱包详细信息将保存在此位置的 JSON 文件中。
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Create a new keypair that starts with `dead`:
+1. 创建一个以 `dead` 开头的新密钥对：
     ```sh
     cast wallet vanity --starts-with dead
     ```
 
-2. Create a new keypair ends with `beef`:
+2. 创建一个以 `beef` 结尾的新密钥对：
     ```sh
     cast wallet vanity --ends-with beef
     ```
 
-3. Create a new keypair that starts with `dead` and save the details to a specific path:
+3. 创建一个以 `dead` 开头的新密钥对，并将详细信息保存到特定路径：
     ```sh
     cast wallet vanity --starts-with dead --save-path /path/to/save
     ```
 
-### SEE ALSO
+### 另请参阅
 
 [cast](./cast.md), [cast wallet](./cast-wallet.md)

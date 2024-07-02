@@ -1,25 +1,25 @@
-## snapshot cheatcodes
+## 快照作弊码
 
-### Signature
+### 签名
 
 ```solidity
-// Snapshot the current state of the evm.
-// Returns the id of the snapshot that was created.
-// To revert a snapshot use `revertTo`
+// 快照当前的 EVM 状态。
+// 返回创建的快照的 ID。
+// 要恢复快照，请使用 `revertTo`
 function snapshot() external returns(uint256);
-// Revert the state of the evm to a previous snapshot
-// Takes the snapshot id to revert to.
-// This deletes the snapshot and all snapshots taken after the given snapshot id.
+// 将 EVM 状态恢复到之前的快照
+// 接受要恢复的快照 ID。
+// 这将删除该快照以及在该快照之后创建的所有快照。
 function revertTo(uint256) external returns(bool);
 ```
 
-### Description
+### 描述
 
-`snapshot` takes a snapshot of the state of the blockchain and returns the identifier of the created snapshot
+`snapshot` 对区块链的状态进行快照，并返回创建的快照的标识符。
 
-`revertTo` reverts the state of the blockchain to the given snapshot. This deletes the given snapshot, as well as any snapshots taken after (e.g.: reverting to id 2 will delete snapshots with ids 2, 3, 4, etc.)
+`revertTo` 将区块链的状态恢复到给定的快照。这将删除给定的快照，以及在该快照之后创建的所有快照（例如：恢复到 ID 为 2 的快照将删除 ID 为 2、3、4 等的快照）。
 
-### Examples
+### 示例
 
 ```solidity
 struct Storage {
@@ -34,14 +34,14 @@ contract SnapshotTest is Test {
     function setUp() public {
         store.slot0 = 10;
         store.slot1 = 20;
-        vm.deal(address(this), 5 ether);        // balance = 5 ether
+        vm.deal(address(this), 5 ether);        // 余额 = 5 ether
         timestamp = block.timestamp;
     }
 
     function testSnapshot() public {
-        uint256 snapshot = vm.snapshot();       // saves the state
+        uint256 snapshot = vm.snapshot();       // 保存状态
 
-        // let's change the state
+        // 让我们改变状态
         store.slot0 = 300;
         store.slot1 = 400;
         vm.deal(address(this), 500 ether);
@@ -52,12 +52,12 @@ contract SnapshotTest is Test {
         assertEq(address(this).balance, 500 ether);
         assertEq(block.timestamp, 12345);
 
-        vm.revertTo(snapshot);                  // restores the state
+        vm.revertTo(snapshot);                  // 恢复状态
 
-        assertEq(store.slot0, 10, "snapshot revert for slot 0 unsuccessful");
-        assertEq(store.slot1, 20, "snapshot revert for slot 1 unsuccessful");
-        assertEq(address(this).balance, 5 ether, "snapshot revert for balance unsuccessful");
-        assertEq(block.timestamp, timestamp, "snapshot revert for timestamp unsuccessful");
+        assertEq(store.slot0, 10, "slot 0 的快照恢复不成功");
+        assertEq(store.slot1, 20, "slot 1 的快照恢复不成功");
+        assertEq(address(this).balance, 5 ether, "余额的快照恢复不成功");
+        assertEq(block.timestamp, timestamp, "时间戳的快照恢复不成功");
     }
 }
 ```

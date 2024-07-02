@@ -1,4 +1,4 @@
-## Transaction Commands
+## 交易命令
 
 - [cast publish](./cast-publish.md)
 - [cast receipt](./cast-receipt.md)

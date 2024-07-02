@@ -1,16 +1,16 @@
 ## `parseBytes32`
 
-### Signature
+### 签名
 
 ```solidity
 function parseBytes32(string calldata stringifiedValue) external pure returns (bytes32 parsedValue);
 ```
 
-### Description
+### 描述
 
-Parses the value of `string` into `bytes32`
+将 `string` 类型的值解析为 `bytes32` 类型。
 
-### Examples
+### 示例
 
 ```solidity
 string memory bytes32AsString = "0x0000000000000000000000000000000000000000000000000000000000000000";

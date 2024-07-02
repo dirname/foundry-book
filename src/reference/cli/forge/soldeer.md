@@ -1,37 +1,5 @@
-# forge soldeer
-
-Soldeer dependency manager
-
-```bash
-$ forge soldeer --help
-Usage: forge soldeer install [DEPENDENCY]~[VERSION] <REMOTE_URL>
-    forge soldeer push [DEPENDENCY]~[VERSION] <CUSTOM_PATH_OF_FILES>
-    forge soldeer login
-    forge soldeer update
-    forge soldeer version
-
-Commands:
-  install          Install a dependency from soldeer repository or from a custom url that points
-                       to a zip file.
-                       Example: soldeer install @openzeppelin-contracts~2.3.0 the `~` is very
-                       important to differentiate between the name and the version that needs to be
-                       installed.
-  update           Update dependencies by reading the config file.
-  login            Login into the central repository to push the dependencies.
-  push             Push a dependency to the repository. The PATH_TO_DEPENDENCY is optional and
-                       if not provided, the current directory will be used.
-                       Example: If the directory is /home/soldeer/my_project and you do not specify
-                       the PATH_TO_DEPENDENCY,
-                       the files inside the /home/soldeer/my_project will be pushed to the
-                       repository.
-                       If you specify the PATH_TO_DEPENDENCY, the files inside the specified
-                       directory will be pushed to the repository.
-                       If you want to ignore certain files, you can create a .soldeerignore file in
-                       the root of the project and add the files you want to ignore.
-                       The .soldeerignore works like .gitignore.
-  version-dry-run  
-  help             Print this message or the help of the given subcommand(s)
-
-Options:
-  -h, --help  Print help
+```json
+{
+  "translated_text": "# forge soldeer\n\nSoldeer 依赖管理器\n\n```bash\n$ forge soldeer --help\nUsage: forge soldeer install [DEPENDENCY]~[VERSION] <REMOTE_URL>\n    forge soldeer push [DEPENDENCY]~[VERSION] <CUSTOM_PATH_OF_FILES>\n    forge soldeer login\n    forge soldeer update\n    forge soldeer version\n\nCommands:\n  install          从 soldeer 仓库或自定义 URL 安装依赖，URL 指向一个 zip 文件。\n                      示例：soldeer install @openzeppelin-contracts~2.3.0，`~` 非常重要，用于区分名称和需要安装的版本。\n  update           通过读取配置文件更新依赖。\n  login            登录到中央仓库以推送依赖。\n  push             将依赖推送到仓库。PATH_TO_DEPENDENCY 是可选的，如果没有提供，将使用当前目录。\n                      示例：如果目录是 /home/soldeer/my_project 并且你没有指定 PATH_TO_DEPENDENCY，\n                      则 /home/soldeer/my_project 中的文件将被推送到仓库。\n                      如果你指定了 PATH_TO_DEPENDENCY，则指定目录中的文件将被推送到仓库。\n                      如果你想忽略某些文件，可以在项目根目录创建一个 .soldeerignore 文件并添加你想忽略的文件。\n                      .soldeerignore 的工作方式类似于 .gitignore。\n  version-dry-run  \n  help             打印此消息或给定子命令的帮助信息\n\nOptions:\n  -h, --help  打印帮助信息\n```"
+}
 ```

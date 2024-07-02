@@ -1,19 +1,19 @@
 ## `pauseGasMetering`
 
-### Signature
+### 签名
 
 ```solidity
 function pauseGasMetering() external;
 ```
 
-### Description
+### 描述
 
-Pauses gas metering (i.e. `gasleft()` does not decrease as operations are executed).
+暂停 gas 计量（即 `gasleft()` 不会随着操作的执行而减少）。
 
-This can be useful for getting a better sense of gas costs, by turning off gas metering for unnecessary code, as well as long-running scripts that would otherwise run out of gas.
+这对于通过关闭不必要的代码的 gas 计量来更好地了解 gas 成本非常有用，还可以用于避免长时间运行的脚本因 gas 耗尽而终止。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> `pauseGasMetering` *turns off DoS protections* that come from metering gas usage.
+> `pauseGasMetering` *关闭了来自 gas 计量的 DoS 保护*。
 >
-> Exposing a service that assumes a particular instance of the EVM will complete due to gas usage no longer is true, and a timeout should be enabled in that case.
+> 如果服务假设特定实例的 EVM 会因 gas 使用而完成，则不再成立，在这种情况下应启用超时。

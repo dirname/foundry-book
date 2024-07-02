@@ -1,6 +1,6 @@
 ## `assertApproxEqAbsDecimal`
 
-### Signature
+### 签名
 
 ```solidity
 function assertApproxEqAbsDecimal(uint256 left, uint256 right, uint256 maxDelta, uint256 decimals) internal;
@@ -18,14 +18,14 @@ function assertApproxEqAbsDecimal(int256 left, int256 right, uint256 maxDelta, u
 function assertApproxEqAbsDecimal(int256 left, int256 right, uint256 maxDelta, uint256 decimals, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `left` is approximately equal to `right` with delta in absolute value.
+断言 `left` 在绝对值的 delta 范围内近似等于 `right`。
 
-`left` and `right` are formatted with decimals in the revert string.
+`left` 和 `right` 在回退字符串中以小数格式显示。
 
-Optionally includes an error message in the revert string.
+可选地在回退字符串中包含错误消息。
 
-### SEE ALSO
+### 另请参阅
 
 - [`assertApproxEqAbs`](./assertApproxEqAbs.md)

@@ -1,6 +1,6 @@
 ## `prompt`
 
-### Signature
+### 签名
 
 ```solidity
 function prompt(string calldata promptText) external returns (string memory input);
@@ -8,81 +8,71 @@ function promptSecret(string calldata promptText) external returns (string memor
 function promptSecretUint(string calldata promptText) external returns (uint256);
 ```
 
-### Description
+### 描述
 
-Display an interactive prompt to the user for inserting arbitrary data.
+向用户显示一个交互式提示，用于插入任意数据。
 
-`vm.prompt` displays an interactive input, while `vm.promptSecret` & `vm.promptSecretUint` display a
-hidden input, used for passwords and other secret information that should not
-leak to the terminal.
+`vm.prompt` 显示一个交互式输入，而 `vm.promptSecret` 和 `vm.promptSecretUint` 显示一个隐藏输入，用于密码和其他不应泄露到终端的秘密信息。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> This cheatcode is meant to be used in scripts ― not tests. It is also advised to
-> follow the best practices below for testing scripts that use `vm.prompt` and
-> handling timeouts, since scripts might otherwise hang or revert. This cheatcode
-> reverts when running in a non-interactive shell.
+> 这个作弊码旨在用于脚本——不是测试。建议遵循以下最佳实践来测试使用 `vm.prompt` 的脚本并处理超时，因为脚本可能会挂起或回滚。在非交互式 shell 中运行时，此作弊码会回滚。
 
-### Configuration
+### 配置
 
-In order to prevent unwanted hangups, `vm.prompt` has a timeout configuration.
+为了防止不必要的挂起，`vm.prompt` 有一个超时配置。
 
-In your `foundry.toml`:
+在你的 `foundry.toml` 文件中：
 
 ```toml
 prompt_timeout = 120
 ```
 
-Default value is `120` and values are in seconds.
+默认值是 `120`，单位是秒。
 
-### Best practices
+### 最佳实践
 
-#### Testing scripts that use `vm.prompt`
+#### 测试使用 `vm.prompt` 的脚本
 
-When testing scripts containing `vm.prompt` it is recommended to use the
-following pattern:
+当测试包含 `vm.prompt` 的脚本时，建议使用以下模式：
 
 ```solidity
 contract Script {
     function run() public {
-        uint256 myUint = vm.parseUint(vm.prompt("enter uint"));
+        uint256 myUint = vm.parseUint(vm.prompt("输入一个整数"));
         run(myUint);
     }
 
     function run(uint256 myUint) public {
-        // actual logic
+        // 实际逻辑
     }
 }
 ```
 
-That way, we are keeping the UX gain (don't have to provide `--sig` argument
-when running the script), but tests can set any value to `myUint` and not just
-a hardcoded default.
+这样，我们保持了用户体验的增益（运行脚本时不需要提供 `--sig` 参数），但测试可以设置任何值给 `myUint`，而不仅仅是一个硬编码的默认值。
 
-#### Handling timeouts
+#### 处理超时
 
-When a user fails to provide an input before the timeout expires, the
-`vm.prompt` cheatcode reverts. If you'd like, timeouts can be handled by using
-`try/catch`:
+当用户在超时到期之前未能提供输入时，`vm.prompt` 作弊码会回滚。如果你愿意，可以使用 `try/catch` 处理超时：
 
 ```solidity
 string memory input;
 
-try vm.prompt("Username") returns (string memory res) {
+try vm.prompt("用户名") returns (string memory res) {
     input = res;
 }
 catch (bytes memory) {
-    input = "Anonymous";
+    input = "匿名";
 }
 ```
 
-### Examples
+### 示例
 
-#### Choose RPC endpoint
+#### 选择 RPC 端点
 
-Provide an option to choose the RPC/chain to run on.
+提供一个选项来选择要运行的 RPC/链。
 
-In your `foundry.toml` file:
+在你的 `foundry.toml` 文件中：
 
 ```toml
 [rpc_endpoints]
@@ -90,21 +80,21 @@ mainnet = "https://eth.llamarpc.com"
 polygon = "https://polygon.llamarpc.com"
 ```
 
-In your script:
+在你的脚本中：
 
 ```solidity
-string memory rpcEndpoint = vm.prompt("RPC endpoint");
+string memory rpcEndpoint = vm.prompt("RPC 端点");
 vm.createSelectFork(rpcEndpoint);
 ```
 
-#### Parse user input into native types
+#### 将用户输入解析为本机类型
 
-We can use the string parsing cheatcodes to parse the responses from users:
+我们可以使用字符串解析作弊码来解析用户的响应：
 
 ```solidity
-uint privateKey = vm.promptSecretUint("Private key");
-address to = vm.parseAddress(vm.prompt("Send to"));
-uint amount = vm.parseUint(vm.prompt("Amount (wei)"));
+uint privateKey = vm.promptSecretUint("私钥");
+address to = vm.parseAddress(vm.prompt("发送至"));
+uint amount = vm.parseUint(vm.prompt("金额 (wei)"));
 vm.broadcast(privateKey);
 payable(to).transfer(amount);
 ```

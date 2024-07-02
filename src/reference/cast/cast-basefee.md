@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-base-fee - Get the basefee of a block.
+cast-base-fee - 获取区块的基本费用。
 
 ### SYNOPSIS
 
@@ -10,13 +10,13 @@ cast-base-fee - Get the basefee of a block.
 
 ### DESCRIPTION
 
-Get the basefee of a block.
+获取区块的基本费用。
 
-The specified *block* can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`. Default to `latest`.
+指定的 *block* 可以是区块号，或者是以下标签之一：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。默认为 `latest`。
 
 ### OPTIONS
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -24,12 +24,12 @@ The specified *block* can be a block number, or any of the tags: `earliest`, `fi
 
 ### EXAMPLES
 
-1. Get the basefee of the latest block:
+1. 获取最新区块的基本费用：
     ```sh
     cast base-fee
     ```
 
-2. Get the basefee of the genesis block:
+2. 获取创世区块的基本费用：
     ```sh
     cast base-fee 1
     ```

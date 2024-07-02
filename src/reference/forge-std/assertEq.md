@@ -1,6 +1,6 @@
 ## `assertEq`
 
-### Signature
+### 签名
 
 #### `bool`
 
@@ -142,10 +142,10 @@ function assertEq(bytes[] memory left, bytes[] memory right) internal;
 function assertEq(bytes[] memory left, bytes[] memory right, string memory err) internal;
 ```
 
-#### Legacy
+#### 遗留
 
 ```solidity
-// legacy helper for asserting two uints shorter than 256 bits: `assertEqUint(uint8(1), uint128(1));`
+// 用于断言两个小于 256 位的 uint 的遗留辅助函数：`assertEqUint(uint8(1), uint128(1));`
 function assertEqUint(uint256 a, uint256 b) internal;
 ```
 
@@ -157,13 +157,13 @@ function assertEq32(bytes32 left, bytes32 right) internal;
 function assertEq32(bytes32 left, bytes32 right, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `left` is equal to `right`.
+断言 `left` 等于 `right`。
 
-Optionally includes an error message in the revert string.
+可选地包含一个错误消息在 revert 字符串中。
 
-### SEE ALSO
+### 另请参阅
 
  - [`assertEqDecimal`](./assertEqDecimal.md)
  - [`assertNotEq`](./assertNotEq.md)

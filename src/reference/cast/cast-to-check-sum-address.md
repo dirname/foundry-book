@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-check-sum-address - Convert an address to a checksummed format ([EIP-55][eip55]).
+cast-to-check-sum-address - 将地址转换为校验和格式（[EIP-55][eip55]）。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-to-check-sum-address - Convert an address to a checksummed format ([EIP-55]
 
 ### DESCRIPTION
 
-Convert an address to a checksummed format ([EIP-55][eip55]).
+将地址转换为校验和格式（[EIP-55][eip55]）。
 
 ### OPTIONS
 

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-receipt - Get the transaction receipt for a transaction.
+cast-receipt - 获取交易的收据。
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-receipt - Get the transaction receipt for a transaction.
 
 ### DESCRIPTION
 
-Get the transaction receipt for a transaction.
+获取交易的收据。
 
-If *field* is specified, then only the given field of the receipt is displayed.
+如果指定了 *field*，则仅显示收据的指定字段。
 
 ### OPTIONS
 
@@ -20,12 +20,12 @@ If *field* is specified, then only the given field of the receipt is displayed.
 
 `--async`  
 `--cast-async`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not wait for the transaction receipt if it does not exist yet.  
-&nbsp;&nbsp;&nbsp;&nbsp;Environment: `CAST_ASYNC`
+&nbsp;&nbsp;&nbsp;&nbsp;如果收据尚不存在，则不等待交易收据。  
+&nbsp;&nbsp;&nbsp;&nbsp;环境变量: `CAST_ASYNC`
 
 `-c` *confirmations*  
 `--confirmations` *confirmations*  
-&nbsp;&nbsp;&nbsp;&nbsp;Wait a number of confirmations before exiting. Default: `1`.
+&nbsp;&nbsp;&nbsp;&nbsp;在退出前等待一定数量的确认。默认值: `1`。
 
 #### RPC Options
 
@@ -37,12 +37,12 @@ If *field* is specified, then only the given field of the receipt is displayed.
 
 ### EXAMPLES
 
-1. Get a transaction receipt:
+1. 获取交易收据:
     ```sh
     cast receipt $TX_HASH
     ```
 
-2. Get the block number the transaction was included in:
+2. 获取交易被包含的区块号:
     ```sh
     cast receipt $TX_HASH blockNumber
     ```

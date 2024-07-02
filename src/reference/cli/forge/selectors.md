@@ -1,17 +1,19 @@
+```markdown
 # forge selectors
 
-Function selector utilities
+函数选择器工具
 
 ```bash
 $ forge selectors --help
 Usage: forge selectors <COMMAND>
 
 Commands:
-  collision  Check for selector collisions between contracts [aliases: co]
-  upload     Upload selectors to registry [aliases: up]
-  list       List selectors from current workspace [aliases: ls]
-  help       Print this message or the help of the given subcommand(s)
+  collision  检查合约之间的选择器冲突 [aliases: co]
+  upload     将选择器上传到注册表 [aliases: up]
+  list       列出当前工作区的选择器 [aliases: ls]
+  help       打印此消息或给定子命令的帮助
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助
+```
 ```

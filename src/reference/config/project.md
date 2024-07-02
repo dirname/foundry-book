@@ -1,74 +1,74 @@
-## Project
+## 项目
 
-Configuration related to the project in general.
+与项目相关的配置。
 
 ##### `src`
 
-- Type: string
-- Default: src
-- Environment: `FOUNDRY_SRC` or `DAPP_SRC`
+- 类型: 字符串
+- 默认值: src
+- 环境变量: `FOUNDRY_SRC` 或 `DAPP_SRC`
 
-The path to the contract sources relative to the root of the project.
+合约源代码相对于项目根目录的路径。
 
 ##### `test`
 
-- Type: string
-- Default: test
-- Environment: `FOUNDRY_TEST` or `DAPP_TEST`
+- 类型: 字符串
+- 默认值: test
+- 环境变量: `FOUNDRY_TEST` 或 `DAPP_TEST`
 
-The path to the test contract sources relative to the root of the project.
+测试合约源代码相对于项目根目录的路径。
 
 ##### `script`
 
-- Type: string
-- Default: script
-- Environment: `FOUNDRY_SCRIPT` or `DAPP_SCRIPT`
+- 类型: 字符串
+- 默认值: script
+- 环境变量: `FOUNDRY_SCRIPT` 或 `DAPP_SCRIPT`
 
-The path to the script contract sources relative to the root of the project.
+脚本合约源代码相对于项目根目录的路径。
 
 ##### `out`
 
-- Type: string
-- Default: out
-- Environment: `FOUNDRY_OUT` or `DAPP_OUT`
+- 类型: 字符串
+- 默认值: out
+- 环境变量: `FOUNDRY_OUT` 或 `DAPP_OUT`
 
-The path to put contract artifacts in, relative to the root of the project.
+存放合约工件的路径，相对于项目根目录。
 
 ##### `libs`
 
-- Type: array of strings (paths)
-- Default: lib
-- Environment: `FOUNDRY_LIBS` or `DAPP_LIBS`
+- 类型: 字符串数组（路径）
+- 默认值: lib
+- 环境变量: `FOUNDRY_LIBS` 或 `DAPP_LIBS`
 
-An array of paths that contain libraries, relative to the root of the project.
+包含库的路径数组，相对于项目根目录。
 
 ##### `cache`
 
-- Type: boolean
-- Default: true
-- Environment: `FOUNDRY_CACHE` or `DAPP_CACHE`
+- 类型: 布尔值
+- 默认值: true
+- 环境变量: `FOUNDRY_CACHE` 或 `DAPP_CACHE`
 
-Whether or not to enable caching. If enabled, the result of compiling sources, tests, and dependencies, are cached in `cache`.
+是否启用缓存。如果启用，编译源代码、测试和依赖项的结果将缓存到 `cache` 中。
 
 ##### `cache_path`
 
-- Type: string
-- Default: cache
-- Environment: `FOUNDRY_CACHE_PATH` or `DAPP_CACHE_PATH`
+- 类型: 字符串
+- 默认值: cache
+- 环境变量: `FOUNDRY_CACHE_PATH` 或 `DAPP_CACHE_PATH`
 
-The path to the cache, relative to the root of the project.
+缓存的路径，相对于项目根目录。
 
 ##### `broadcast`
 
-- Type: string
-- Default: broadcast
+- 类型: 字符串
+- 默认值: broadcast
 
-The path to the broadcast transaction logs, relative to the root of the project.
+广播交易日志的路径，相对于项目根目录。
 
 ##### `force`
 
-- Type: boolean
-- Default: false
-- Environment: `FOUNDRY_FORCE` or `DAPP_FORCE`
+- 类型: 布尔值
+- 默认值: false
+- 环境变量: `FOUNDRY_FORCE` 或 `DAPP_FORCE`
 
-Whether or not to perform a clean build, discarding the cache.
+是否执行清理构建，丢弃缓存。

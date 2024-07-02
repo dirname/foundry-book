@@ -1,13 +1,12 @@
 ## `startStateDiffRecording`
 
-### Signature
+### 签名
 
 ```solidity
 function startStateDiffRecording()
 ```
 
-### Description
+### 描述
 
-Records all state changes as part of CREATE, CALL or SELFDESTRUCT opcodes in order,
-along with the context of the calls.
-Refer to [`stopAndReturnStateDiff`](./stop-and-return-state-diff.md) for more details on how to access and interpret the recorded state changes.
+记录所有作为 CREATE、CALL 或 SELFDESTRUCT 操作码一部分的状态变化，并按顺序记录调用上下文。
+有关如何访问和解释记录的状态变化的更多详细信息，请参阅 [`stopAndReturnStateDiff`](./stop-and-return-state-diff.md)。

@@ -1,6 +1,6 @@
 ## `read`
 
-### Signature
+### 签名
 
 ```solidity
 function read_bytes32(StdStorage storage self) internal returns (bytes32);
@@ -22,8 +22,8 @@ function read_uint(StdStorage storage self) internal returns (uint256);
 function read_int(StdStorage storage self) internal returns (int256);
 ```
 
-### Description
+### 描述
 
-Reads the value from the storage slot as `bytes32`, `bool`, `address`, `uint256`, or `int256`.
+从存储槽中读取值，类型为 `bytes32`、`bool`、`address`、`uint256` 或 `int256`。
 
-Reverts with a message if unsuccessful.
+如果读取失败，会抛出带有消息的错误。

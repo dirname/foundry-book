@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-wallet-import - Import a private key into an encrypted keystore
+cast-wallet-import - 将私钥导入加密密钥库
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-wallet-import - Import a private key into an encrypted keystore
 
 ### DESCRIPTION
 
-Import a private key into an encrypted keystore.
+将私钥导入加密密钥库。
 
-If no _keystore-dir_ is specified, it will be saved in the default `~/.foundry/keystores`, so it can be accessed through the `--account` option in methods like `forge script`, `cast send` or any other that requires a private key.
+如果没有指定 _keystore-dir_，它将保存在默认的 `~/.foundry/keystores` 中，因此可以通过 `forge script`、`cast send` 或其他需要私钥的方法中的 `--account` 选项访问。
 
 ### OPTIONS
 
@@ -21,8 +21,8 @@ If no _keystore-dir_ is specified, it will be saved in the default `~/.foundry/k
 `-k`  
 `--keystore-dir`
 
-&nbsp;&nbsp;&nbsp;&nbsp;The path to store the encrypted keystore.  
-&nbsp;&nbsp;&nbsp;&nbsp;Defaults to `~/.foundry/keystores`.
+&nbsp;&nbsp;&nbsp;&nbsp;存储加密密钥库的路径。  
+&nbsp;&nbsp;&nbsp;&nbsp;默认为 `~/.foundry/keystores`。
 
 {{#include ../common/wallet-options-raw.md}}
 
@@ -30,19 +30,19 @@ If no _keystore-dir_ is specified, it will be saved in the default `~/.foundry/k
 
 ### EXAMPLES
 
-1. Create a keystore from a private key:
+1. 从私钥创建密钥库：
 
    ```sh
    cast wallet import BOB --interactive
    ```
 
-2. Create a keystore from a mnemonic:
+2. 从助记词创建密钥库：
 
    ```sh
    cast wallet import ALICE --mnemonic "test test test test test test test test test test test test"
    ```
 
-3. Create a keystore from a mnemonic with a specific mnemonic index:
+3. 从助记词和特定助记词索引创建密钥库：
    ```sh
    cast wallet import ALICE --mnemonic "test test test test test test test test test test test test" --mnemonic-index 1
    ```

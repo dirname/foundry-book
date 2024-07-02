@@ -1,11 +1,11 @@
+```markdown
 # forge soldeer version-dry-run
-
-
 
 ```bash
 $ forge soldeer version-dry-run --help
-Usage: forge soldeer version-dry-run
+用法: forge soldeer version-dry-run
 
-Options:
-  -h, --help  Print help
+选项:
+  -h, --help  打印帮助信息
+```
 ```

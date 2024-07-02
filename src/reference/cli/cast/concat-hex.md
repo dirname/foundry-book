@@ -1,14 +1,14 @@
 # cast concat-hex
 
-Concatenate hex strings
+连接十六进制字符串
 
 ```bash
 $ cast concat-hex --help
-Usage: cast concat-hex [DATA]...
+用法: cast concat-hex [数据]...
 
-Arguments:
-  [DATA]...  The data to concatenate
+参数:
+  [数据]...  要连接的数据
 
-Options:
-  -h, --help  Print help
+选项:
+  -h, --help  打印帮助信息
 ```

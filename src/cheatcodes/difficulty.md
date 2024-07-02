@@ -1,18 +1,18 @@
 ## `difficulty`
 
-### Signature
+### 签名
 
 ```solidity
 function difficulty(uint256) external;
 ```
 
-### Description
+### 描述
 
-Sets `block.difficulty`.
+设置 `block.difficulty`。
 
-If used with a post-merge EVM version (Paris and onwards), it will revert. In that case, use [`vm.prevrandao`][prevrandao] instead.
+如果在合并后的 EVM 版本（巴黎及以后）中使用，将会回滚。在这种情况下，请使用 [`vm.prevrandao`][prevrandao] 代替。
 
-### Examples
+### 示例
 
 ```solidity
 vm.difficulty(25);

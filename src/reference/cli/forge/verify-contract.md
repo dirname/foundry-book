@@ -1,6 +1,6 @@
 # forge verify-contract
 
-Verify smart contracts on Etherscan
+在 Etherscan 上验证智能合约
 
 ```bash
 $ forge verify-contract --help
@@ -8,89 +8,87 @@ Usage: forge verify-contract [OPTIONS] <ADDRESS> [CONTRACT]
 
 Arguments:
   <ADDRESS>
-          The address of the contract to verify
+          要验证的合约地址
 
   [CONTRACT]
-          The contract identifier in the form `<path>:<contractname>`
+          合约标识符，格式为 `<路径>:<合约名称>`
 
 Options:
       --constructor-args <ARGS>
-          The ABI-encoded constructor arguments
+          构造函数参数的 ABI 编码
           
           [aliases: encoded-constructor-args]
 
       --constructor-args-path <PATH>
-          The path to a file containing the constructor arguments
+          包含构造函数参数的文件路径
 
       --guess-constructor-args
-          Try to extract constructor arguments from on-chain creation code
+          尝试从链上创建代码中提取构造函数参数
 
       --compiler-version <VERSION>
-          The `solc` version to use to build the smart contract
+          用于构建智能合约的 `solc` 版本
 
       --num-of-optimizations <NUM>
-          The number of optimization runs used to build the smart contract
+          用于构建智能合约的优化运行次数
           
           [aliases: optimizer-runs]
 
       --flatten
-          Flatten the source code before verifying
+          在验证前展平源代码
 
   -f, --force
-          Do not compile the flattened smart contract before verifying (if --flatten is passed)
+          在验证前不编译展平的智能合约（如果传递了 --flatten）
 
       --skip-is-verified-check
-          Do not check if the contract is already verified before verifying
+          在验证前不检查合约是否已验证
 
       --watch
-          Wait for verification result after submission
+          提交后等待验证结果
 
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根路径（如果在 Git 仓库中），或者当前工作目录。
 
       --show-standard-json-input
-          Prints the standard json compiler input.
+          打印标准 json 编译器输入。
           
-          The standard json compiler input can be used to manually submit contract verification in
-          the browser.
+          标准 json 编译器输入可以用于在浏览器中手动提交合约验证。
 
       --via-ir
-          Use the Yul intermediate representation compilation pipeline
+          使用 Yul 中间表示编译管道
 
       --evm-version <EVM_VERSION>
-          The EVM version to use.
+          EVM 版本。
           
-          Overrides the version specified in the config.
+          覆盖配置中指定的版本。
 
   -e, --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
+          Etherscan（或等效）API 密钥
           
           [env: ETHERSCAN_API_KEY=]
 
   -c, --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+          链名称或 EIP-155 链 ID
           
           [env: CHAIN=]
 
   -r, --rpc-url <URL>
-          The RPC endpoint
+          RPC 端点
           
           [env: ETH_RPC_URL=]
 
       --flashbots
-          Use the Flashbots RPC URL with fast mode (<https://rpc.flashbots.net/fast>).
+          使用 Flashbots RPC URL 并启用快速模式（<https://rpc.flashbots.net/fast>）。
           
-          This shares the transaction privately with all registered builders.
+          这会私下共享交易给所有注册的构建者。
           
-          See: <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
+          参见：<https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
 
       --jwt-secret <JWT_SECRET>
-          JWT Secret for the RPC endpoint.
+          RPC 端点的 JWT 密钥。
           
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be
-          used to simulate a CL `engine_forkchoiceUpdated` call:
+          JWT 密钥将用于创建 RPC 的 JWT。例如，可以使用以下命令模拟 CL `engine_forkchoiceUpdated` 调用：
           
           cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
           '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
@@ -100,33 +98,33 @@ Options:
           [env: ETH_RPC_JWT_SECRET=]
 
       --retries <RETRIES>
-          Number of attempts for retrying verification
+          重试验证的次数
           
           [default: 5]
 
       --delay <DELAY>
-          Optional delay to apply inbetween verification attempts, in seconds
+          在验证尝试之间应用的可选延迟，以秒为单位
           
           [default: 5]
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
 Linker options:
       --libraries <LIBRARIES>
-          Set pre-linked libraries
+          设置预链接的库
           
           [env: DAPP_LIBRARIES=]
 
 Verifier options:
       --verifier <VERIFIER>
-          The contract verification provider to use
+          使用的合约验证提供者
           
           [default: etherscan]
           [possible values: etherscan, sourcify, blockscout, oklink]
 
       --verifier-url <VERIFIER_URL>
-          The verifier URL, if using a custom provider
+          自定义提供者的验证 URL
           
           [env: VERIFIER_URL=]
 ```

@@ -1,18 +1,18 @@
 ## cast address-zero
 
-### NAME
+### 名称
 
-cast address-zero - Prints the zero address. 
+cast address-zero - 打印零地址。
 
-### SYNOPSIS
+### 概要
 
 ``cast address-zero``
 
-### DESCRIPTION
+### 描述
 
-Prints the zero address.
+打印零地址。
 
-### OPTIONS
+### 选项
 
 {{#include common-options.md}}
 

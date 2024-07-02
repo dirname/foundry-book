@@ -1,14 +1,16 @@
+```markdown
 # cast to-utf8
 
-Convert hex data to a utf-8 string
+将十六进制数据转换为 utf-8 字符串
 
 ```bash
 $ cast to-utf8 --help
 Usage: cast to-utf8 [HEXDATA]
 
 Arguments:
-  [HEXDATA]  The hex data to convert
+  [HEXDATA]  要转换的十六进制数据
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

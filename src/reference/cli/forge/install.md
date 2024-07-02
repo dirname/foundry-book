@@ -1,47 +1,51 @@
+```markdown
 # forge install
 
-Install one or multiple dependencies.
+安装一个或多个依赖项。
 
 ```bash
 $ forge install --help
 Usage: forge install [OPTIONS] [DEPENDENCIES]...
-    forge install [OPTIONS] <github username>/<github project>@<tag>...
-    forge install [OPTIONS] <alias>=<github username>/<github project>@<tag>...
-    forge install [OPTIONS] <https:// git url>...
+    forge install [OPTIONS] <github 用户名>/<github 项目>@<标签>...
+    forge install [OPTIONS] <别名>=<github 用户名>/<github 项目>@<标签>...
+    forge install [OPTIONS] <https:// git 地址>...
 
 Arguments:
   [DEPENDENCIES]...
-          The dependencies to install.
+          要安装的依赖项。
           
-          A dependency can be a raw URL, or the path to a GitHub repository.
+          依赖项可以是一个原始 URL，或 GitHub 仓库的路径。
           
-          Additionally, a ref can be provided by adding @ to the dependency path.
+          此外，可以通过在依赖路径后添加 @ 来提供 ref。
           
-          A ref can be: - A branch: master - A tag: v1.2.3 - A commit: 8e8128
+          ref 可以是：
+          - 分支：master
+          - 标签：v1.2.3
+          - 提交：8e8128
           
-          Target installation directory can be added via `<alias>=` suffix. The dependency will
-          installed to `lib/<alias>`.
+          可以通过 `<别名>=` 后缀添加目标安装目录。依赖项将安装到 `lib/<别名>`。
 
 Options:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在 Git 仓库中），或当前工作目录。
 
       --shallow
-          Perform shallow clones instead of deep ones.
+          执行浅克隆而不是深克隆。
           
-          Improves performance and reduces disk usage, but prevents switching branches or tags.
+          提高性能并减少磁盘使用，但阻止切换分支或标签。
 
       --no-git
-          Install without adding the dependency as a submodule
+          安装时不将依赖项添加为子模块
 
       --no-commit
-          Do not create a commit
+          不创建提交
 
   -q, --quiet
-          Do not print any messages
+          不打印任何消息
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
+```
 ```

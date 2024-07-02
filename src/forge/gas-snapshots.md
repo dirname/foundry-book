@@ -1,13 +1,10 @@
-## Gas Snapshots
+## 气体快照
 
-Forge can generate gas snapshots for all your test functions. This can
-be useful to get a general feel for how much gas your contract will consume,
-or to compare gas usage before and after various optimizations.
+Forge 可以为所有测试函数生成气体快照。这对于了解合约消耗的气体量或比较各种优化前后的气体使用情况非常有用。
 
-To generate the gas snapshot, run [`forge snapshot`](../reference/forge/forge-snapshot.md).
+要生成气体快照，请运行 [`forge snapshot`](../reference/forge/forge-snapshot.md)。
 
-This will generate a file called `.gas-snapshot` by default with all your
-tests and their respective gas usage.
+默认情况下，这将生成一个名为 `.gas-snapshot` 的文件，其中包含所有测试及其相应的气体使用情况。
 
 ```ignore
 $ forge snapshot
@@ -25,34 +22,27 @@ ERC20Test:testTransfer() (gas: 60473)
 ERC20Test:testTransferFrom() (gas: 84152)
 ```
 
-### Filtering
+### 过滤
 
-If you would like to specify a different output file, run `forge snapshot --snap <FILE_NAME>`.
+如果您想指定不同的输出文件，请运行 `forge snapshot --snap <FILE_NAME>`。
 
-You can also sort the results by gas usage. Use the `--asc` option to sort the results in
-ascending order and `--desc` to sort the results in descending order.
+您还可以按气体使用情况对结果进行排序。使用 `--asc` 选项按升序排序结果，使用 `--desc` 按降序排序结果。
 
-Finally, you can also specify a min/max gas threshold for all your tests.
-To only include results above a threshold, you can use the `--min <VALUE>` option.
-In the same way, to only include results under a threshold,
-you can use the `--max <VALUE>` option.
+最后，您还可以为所有测试指定最小/最大气体阈值。要仅包含高于阈值的结果，可以使用 `--min <VALUE>` 选项。同样，要仅包含低于阈值的结果，可以使用 `--max <VALUE>` 选项。
 
-Keep in mind that the changes will be made in the snapshot file, and not in the snapshot being
-displayed on your screen.
+请记住，这些更改将应用于快照文件，而不是显示在屏幕上的快照。
 
-You can also use it in combination with the filters for `forge test`, such as `forge snapshot --match-path contracts/test/ERC721.t.sol` to generate a gas snapshot relevant to this test contract.
+您还可以将其与 `forge test` 的过滤器结合使用，例如 `forge snapshot --match-path contracts/test/ERC721.t.sol` 以生成与此测试合约相关的气体快照。
 
-### Comparing gas usage
+### 比较气体使用情况
 
-If you would like to compare the current snapshot file with your 
-latest changes, you can use the `--diff` or `--check` options.
+如果您想将当前快照文件与最新更改进行比较，可以使用 `--diff` 或 `--check` 选项。
 
-`--diff` will compare against the snapshot and display changes from the snapshot.
+`--diff` 将比较快照并显示从快照中的变化。
 
-It can also optionally take a file name (`--diff <FILE_NAME>`), with the default
-being `.gas-snapshot`.
+它还可以选择性地接受文件名（`--diff <FILE_NAME>`），默认情况下为 `.gas-snapshot`。
 
-For example:
+例如：
 
 ```ignore
 $ forge snapshot --diff .gas-snapshot2
@@ -82,10 +72,9 @@ testApprove() (gas: -8 (-0.000%))
 Overall gas change: -8 (-0.000%)
 ```
 
-`--check` will compare a snapshot with an existing snapshot file and display all the 
-differences, if any. You can change the file to compare against by providing a different file name: `--check <FILE_NAME>`.
+`--check` 将比较快照与现有快照文件并显示所有差异（如果有）。您可以通过提供不同的文件名来更改要比较的文件：`--check <FILE_NAME>`。
 
-For example:
+例如：
 
 ```ignore
 $ forge snapshot --check .gas-snapshot2

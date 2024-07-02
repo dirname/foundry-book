@@ -1,103 +1,103 @@
-## Installation
+## 安装
 
-If you face any issues while installing, check out the [FAQ](../faq.md).
+如果在安装过程中遇到任何问题，请查看[常见问题解答](../faq.md)。
 
-### Precompiled binaries
+### 预编译二进制文件
 
-Precompiled binaries are available from the [GitHub releases page](https://github.com/foundry-rs/foundry/releases).
-These are better managed by using [Foundryup](#using-foundryup).
+预编译二进制文件可以从[GitHub发布页面](https://github.com/foundry-rs/foundry/releases)获取。
+这些文件最好通过使用[Foundryup](#using-foundryup)进行管理。
 
-### Using Foundryup
+### 使用 Foundryup
 
-Foundryup is the Foundry toolchain installer. You can find more about it [here](https://github.com/foundry-rs/foundry/blob/master/foundryup/README.md).
+Foundryup 是 Foundry 工具链安装程序。你可以在[这里](https://github.com/foundry-rs/foundry/blob/master/foundryup/README.md)了解更多信息。
 
-Open your terminal and run the following command:
+打开终端并运行以下命令：
 
 ```sh
 curl -L https://foundry.paradigm.xyz | bash
 ```
 
-This will install Foundryup, then simply follow the instructions on-screen,
-which will make the `foundryup` command available in your CLI.
+这将安装 Foundryup，然后按照屏幕上的指示操作，
+这将使 `foundryup` 命令在你的 CLI 中可用。
 
-Running `foundryup` by itself will install the latest (nightly) [precompiled binaries](#precompiled-binaries): `forge`, `cast`, `anvil`, and `chisel`.
-See `foundryup --help` for more options, like installing from a specific version or commit.
+运行 `foundryup` 本身将安装最新的（ nightly ）[预编译二进制文件](#precompiled-binaries)：`forge`、`cast`、`anvil` 和 `chisel`。
+查看 `foundryup --help` 了解更多选项，例如从特定版本或提交安装。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> If you're on Windows, you will need to install and use [Git BASH](https://gitforwindows.org/) or [WSL](https://learn.microsoft.com/en-us/windows/wsl/install),
-> as your terminal, since Foundryup currently does not support Powershell or Cmd.
+> 如果你使用的是 Windows，你需要安装并使用 [Git BASH](https://gitforwindows.org/) 或 [WSL](https://learn.microsoft.com/en-us/windows/wsl/install)，
+> 作为你的终端，因为 Foundryup 目前不支持 Powershell 或 Cmd。
 
-### Building from source
+### 从源代码构建
 
-#### Prerequisites
+#### 先决条件
 
-You will need the [Rust](https://rust-lang.org) compiler and Cargo, the Rust package manager.
-The easiest way to install both is with [`rustup.rs`](https://rustup.rs/).
+你需要 [Rust](https://rust-lang.org) 编译器和 Cargo，即 Rust 包管理器。
+安装两者的最简单方法是使用 [`rustup.rs`](https://rustup.rs/)。
 
-Foundry generally only supports building on the latest stable Rust version.
-If you have an older Rust version, you can update with `rustup`:
+Foundry 通常只支持在最新的稳定 Rust 版本上构建。
+如果你有旧版本的 Rust，可以使用 `rustup` 进行更新：
 
 ```sh
 rustup update stable
 ```
 
-On Windows, you will also need a recent version of [Visual Studio](https://visualstudio.microsoft.com/downloads/),
-installed with the "Desktop Development With C++" Workloads option.
+在 Windows 上，你还需要安装最新版本的 [Visual Studio](https://visualstudio.microsoft.com/downloads/)，
+并选择“使用 C++ 的桌面开发”工作负载选项。
 
-#### Building
+#### 构建
 
-You can either use the different [Foundryup](#using-foundryup) flags:
+你可以使用不同的 [Foundryup](#using-foundryup) 标志：
 
 ```sh
 foundryup --branch master
 foundryup --path path/to/foundry
 ```
 
-Or, by using a single Cargo command:
+或者，通过使用单个 Cargo 命令：
 
 ```sh
 cargo install --git https://github.com/foundry-rs/foundry --profile release --locked forge cast chisel anvil
 ```
 
-Or, by manually building from a local copy of the [Foundry repository](https://github.com/foundry-rs/foundry):
+或者，通过手动从 [Foundry 仓库](https://github.com/foundry-rs/foundry) 的本地副本构建：
 
 ```sh
-# clone the repository
+# 克隆仓库
 git clone https://github.com/foundry-rs/foundry.git
 cd foundry
-# install Forge
+# 安装 Forge
 cargo install --path ./crates/forge --profile release --force --locked
-# install Cast
+# 安装 Cast
 cargo install --path ./crates/cast --profile release --force --locked
-# install Anvil
+# 安装 Anvil
 cargo install --path ./crates/anvil --profile release --force --locked
-# install Chisel
+# 安装 Chisel
 cargo install --path ./crates/chisel --profile release --force --locked
 ```
 
-### Installing for CI in Github Action
+### 在 Github Action 中安装
 
-See the [foundry-rs/foundry-toolchain](https://github.com/foundry-rs/foundry-toolchain) GitHub Action.
+请参阅 [foundry-rs/foundry-toolchain](https://github.com/foundry-rs/foundry-toolchain) GitHub Action。
 
-### Using Foundry with Docker
+### 使用 Docker 运行 Foundry
 
-Foundry can also be used entirely within a Docker container. If you don't have it, Docker can be installed directly from [Docker's website](https://docs.docker.com/get-docker/).
+Foundry 也可以完全在 Docker 容器中使用。如果你没有安装 Docker，可以直接从 [Docker 的网站](https://docs.docker.com/get-docker/) 安装。
 
-Once installed, you can download the latest release by running:
+安装完成后，你可以通过运行以下命令下载最新版本：
 
 ```sh
 docker pull ghcr.io/foundry-rs/foundry:latest
 ```
 
-It is also possible to build the docker image locally. From the Foundry repository, run:
+也可以在本地构建 Docker 镜像。从 Foundry 仓库中运行：
 
 ```sh
 docker build -t foundry .
 ```
 
-For examples and guides on using this image, see the [Docker tutorial section](../tutorials/foundry-docker).
+有关使用此镜像的示例和指南，请参阅 [Docker 教程部分](../tutorials/foundry-docker)。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Some machines (including those with M1 chips) may be unable to build the docker image locally. This is a known issue.
+> 一些机器（包括带有 M1 芯片的机器）可能无法在本地构建 Docker 镜像。这是一个已知问题。

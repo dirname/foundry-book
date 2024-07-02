@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-proof - Generate a storage proof for a given storage slot.
+cast-proof - 生成给定存储槽的存储证明。
 
 ### SYNOPSIS
 
@@ -10,34 +10,34 @@ cast-proof - Generate a storage proof for a given storage slot.
 
 ### DESCRIPTION
 
-Generate a storage proof for a given storage slot.
+生成给定存储槽的存储证明。
 
-The address (*address*) can be an ENS name or an address.
+地址（*address*）可以是 ENS 名称或地址。
 
-The displayed output is a JSON object with the following keys:
+显示的输出是一个 JSON 对象，包含以下键：
 
-- `accountProof`: Proof for the account itself
-- `address`: The address of the account
-- `balance`: The balance of the account
-- `codeHash`: A hash of the account's code
-- `nonce`: The nonce of the account
-- `storageHash`: A hash of the account's storage
-- `storageProof`: An array of storage proofs, one for each requested slot
-- `storageProof.key`: The slot
-- `storageProof.proof`: The proof for the slot
-- `storageProof.value`: The value of the slot
+- `accountProof`：账户本身的证明
+- `address`：账户地址
+- `balance`：账户余额
+- `codeHash`：账户代码的哈希
+- `nonce`：账户的 nonce
+- `storageHash`：账户存储的哈希
+- `storageProof`：存储证明的数组，每个请求的槽一个
+- `storageProof.key`：槽
+- `storageProof.proof`：槽的证明
+- `storageProof.value`：槽的值
 
 ### OPTIONS
 
-#### Query Options
+#### 查询选项
 
 `-B` *block*  
 `--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
+&nbsp;&nbsp;&nbsp;&nbsp;你想要查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，或任何标签：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -47,7 +47,7 @@ The displayed output is a JSON object with the following keys:
 
 ### EXAMPLES
 
-1. Get the proof for storage slot 0 on the WETH contract:
+1. 获取 WETH 合约存储槽 0 的证明：
     ```sh
     cast proof 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 0
     ```

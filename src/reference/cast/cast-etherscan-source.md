@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-etherscan-source - Get the source code of a contract from Etherscan.
+cast-etherscan-source - 从Etherscan获取合约的源代码。
 
 ### SYNOPSIS
 
@@ -10,17 +10,17 @@ cast-etherscan-source - Get the source code of a contract from Etherscan.
 
 ### DESCRIPTION
 
-Get the source code of a contract from Etherscan.
+从Etherscan获取合约的源代码。
 
-The destination (*to*) can be an ENS name or an address.
+目标地址（*to*）可以是ENS名称或地址。
 
 ### OPTIONS
 
-#### Output Options
+#### 输出选项
 
 `-d` *directory*  
-&nbsp;&nbsp;&nbsp;&nbsp;The output directory to expand the source tree into.
-&nbsp;&nbsp;&nbsp;&nbsp;If not provided, the source will be outputted to stdout.
+&nbsp;&nbsp;&nbsp;&nbsp;将源代码树展开到的输出目录。
+&nbsp;&nbsp;&nbsp;&nbsp;如果未提供，源代码将输出到标准输出。
 
 {{#include ../common/etherscan-options.md}}
 
@@ -28,12 +28,12 @@ The destination (*to*) can be an ENS name or an address.
 
 ### EXAMPLES
 
-1. Get the source code of the WETH contract:
+1. 获取WETH合约的源代码：
     ```sh
     cast etherscan-source 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
     ```
 
-2. Expand the source code of the WETH contract into a directory named `weth`
+2. 将WETH合约的源代码展开到一个名为`weth`的目录中：
     ```sh
     cast etherscan-source -d weth 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
     ```

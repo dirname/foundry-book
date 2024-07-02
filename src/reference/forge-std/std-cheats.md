@@ -1,4 +1,4 @@
-## Std Cheats
+## 标准作弊码
 
 - [`skip`](./skip.md)
 - [`rewind`](./rewind.md)

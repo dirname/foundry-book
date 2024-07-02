@@ -1,52 +1,7 @@
-# cast tx
-
-Get information about a transaction
-
-```bash
-$ cast tx --help
-Usage: cast tx [OPTIONS] <TX_HASH> [FIELD]
-
-Arguments:
-  <TX_HASH>
-          The transaction hash
-
-  [FIELD]
-          If specified, only get the given field of the transaction. If "raw", the RLP encoded
-          transaction will be printed
-
-Options:
-      --raw
-          Print the raw RLP encoded transaction
-
-  -r, --rpc-url <URL>
-          The RPC endpoint
-          
-          [env: ETH_RPC_URL=]
-
-      --flashbots
-          Use the Flashbots RPC URL with fast mode (<https://rpc.flashbots.net/fast>).
-          
-          This shares the transaction privately with all registered builders.
-          
-          See: <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
-
-      --jwt-secret <JWT_SECRET>
-          JWT Secret for the RPC endpoint.
-          
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be
-          used to simulate a CL `engine_forkchoiceUpdated` call:
-          
-          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
-          '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
-          
-          [env: ETH_RPC_JWT_SECRET=]
-
-  -h, --help
-          Print help (see a summary with '-h')
-
-Display options:
-  -j, --json
-          Print as JSON
+```json
+{
+  "title": "cast tx",
+  "description": "获取交易信息",
+  "usage": "```bash\n$ cast tx --help\nUsage: cast tx [OPTIONS] <TX_HASH> [FIELD]\n\nArguments:\n  <TX_HASH>\n          交易哈希\n\n  [FIELD]\n          如果指定，仅获取交易的指定字段。如果为“raw”，将打印RLP编码的交易\n\nOptions:\n      --raw\n          打印原始RLP编码的交易\n\n  -r, --rpc-url <URL>\n          RPC端点\n          \n          [env: ETH_RPC_URL=]\n\n      --flashbots\n          使用Flashbots RPC URL并启用快速模式（<https://rpc.flashbots.net/fast>）。\n          \n          这将私密地与所有注册的构建者共享交易。\n          \n          参见：<https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>\n\n      --jwt-secret <JWT_SECRET>\n          RPC端点的JWT密钥。\n          \n          JWT密钥将用于创建RPC的JWT。例如，以下内容可用于模拟CL `engine_forkchoiceUpdated`调用：\n          \n          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2\n          '[\"0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc\",\n          \"0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc\",\n          \"0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc\"]'\n          \n          [env: ETH_RPC_JWT_SECRET=]\n\n  -h, --help\n          打印帮助信息（使用‘-h’查看摘要）\n\nDisplay options:\n  -j, --json\n          以JSON格式打印\n```"
+}
 ```

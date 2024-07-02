@@ -1,6 +1,6 @@
 ## `envInt`
 
-### Signature
+### 签名
 
 ```solidity
 function envInt(string calldata key) external returns (int256 value);
@@ -10,20 +10,19 @@ function envInt(string calldata key) external returns (int256 value);
 function envInt(string calldata key, string calldata delimiter) external returns (int256[] memory values);
 ```
 
-### Description
+### 描述
 
-Read an environment variable as `int256` or `int256[]`.
+读取环境变量作为 `int256` 或 `int256[]`。
 
-### Tips
+### 提示
 
-- If the value starts with `0x`, `-0x` or `+0x`, it will be interpreted as a hex value, otherwise,
-it will be treated as a decimal number.
-- For arrays, you can specify the delimiter used to separate the values with the `delimiter` parameter.
+- 如果值以 `0x`、`-0x` 或 `+0x` 开头，它将被解释为十六进制值，否则，它将被视为十进制数。
+- 对于数组，可以使用 `delimiter` 参数指定用于分隔值的分隔符。
 
-### Examples
+### 示例
 
-#### Single Value
-With environment variable `INT_VALUE=-57896044618658097711785492504343953926634992332820282019728792003956564819968`,
+#### 单个值
+使用环境变量 `INT_VALUE=-57896044618658097711785492504343953926634992332820282019728792003956564819968`，
 ```solidity
 string memory key = "INT_VALUE";
 int256 expected = type(int256).min;
@@ -31,8 +30,8 @@ int256 output = cheats.envInt(key);
 assert(output == expected);
 ```
 
-#### Array
-With environment variable `INT_VALUES=-0x8000000000000000000000000000000000000000000000000000000000000000,+0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`,
+#### 数组
+使用环境变量 `INT_VALUES=-0x8000000000000000000000000000000000000000000000000000000000000000,+0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF`，
 ```solidity
 string memory key = "INT_VALUES";
 string memory delimiter = ",";

@@ -1,4 +1,4 @@
-## Account Commands
+## 账户命令
 
 - [cast balance](./cast-balance.md)
 - [cast storage](./cast-storage.md)

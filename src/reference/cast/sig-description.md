@@ -1,5 +1,5 @@
-The signature (*sig*) can be:
+签名（*sig*）可以是：
 
-- A fragment: `someFunction(uint256,bytes32)`
-- A selector and encoded calldata: `0xcdba2fd40000000000000000000000000000000000000000000000000000000000007a69`
-- Only the function name: in this case Cast will try to fetch the function signature from Etherscan
+- 一个片段：`someFunction(uint256,bytes32)`
+- 一个选择器和编码的调用数据：`0xcdba2fd40000000000000000000000000000000000000000000000000000000000007a69`
+- 仅函数名称：在这种情况下，Cast 将尝试从 Etherscan 获取函数签名

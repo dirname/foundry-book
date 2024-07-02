@@ -1,21 +1,21 @@
 ## `keyExists`
 
-### Status
+### 状态
 
-`keyExists` is being deprecated in favor of `keyExistsJson`. It will be removed in future versions.
+`keyExists` 正在被 `keyExistsJson` 取代，未来版本中将被移除。
 
-### Signature
+### 签名
 
 ```solidity
-// Check if a key exists in a JSON string.
+// 检查 JSON 字符串中是否存在某个键。
 vm.keyExists(string memory json, string memory key) returns (bool)
 ```
 
-### Description
+### 描述
 
-Checks if a key exists in a JSON string.
+检查 JSON 字符串中是否存在某个键。
 
-### Examples
+### 示例
 
 ```solidity
 string memory path = "./path/to/jsonfile.json";

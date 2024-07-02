@@ -1,4 +1,4 @@
-## Std Assertions
+## 标准断言
 
 - [`fail`](./fail.md)
 - [`assertTrue`](./assertTrue.md)

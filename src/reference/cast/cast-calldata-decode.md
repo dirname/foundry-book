@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-calldata-decode - Decode ABI-encoded input data.
+cast-calldata-decode - 解码 ABI 编码的输入数据。
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-calldata-decode - Decode ABI-encoded input data.
 
 ### DESCRIPTION
 
-Decode ABI-encoded input data.
+解码 ABI 编码的输入数据。
 
-The signature (*sig*) is a fragment in the form `<function name>(<types...>)`.
+签名（*sig*）是一个形式为 `<function name>(<types...>)` 的片段。
 
 ### OPTIONS
 
@@ -20,7 +20,7 @@ The signature (*sig*) is a fragment in the form `<function name>(<types...>)`.
 
 ### EXAMPLES
 
-1. Decode input data for a `transfer` call:
+1. 解码 `transfer` 调用的输入数据：
     ```sh
     cast calldata-decode "transfer(address,uint256)" \
       0xa9059cbb000000000000000000000000e78388b4ce79068e89bf8aa7f218ef6b9ab0e9d0000000000000000000000000000000000000000000000000008a8e4b1a3d8000

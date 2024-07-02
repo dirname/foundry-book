@@ -1,6 +1,6 @@
 ## `expectEmit`
 
-### Signature
+### 签名
 
 ```solidity
 function expectEmit() external;
@@ -29,40 +29,38 @@ function expectEmit(
 ) external;
 ```
 
-### Description
+### 描述
 
-Assert a specific log is emitted during the next call.
+断言在下次调用期间会发出特定的日志。
 
-1. Call the cheat code, specifying whether we should check the first, second or third topic, and the log data (`expectEmit()` checks them all). Topic 0 is always checked.
-2. Emit the event we are supposed to see during the next call.
-3. Perform the call.
+1. 调用作弊代码，指定我们是否应该检查第一个、第二个或第三个主题，以及日志数据（`expectEmit()` 检查所有这些）。主题 0 总是被检查。
+2. 在下次调用期间发出我们预期会看到的事件。
+3. 执行调用。
 
-You can perform steps 1 and 2 multiple times to match a _sequence_ of events in the next call.
+你可以在下次调用中多次执行步骤 1 和 2 以匹配一系列事件。
 
-If the event is not available in the current scope (e.g. if we are using an interface, or an external smart contract), we can define the event ourselves with an identical event signature.
+如果事件在当前作用域中不可用（例如，如果我们使用接口或外部智能合约），我们可以用相同的事件签名自己定义事件。
 
-There are 2 varieties of `expectEmit`:
+`expectEmit` 有两种变体：
 
-- **Without checking the emitter address**: Asserts the topics match **without** checking the emitting address.
-- **With `address`**: Asserts the topics match and that the emitting address matches.
+- **不检查发射地址**：断言主题匹配**不**检查发射地址。
+- **带 `address`**：断言主题匹配并且发射地址匹配。
 
-> ℹ️ **Matching sequences**
+> ℹ️ **匹配序列**
 >
-> In functions that emit a lot of events, it's possible to "skip" events and only match a specific sequence,
-> but this sequence must always be in order. As an example, let's say a 
-> function emits events: `A, B, C, D, E, F, F, G`.
+> 在发出大量事件的函数中，可以“跳过”事件并仅匹配特定序列，但此序列必须始终按顺序排列。例如，假设一个函数发出事件：`A, B, C, D, E, F, F, G`。
 >
-> `expectEmit` will be able to match ranges with and without skipping events in between:
-> - `[A, B, C]` is valid.
-> - `[B, D, F]` is valid.
-> - `[G]` or any other single event combination is valid.
-> - `[B, A]` or similar out-of-order combinations are **invalid** (events must be in order).
-> - `[C, F, F]` is valid.
-> - `[F, F, C]` is **invalid** (out of order).
+> `expectEmit` 将能够匹配范围，并且可以在中间跳过事件：
+> - `[A, B, C]` 是有效的。
+> - `[B, D, F]` 是有效的。
+> - `[G]` 或其他单一事件组合是有效的。
+> - `[B, A]` 或类似的乱序组合是**无效的**（事件必须按顺序排列）。
+> - `[C, F, F]` 是有效的。
+> - `[F, F, C]` 是**无效的**（乱序）。
 
-### Examples
+### 示例
 
-This does not check the emitting address.
+这不检查发射地址。
 
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 amount);
@@ -70,63 +68,63 @@ event Transfer(address indexed from, address indexed to, uint256 amount);
 function testERC20EmitsTransfer() public {
     vm.expectEmit();
 
-    // We emit the event we expect to see.
+    // 我们发出预期会看到的事件。
     emit MyToken.Transfer(address(this), address(1), 10);
 
-    // We perform the call.
+    // 我们执行调用。
     myToken.transfer(address(1), 10);
 }
 ```
 
-This does check the emitting address.
+这检查发射地址。
 
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 amount);
 
 function testERC20EmitsTransfer() public {
-    // We check that the token is the event emitter by passing the address.
+    // 我们通过传递地址来检查代币是否是事件发射者。
     vm.expectEmit(address(myToken));
     emit MyToken.Transfer(address(this), address(1), 10);
 
-    // We perform the call.
+    // 我们执行调用。
     myToken.transfer(address(1), 10);
 }
 ```
 
-We can also assert that multiple events are emitted in a single call.
+我们还可以断言在一次调用中发出多个事件。
 
 ```solidity
 function testERC20EmitsBatchTransfer() public {
-    // We declare multiple expected transfer events
+    // 我们声明多个预期的转账事件
     for (uint256 i = 0; i < users.length; i++) {
-        // Here we use the longer signature for demonstration purposes. This call checks
-        // topic0 (always checked), topic1 (true), topic2 (true), NOT topic3 (false), and data (true).
+        // 这里我们使用较长的签名进行演示。此调用检查
+        // topic0（总是检查），topic1（true），topic2（true），不检查 topic3（false），以及数据（true）。
         vm.expectEmit(true, true, false, true);
         emit Transfer(address(this), users[i], 10);
     }
 
-    // We also expect a custom `BatchTransfer(uint256 numberOfTransfers)` event.
+    // 我们还预期一个自定义的 `BatchTransfer(uint256 numberOfTransfers)` 事件。
     vm.expectEmit(false, false, false, true);
     emit BatchTransfer(users.length);
 
-    // We perform the call.
+    // 我们执行调用。
     myToken.batchTransfer(users, 10);
 }
 ```
 
-This example fails, as the expected event is not emitted on the next call.
+此示例失败，因为预期的事件在下次调用中未发出。
 ```solidity
 event Transfer(address indexed from, address indexed to, uint256 amount);
 
 function testERC20EmitsTransfer() public {
-    // We check that the token is the event emitter by passing the address as the fifth argument.
+    // 我们通过传递地址作为第五个参数来检查代币是否是事件发射者。
     vm.expectEmit(true, true, false, true, address(myToken));
     emit MyToken.Transfer(address(this), address(1), 10);
 
-    // We perform an unrelated call that won't emit the intended event,
-    // making the cheatcode fail.
+    // 我们执行一个不相关的调用，该调用不会发出预期的事件，
+    // 使作弊代码失败。
     myToken.approve(address(this), 1e18);
-    // We perform the call, but it will have no effect as the cheatcode has already failed.
+    // 我们执行调用，但它不会有任何效果，因为作弊代码已经失败。
     myToken.transfer(address(1), 10);
 }
 ```

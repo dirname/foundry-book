@@ -1,6 +1,7 @@
+```markdown
 # cast to-hexdata
 
-Normalize the input to lowercase, 0x-prefixed hex.
+将输入规范化为小写、0x前缀的十六进制数据。
 
 ```bash
 $ cast to-hexdata --help
@@ -8,9 +9,10 @@ Usage: cast to-hexdata [INPUT]
 
 Arguments:
   [INPUT]
-          The input to normalize
+          要规范化的输入
 
 Options:
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
+```
 ```

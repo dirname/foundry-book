@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-estimate - Estimate the gas cost of a transaction.
+cast-estimate - 估算交易所需的 gas 费用。
 
 ### SYNOPSIS
 
@@ -10,15 +10,15 @@ cast-estimate - Estimate the gas cost of a transaction.
 
 ### DESCRIPTION
 
-Estimate the gas cost of a transaction.
+估算交易所需的 gas 费用。
 
-The destination (*to*) can be an ENS name or an address.
+目标地址（*to*）可以是 ENS 名称或地址。
 
 {{#include sig-description.md}}
 
 ### OPTIONS
 
-#### Transaction Options
+#### 交易选项
 
 {{#include ../common/tx-value-option.md}}
 
@@ -30,7 +30,7 @@ The destination (*to*) can be an ENS name or an address.
 
 ### EXAMPLES
 
-1. Estimate the gas cost of calling `deposit()` on the WETH contract:
+1. 估算调用 WETH 合约上的 `deposit()` 方法所需的 gas 费用：
     ```sh
     cast estimate 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 \
       --value 0.1ether "deposit()"

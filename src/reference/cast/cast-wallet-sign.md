@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-wallet-sign - Sign a message.
+cast-wallet-sign - 签名消息。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-wallet-sign - Sign a message.
 
 ### DESCRIPTION
 
-Sign a message.
+签名消息。
 
 ### OPTIONS
 
@@ -24,12 +24,12 @@ Sign a message.
 
 ### EXAMPLES
 
-1. Sign a message using a keystore:
+1. 使用 keystore 签名消息：
     ```sh
     cast wallet sign --keystore keystore.json --interactive "hello"
     ```
 
-2. Sign a message using a raw private key:
+2. 使用原始私钥签名消息：
     ```sh
     cast wallet sign --private-key $PRIV_KEY "hello"
     ```

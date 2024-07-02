@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-send - Sign and publish a transaction.
+cast-send - 签名并发布交易。
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-send - Sign and publish a transaction.
 
 ### DESCRIPTION
 
-Sign and publish a transaction.
+签名并发布交易。
 
-The destination (*to*) can be an ENS name or an address.
+目标地址（*to*）可以是 ENS 名称或地址。
 
 {{#include sig-description.md}}
 
@@ -21,26 +21,26 @@ The destination (*to*) can be an ENS name or an address.
 {{#include ../common/transaction-options.md}}
 
 `--resend`  
-&nbsp;&nbsp;&nbsp;&nbsp;Reuse the latest nonce of the sending account.
+&nbsp;&nbsp;&nbsp;&nbsp;重用发送账户的最新 nonce。
 
 `--create` *code* [*sig* *args...*]  
-&nbsp;&nbsp;&nbsp;&nbsp;Deploy a contract by specifying raw bytecode, in place of specifying a *to* address.
+&nbsp;&nbsp;&nbsp;&nbsp;通过指定原始字节码来部署合约，而不是指定 *to* 地址。
 
 #### Receipt Options
 
 `--async`  
 `--cast-async`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not wait for the transaction receipt if it does not exist yet.  
-&nbsp;&nbsp;&nbsp;&nbsp;Environment: `CAST_ASYNC`
+&nbsp;&nbsp;&nbsp;&nbsp;如果交易收据尚不存在，则不等待交易收据。  
+&nbsp;&nbsp;&nbsp;&nbsp;环境变量: `CAST_ASYNC`
 
 `-c` *confirmations*  
 `--confirmations` *confirmations*  
-&nbsp;&nbsp;&nbsp;&nbsp;Wait a number of confirmations before exiting. Default: `1`.
+&nbsp;&nbsp;&nbsp;&nbsp;在退出前等待一定数量的确认。默认: `1`。
 
 {{#include ../common/wallet-options.md}}
 
 `--unlocked`  
-&nbsp;&nbsp;&nbsp;&nbsp;Send via `eth_sendTransaction` using the `--from` argument or `$ETH_FROM` as sender.
+&nbsp;&nbsp;&nbsp;&nbsp;通过 `eth_sendTransaction` 使用 `--from` 参数或 `$ETH_FROM` 作为发送者。
 
 {{#include ../common/rpc-options.md}}
 
@@ -52,17 +52,17 @@ The destination (*to*) can be an ENS name or an address.
 
 ### EXAMPLES
 
-1. Send some ether to Vitalik using your Ledger:
+1. 使用 Ledger 向 Vitalik 发送一些以太币：
     ```sh
     cast send --ledger vitalik.eth --value 0.1ether
     ```
 
-2. Call `deposit(address token, uint256 amount)` on a contract:
+2. 在合约上调用 `deposit(address token, uint256 amount)` 函数：
     ```sh
     cast send --ledger 0x... "deposit(address,uint256)" 0x... 1
     ```
 
-3. Call a function that expects a `struct`:
+3. 调用一个期望 `struct` 的函数：
 
     ```solidity
     contract Test {
@@ -74,13 +74,13 @@ The destination (*to*) can be an ENS name or an address.
     }
     ```
 
-    Structs are encoded as tuples (see [struct encoding](../../misc/struct-encoding.md))
+    结构体被编码为元组（参见 [struct encoding](../../misc/struct-encoding.md)）
 
     ```sh
     cast send 0x... "myfunction((address,uint256))" "(0x...,1)"
     ```
 
-4. Send a transaction with hex data in the `input` field of the transaction object:
+4. 在交易的 `input` 字段中发送带有十六进制数据的交易：
     ```sh
     cast send 0x... 0x68656c6c6f20776f726c64
     ```

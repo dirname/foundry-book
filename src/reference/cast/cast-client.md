@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-client - Get the current client version.
+cast-client - 获取当前客户端版本。
 
 ### SYNOPSIS
 
@@ -10,11 +10,11 @@ cast-client - Get the current client version.
 
 ### DESCRIPTION
 
-Get the current client version.
+获取当前客户端版本。
 
 ### OPTIONS
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -22,10 +22,11 @@ Get the current client version.
 
 ### EXAMPLES
 
-1. Get the current client version:
+1. 获取当前客户端版本：
     ```sh
     cast client
     ```
+
 ### SEE ALSO
 
 [cast](./cast.md)

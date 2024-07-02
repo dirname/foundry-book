@@ -1,6 +1,6 @@
 ## `getNonce`
 
-### Signature
+### 签名
 
 ```solidity
 function getNonce(address account) external returns (uint64);
@@ -10,11 +10,11 @@ function getNonce(address account) external returns (uint64);
 function getNonce(Wallet memory wallet) external returns (uint64);
 ```
 
-### Description
+### 描述
 
-Gets the nonce of the given account or [Wallet](./create-wallet.md).
+获取给定账户或 [Wallet](./create-wallet.md) 的 nonce。
 
-### Examples
+### 示例
 
 #### `address`
 ```solidity

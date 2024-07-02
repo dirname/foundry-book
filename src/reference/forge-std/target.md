@@ -1,13 +1,13 @@
 ## `target`
 
-### Signature
+### 签名
 
 ```solidity
 function target(StdStorage storage self, address _target) internal returns (StdStorage storage);
 ```
 
-### Description
+### 描述
 
-Sets the address of the contract.
+设置合约的地址。
 
-Default value: `address(0)`
+默认值：`address(0)`

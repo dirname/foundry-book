@@ -1,58 +1,51 @@
 ## forge test
 
-### NAME
+### 名称
 
-forge-test - Run the project's tests.
+forge-test - 运行项目的测试。
 
-### SYNOPSIS
+### 概要
 
-``forge test`` [*options*]
+``forge test`` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Run the project's tests.
+运行项目的测试。
 
-#### Forking
+#### 分叉
 
-It is possible to run the tests in a forked environment by passing `--fork-url <URL>`.
+可以通过传递 `--fork-url <URL>` 在分叉环境中运行测试。
 
-When the tests are running in a forked environment, you can access all the state of the forked chain as you would
-if you had deployed the contracts. [Cheatcodes][cheatcodes] are still available.
+当测试在分叉环境中运行时，你可以访问分叉链的所有状态，就像你部署了合约一样。[作弊码][cheatcodes] 仍然可用。
 
-You can also specify a block number to fork from by passing `--fork-block-number <BLOCK>`. When forking from a
-specific block, the chain data is cached to `~/.foundry/cache`. If you do not want to cache the chain data,
-pass `--no-storage-caching`.
+你还可以通过传递 `--fork-block-number <BLOCK>` 指定从某个区块分叉。当从特定区块分叉时，链数据会缓存到 `~/.foundry/cache`。如果你不想缓存链数据，可以传递 `--no-storage-caching`。
 
-Traces that cannot be decoded by local contracts when running in a forked environment (e.g. calls to
-contracts that live on mainnet, like tokens) can optionally be decoded using Etherscan. To use Etherscan
-for trace decoding, set `ETHERSCAN_API_KEY` or pass `--etherscan-api-key <KEY>`.
+在分叉环境中运行时，无法由本地合约解码的跟踪（例如对主网上存在的合约的调用，如代币）可以选择使用 Etherscan 解码。要使用 Etherscan 进行跟踪解码，请设置 `ETHERSCAN_API_KEY` 或传递 `--etherscan-api-key <KEY>`。
 
-#### Debugging
+#### 调试
 
-It is possible to run a test in an interactive debugger. To start the debugger, pass `--debug <TEST>`.
+可以在交互式调试器中运行测试。要启动调试器，请传递 `--debug <TEST>`。
 
-If multiple tests match the specified pattern, you must use other test filters in order to reduce
-the matching number of tests to exactly 1.
+如果多个测试匹配指定的模式，你必须使用其他测试过滤器以将匹配的测试数量减少到恰好 1。
 
-If the test is a unit test, it is immediately opened in the debugger.
+如果测试是单元测试，它会立即在调试器中打开。
 
-If the test is a fuzz test, the fuzz test is run and the debugger is opened on the first failing scenario.
-If there are no failing scenarios for the fuzz test, the debugger is opened on the last scenario.
+如果测试是模糊测试，模糊测试会运行，调试器会在第一个失败的场景中打开。如果没有失败的场景，调试器会在最后一个场景中打开。
 
-More information on the debugger can be found in the [debugger chapter][debugger].
+有关调试器的更多信息，请参见 [调试器章节][debugger]。
 
-#### Gas reports
+#### 气体报告
 
-You can generate a gas report by passing `--gas-report`.
+可以通过传递 `--gas-report` 生成气体报告。
 
-More information on gas reports can be found in the [gas reports chapter][gas-reports].
+有关气体报告的更多信息，请参见 [气体报告章节][gas-reports]。
 
-#### List
+#### 列表
 
-It is possible to list the tests without running them.
-You can pass `--json` to make it easier for outside extensions to parse structured content.
+可以列出测试而不运行它们。
+你可以传递 `--json` 以便外部扩展更容易解析结构化内容。
 
-### OPTIONS
+### 选项
 
 {{#include test-options.md}}
 
@@ -67,41 +60,41 @@ You can pass `--json` to make it easier for outside extensions to parse structur
 {{#include ../common/display-options.md}}
 
 `--list`  
-&nbsp;&nbsp;&nbsp;&nbsp;List tests instead of running them.
+&nbsp;&nbsp;&nbsp;&nbsp;列出测试而不是运行它们。
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Run the tests:
+1. 运行测试：
     ```sh
     forge test
     ```
 
-2. Open a test in the debugger:
+2. 在调试器中打开测试：
     ```sh
     forge test --debug testSomething
     ```
 
-3. Generate a gas report:
+3. 生成气体报告：
     ```sh
     forge test --gas-report
     ```
 
-4. Only run tests in `test/Contract.t.sol` in the `BigTest` contract that start with `testFail`:
+4. 仅在 `test/Contract.t.sol` 中的 `BigTest` 合约中运行以 `testFail` 开头的测试：
     ```sh
     forge test --match-path test/Contract.t.sol --match-contract BigTest \
       --match-test "testFail*"
     ```
 
-5. List tests in desired format
+5. 以所需格式列出测试
     ```sh
     forge test --list
     forge test --list --json
     forge test --list --json --match-test "testFail*" | tail -n 1 | json_pp
     ```
 
-### SEE ALSO
+### 另请参阅
 
 [forge](./forge.md), [forge build](./forge-build.md), [forge snapshot](./forge-snapshot.md)
 

@@ -1,6 +1,6 @@
 # forge geiger
 
-Detects usage of unsafe cheat codes in a project and its dependencies
+检测项目及其依赖项中使用的不安全作弊代码
 
 ```bash
 $ forge geiger --help
@@ -8,25 +8,25 @@ Usage: forge geiger [OPTIONS] [PATH]...
 
 Arguments:
   [PATH]...
-          Paths to files or directories to detect
+          要检测的文件或目录路径
 
 Options:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根路径（如果在 Git 仓库中），或者当前工作目录。
 
       --check
-          Run in "check" mode.
+          以“检查”模式运行。
           
-          The exit code of the program will be the number of unsafe cheatcodes found.
+          程序的退出代码将是找到的不安全作弊代码的数量。
 
       --ignore <PATH>...
-          Globs to ignore
+          要忽略的通配符
 
       --full
-          Print a report of all files, even if no unsafe functions are found
+          打印所有文件的报告，即使没有找到不安全函数
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 ```

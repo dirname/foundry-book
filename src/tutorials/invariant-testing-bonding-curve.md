@@ -1,33 +1,32 @@
-## Invariant Testing Bonding Curve
+## 不变测试债券曲线
 
+### 介绍
 
-### Introduction
+本教程将介绍不变测试，使用**债券曲线实现**作为目标示例。所有不变测试都是使用 `Foundry Invaraint Testing` 功能在 Solidity 中编写的。
 
-This tutorial will cover invariant testing, using **Bonding Curve Implementation** as a target example. All invariant tests are written in Solidity using the `Foundry Invaraint Testing` feature.
+然而，本指南仅用于教育目的。代码未经过审计，请勿在生产环境中使用。
 
-However, this guide is for educational purposes only. The code is not audited. Please do not use it in production.
+> 💡 注意：完整的债券曲线实现可以在[这里](https://github.com/Ratimon/bonding-curves)找到，关于不变测试的进一步阅读，可以查看 `Invariant Testing` [参考](../reference/forge/invariant-testing.md)。
 
-> 💡 Note: A full implementation of the bonding curve can be found [here](https://github.com/Ratimon/bonding-curves), and for further reading about invariant testing, we can check out the `Invariant Testing` [reference](../reference/forge/invariant-testing.md).
+### 快速开始
 
-### Quick Start
+不变测试的一般过程是 Foundry 会在目标合约中使用随机输入调用一系列预定义的**动作**。
 
-The general process of invariant testing is that the foundry will call a sequence of pre-defined **actions**  with random input in the target contract.
+这将多次运行以确保不变性的正确性。
 
-This will be run multiple times to ensure the correctness of invariants.
+> 💡 注意：使用随机输入进行动作调用的过程称为**模糊测试**。
 
-> 💡 Note: The process of making an action call with random input is called **fuzzing**.
+> 💡 注意：生成并运行一系列函数调用的次数称为**运行**。
 
-> 💡 Note: The number of times that a sequence of function calls is generated and run is called **run**.
+每次单次运行后，系统将被检查以查看定义的**不变性**是否保持为真。
 
-After each single run, the system will be checked to see whether the defined **invariants** hold true or not.
+关键考虑是定义这些：
 
-The key consderation is to define these:
+1. **不变性**（一组始终为真的属性）
 
-1. **Invariants** (a set of properties that will always remain true)
+2. **动作**（每次运行期间可能发生的一组事情）
 
-2. **Actions**  (a set of things that can happen during each run)
-
-To get started, we are going to focus on the following directories in this [repository](https://github.com/Ratimon/bonding-curves):
+要开始，我们将关注以下[仓库](https://github.com/Ratimon/bonding-curves)中的目录：
 
 ```
 .
@@ -37,71 +36,67 @@ To get started, we are going to focus on the following directories in this [repo
     ├── invariant
 ```
 
-In this guide, we can run the fuzzing campaign by running the following command:
+在本指南中，我们可以通过运行以下命令来运行模糊测试活动：
 
 ```sh
 make invariant-LinearBondingCurve
 ```
 
-> 💡 Note: Other commands for this tutorial can be found in [ `Makefile`](https://github.com/Ratimon/bonding-curves/blob/master/Makefile).
+> 💡 注意：本教程的其他命令可以在 [ `Makefile`](https://github.com/Ratimon/bonding-curves/blob/master/Makefile) 中找到。
 
-I note that the default configuration (at [ `foundry.toml`](https://github.com/Ratimon/bonding-curves/blob/master/foundry.toml)) for invariant testing is as follows:
+我注意到不变测试的默认配置（在 [ `foundry.toml`](https://github.com/Ratimon/bonding-curves/blob/master/foundry.toml)）如下：
 
 ```toml
 [invariant]
-runs          = 1000    # The number of times to run the invariant tests
-depth         = 100   # The number of random action calls to make in the invariant tests
+runs          = 1000    # 运行不变测试的次数
+depth         = 100   # 不变测试中随机动作调用的次数
 fail_on_revert = false
 ```
 
+### 定义不变性
 
-### Define Invariants
+要指定不变性，我们需要构建关于可能达到的错误状态的思维模型。
 
-To specify invariants, we need to build the mental model of thinking about the incorrect states that could possibly be reached.
+> 💡 注意：不变性是关于某事物（在我们的例子中是合约）的逻辑断言的术语，始终为真。
 
-> 💡 Note: An invariant is a term for a logical assertion about something (a contract in our case) that is always true.
+我们可以定义两种不变性，包括：
 
+1. 函数级不变性
 
-There are two kinds of invariants we can define, including:
+- 它们应该是无状态的，或者不依赖于我们的目标系统。
+- 它们可以以隔离的方式进行测试。
 
-1. Function-level invariants
+> 💡 注意：显著的例子可能是将代币存入合约。
 
-- They should be stateless, or it does not depend on much of our target system.
-- They could be tested in an isolated manner.
+2. 系统级不变性
 
-> 💡 Note: The notable example could be depositing tokens into the contract.
+- 它们应该是有状态的，或者依赖于智能合约状态。
+- 它们依赖于整个系统及其相关的部署逻辑。
 
-2. System-level invariants
+> 💡 注意：例如，ERC20 的系统级不变性是 ERC20 代币的总数始终等于或大于所有代币持有者的 ERC20 代币余额之和。
 
-- They should be stateful, or it relies on the smart contract state.
-- They depend on much of the entire system and its relevant deployment logic.
+### 定义系统级不变性
 
-
-> 💡 Note: For example, the system-level invariant for ERC20 is that the total number of ERC20 tokens is always equal to or greater than the sum of the individual ERC 20 token balances of all token holders.
-
-
-### Define System-level Invariants
-
-In our case, our state variables (found in [`BondingCurve.sol`](https://github.com/Ratimon/bonding-curves/blob/master/src/bondingcurves/BondingCurve.sol)) used to define invariants are:
+在我们的例子中，用于定义不变性的状态变量（在 [`BondingCurve.sol`](https://github.com/Ratimon/bonding-curves/blob/master/src/bondingcurves/BondingCurve.sol) 中找到）如下：
 
 ```solidity
     /** ... */
     abstract contract BondingCurve is IBondingCurve, Initializable, Pausable, Ownable2Step, Timed {
         /** ... */
         /**
-        * @notice the total amount of sale token purchased on bonding curve
+        * @notice 在债券曲线上购买的销售代币总量
         *
         */
         UD60x18 public override totalPurchased;
 
         /**
-        * @notice the cap on how much sale token can be minted by the bonding curve
+        * @notice 债券曲线可以铸造的销售代币上限
         *
         */
         UD60x18 public override cap;
 
         /**
-        * @notice returns how close to the cap we are
+        * @notice 返回我们离上限有多近
         *
         */
         function availableToSell() public view override returns (UD60x18) {
@@ -109,8 +104,8 @@ In our case, our state variables (found in [`BondingCurve.sol`](https://github.c
         }
 
         /**
-        * @notice balance of accepted token the bonding curve
-        * @return the amount of accepted token held in contract and ready to be allocated
+        * @notice 债券曲线的接受代币余额
+        * @return 合约中持有的接受代币数量，准备分配
         *
         */
         function reserveBalance() public view virtual override returns (UD60x18) {
@@ -123,9 +118,9 @@ In our case, our state variables (found in [`BondingCurve.sol`](https://github.c
 
 ```
 
-Then, we could specify and write assertions in [`LinearBondingCurve.invariants.t.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/LinearBondingCurve.invariants.t.sol) as follows:
+然后，我们可以在 [`LinearBondingCurve.invariants.t.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/LinearBondingCurve.invariants.t.sol) 中指定并编写断言，如下：
 
-1.  Invariant 1: totalPurchased + availableToSell = cap
+1. 不变性 1：totalPurchased + availableToSell = cap
 
 ```solidity
 
@@ -138,7 +133,7 @@ Then, we could specify and write assertions in [`LinearBondingCurve.invariants.t
 
 ```
 
-2.  Invariant 2: availableToSell >= 0
+2. 不变性 2：availableToSell >= 0
 
 ```solidity
 
@@ -149,7 +144,7 @@ Then, we could specify and write assertions in [`LinearBondingCurve.invariants.t
 
 ```
 
-3.  Invariant 3: availableToSell = amount of ERC20 token amount in bonding curve contract
+3. 不变性 3：availableToSell = 债券曲线合约中的 ERC20 代币数量
 
 ```solidity
     function invariant_AvailableToSell_eq_saleTokenBalance() public {
@@ -157,8 +152,7 @@ Then, we could specify and write assertions in [`LinearBondingCurve.invariants.t
     }
 ```
 
-4.  Invariant 4:  Poolbalance =  y = f(x = currentTokenPurchased) =  slope/2 * (currentTokenPurchased)^2 + initialPrice * (currentTokenPurchased)
-
+4. 不变性 4：Poolbalance = y = f(x = currentTokenPurchased) = slope/2 * (currentTokenPurchased)^2 + initialPrice * (currentTokenPurchased)
 
 ```solidity
     function invariant_Poolbalance_eq_saleTokenBalance() public {
@@ -170,13 +164,11 @@ Then, we could specify and write assertions in [`LinearBondingCurve.invariants.t
     }
 ```
 
+### 定义动作逻辑和函数级不变性
 
-### Defining Action Logics and Function-level Invariants
+好的！我们已经定义了一些系统级不变性。下一步是指定如何执行动作和相关交易的序列以破坏定义的不变性。
 
-Ok !! We have defined some system-level invariants. The next step is then to specify how the action and the sequence of relevant transactions should be performed to break the defined invariants.
-
-The high-level contents to explore is in [`LinearBondingCurve.invariants.t.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/LinearBondingCurve.invariants.t.sol), and the configuration is at `setup()` as follows:
-
+高级内容在 [`LinearBondingCurve.invariants.t.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/LinearBondingCurve.invariants.t.sol) 中探索，配置在 `setup()` 中如下：
 
 ```solidity
 
@@ -208,17 +200,17 @@ contract LinearBondingCurveInvariants is StdInvariant, Test, ConstantsFixture, D
             bytes4[] memory selectors = new bytes4[](1);
             selectors[0] = InvariantBuyerManager.purchase.selector;
 
-            // Performs random purchase() calls
+            // 执行随机的 purchase() 调用
             targetSelector(FuzzSelector({addr: address(_buyerManager), selectors: selectors}));
             targetContract(address(_buyerManager));
 
             selectors[0] = Warper.warp.selector;
-            // Performs random warps forward in time
+            // 执行随机的时间推进
             targetSelector(FuzzSelector({addr: address(_warper), selectors: selectors}));
             targetContract(address(_warper));
 
             selectors[0] = InvariantOwner.allocate.selector;
-            // Performs random allocate() calls
+            // 执行随机的 allocate() 调用
             targetSelector(FuzzSelector({addr: address(_owner), selectors: selectors}));
             targetContract(address(_owner));
 
@@ -230,21 +222,21 @@ contract LinearBondingCurveInvariants is StdInvariant, Test, ConstantsFixture, D
 
 ```
 
-To sum up, we perform random `purchase()` calls, random `warps` forward in time, and  random `allocate()` calls.
+总结一下，我们执行随机的 `purchase()` 调用，随机的时间推进，以及随机的 `allocate()` 调用。
 
-This is set up via **Invariant Test Helper Functions** (including **targetContract(address newTargetedContract_)** and **targetSelector(FuzzSelector memory newTargetedSelector_)** ).
+这是通过**不变测试辅助函数**（包括 **targetContract(address newTargetedContract_)** 和 **targetSelector(FuzzSelector memory newTargetedSelector_)**）设置的。
 
-> 💡 Note: More details are outlined in the [`Invariant Test Helper Functions`](https://book.getfoundry.sh/forge/invariant-testing#invariant-test-helper-functions) section of the `foundry documentation`
+> 💡 注意：更多细节在 `foundry documentation` 的 [`Invariant Test Helper Functions`](https://book.getfoundry.sh/forge/invariant-testing#invariant-test-helper-functions) 部分中概述
 
-We can think of **Foundry Fuzzer** as an externally owned account and of **Handler** as a smart contract wrapper, including a set of actions that interact with our target contract.
+我们可以将**Foundry Fuzzer**视为外部拥有的账户，将**Handler**视为智能合约包装器，包括一组与我们的目标合约交互的动作。
 
-These handlers are specified in **handler files** located in [`test/invariant/handlers`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers) as follows:
+这些处理程序在 [`test/invariant/handlers`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers) 中的**处理程序文件**中指定，如下：
 
-1.  [`Buyer.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers/Buyer.sol) : perform random `purchase()`
+1. [`Buyer.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers/Buyer.sol)：执行随机的 `purchase()`
 
-We can think of this set of smart contracts as having external stakeholder properties. In general, we want a fuzzer to generate a number of buyers. Now, we define **InvariantBuyerManager** as follows.
+我们可以将这组智能合约视为具有外部利益相关者属性。通常，我们希望 fuzzer 生成多个买家。现在，我们定义 **InvariantBuyerManager** 如下。
 
-It can be seen that **createBuyer()** is called at our `setup()` so that we have one buyer (**InvariantBuyer**) generated from **InvariantBuyerManager**.
+可以看到，**createBuyer()** 在我们的 `setup()` 中被调用，因此我们有一个买家（**InvariantBuyer**）从 **InvariantBuyerManager** 生成。
 
 ```solidity
 
@@ -266,10 +258,9 @@ contract InvariantBuyerManager is Test {
 }
 ```
 
-Then, those generated buyers (**InvariantBuyer**) are supposed to purchase the token from the bonding curve. Now, we are going to write the **function-level invariants**.
+然后，那些生成的买家（**InvariantBuyer**）应该从债券曲线购买代币。现在，我们将编写**函数级不变性**。
 
-In particular, we want to ensure that both balance states of external smart contracts (ERC20 tokens in our case) are correctly updated after each purchase. The implement is as follows:
-
+特别是，我们要确保外部智能合约（在我们的例子中是 ERC20 代币）的余额状态在每次购买后都正确更新。实现如下：
 
 ```solidity
 
@@ -287,14 +278,14 @@ contract InvariantBuyer is Test {
     }
 
     function purchase(uint256 amount_) external {
-        amount_ = bound(amount_, 1, 1e29); // 100 billion at WAD precision
+        amount_ = bound(amount_, 1, 1e29); // 1000 亿以 WAD 精度
         uint256 startingBuyBalance = _underlyingAcceptedToken.balanceOf(address(this));
         uint256 startingSaleBalance = _underlyingSaleToken.balanceOf(address(this));
         uint256 saleAmountOut = unwrap(_bondingCurve.calculatePurchaseAmountOut(ud(amount_)));
         deal({token: address(_underlyingAcceptedToken), to: address(this), give: amount_});
         _underlyingAcceptedToken.approve(address(_bondingCurve), amount_);
         _bondingCurve.purchase(address(this), amount_);
-        // Ensure successful purchase
+        // 确保购买成功
         assertEq(_underlyingAcceptedToken.balanceOf(address(this)), startingBuyBalance - amount_);
         assertEq(_underlyingSaleToken.balanceOf(address(this)), startingSaleBalance + saleAmountOut);
     }
@@ -304,10 +295,9 @@ contract InvariantBuyer is Test {
 
 ```
 
+2. [`Owner.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers/Owner.sol)：执行随机的 `allocate()`
 
-2.  [`Owner.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers/Owner.sol) : perform random `allocate()`
-
-Again, we  ensure that the balance state of an external contract (acceptable tokens ) is correctly updated after the token is allocated to the issuer. The implementation is as follows:
+同样，我们确保外部合约（可接受代币）的余额状态在代币分配给发行人后正确更新。实现如下：
 
 ```solidity
 
@@ -333,11 +323,11 @@ contract InvariantOwner is Test {
 
 ```
 
-3.  [`Warper.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers/Warper.sol) : perform random `warps` forward in time.
+3. [`Warper.sol`](https://github.com/Ratimon/bonding-curves/blob/master/test/invariant/handlers/Warper.sol)：执行随机的时间推进。
 
-As this system involves time- dependent logics, the issuer cannot allocate tokens if the selling period has not ended. This means that random `allocate()` would always be reverted without the `warps` handler.
+由于该系统涉及时间依赖逻辑，发行人在销售期结束前不能分配代币。这意味着没有 `warps` 处理程序的随机 `allocate()` 总是会回滚。
 
-For this, we use `Foundry's cheat code`( **vm.warp(uint256)** ) to deal with it.
+为此，我们使用 `Foundry's cheat code`（**vm.warp(uint256)**）来处理它。
 
 ```solidity
 
@@ -359,9 +349,8 @@ contract Warper is CommonBase, StdCheats, StdUtils {
 
 ```
 
+### 探索更多！
 
-### Exploring more !!!
+> 💡 注意：我们承认、使用并从项目 [PaulRBerg/prb-math](https://github.com/PaulRBerg/prb-math) 和 [maple-labs/revenue-distribution-token](https://github.com/maple-labs/revenue-distribution-token) 中获得灵感。
 
-> 💡 Note: We acknowledge, use, and get inspiration from the projects [PaulRBerg/prb-math](https://github.com/PaulRBerg/prb-math) and  [maple-labs/revenue-distribution-token](https://github.com/maple-labs/revenue-distribution-token).
-
-> 💡 Reference: We also acknowledge the insightfuls technial writing: [Invariant Testing WETH With Foundry](https://mirror.xyz/horsefacts.eth/Jex2YVaO65dda6zEyfM_-DXlXhOWCAoSpOx5PLocYgw) and [Invariant Testing — Enter The Matrix](https://betterprogramming.pub/invariant-testing-enter-the-matrix-c71363dea37e)
+> 💡 参考：我们也承认有见地的技术写作：[Invariant Testing WETH With Foundry](https://mirror.xyz/horsefacts.eth/Jex2YVaO65dda6zEyfM_-DXlXhOWCAoSpOx5PLocYgw) 和 [Invariant Testing — Enter The Matrix](https://betterprogramming.pub/invariant-testing-enter-the-matrix-c71363dea37e)

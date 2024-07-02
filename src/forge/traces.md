@@ -1,27 +1,27 @@
-## Understanding Traces
+## 理解追踪
 
-Forge can produce traces either for failing tests (`-vvv`) or all tests (`-vvvv`).
+Forge 可以为失败的测试（`-vvv`）或所有测试（`-vvvv`）生成追踪。
 
-Traces follow the same general format:
+追踪遵循相同的一般格式：
 
 ```ignore
-  [<Gas Usage>] <Contract>::<Function>(<Parameters>)
-    ├─ [<Gas Usage>] <Contract>::<Function>(<Parameters>)
-    │   └─ ← <Return Value>
-    └─ ← <Return Value>
+  [<Gas 使用量>] <合约>::<函数>(<参数>)
+    ├─ [<Gas 使用量>] <合约>::<函数>(<参数>)
+    │   └─ ← <返回值>
+    └─ ← <返回值>
 ```
 
-Each trace can have many more subtraces, each denoting a call to a contract and a return value.
+每个追踪可以有许多更多的子追踪，每个子追踪表示对合约的调用和返回值。
 
-If your terminal supports color, the traces will also come with a variety of colors:
+如果你的终端支持颜色，追踪还会带有各种颜色：
 
-- **Green**: For calls that do not revert
-- **Red**: For reverting calls
-- **Blue**: For calls to cheat codes
-- **Cyan**: For emitted logs
-- **Yellow**: For contract deployments
+- **绿色**：表示不回滚的调用
+- **红色**：表示回滚的调用
+- **蓝色**：表示对作弊代码的调用
+- **青色**：表示发出的日志
+- **黄色**：表示合约部署
 
-The gas usage (marked in square brackets) is for the entirety of the function call. You may notice, however, that sometimes the gas usage of one trace does not exactly match the gas usage of all its subtraces:
+Gas 使用量（标记在方括号中）是整个函数调用的总量。然而，你可能会注意到，有时一个追踪的 Gas 使用量并不完全匹配其所有子追踪的 Gas 使用量：
 
 ```ignore
   [24661] OwnerUpOnlyTest::testIncrementAsOwner()
@@ -34,11 +34,11 @@ The gas usage (marked in square brackets) is for the entirety of the function ca
     └─ ← ()
 ```
 
-The gas unaccounted for is due to some extra operations happening between calls, such as arithmetic and store reads/writes.
+未计算的 Gas 是由于在调用之间发生的一些额外操作，例如算术和存储读/写。
 
-Forge will try to decode as many signatures and values as possible, but sometimes this is not possible. In these cases, the traces will appear like so:
+Forge 会尝试解码尽可能多的签名和值，但有时这是不可能的。在这些情况下，追踪将如下所示：
 
 ```ignore
-  [<Gas Usage>] <Address>::<Calldata>
-    └─ ← <Return Data>
+  [<Gas 使用量>] <地址>::<调用数据>
+    └─ ← <返回数据>
 ```

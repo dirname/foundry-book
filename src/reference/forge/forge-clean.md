@@ -1,33 +1,33 @@
 ## forge clean
 
-### NAME
+### 名称
 
-forge-clean - Remove the build artifacts and cache directories.
+forge-clean - 删除构建产物和缓存目录。
 
-### SYNOPSIS
+### 概要
 
-``forge clean`` [*options*]
+``forge clean`` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Remove the build artifacts and cache directories.
+删除构建产物和缓存目录。
 
-### OPTIONS
+### 选项
 
-#### Clean Options
+#### 清理选项
 
-`--root` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;The project's root path. Defaults to the current working directory.
+`--root` *路径*  
+&nbsp;&nbsp;&nbsp;&nbsp;项目的根路径。默认为当前工作目录。
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Clean artifacts and cache in a project:
+1. 清理项目中的构建产物和缓存：
     ```sh
     forge clean
     ```
 
-### SEE ALSO
+### 另请参阅
 
 [forge](./forge.md)

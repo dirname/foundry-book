@@ -1,11 +1,11 @@
 ## `zeroVarError`
 
-### Signature
+### 签名
 
 ```solidity
 stdError.zeroVarError
 ```
 
-### Description
+### 描述
 
-The internal Solidity error when trying to call a function via a function pointer that has not been initialized.
+当尝试通过未初始化的函数指针调用函数时，Solidity 内部抛出的错误。

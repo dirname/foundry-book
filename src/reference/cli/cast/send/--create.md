@@ -1,16 +1,5 @@
-# cast send --create
-
-Use to deploy raw contract bytecode
-
-```bash
-$ cast send --create --help
-Usage: cast send --create <CODE> [SIG] [ARGS]...
-
-Arguments:
-  <CODE>     The bytecode of the contract to deploy
-  [SIG]      The signature of the function to call
-  [ARGS]...  The arguments of the function to call
-
-Options:
-  -h, --help  Print help
+```json
+{
+  "translation": "# cast send --create\n\n用于部署原始合约字节码\n\n```bash\n$ cast send --create --help\nUsage: cast send --create <CODE> [SIG] [ARGS]...\n\nArguments:\n  <CODE>     要部署的合约的字节码\n  [SIG]      要调用的函数的签名\n  [ARGS]...  要调用的函数的参数\n\nOptions:\n  -h, --help  打印帮助信息\n```"
+}
 ```

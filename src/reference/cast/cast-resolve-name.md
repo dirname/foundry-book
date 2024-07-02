@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-resolve-name - Perform an ENS lookup.
+cast-resolve-name - 执行 ENS 查询。
 
 ### SYNOPSIS
 
@@ -10,19 +10,19 @@ cast-resolve-name - Perform an ENS lookup.
 
 ### DESCRIPTION
 
-Perform an ENS lookup.
+执行 ENS 查询。
 
-If `--verify` is passed, then a reverse lookup is performed after the normal lookup to verify that the name is correct.
+如果传递 `--verify`，则在正常查询之后执行反向查询以验证名称是否正确。
 
 ### OPTIONS
 
-#### Lookup Options
+#### 查询选项
 
 `-v`  
 `--verify`  
-&nbsp;&nbsp;&nbsp;&nbsp;Perform a reverse lookup to verify that the name is correct.
+&nbsp;&nbsp;&nbsp;&nbsp;执行反向查询以验证名称是否正确。
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -30,12 +30,12 @@ If `--verify` is passed, then a reverse lookup is performed after the normal loo
 
 ### EXAMPLES
 
-1. Get the address for an ENS name.
+1. 获取 ENS 名称的地址。
     ```sh
     cast resolve-name vitalik.eth
     ```
 
-2. Perform both a normal and a reverse lookup:
+2. 执行正常查询和反向查询：
     ```sh
     cast resolve-name --verify vitalik.eth
     ```

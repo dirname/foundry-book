@@ -1,6 +1,6 @@
 ## `startBroadcast`
 
-### Signature
+### 签名
 
 ```solidity
 function startBroadcast() external;
@@ -14,13 +14,11 @@ function startBroadcast(address who) external;
 function startBroadcast(uint256 privateKey) external;
 ```
 
-### Description
+### 描述
 
-Using the address that calls the test contract or the address / private key provided
-as the sender, has all subsequent calls (at this call depth only and excluding cheatcode calls) create
-transactions that can later be signed and sent onchain.
+使用调用测试合约的地址或提供的地址/私钥作为发送者，所有后续调用（仅在此调用深度且不包括作弊码调用）将创建可以稍后签名并发送上链的交易。
 
-### Examples
+### 示例
 
 ```solidity
 function t(uint256 a) public returns (uint256) {
@@ -33,19 +31,19 @@ function deployOther() public {
     vm.startBroadcast(ACCOUNT_A);
     Test test = new Test();
     
-    // will trigger a transaction
+    // 将触发一笔交易
     test.t(1);
     
     vm.stopBroadcast();
 
-    // broadcast again, this time using a private key from your environment variables
+    // 再次广播，这次使用环境变量中的私钥
     vm.startBroadcast(vm.envUint("PRIVATE_KEY"));
     test.t(3);
     vm.stopBroadcast();
 }
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [broadcast](./broadcast.md)
 - [stopBroadcast](./stop-broadcast.md)

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-call - Perform a call on an account without publishing a transaction.
+cast-call - 在不发布交易的情况下对账户执行调用。
 
 ### SYNOPSIS
 
@@ -10,33 +10,33 @@ cast-call - Perform a call on an account without publishing a transaction.
 
 ### DESCRIPTION
 
-Perform a call on an account without publishing a transaction.
+在不发布交易的情况下对账户执行调用。
 
-The destination (*to*) can be an ENS name or an address.
+目标（*to*）可以是 ENS 名称或地址。
 
 {{#include sig-description.md}}
 
 ### OPTIONS
 
 `--trace`  
-&nbsp;&nbsp;&nbsp;&nbsp;Prints traces for the transaction.
+&nbsp;&nbsp;&nbsp;&nbsp;打印交易的跟踪信息。
 
 `--debug`  
-&nbsp;&nbsp;&nbsp;&nbsp;Opens an interactive debugger with the transaction. Needs `--trace`.
+&nbsp;&nbsp;&nbsp;&nbsp;使用交易打开交互式调试器。需要 `--trace`。
 
 `--labels <address:label>`  
-&nbsp;&nbsp;&nbsp;&nbsp;Labels to apply to the traces, with the format `address:label`. Needs `--trace`.
+&nbsp;&nbsp;&nbsp;&nbsp;应用于跟踪的标签，格式为 `address:label`。需要 `--trace`。
 
 `--evm-version`  
-&nbsp;&nbsp;&nbsp;&nbsp;The EVM version to use. Needs `--trace`.
+&nbsp;&nbsp;&nbsp;&nbsp;要使用的 EVM 版本。需要 `--trace`。
 
-#### Query Options
+#### 查询选项
 
 `-B` *block*  
 `--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
+&nbsp;&nbsp;&nbsp;&nbsp;你想要查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，或任何标签：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。
 
 {{#include ../common/wallet-options.md}}
 
@@ -48,14 +48,14 @@ The destination (*to*) can be an ENS name or an address.
 
 ### EXAMPLES
 
-1. Call `balanceOf(address)` on the WETH contract:
+1. 在 WETH 合约上调用 `balanceOf(address)`：
 
     ```sh
     cast call 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2 \
       "balanceOf(address)(uint256)" 0x...
     ```
 
-2. Call `tokenURI(uint256)(string)` on the Tubby Cats NFT contract:
+2. 在 Tubby Cats NFT 合约上调用 `tokenURI(uint256)(string)`：
 
     ```sh
     export CONTRACT=0xca7ca7bcc765f77339be2d648ba53ce9c8a262bd
@@ -63,7 +63,7 @@ The destination (*to*) can be an ENS name or an address.
     cast call $CONTRACT "tokenURI(uint256)(string)" $TOKEN_ID
    ```
 
-3. Call ``getAmountsOut(uint,address[])`` on the Uniswap v2 router contract:
+3. 在 Uniswap v2 路由合约上调用 `getAmountsOut(uint,address[])`：
 
     ```sh
    cast call 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D \

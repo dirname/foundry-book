@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-dec - Converts a number of one base to decimal
+cast-to-dec - 将一个基数的数字转换为十进制
 
 ### SYNOPSIS
 
@@ -10,18 +10,18 @@ cast-to-dec - Converts a number of one base to decimal
 
 ### DESCRIPTION
 
-Converts a number of one base to decimal
+将一个基数的数字转换为十进制
 
 ### OPTIONS
 
 `--base-in` *base_in*
-&nbsp;&nbsp;&nbsp;&nbsp;The input base.
+&nbsp;&nbsp;&nbsp;&nbsp;输入的基数。
 
 {{#include common-options.md}}
 
 ### EXAMPLES
 
-1. Convert ff in hexadecimal to decimal
+1. 将十六进制的 ff 转换为十进制
     ```sh
     cast to-dec ff
     ```

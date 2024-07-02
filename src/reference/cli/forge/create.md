@@ -1,6 +1,7 @@
+```markdown
 # forge create
 
-Deploy a smart contract
+部署智能合约
 
 ```bash
 $ forge create --help
@@ -8,312 +9,142 @@ Usage: forge create [OPTIONS] <CONTRACT>
 
 Arguments:
   <CONTRACT>
-          The contract identifier in the form `<path>:<contractname>`
+          合约标识符，格式为 `<路径>:<合约名称>`
 
 Options:
       --constructor-args <ARGS>...
-          The constructor arguments
+          构造函数参数
 
       --constructor-args-path <PATH>
-          The path to a file containing the constructor arguments
+          包含构造函数参数的文件路径
 
       --verify
-          Verify contract after creation
+          创建后验证合约
 
       --unlocked
-          Send via `eth_sendTransaction` using the `--from` argument or `$ETH_FROM` as sender
+          通过 `eth_sendTransaction` 使用 `--from` 参数或 `$ETH_FROM` 作为发送者
 
       --show-standard-json-input
-          Prints the standard json compiler input if `--verify` is provided.
+          如果提供了 `--verify`，则打印标准 json 编译器输入。
           
-          The standard json compiler input can be used to manually submit contract verification in
-          the browser.
+          标准 json 编译器输入可以用于在浏览器中手动提交合约验证。
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
 Display options:
       --json
-          Print the deployment information as JSON
+          以 JSON 格式打印部署信息
 
 Cache options:
       --force
-          Clear the cache and artifacts folder and recompile
+          清除缓存和 artifacts 文件夹并重新编译
 
 Build options:
       --no-cache
-          Disable the cache
+          禁用缓存
 
       --skip <SKIP>...
-          Skip building files whose names contain the given filter.
+          跳过构建文件名包含给定过滤器的文件。
           
-          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
+          `test` 和 `script` 是 `.t.sol` 和 `.s.sol` 的别名。
 
 Linker options:
       --libraries <LIBRARIES>
-          Set pre-linked libraries
+          设置预链接的库
           
           [env: DAPP_LIBRARIES=]
 
 Compiler options:
       --ignored-error-codes <ERROR_CODES>
-          Ignore solc warnings by error code
+          忽略 solc 警告的错误代码
 
       --deny-warnings
-          Warnings will trigger a compiler error
+          警告将触发编译器错误
 
       --no-auto-detect
-          Do not auto-detect the `solc` version
+          不自动检测 `solc` 版本
 
       --use <SOLC_VERSION>
-          Specify the solc version, or a path to a local solc, to build with.
+          指定用于构建的 solc 版本或本地 solc 的路径。
           
-          Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+          有效值格式为 `x.y.z`、`solc:x.y.z` 或 `path/to/solc`。
 
       --offline
-          Do not access the network.
+          不访问网络。
           
-          Missing solc versions will not be installed.
+          缺失的 solc 版本将不会被安装。
 
       --via-ir
-          Use the Yul intermediate representation compilation pipeline
+          使用 Yul 中间表示编译管道
 
       --no-metadata
-          Do not append any metadata to the bytecode.
+          不在字节码中附加任何元数据。
           
-          This is equivalent to setting `bytecode_hash` to `none` and `cbor_metadata` to `false`.
+          这相当于将 `bytecode_hash` 设置为 `none` 并将 `cbor_metadata` 设置为 `false`。
 
       --silent
-          Don't print anything on startup
+          启动时不打印任何内容
 
       --ast
-          Includes the AST as JSON in the compiler output
+          在编译器输出中包含 AST 作为 JSON
 
       --evm-version <VERSION>
-          The target EVM version
+          目标 EVM 版本
 
       --optimize
-          Activate the Solidity optimizer
+          激活 Solidity 优化器
 
       --optimizer-runs <RUNS>
-          The number of optimizer runs
+          优化器运行次数
 
       --extra-output <SELECTOR>...
-          Extra output to include in the contract's artifact.
+          在合约的 artifact 中包含的额外输出。
           
-          Example keys: evm.assembly, ewasm, ir, irOptimized, metadata
+          示例键：evm.assembly、ewasm、ir、irOptimized、metadata
           
-          For a full description, see
+          完整描述请参见
           <https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description>
 
       --extra-output-files <SELECTOR>...
-          Extra output to write to separate files.
+          写入单独文件的额外输出。
           
-          Valid values: metadata, ir, irOptimized, ewasm, evm.assembly
+          有效值：metadata、ir、irOptimized、ewasm、evm.assembly
 
 Project options:
   -o, --out <PATH>
-          The path to the contract artifacts folder
+          合约 artifacts 文件夹的路径
 
       --revert-strings <REVERT>
-          Revert string configuration.
+          回退字符串配置。
           
-          Possible values are "default", "strip" (remove), "debug" (Solidity-generated revert
-          strings) and "verboseDebug"
+          可能的值为 "default"、"strip"（移除）、"debug"（Solidity 生成的回退字符串）和 "verboseDebug"
 
       --build-info
-          Generate build info files
+          生成构建信息文件
 
       --build-info-path <PATH>
-          Output path to directory that build info files will be written to
+          构建信息文件将写入的目录输出路径
 
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根路径（如果在 Git 仓库中），或者当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的 remappings
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境获取的项目的 remappings
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存的路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹的路径
 
       --hardhat
-          Use the Hardhat-style project layout.
-          
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
-          
-          [aliases: hh]
-
-      --config-path <FILE>
-          Path to the config file
-
-Transaction options:
-      --gas-limit <GAS_LIMIT>
-          Gas limit for the transaction
-          
-          [env: ETH_GAS_LIMIT=]
-
-      --gas-price <PRICE>
-          Gas price for legacy transactions, or max fee per gas for EIP1559 transactions
-          
-          [env: ETH_GAS_PRICE=]
-
-      --priority-gas-price <PRICE>
-          Max priority fee per gas for EIP1559 transactions
-          
-          [env: ETH_PRIORITY_GAS_PRICE=]
-
-      --value <VALUE>
-          Ether to send in the transaction, either specified in wei, or as a string with a unit
-          type.
-          
-          Examples: 1ether, 10gwei, 0.01ether
-
-      --nonce <NONCE>
-          Nonce for the transaction
-
-      --legacy
-          Send a legacy transaction instead of an EIP1559 transaction.
-          
-          This is automatically enabled for common networks without EIP1559.
-
-      --blob
-          Send a EIP-4844 blob transaction
-
-      --blob-gas-price <BLOB_PRICE>
-          Gas price for EIP-4844 blob transaction
-          
-          [env: ETH_BLOB_GAS_PRICE=]
-
-Ethereum options:
-  -r, --rpc-url <URL>
-          The RPC endpoint
-          
-          [env: ETH_RPC_URL=]
-
-      --flashbots
-          Use the Flashbots RPC URL with fast mode (<https://rpc.flashbots.net/fast>).
-          
-          This shares the transaction privately with all registered builders.
-          
-          See: <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
-
-      --jwt-secret <JWT_SECRET>
-          JWT Secret for the RPC endpoint.
-          
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be
-          used to simulate a CL `engine_forkchoiceUpdated` call:
-          
-          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
-          '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
-          
-          [env: ETH_RPC_JWT_SECRET=]
-
-  -e, --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
-          
-          [env: ETHERSCAN_API_KEY=]
-
-  -c, --chain <CHAIN>
-          The chain name or EIP-155 chain ID
-          
-          [env: CHAIN=]
-
-Wallet options - raw:
-  -f, --from <ADDRESS>
-          The sender account
-          
-          [env: ETH_FROM=]
-
-  -i, --interactive
-          Open an interactive prompt to enter your private key
-
-      --private-key <RAW_PRIVATE_KEY>
-          Use the provided private key
-
-      --mnemonic <MNEMONIC>
-          Use the mnemonic phrase of mnemonic file at the specified path
-
-      --mnemonic-passphrase <PASSPHRASE>
-          Use a BIP39 passphrase for the mnemonic
-
-      --mnemonic-derivation-path <PATH>
-          The wallet derivation path.
-          
-          Works with both --mnemonic-path and hardware wallets.
-
-      --mnemonic-index <INDEX>
-          Use the private key from the given mnemonic index.
-          
-          Used with --mnemonic-path.
-          
-          [default: 0]
-
-      --retries <RETRIES>
-          Number of attempts for retrying verification
-          
-          [default: 5]
-
-      --delay <DELAY>
-          Optional delay to apply inbetween verification attempts, in seconds
-          
-          [default: 5]
-
-Wallet options - keystore:
-      --keystore <PATH>
-          Use the keystore in the given folder or file
-          
-          [env: ETH_KEYSTORE=]
-
-      --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
-          
-          [env: ETH_KEYSTORE_ACCOUNT=]
-
-      --password <PASSWORD>
-          The keystore password.
-          
-          Used with --keystore.
-
-      --password-file <PASSWORD_FILE>
-          The keystore password file path.
-          
-          Used with --keystore.
-          
-          [env: ETH_PASSWORD=]
-
-Wallet options - hardware wallet:
-  -l, --ledger
-          Use a Ledger hardware wallet
-
-  -t, --trezor
-          Use a Trezor hardware wallet
-
-Wallet options - remote:
-      --aws
-          Use AWS Key Management Service
-
-Verifier options:
-      --verifier <VERIFIER>
-          The contract verification provider to use
-          
-          [default: etherscan]
-          [possible values: etherscan, sourcify, blockscout, oklink]
-
-      --verifier-url <VERIFIER_URL>
-          The verifier URL, if using a custom provider
-          
-          [env: VERIFIER_URL=]
-```
+          使用 Hardhat 风格的

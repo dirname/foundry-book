@@ -1,6 +1,7 @@
+```markdown
 # forge fmt
 
-Format Solidity source files
+格式化 Solidity 源文件
 
 ```bash
 $ forge fmt --help
@@ -8,22 +9,23 @@ Usage: forge fmt [OPTIONS] [PATH]...
 
 Arguments:
   [PATH]...
-          Path to the file, directory or '-' to read from stdin
+          文件路径、目录或 '-' 从标准输入读取
 
 Options:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根路径（如果在 Git 仓库中），否则是当前工作目录。
 
       --check
-          Run in 'check' mode.
+          以 'check' 模式运行。
           
-          Exits with 0 if input is formatted correctly. Exits with 1 if formatting is required.
+          如果输入格式正确则退出代码为 0。如果需要格式化则退出代码为 1。
 
   -r, --raw
-          In 'check' and stdin modes, outputs raw formatted code instead of the diff
+          在 'check' 和标准输入模式下，输出原始格式化代码而不是差异
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
+```
 ```

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-publish - Publish a raw transaction to the network.
+cast-publish - 将原始交易发布到网络。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-publish - Publish a raw transaction to the network.
 
 ### DESCRIPTION
 
-Publish a raw pre-signed transaction to the network.
+将预先签名的原始交易发布到网络。
 
 ### OPTIONS
 
@@ -18,8 +18,8 @@ Publish a raw pre-signed transaction to the network.
 
 `--async`  
 `--cast-async`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not wait for a transaction receipt.  
-&nbsp;&nbsp;&nbsp;&nbsp;Environment: `CAST_ASYNC`
+&nbsp;&nbsp;&nbsp;&nbsp;不等待交易收据。  
+&nbsp;&nbsp;&nbsp;&nbsp;环境变量: `CAST_ASYNC`
 
 {{#include ../common/rpc-options.md}}
 
@@ -27,12 +27,12 @@ Publish a raw pre-signed transaction to the network.
 
 ### EXAMPLES
 
-1. Publish a pre-signed transaction:
+1. 发布预签名的交易：
     ```sh
     cast publish --rpc-url $RPC $TX
     ```
 
-2. Publish a pre-signed transaction with flashbots.
+2. 使用 flashbots 发布预签名的交易：
     ```sh
     cast publish --flashbots $TX
     ```

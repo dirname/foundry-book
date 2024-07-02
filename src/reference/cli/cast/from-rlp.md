@@ -1,6 +1,7 @@
+```markdown
 # cast from-rlp
 
-Decodes RLP encoded data.
+解码RLP编码的数据。
 
 ```bash
 $ cast from-rlp --help
@@ -8,9 +9,10 @@ Usage: cast from-rlp [VALUE]
 
 Arguments:
   [VALUE]
-          The value to convert
+          要转换的值
 
 Options:
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用'-h'查看摘要）
+```
 ```

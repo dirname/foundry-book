@@ -1,29 +1,29 @@
 ## `getCode`
 
-### Signature
+### 签名
 
 ```solidity
 function getCode(string calldata) external returns (bytes memory);
 ```
 
-### Description
+### 描述
 
-Returns the **creation** bytecode for a contract in the project given the path to the contract.
+返回项目中给定合约路径的**创建**字节码。
 
-The calldata parameter can either be in the form `ContractFile.sol` (if the filename and contract name are the same), `ContractFile.sol:ContractName`, or the path to an artifact, relative to the root of your project.
+calldata 参数可以是 `ContractFile.sol`（如果文件名和合约名相同）、`ContractFile.sol:ContractName` 或相对于项目根目录的工件路径。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> `getCode` requires read permission for the output directory, see [file cheatcodes](./fs.md).
+> `getCode` 需要读取输出目录的权限，请参阅 [文件作弊码](./fs.md)。
 >
-> To grant read access set `fs_permissions = [{ access = "read", path = "./out"}]` in your `foundry.toml`.
+> 要授予读取权限，请在 `foundry.toml` 中设置 `fs_permissions = [{ access = "read", path = "./out"}]`。
 
-### Examples
+### 示例
 
 ```solidity
 MyContract myContract = new MyContract(arg1, arg2);
 
-// Let's do the same thing with `getCode`
+// 让我们用 `getCode` 做同样的事情
 bytes memory args = abi.encode(arg1, arg2);
 bytes memory bytecode = abi.encodePacked(vm.getCode("MyContract.sol:MyContract"), args);
 address anotherAddress;
@@ -34,10 +34,10 @@ assembly {
 assertEq0(address(myContract).code, anotherAddress.code); // [PASS]
 ```
 
-Deploy a contract to an arbitrary address by combining `getCode` and [`etch`](./etch.md)
+通过结合 `getCode` 和 [`etch`](./etch.md) 将合约部署到任意地址
 
 ```solidity
-// Deploy
+// 部署
 bytes memory args = abi.encode(arg1, arg2);
 bytes memory bytecode = abi.encodePacked(vm.getCode("MyContract.sol:MyContract"), args);
 address deployed;
@@ -45,14 +45,14 @@ assembly {
     deployed := create(0, add(bytecode, 0x20), mload(bytecode))
 }
 
-// Set the bytecode of an arbitrary address
+// 设置任意地址的字节码
 vm.etch(targetAddr, deployed.code);
 ```
 
 
-### Supported formats
+### 支持的格式
 
-You can fetch artifacts by either contract path or contract name. Fetching artifacts for a specific version is also supported. If not provided, cheatcode will default to the version of a test being executed or the only version artifact was compiled with.
+您可以通过合约路径或合约名称获取工件。还支持获取特定版本的工件。如果未提供，作弊码将默认为正在执行的测试版本或工件编译的唯一版本。
 ```solidity
 vm.getCode("MyContract.sol:MyContract");
 vm.getCode("MyContract");
@@ -60,12 +60,12 @@ vm.getCode("MyContract.sol:0.8.18");
 vm.getCode("MyContract:0.8.18");
 ```
 
-### SEE ALSO
+### 另请参阅
 
 [`getDeployedCode`](./get-deployed-code.md)
 [`eth`](./etch.md)
 
-Forge Standard Library
+Forge 标准库
 
 [`deployCode`](../reference/forge-std/deployCode.md)
 [`deployCodeTo`](../reference/forge-std/deployCodeTo.md)

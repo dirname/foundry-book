@@ -1,21 +1,21 @@
 ## `breakpoint`
 
-### Signature
+### 签名
 
 ```solidity
 function breakpoint(string) external;
 function breakpoint(string, bool) external;
 ```
 
-### Description
+### 描述
 
-Places a breakpoint to jump to in the debugger view.
+在调试器视图中放置一个断点以跳转。
 
-Calling `vm.breakpoint('<char>, true)` is equivalent to `vm.breakpoint('<char>)`, but calling `vm.breakpoint('<char>, false)` will erase the breakpoint at `'<char>`.
+调用 `vm.breakpoint('<char>, true)` 等同于 `vm.breakpoint('<char>)`，但调用 `vm.breakpoint('<char>, false)` 将删除 `'<char>` 处的断点。
 
-If the char is overwritten, only the last one that was visited in the execution steps is considered.
+如果字符被覆盖，只有最后访问的那个断点会被考虑。
 
-### Examples
+### 示例
 
 ```solidity
 function testBreakpoint() public {
@@ -23,10 +23,10 @@ function testBreakpoint() public {
 }
 ```
 
-Opening up the debugger in a test environment and pressing `'a` will then place the debugger step at the place where the breakpoint cheatcode was called.
+在测试环境中打开调试器并按下 `'a` 后，调试器步骤将放置在调用断点作弊码的地方。
 
 ![breakpoint a](../images/breakpoint.png)
 
-### SEE ALSO
+### 另请参阅
 
 [debugger](../forge/debugger.md)

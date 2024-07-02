@@ -1,43 +1,7 @@
-# cast age
-
-Get the timestamp of a block
-
-```bash
-$ cast age --help
-Usage: cast age [OPTIONS] [BLOCK]
-
-Arguments:
-  [BLOCK]
-          The block height to query at.
-          
-          Can also be the tags earliest, finalized, safe, latest, or pending.
-
-Options:
-  -r, --rpc-url <URL>
-          The RPC endpoint
-          
-          [env: ETH_RPC_URL=]
-
-      --flashbots
-          Use the Flashbots RPC URL with fast mode (<https://rpc.flashbots.net/fast>).
-          
-          This shares the transaction privately with all registered builders.
-          
-          See: <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
-
-      --jwt-secret <JWT_SECRET>
-          JWT Secret for the RPC endpoint.
-          
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be
-          used to simulate a CL `engine_forkchoiceUpdated` call:
-          
-          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
-          '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
-          "0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc"]'
-          
-          [env: ETH_RPC_JWT_SECRET=]
-
-  -h, --help
-          Print help (see a summary with '-h')
+```json
+{
+  "title": "获取区块的时间戳",
+  "description": "获取一个区块的时间戳",
+  "usage": "```bash\n$ cast age --help\nUsage: cast age [OPTIONS] [BLOCK]\n\nArguments:\n  [BLOCK]\n          The block height to query at.\n          \n          Can also be the tags earliest, finalized, safe, latest, or pending.\n\nOptions:\n  -r, --rpc-url <URL>\n          The RPC endpoint\n          \n          [env: ETH_RPC_URL=]\n\n      --flashbots\n          Use the Flashbots RPC URL with fast mode (<https://rpc.flashbots.net/fast>).\n          \n          This shares the transaction privately with all registered builders.\n          \n          See: <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>\n\n      --jwt-secret <JWT_SECRET>\n          JWT Secret for the RPC endpoint.\n          \n          The JWT secret will be used to create a JWT for a RPC. For example, the following can be\n          used to simulate a CL `engine_forkchoiceUpdated` call:\n          \n          cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2\n          '[\"0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc\",\n          \"0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc\",\n          \"0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc\"]'\n          \n          [env: ETH_RPC_JWT_SECRET=]\n\n  -h, --help\n          Print help (see a summary with '-h')\n```"
+}
 ```

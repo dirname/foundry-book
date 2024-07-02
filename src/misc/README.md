@@ -1,3 +1,3 @@
-## Miscellaneous
+## 杂项
 
-- [Struct encoding](./struct-encoding.md)
+- [结构体编码](./struct-encoding.md)

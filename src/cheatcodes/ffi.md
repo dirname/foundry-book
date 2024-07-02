@@ -1,34 +1,34 @@
 ## `ffi`
 
-### Signature
+### 签名
 
 ```solidity
 function ffi(string[] calldata) external returns (bytes memory);
 ```
 
-### Description
+### 描述
 
-Calls an arbitrary command if [`ffi`](../reference/config/testing.md#ffi) is enabled.
+如果启用了 [`ffi`](../reference/config/testing.md#ffi)，则调用任意命令。
 
-It is generally advised to use this cheat code as a last resort, and to not enable it by default, as anyone who can change the tests of a project will be able to execute arbitrary commands on devices that run the tests.
+通常建议将此作弊代码作为最后手段使用，并且不要默认启用它，因为任何可以更改项目测试的人都可以在运行测试的设备上执行任意命令。
 
-### Tips
+### 提示
 
-- By default the `ffi` cheatcode assumes the output of the command is a hex encoded value (e.g. a hex string of an ABI encoded value). If hex decoding fails, it will return the output as UTF8 bytes that you can cast to a string.
-- Make sure that the output does not include a `\n` newline character. (e.g in Rust use `print!` vs `println!`)
-- Remember that the script will be executed from the top-level directory of your project, not inside `test`
-- Make sure that the inputs array does not have empty elements. They will be handled as inputs by the script, instead of space
-- Use the cheatcode `toString` to easily convert arbitrary data to strings, so that you can pass them as command-line arguments
+- 默认情况下，`ffi` 作弊代码假设命令的输出是十六进制编码的值（例如 ABI 编码值的十六进制字符串）。如果十六进制解码失败，它将返回输出为 UTF8 字节，您可以将其转换为字符串。
+- 确保输出不包含 `\n` 换行符。（例如在 Rust 中使用 `print!` 而不是 `println!`）
+- 请记住，脚本将从项目的顶层目录执行，而不是在 `test` 内部。
+- 确保输入数组没有空元素。它们将被脚本处理为输入，而不是空格。
+- 使用作弊代码 `toString` 可以轻松将任意数据转换为字符串，以便您可以将它们作为命令行参数传递。
 
-### Examples
+### 示例
 
-ABI encoded output
+ABI 编码输出
 
 ```solidity
 string[] memory inputs = new string[](3);
 inputs[0] = "echo";
 inputs[1] = "-n";
-// ABI encoded "gm", as a hex string
+// ABI 编码的 "gm"，作为十六进制字符串
 inputs[2] = "0x00000000000000000000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000000002676d000000000000000000000000000000000000000000000000000000000000";
 
 bytes memory res = vm.ffi(inputs);
@@ -36,7 +36,7 @@ string memory output = abi.decode(res, (string));
 assertEq(output, "gm");
 ```
 
-UTF8 string output
+UTF8 字符串输出
 
 ```solidity
 string[] memory inputs = new string[](3);

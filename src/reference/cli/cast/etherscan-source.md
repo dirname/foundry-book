@@ -1,18 +1,20 @@
+```markdown
 # cast etherscan-source
 
-Get the source code of a contract from Etherscan
+从Etherscan获取合约的源代码
 
 ```bash
 $ cast etherscan-source --help
 Usage: cast etherscan-source [OPTIONS] <ADDRESS>
 
 Arguments:
-  <ADDRESS>  The contract's address
+  <ADDRESS>  合约的地址
 
 Options:
-  -f, --flatten                  Whether to flatten the source code
-  -d <DIRECTORY>                 The output directory/file to expand source tree into
-  -e, --etherscan-api-key <KEY>  The Etherscan (or equivalent) API key [env: ETHERSCAN_API_KEY=]
-  -c, --chain <CHAIN>            The chain name or EIP-155 chain ID [env: CHAIN=]
-  -h, --help                     Print help
+  -f, --flatten                  是否展平源代码
+  -d <DIRECTORY>                 输出目录/文件以展开源代码树
+  -e, --etherscan-api-key <KEY>  Etherscan（或等效）API密钥 [env: ETHERSCAN_API_KEY=]
+  -c, --chain <CHAIN>            链名称或EIP-155链ID [env: CHAIN=]
+  -h, --help                     打印帮助信息
+```
 ```

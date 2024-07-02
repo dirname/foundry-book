@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-from-fixed-point - Convert a fixed point number into an integer.
+cast-from-fixed-point - 将定点数转换为整数。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-from-fixed-point - Convert a fixed point number into an integer.
 
 ### DESCRIPTION
 
-Convert a fixed point number into an integer.
+将定点数转换为整数。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Convert a fixed point number into an integer.
 
 ### EXAMPLES
 
-1. Convert 10.55 to an integer:
+1. 将 10.55 转换为整数：
     ```sh
     cast from-fixed-point 2 10.55
     ```

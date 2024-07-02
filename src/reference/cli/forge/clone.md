@@ -1,6 +1,7 @@
+```markdown
 # forge clone
 
-Clone a contract from Etherscan
+从Etherscan克隆一个合约
 
 ```bash
 $ forge clone --help
@@ -8,48 +9,47 @@ Usage: forge clone [OPTIONS] <ADDRESS> [PATH]
 
 Arguments:
   <ADDRESS>
-          The contract address to clone
+          要克隆的合约地址
 
   [PATH]
-          The root directory of the cloned project
+          克隆项目的根目录
           
-          [default: .]
+          [默认值: .]
 
 Options:
       --no-remappings-txt
-          Do not generate the remappings.txt file. Instead, keep the remappings in the configuration
+          不生成remappings.txt文件。而是将remappings保留在配置中
 
       --keep-directory-structure
-          Keep the original directory structure collected from Etherscan.
+          保留从Etherscan收集的原始目录结构。
           
-          If this flag is set, the directory structure of the cloned project will be kept as is. By
-          default, the directory structure is re-orgnized to increase the readability, but may risk
-          some compilation failures.
+          如果设置了此标志，克隆项目的目录结构将保持不变。默认情况下，目录结构会重新组织以提高可读性，但可能会导致某些编译失败。
 
   -e, --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
+          Etherscan（或等效）API密钥
           
-          [env: ETHERSCAN_API_KEY=]
+          [环境变量: ETHERSCAN_API_KEY=]
 
   -c, --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+          链名称或EIP-155链ID
           
-          [env: CHAIN=]
+          [环境变量: CHAIN=]
 
       --shallow
-          Perform shallow clones instead of deep ones.
+          执行浅克隆而不是深克隆。
           
-          Improves performance and reduces disk usage, but prevents switching branches or tags.
+          提高性能并减少磁盘使用，但阻止切换分支或标签。
 
       --no-git
-          Install without adding the dependency as a submodule
+          安装时不将依赖项作为子模块添加
 
       --no-commit
-          Do not create a commit
+          不创建提交
 
   -q, --quiet
-          Do not print any messages
+          不打印任何消息
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用'-h'查看摘要）
+```
 ```

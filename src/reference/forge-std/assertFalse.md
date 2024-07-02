@@ -1,6 +1,6 @@
 ## `assertFalse`
 
-### Signature
+### 签名
 
 ```solidity
 function assertFalse(bool data) internal;
@@ -10,19 +10,19 @@ function assertFalse(bool data) internal;
 function assertFalse(bool data, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `data` is false.
+断言 `data` 为假。
 
-Optionally includes an error message in the revert string.
+可选地包含一个错误消息在回退字符串中。
 
-### Examples
+### 示例
 
 ```solidity
 bool failure = contract.fun();
 assertFalse(failure);
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [`assertTrue`](./assertTrue.md)

@@ -1,16 +1,16 @@
 ## `parseBool`
 
-### Signature
+### 签名
 
 ```solidity
 function parseBool(string calldata stringifiedValue) external pure returns (bool parsedValue);
 ```
 
-### Description
+### 描述
 
-Parses the value of `string` into `bool`
+将 `string` 类型的值解析为 `bool` 类型。
 
-### Examples
+### 示例
 
 ```solidity
 string memory boolAsString = "false";

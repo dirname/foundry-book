@@ -1,6 +1,6 @@
 ## `serializeJson`
 
-### Signature
+### 签名
 
 ```solidity
 function serializeJson(string calldata objectKey, string calldata value)
@@ -64,32 +64,32 @@ function serializeBytes(string calldata objectKey, string calldata valueKey, byt
     returns (string memory json);
 ```
 
-### Description
+### 描述
 
-Serializes values as a stringified JSON object.
+将值序列化为字符串化的 JSON 对象。
 
-### How it works
+### 工作原理
 
-The idea is that the user serializes the values of the JSON file and finally writes that object to a file. The user needs to pass:
+用户序列化 JSON 文件的值，最后将该对象写入文件。用户需要传递：
 
-- A key for the _object_ to which the value should be serialized to. This enables the user to serialize multiple objects in parallel
-- A key for the _value_ which will be its key in the JSON file
-- The value to be serialized
+- 一个用于 _对象_ 的键，该值应序列化到该对象。这使用户能够并行序列化多个对象
+- 一个用于 _值_ 的键，该键将在 JSON 文件中作为其键
+- 要序列化的值
 
-An exception to this is the `serializeJson` function, which only receives an `objectKey` and a json string `value`. This allows the user to serialize an existing json object and directly assign it to the provided `objectKey`. If the `objectKey` is already in use, the whole serialized json is overwritten.
+`serializeJson` 函数是一个例外，它只接收一个 `objectKey` 和一个 JSON 字符串 `value`。这允许用户序列化现有的 JSON 对象，并直接将其分配给提供的 `objectKey`。如果 `objectKey` 已在使用中，则整个序列化的 JSON 将被覆盖。
 
-The keys do not need to be of some specific form. They are of type `string` to enable for intuitive human interpretation. Semantically, they are not important other than to be used as keys.
+键不需要是某种特定的形式。它们是 `string` 类型，以便于直观的人类解释。从语义上讲，它们除了用作键之外并不重要。
 
-The cheatcodes return the JSON object that is being serialized **up to that point**. That way the user can serialize inner JSON objects and then serialize them in bigger JSON objects, enabling the user to create arbitrary JSON objects.
+作弊码返回正在序列化的 JSON 对象 **到该点为止**。这样用户可以序列化内部 JSON 对象，然后将它们序列化到更大的 JSON 对象中，使用户能够创建任意的 JSON 对象。
 
-Finally, the user writes the JSON object to a JSON file by using [writeJson](./write-json.md).
-Alternatively, the user can write the JSON object to TOML file by using [writeToml](./write-toml.md).
+最后，用户通过使用 [writeJson](./write-json.md) 将 JSON 对象写入 JSON 文件。
+或者，用户可以通过使用 [writeToml](./write-toml.md) 将 JSON 对象写入 TOML 文件。
 
-**Remember:** The file path needs to be in the allowed paths. Read more in [File cheatcodes](./fs.md).
+**记住：** 文件路径需要在允许的路径中。更多信息请阅读 [文件作弊码](./fs.md)。
 
-### Example
+### 示例
 
-Let's assume we want to write the following JSON to a file:
+假设我们要将以下 JSON 写入文件：
 
 { "boolean": true, "number": 342, "object": { "title": "finally json serialization" } }
 
@@ -101,16 +101,15 @@ vm.serializeUint(obj1, "number", uint256(342));
 string memory obj2 = "some other key";
 string memory output = vm.serializeString(obj2, "title", "finally json serialization");
 
-// IMPORTANT: This works because `serializeString` first tries to interpret `output` as
-//   a stringified JSON object. If the parsing fails, then it treats it as a normal
-//   string instead.
-//   For instance, an `output` equal to '{ "ok": "asd" }' will produce an object, but
-//   an output equal to '"ok": "asd" }' will just produce a normal string.
+// 重要：这之所以有效，是因为 `serializeString` 首先尝试将 `output` 解释为
+//   字符串化的 JSON 对象。如果解析失败，则将其视为普通字符串。
+//   例如，等于 '{ "ok": "asd" }' 的 `output` 将生成一个对象，但
+//   等于 '"ok": "asd" }' 的 `output` 将只生成一个普通字符串。
 string memory finalJson = vm.serializeString(obj1, "object", output);
 
 vm.writeJson(finalJson, "./output/example.json");
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [writeJson](./write-json.md)

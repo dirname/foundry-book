@@ -1,26 +1,26 @@
-## Creating an NFT with Solmate
+## 使用 Solmate 创建 NFT
 
-This tutorial will walk you through creating an OpenSea compatible NFT with Foundry and [Solmate](https://github.com/transmissions11/solmate/blob/main/src/tokens/ERC721.sol). A full implementation of this tutorial can be found [here](https://github.com/FredCoen/nft-tutorial).
+本教程将指导您使用 Foundry 和 [Solmate](https://github.com/transmissions11/solmate/blob/main/src/tokens/ERC721.sol) 创建一个 OpenSea 兼容的 NFT。本教程的完整实现可以在此处找到 [这里](https://github.com/FredCoen/nft-tutorial)。
 
-##### This tutorial is for illustrative purposes only and provided on an as-is basis. The tutorial is not audited nor fully tested. No code in this tutorial should be used in a production environment.
+##### 本教程仅用于说明目的，并按原样提供。本教程未经过审计也未完全测试。本教程中的代码不应在生产环境中使用。
 
-### Create project and install dependencies
+### 创建项目并安装依赖
 
-Start by setting up a Foundry project following the steps outlined in the [Getting started section](../getting-started/installation.html). We will also install Solmate for their ERC721 implementation, as well as some OpenZeppelin utility libraries. Install the dependencies by running the following commands from the root of your project:
+首先按照 [入门部分](../getting-started/installation.html) 中概述的步骤设置一个 Foundry 项目。我们还将安装 Solmate 以获取其 ERC721 实现，以及一些 OpenZeppelin 实用库。通过从项目根目录运行以下命令来安装依赖项：
 
 ```bash
 forge install transmissions11/solmate Openzeppelin/openzeppelin-contracts
 ```
 
-These dependencies will be added as git submodules to your project.
+这些依赖项将作为 git 子模块添加到您的项目中。
 
-If you have followed the instructions correctly your project should be structured like this:
+如果您正确地按照说明操作，您的项目结构应如下所示：
 
-![Project structure](../images/nft-tutorial/nft-tutorial-project-structure.png)
+![项目结构](../images/nft-tutorial/nft-tutorial-project-structure.png)
 
-### Implement a basic NFT
+### 实现一个基本的 NFT
 
-We are then going to rename the boilerplate contract in `src/Contract.sol` to `src/NFT.sol` and replace the code:
+然后，我们将样板合约 `src/Contract.sol` 重命名为 `src/NFT.sol` 并替换代码：
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -49,11 +49,11 @@ contract NFT is ERC721 {
 }
 ```
 
-Let's take a look at this very basic implementation of an NFT. We start by importing two contracts from our git submodules. We import solmate's gas optimized implementation of the ERC721 standard which our NFT contract will inherit from. Our constructor takes the `_name` and `_symbol` arguments for our NFT and passes them on to the constructor of the parent ERC721 implementation. Lastly we implement the `mintTo` function which allows anyone to mint an NFT. This function increments the `currentTokenId` and makes use of the `_safeMint` function of our parent contract.
+让我们来看看这个非常基本的 NFT 实现。我们首先从 git 子模块中导入两个合约。我们导入 Solmate 的 gas 优化 ERC721 标准实现，我们的 NFT 合约将继承自该实现。我们的构造函数接受 NFT 的 `_name` 和 `_symbol` 参数，并将它们传递给父 ERC721 实现的构造函数。最后，我们实现了 `mintTo` 函数，允许任何人铸造一个 NFT。该函数递增 `currentTokenId` 并使用父合约的 `_safeMint` 函数。
 
-### Compile & deploy with forge
+### 使用 forge 编译和部署
 
-To compile the NFT contract run `forge build`. You might experience a build failure due to wrong mapping:
+要编译 NFT 合约，请运行 `forge build`。您可能会遇到由于错误映射导致的构建失败：
 
 ```text
 Error:
@@ -65,51 +65,50 @@ error[6275]: ParserError: Source "lib/openzeppelin-contracts/contracts/contracts
   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ```
 
-this can be fixed by setting up the correct remapping. Create a file `remappings.txt` in your project and add the line
+这可以通过设置正确的重映射来修复。在项目中创建一个 `remappings.txt` 文件并添加以下行：
 
 ```text
 openzeppelin-contracts/=lib/openzeppelin-contracts/
 ```
 
-(You can find out more on remappings in [the dependencies documentation](../projects/dependencies.md).
+（您可以在 [依赖文档](../projects/dependencies.md) 中了解更多关于重映射的信息。
 
-By default the compiler output will be in the `out` directory. To deploy our compiled contract with Forge we have to set environment variables for the RPC endpoint and the private key we want to use to deploy.
+默认情况下，编译器输出将在 `out` 目录中。要使用 Forge 部署我们编译的合约，我们必须为要使用的 RPC 端点和私钥设置环境变量。
 
-Set your environment variables by running:
+通过运行以下命令设置环境变量：
 
 ```bash
 export RPC_URL=<Your RPC endpoint>
 export PRIVATE_KEY=<Your wallets private key>
 ```
 
-Once set, you can deploy your NFT with Forge by running the below command while adding the relevant constructor arguments to the NFT contract:
+设置完成后，您可以通过运行以下命令并添加相关的构造函数参数来使用 Forge 部署 NFT 合约：
 
 ```bash
 forge create NFT --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY --constructor-args <name> <symbol>
 ```
 
-If successfully deployed, you will see the deploying wallet's address, the contract's address as well as the transaction hash printed to your terminal.
+如果成功部署，您将看到部署钱包的地址、合约地址以及交易哈希打印到终端。
 
-### Minting NFTs from your contract
+### 从您的合约中铸造 NFT
 
-Calling functions on your NFT contract is made simple with Cast, Foundry's command-line tool for interacting with smart contracts, sending transactions, and getting chain data. Let's have a look at how we can use it to mint NFTs from our NFT contract.
+使用 Cast，Foundry 的命令行工具与智能合约交互、发送交易和获取链数据，可以简化在 NFT 合约上调用函数的过程。让我们看看如何使用它从我们的 NFT 合约中铸造 NFT。
 
-Given that you already set your RPC and private key env variables during deployment, mint an NFT from your contract by
-running:
+鉴于您在部署期间已经设置了 RPC 和私钥环境变量，通过运行以下命令从您的合约中铸造一个 NFT：
 
 ```bash
 cast send --rpc-url=$RPC_URL <contractAddress>  "mintTo(address)" <arg> --private-key=$PRIVATE_KEY
 ```
 
-Well done! You just minted your first NFT from your contract. You can sanity check the owner of the NFT with `currentTokenId` equal to **1** by running the below `cast call` command. The address you provided above should be returned as the owner.
+做得好！您刚刚从您的合约中铸造了第一个 NFT。您可以通过运行以下 `cast call` 命令来检查 NFT 的所有者，`currentTokenId` 等于 **1**。您提供的地址应作为所有者返回。
 
 ```bash
 cast call --rpc-url=$RPC_URL --private-key=$PRIVATE_KEY <contractAddress> "ownerOf(uint256)" 1
 ```
 
-### Extending our NFT contract functionality and testing
+### 扩展我们的 NFT 合约功能和测试
 
-Let's extend our NFT by adding metadata to represent the content of our NFTs, as well as set a minting price, a maximum supply and the possibility to withdraw the collected proceeds from minting. To follow along you can replace your current NFT contract with the code snippet below:
+让我们通过添加元数据来表示 NFT 的内容，以及设置铸造价格、最大供应量和提取铸造收益的可能性来扩展我们的 NFT。要继续操作，您可以用下面的代码片段替换当前的 NFT 合约：
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -183,13 +182,13 @@ contract NFT is ERC721, Ownable {
 }
 ```
 
-Among other things, we have added metadata that can be queried from any front-end application like OpenSea, by calling the `tokenURI` method on our NFT contract.
+除了其他功能外，我们还添加了可以通过任何前端应用程序（如 OpenSea）查询的元数据，通过调用 NFT 合约上的 `tokenURI` 方法。
 
-> **Note**: If you want to provide a real URL to the constructor at deployment, and host the metadata of this NFT contract please follow the steps outlined [here](https://docs.opensea.io/docs/part-3-upload-metadata).
+> **注意**：如果您想在部署时提供一个真实的 URL 到构造函数，并托管此 NFT 合约的元数据，请按照 [此处](https://docs.opensea.io/docs/part-3-upload-metadata) 概述的步骤操作。
 
-Let's test some of this added functionality to make sure it works as intended. Foundry offers an extremely fast EVM native testing framework through Forge.
+让我们测试一些添加的功能，以确保它们按预期工作。Foundry 通过 Forge 提供了一个极快的 EVM 原生测试框架。
 
-Within your test folder rename the current `Contract.t.sol` test file to `NFT.t.sol`. This file will contain all tests regarding the NFT's `mintTo` method. Next, replace the existing boilerplate code with the below:
+在您的测试文件夹中，将当前的 `Contract.t.sol` 测试文件重命名为 `NFT.t.sol`。该文件将包含所有关于 NFT 的 `mintTo` 方法的测试。接下来，用以下内容替换现有的样板代码：
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -331,37 +330,36 @@ contract Receiver is ERC721TokenReceiver {
 
 ```
 
-The test suite is set up as a contract with a `setUp` method which runs before every individual test.
+测试套件设置为一个合约，其中 `setUp` 方法在每个单独的测试之前运行。
 
-As you can see, Forge offers a number of [cheatcodes](../cheatcodes/) to manipulate state to accommodate your testing scenario.
+如您所见，Forge 提供了许多 [作弊码](../cheatcodes/) 来操纵状态以适应您的测试场景。
 
-For example, our `testFailMaxSupplyReached` test checks that an attempt to mint fails when the max supply of NFT is reached. Thus, the `currentTokenId` of the NFT contract needs to be set to the max supply by using the store cheatcode which allows you to write data to your contracts storage slots. The storage slots you wish to write to can easily be found using the
-[`forge-std`](https://github.com/foundry-rs/forge-std/) helper library. You can run the test with the following command:
+例如，我们的 `testFailMaxSupplyReached` 测试检查当 NFT 的最大供应量达到时尝试铸造是否失败。因此，需要使用存储作弊码将 NFT 合约的 `currentTokenId` 设置为最大供应量，该作弊码允许您写入合约的存储槽。可以使用 [`forge-std`](https://github.com/foundry-rs/forge-std/) 帮助库轻松找到要写入的存储槽。您可以使用以下命令运行测试：
 
 ```bash
 forge test
 ```
 
-If you want to put your Forge skills to practice, write tests for the remaining methods of our NFT contract. Feel free to PR them to [nft-tutorial](https://github.com/FredCoen/nft-tutorial), where you will find the full implementation of this tutorial.
+如果您想将 Forge 技能付诸实践，请为 NFT 合约的其余方法编写测试。欢迎将它们 PR 到 [nft-tutorial](https://github.com/FredCoen/nft-tutorial)，您将在其中找到本教程的完整实现。
 
-### Gas reports for your function calls
+### 函数调用的 Gas 报告
 
-Foundry provides comprehensive gas reports about your contracts. For every function called within your tests, it returns the minimum, average, median and max gas cost. To print the gas report simply run:
+Foundry 提供了关于合约的综合 Gas 报告。对于测试中的每个函数调用，它返回最小、平均、中位数和最大 Gas 成本。要打印 Gas 报告，只需运行：
 
 ```bash
 forge test --gas-report
 ```
 
-This comes in handy when looking at various gas optimizations within your contracts.
+这在查看合约中的各种 Gas 优化时非常方便。
 
-Let's have a look at the gas savings we made by substituting OpenZeppelin with Solmate for our ERC721 implementation. You can find the NFT implementation using both libraries [here](https://github.com/FredCoen/nft-tutorial). Below are the resulting gas reports when running `forge test --gas-report` on that repository.
+让我们看看通过将 OpenZeppelin 替换为 Solmate 进行 ERC721 实现所节省的 Gas。您可以在此处找到使用这两个库的 NFT 实现 [这里](https://github.com/FredCoen/nft-tutorial)。在运行 `forge test --gas-report` 时，以下是该存储库的 Gas 报告结果。
 
-As you can see, our implementation using Solmate saves around 500 gas on a successful mint (the max gas cost of the `mintTo` function calls).
+如您所见，我们使用 Solmate 的实现在成功铸造时节省了大约 500 Gas（`mintTo` 函数调用的最大 Gas 成本）。
 
 ![Gas report solmate NFT](../images/nft-tutorial/gas-report-solmate-nft.png)
 
 ![Gas report OZ NFT](../images/nft-tutorial/gas-report-oz-nft.png)
 
-That's it, I hope this will give you a good practical basis of how to get started with foundry. We think there is no better way to deeply understand solidity than writing your tests in solidity. You will also experience less context switching between javascript and solidity. Happy coding!
+就是这样，我希望这能为您提供一个很好的实践基础，了解如何开始使用 Foundry。我们认为，没有比在 Solidity 中编写测试更好的方式来深入理解 Solidity 了。您还将体验到在 JavaScript 和 Solidity 之间切换的上下文切换更少。祝您编码愉快！
 
-> Note: Follow [this](./solidity-scripting.md) tutorial to learn how to deploy the NFT contract used here with solidity scripting.
+> 注意：请按照 [此教程](./solidity-scripting.md) 学习如何使用 Solidity 脚本部署此处使用的 NFT 合约。

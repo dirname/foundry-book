@@ -1,15 +1,17 @@
+```markdown
 # cast to-fixed-point
 
-Convert an integer into a fixed point number
+将整数转换为定点数
 
 ```bash
 $ cast to-fixed-point --help
 Usage: cast to-fixed-point [DECIMALS] [VALUE]
 
 Arguments:
-  [DECIMALS]  The number of decimals to use
-  [VALUE]     The value to convert
+  [DECIMALS]  使用的十进制位数
+  [VALUE]     要转换的值
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

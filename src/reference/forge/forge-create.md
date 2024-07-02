@@ -2,7 +2,7 @@
 
 ### NAME
 
-forge-create - Deploy a smart contract.
+forge-create - 部署智能合约。
 
 ### SYNOPSIS
 
@@ -10,36 +10,35 @@ forge-create - Deploy a smart contract.
 
 ### DESCRIPTION
 
-Deploy a smart contract.
+部署智能合约。
 
-The path to the contract is in the format `<path>:<contract>`, e.g. `src/Contract.sol:Contract`.
+合约路径的格式为 `<path>:<contract>`，例如 `src/Contract.sol:Contract`。
 
-You can specify constructor arguments with `--constructor-args`. Alternatively, you can specify a file
-containing space-separated constructor arguments with `--constructor-args-path`.
+你可以使用 `--constructor-args` 指定构造函数参数。或者，你可以使用 `--constructor-args-path` 指定包含空格分隔的构造函数参数的文件。
 
-Dynamic linking is not supported: you should predeploy your libraries and manually specify their addresses (see `--libraries`).
+不支持动态链接：你应该预先部署你的库，并手动指定它们的地址（见 `--libraries`）。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> The `--constructor-args` flag must be positioned last in the command, since it takes multiple values.
+> `--constructor-args` 标志必须放在命令的最后，因为它接受多个值。
 
 ### OPTIONS
 
 #### Build Options
 
 `--constructor-args` *args...*  
-&nbsp;&nbsp;&nbsp;&nbsp;The constructor arguments.
+&nbsp;&nbsp;&nbsp;&nbsp;构造函数参数。
 
 `--constructor-args-path` *file*  
-&nbsp;&nbsp;&nbsp;&nbsp;The path to a file containing the constructor arguments.
+&nbsp;&nbsp;&nbsp;&nbsp;包含构造函数参数的文件路径。
 
 `--verify`  
-&nbsp;&nbsp;&nbsp;&nbsp;Verify contract after creation. Runs `forge verify-contract` with the appropriate parameters.
+&nbsp;&nbsp;&nbsp;&nbsp;创建后验证合约。运行 `forge verify-contract` 并带有适当的参数。
 
 {{#include ../common/verifier-options.md}}
 
 `--unlocked`  
-&nbsp;&nbsp;&nbsp;&nbsp;Send via `eth_sendTransaction` using the `--from` argument or `$ETH_FROM` as sender.
+&nbsp;&nbsp;&nbsp;&nbsp;通过 `eth_sendTransaction` 发送，使用 `--from` 参数或 `$ETH_FROM` 作为发送者。
 
 {{#include ../common/transaction-options.md}}
 
@@ -57,12 +56,12 @@ Dynamic linking is not supported: you should predeploy your libraries and manual
 
 ### EXAMPLES
 
-1. Deploy a contract with no constructor arguments:
+1. 部署没有构造函数参数的合约：
     ```sh
     forge create src/Contract.sol:ContractWithNoConstructor
     ```
 
-2. Deploy a contract with two constructor arguments:
+2. 部署带有两个构造函数参数的合约：
     ```sh
     forge create src/Contract.sol:MyToken --constructor-args "My Token" "MT"
     ```

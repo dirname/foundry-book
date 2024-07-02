@@ -1,4 +1,4 @@
-## Std Math
+## 标准数学
 
 - [`abs`](./abs.md)
 - [`delta`](./delta.md)

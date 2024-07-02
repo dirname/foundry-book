@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-selectors - Extracts function selectors and arguments from bytecode
+cast-selectors - 从字节码中提取函数选择器和参数
 
 ### SYNOPSIS
 
@@ -10,19 +10,19 @@ cast-selectors - Extracts function selectors and arguments from bytecode
 
 ### DESCRIPTION
 
-Extracts function selectors and arguments from bytecode using the [EVMole library](https://github.com/cdump/evmole)
+使用 [EVMole 库](https://github.com/cdump/evmole) 从字节码中提取函数选择器和参数
 
 ### OPTIONS
 
 `-r`  
 `--resolve`  
-&nbsp;&nbsp;&nbsp;&nbsp;Resolve the function signatures for the extracted selectors using https://openchain.xyz
+&nbsp;&nbsp;&nbsp;&nbsp;使用 https://openchain.xyz 解析提取的选择器的函数签名
 
 {{#include common-options.md}}
 
 ### EXAMPLES
 
-1. Get WETH's contract function signatures & arguments:
+1. 获取 WETH 合约的函数签名和参数：
     ```sh
     cast selectors $(cast code 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2)
     ```

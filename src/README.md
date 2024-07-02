@@ -1,83 +1,83 @@
 <img src="images/foundry-banner.png" style="border-radius: 20px">
 
-Foundry is a smart contract development toolchain.
+Foundry 是一个智能合约开发工具链。
 
-Foundry manages your dependencies, compiles your project, runs tests, deploys, and lets you interact with the chain from the command-line and via Solidity scripts.
+Foundry 管理你的依赖项，编译你的项目，运行测试，部署，并让你通过命令行和 Solidity 脚本与链进行交互。
 
-> 📖 **Contributing**
+> 📖 **贡献**
 >
-> You can contribute to this book on [GitHub](https://github.com/foundry-rs/book).
+> 你可以在 [GitHub](https://github.com/foundry-rs/book) 上为此书做出贡献。
 
-### Sections
+### 章节
 
-**[Getting Started](getting-started/installation.md)**
+**[入门](getting-started/installation.md)**
 
-To get started with Foundry, install Foundry and set up your first project.
+要开始使用 Foundry，请安装 Foundry 并设置你的第一个项目。
 
-**[Projects](projects/creating-a-new-project.md)**
+**[项目](projects/creating-a-new-project.md)**
 
-This section will give you an overview of how to create and work with existing projects.
+本节将概述如何创建和使用现有项目。
 
-**[Forge Overview](forge)**
+**[Forge 概述](forge)**
 
-The overview will give you all you need to know about how to use `forge` to develop, test, and deploy smart contracts.
+本概述将告诉你所有关于如何使用 `forge` 开发、测试和部署智能合约的信息。
 
-**[Cast Overview](cast)**
+**[Cast 概述](cast)**
 
-Learn how to use `cast` to interact with smart contracts, send transactions, and get chain data from the command-line.
+学习如何使用 `cast` 与智能合约交互，发送交易，并从命令行获取链数据。
 
-**[Anvil Overview](anvil)**
+**[Anvil 概述](anvil)**
 
-Learn about `anvil`, Foundry's local node.
+学习关于 `anvil`，Foundry 的本地节点。
 
-**[Chisel Overview](chisel)**
+**[Chisel 概述](chisel)**
 
-Learn how to use `chisel`, Foundry's integrated Solidity REPL.
+学习如何使用 `chisel`，Foundry 的集成 Solidity REPL。
 
-**Configuration**
+**配置**
 
-Guides on configuring Foundry.
+关于配置 Foundry 的指南。
 
-- [Configuring with `foundry.toml`](./config/)
-- [Continuous Integration](./config/continuous-integration.md)
-- [Integrating with VSCode](./config/vscode.md)
-- [Shell Autocompletion](./config/shell-autocompletion.md)
-- [Static Analyzers](./config/static-analyzers.md)
-- [Integrating with Hardhat](./config/hardhat.md)
-- [Vyper support](./config/vyper.md)
+- [使用 `foundry.toml` 配置](./config/)
+- [持续集成](./config/continuous-integration.md)
+- [与 VSCode 集成](./config/vscode.md)
+- [Shell 自动补全](./config/shell-autocompletion.md)
+- [静态分析器](./config/static-analyzers.md)
+- [与 Hardhat 集成](./config/hardhat.md)
+- [Vyper 支持](./config/vyper.md)
 
-**Tutorials**
+**教程**
 
-Tutorials on building smart contracts with Foundry.
+使用 Foundry 构建智能合约的教程。
 
-- [Creating an NFT with Solmate](./tutorials/solmate-nft.md)
-- [Docker and Foundry](./tutorials/foundry-docker.md)
-- [Testing EIP-712 Signatures](./tutorials/testing-eip712.md)
-- [Solidity Scripting](./tutorials/solidity-scripting.md)
-- [Forking Mainnet with Cast and Anvil](./tutorials/forking-mainnet-with-cast-anvil.md)
-- [Learning Foundry Videos](./tutorials/learn-foundry.md)
-<!-- - [Incremental Adoption]() -->
+- [使用 Solmate 创建 NFT](./tutorials/solmate-nft.md)
+- [Docker 和 Foundry](./tutorials/foundry-docker.md)
+- [测试 EIP-712 签名](./tutorials/testing-eip712.md)
+- [Solidity 脚本](./tutorials/solidity-scripting.md)
+- [使用 Cast 和 Anvil 分叉主网](./tutorials/forking-mainnet-with-cast-anvil.md)
+- [学习 Foundry 视频](./tutorials/learn-foundry.md)
+<!-- - [增量采用]() -->
 
-**Contributing**
+**贡献**
 
-Help us improve Foundry: [Contributing](./contributing.md)
+帮助我们改进 Foundry：[贡献](./contributing.md)
 
-**Appendix**
+**附录**
 
-References, troubleshooting, and more.
+参考资料、故障排除等。
 
-- [FAQ](./faq.md)
-- [CLI Reference](./reference/cli/)
-- [forge Commands](./reference/forge/)
-- [cast Commands](./reference/cast/)
-- [anvil Commands](./reference/anvil/)
-- [chisel Commands](./reference/chisel/)
-- [Config Reference](./reference/config/)
-- [Cheatcodes Reference](./cheatcodes/)
-- [Forge Standard Library Reference](./reference/forge-std/)
-- [DSTest Reference](./reference/ds-test.md)
-- [Miscellaneous](misc)
+- [常见问题](./faq.md)
+- [CLI 参考](./reference/cli/)
+- [forge 命令](./reference/forge/)
+- [cast 命令](./reference/cast/)
+- [anvil 命令](./reference/anvil/)
+- [chisel 命令](./reference/chisel/)
+- [配置参考](./reference/config/)
+- [作弊码参考](./cheatcodes/)
+- [Forge 标准库参考](./reference/forge-std/)
+- [DSTest 参考](./reference/ds-test.md)
+- [杂项](misc)
 
 <br>
 
-> You can also check out [Awesome Foundry](https://github.com/crisgarner/awesome-foundry), a curated list of awesome Foundry resources, tutorials, tools, and libraries!
+> 你也可以查看 [Awesome Foundry](https://github.com/crisgarner/awesome-foundry)，一个精选的 Foundry 资源、教程、工具和库的列表！

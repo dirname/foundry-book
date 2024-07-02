@@ -1,15 +1,17 @@
-#### Wallet Options - Keystore
+```markdown
+#### 钱包选项 - Keystore
 
-`--keystore` _path_  
-&nbsp;&nbsp;&nbsp;&nbsp;Use the keystore in the given folder or file.  
-&nbsp;&nbsp;&nbsp;&nbsp;Environment: `ETH_KEYSTORE`
+`--keystore` _路径_  
+&nbsp;&nbsp;&nbsp;&nbsp;使用指定文件夹或文件中的 keystore。  
+&nbsp;&nbsp;&nbsp;&nbsp;环境变量: `ETH_KEYSTORE`
 
-`--account` _account-name_  
-&nbsp;&nbsp;&nbsp;&nbsp;Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename.  
-&nbsp;&nbsp;&nbsp;&nbsp;Environment: `ETH_KEYSTORE_ACCOUNT`
+`--account` _账户名称_  
+&nbsp;&nbsp;&nbsp;&nbsp;通过文件名从默认 keystores 文件夹（~/.foundry/keystores）中使用 keystore。  
+&nbsp;&nbsp;&nbsp;&nbsp;环境变量: `ETH_KEYSTORE_ACCOUNT`
 
 `--interactive`
 
-`--password` _password_  
-&nbsp;&nbsp;&nbsp;&nbsp;The keystore password. Used with `--keystore`.
-&nbsp;&nbsp;&nbsp;&nbsp;Environment: `ETH_PASSWORD`
+`--password` _密码_  
+&nbsp;&nbsp;&nbsp;&nbsp;keystore 密码。与 `--keystore` 一起使用。
+&nbsp;&nbsp;&nbsp;&nbsp;环境变量: `ETH_PASSWORD`
+```

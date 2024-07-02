@@ -1,6 +1,6 @@
 ## `assertLt`
 
-### Signature
+### 签名
 
 ```solidity
 function assertLt(uint256 left, uint256 right) internal;
@@ -18,13 +18,13 @@ function assertLt(int256 left, int256 right) internal;
 function assertLt(int256 left, int256 right, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `left` is strictly less than `right`.
+断言 `left` 严格小于 `right`。
 
-Optionally includes an error message in the revert string.
+可选地包含一个错误消息在回退字符串中。
 
-### SEE ALSO
+### 另请参阅
 
 - [`assertLtDecimal`](./assertLtDecimal.md)
 - [`assertLe`](./assertLe.md)

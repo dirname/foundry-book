@@ -1,6 +1,6 @@
 ## `prank`
 
-### Signature
+### 签名
 
 ```solidity
 function prank(address) external;
@@ -10,13 +10,13 @@ function prank(address) external;
 function prank(address sender, address origin) external;
 ```
 
-### Description
+### 描述
 
-Sets `msg.sender` to the specified address **for the next call**. "The next call" includes static calls as well, but not calls to the cheat code address.
+将 `msg.sender` 设置为指定的地址 **仅对下一次调用** 有效。"下一次调用" 包括静态调用，但不包括对作弊码地址的调用。
 
-If the alternative signature of `prank` is used, then `tx.origin` is set as well for the next call.
+如果使用 `prank` 的替代签名，则 `tx.origin` 也会在下一次调用中被设置。
 
-### Examples
+### 示例
 
 ```solidity
 /// function withdraw() public {
@@ -26,8 +26,8 @@ vm.prank(owner);
 myContract.withdraw(); // [PASS]
 ```
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
+Forge 标准库
 
 [`hoax`](../reference/forge-std/hoax.md)

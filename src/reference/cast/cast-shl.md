@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-shl - Perform a left shifting operation.
+cast-shl - 执行左移操作。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-shl - Perform a left shifting operation.
 
 ### DESCRIPTION
 
-Perform a left shifting operation.
+执行左移操作。
 
 ### OPTIONS
 
@@ -20,12 +20,12 @@ Perform a left shifting operation.
 
 ### EXAMPLES
 
-1. Perform a 3 position left bit shift of the number 61
+1. 对数字 61 执行 3 位左移
     ```sh
     cast shl --base-in 10 61 3
     ```
 
-> Note: The --base-in parameter is not enforced but will be needed if the input is ambiguous.
+> 注意：--base-in 参数不是强制的，但如果输入不明确则需要使用。
 
 ### SEE ALSO
 

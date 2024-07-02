@@ -1,23 +1,19 @@
-## Overview of Chisel
+## Chisel 概述
 
-Chisel is an advanced Solidity REPL shipped with Foundry. It can be used to quickly test the behavior of Solidity snippets
-on a local or forked network.
+Chisel 是 Foundry 附带的高级 Solidity REPL。它可以在本地或分叉网络上快速测试 Solidity 代码片段的行为。
 
-Chisel is part of the Foundry suite and is installed alongside `forge`, `cast`, and `anvil`. If you haven't installed Foundry
-yet, see [Foundry installation](../getting-started/installation.md). 
+Chisel 是 Foundry 套件的一部分，与 `forge`、`cast` 和 `anvil` 一起安装。如果您还没有安装 Foundry，请参阅 [Foundry 安装](../getting-started/installation.md)。
 
-> Note: If you have an older version of Foundry installed, you'll need to re-install `foundryup` in order for Chisel to be downloaded.
+> 注意：如果您安装了旧版本的 Foundry，则需要重新安装 `foundryup` 以便下载 Chisel。
 
-### How to use Chisel
+### 如何使用 Chisel
 
-To use Chisel, simply type `chisel`. From there, start writing Solidity code! Chisel will offer verbose feedback on each input.
+要使用 Chisel，只需输入 `chisel`。然后，开始编写 Solidity 代码！Chisel 将对每个输入提供详细的反馈。
 
-Chisel can be used both within and outside of a foundry project. If the binary is executed in a Foundry project root, Chisel will
-inherit the project's configuration options.
+Chisel 可以在 Foundry 项目内部和外部使用。如果在 Foundry 项目根目录中执行二进制文件，Chisel 将继承项目的配置选项。
 
-To see available commands, type `!help` within the REPL.
+要查看可用命令，请在 REPL 中输入 `!help`。
 
-> 📚 **Reference**
+> 📚 **参考**
 >
-> See the [`chisel` Reference](../reference/chisel/) for in depth information on Chisel and its capabilities.
-
+> 有关 Chisel 及其功能的深入信息，请参阅 [`chisel` 参考](../reference/chisel/)。

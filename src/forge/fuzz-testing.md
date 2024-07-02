@@ -1,26 +1,26 @@
-## Fuzz Testing
+## 模糊测试
 
-Forge supports property based testing.
+Forge 支持基于属性的测试。
 
-Property-based testing is a way of testing general behaviors as opposed to isolated scenarios.
+基于属性的测试是一种测试通用行为而非孤立场景的方法。
 
-Let's examine what that means by writing a unit test, finding the general property we are testing for, and converting it to a property-based test instead:
+让我们通过编写一个单元测试，找出我们正在测试的通用属性，并将其转换为基于属性的测试来理解这意味着什么：
 
 ```solidity
 {{#include ../../projects/fuzz_testing/test/Safe.t.sol.1:all}}
 ```
 
-Running the test, we see it passes:
+运行测试，我们看到它通过了：
 
 ```sh
 {{#include ../output/fuzz_testing/forge-test-no-fuzz:all}}
 ```
 
-This unit test _does test_ that we can withdraw ether from our safe. However, who is to say that it works for all amounts, not just 1 ether?
+这个单元测试确实测试了我们可以从安全合约中提取以太币。然而，谁又能说它对所有金额都有效，而不仅仅是 1 以太币呢？
 
-The general property here is: given a safe balance, when we withdraw, we should get whatever is in the safe.
+这里的通用属性是：给定一个安全余额，当我们提取时，我们应该得到安全合约中的所有以太币。
 
-Forge will run any test that takes at least one parameter as a property-based test, so let's rewrite:
+Forge 会将任何至少有一个参数的测试视为基于属性的测试，所以让我们重写：
 
 ```solidity
 {{#include ../../projects/fuzz_testing/test/Safe.t.sol.2:contract_prelude}}
@@ -30,69 +30,69 @@ Forge will run any test that takes at least one parameter as a property-based te
 }
 ```
 
-If we run the test now, we can see that Forge runs the property-based test, but it fails for high values of `amount`:
+如果我们现在运行测试，我们可以看到 Forge 运行了基于属性的测试，但对于高值的 `amount` 它会失败：
 
 ```sh
 $ forge test
 {{#include ../output/fuzz_testing/forge-test-fail-fuzz:output}}
 ```
 
-The default amount of ether that the test contract is given is `2**96 wei` (as in DappTools), so we have to restrict the type of amount to `uint96` to make sure we don't try to send more than we have:
+默认情况下，测试合约被赋予的以太币数量是 `2**96 wei`（类似于 DappTools），所以我们必须将 `amount` 的类型限制为 `uint96`，以确保我们不会尝试发送超过我们拥有的数量：
 
 ```solidity
 {{#include ../../projects/fuzz_testing/test/Safe.t.sol.3:signature}}
 ```
 
-And now it passes:
+现在它通过了：
 
 ```sh
 {{#include ../output/fuzz_testing/forge-test-success-fuzz:all}}
 ```
 
-You may want to exclude certain cases using the [`assume`](../cheatcodes/assume.md) cheatcode. In those cases, fuzzer will discard the inputs and start a new fuzz run:
+你可能希望使用 [`assume`](../cheatcodes/assume.md) 作弊码排除某些情况。在这些情况下，模糊器将丢弃输入并开始新的模糊运行：
 
 ```solidity
 function testFuzz_Withdraw(uint96 amount) public {
     vm.assume(amount > 0.1 ether);
-    // snip
+    // 省略
 }
 ```
 
-There are different ways to run property-based tests, notably parametric testing and fuzzing. Forge only supports fuzzing.
+有不同的方法来运行基于属性的测试，特别是参数化测试和模糊测试。Forge 仅支持模糊测试。
 
-### Interpreting results
+### 解释结果
 
-You might have noticed that fuzz tests are summarized a bit differently compared to unit tests:
+你可能注意到模糊测试与单元测试的总结方式略有不同：
 
-- "runs" refers to the amount of scenarios the fuzzer tested. By default, the fuzzer will generate 256 scenarios, but this and other test execution parameters can be setup by the user. Fuzzer configuration details are provided [`here`](#configuring-fuzz-test-execution).
-- "μ" (Greek letter mu) is the mean gas used across all fuzz runs
-- "~" (tilde) is the median gas used across all fuzz runs
+- "runs" 指的是模糊器测试的场景数量。默认情况下，模糊器将生成 256 个场景，但用户可以设置此参数和其他测试执行参数。模糊器配置详情请参见 [`这里`](#configuring-fuzz-test-execution)。
+- "μ"（希腊字母 mu）是所有模糊运行中使用的平均气体量
+- "~"（波浪号）是所有模糊运行中使用的中位气体量
 
-### Configuring fuzz test execution
+### 配置模糊测试执行
 
-Fuzz tests execution is governed by parameters that can be controlled by users via Forge configuration primitives. Configs can be applied globally or on a per-test basis. For details on this topic please refer to
- 📚 [`Global config`](../reference/config/testing.md) and 📚 [`In-line config`](../reference/config/inline-test-config.md).
+模糊测试执行由用户可以通过 Forge 配置原语控制的参数管理。配置可以全局应用或在每个测试基础上应用。有关此主题的详细信息，请参见
+ 📚 [`全局配置`](../reference/config/testing.md) 和 📚 [`内联配置`](../reference/config/inline-test-config.md)。
 
-#### Fuzz test fixtures
+#### 模糊测试固定装置
 
-Fuzz test fixtures can be defined when you want to make sure a certain set of values is used as inputs for fuzzed parameters.
-These fixtures can be declared in tests as:
+当你希望确保一组特定的值用作模糊参数的输入时，可以定义模糊测试固定装置。
+这些固定装置可以在测试中声明为：
 
-- storage arrays prefixed with `fixture` and followed by param name to be fuzzed. For example, fixtures to be used when fuzzing parameter `amount` of type `uint32` can be defined as
+- 以 `fixture` 为前缀的存储数组，后跟要模糊的参数名称。例如，当模糊参数 `amount` 类型为 `uint32` 时，可以定义为
 
 ```solidity
 uint32[] public fixtureAmount = [1, 5, 555];
 ```
 
-- functions named with `fixture` prefix, followed by param name to be fuzzed. Function should return an (fixed size or dynamic) array of values to be used for fuzzing. For example, fixtures to be used when fuzzing parameter named `owner` of type `address` can be defined in a function with signature
+- 以 `fixture` 为前缀的函数，后跟要模糊的参数名称。函数应返回用于模糊的值数组（固定大小或动态）。例如，当模糊参数名为 `owner` 类型为 `address` 时，可以定义为
 
 ```solidity
 function fixtureOwner() public returns (address[] memory)
 ```
 
-If the type of value provided as a fixture is not the same type as the named parameter to be fuzzed then it is rejected and an error is raised.
+如果提供的固定装置值类型与要模糊的命名参数类型不同，则会被拒绝并引发错误。
 
-An example where fixture could be use is to reproduce the `DSChief` vulnerability. Consider the 2 functions
+一个可以使用固定装置的例子是重现 `DSChief` 漏洞。考虑以下两个函数
 
 ```solidity
     function etch(address yay) public returns (bytes32 slate) {
@@ -111,8 +111,7 @@ An example where fixture could be use is to reproduce the `DSChief` vulnerabilit
     }
 ```
 
-where the vulnerability can be reproduced by calling `voteSlate` before `etch`, with `slate` value being a hash of `yay` address.
-To make sure fuzzer includes in the same run a `slate` value derived from a `yay` address, following fixtures can be defined:
+漏洞可以通过在 `etch` 之前调用 `voteSlate`，并将 `slate` 值作为 `yay` 地址的哈希来重现。为了确保模糊器在同一运行中包含从 `yay` 地址派生的 `slate` 值，可以定义以下固定装置：
 
 ```solidity
     address[] public fixtureYay = [
@@ -128,5 +127,5 @@ To make sure fuzzer includes in the same run a `slate` value derived from a `yay
     ];
 ```
 
-Following image shows how fuzzer generates values with and without fixtures being declared:
+以下图像显示了模糊器在声明和不声明固定装置时生成值的情况：
 ![Fuzzer](../images/fuzzer.png)

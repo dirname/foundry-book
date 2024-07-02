@@ -1,6 +1,6 @@
 ## `sig`
 
-### Signature
+### 签名
 
 ```solidity
 function sig(StdStorage storage self, bytes4 _sig) internal returns (StdStorage storage);
@@ -10,13 +10,13 @@ function sig(StdStorage storage self, bytes4 _sig) internal returns (StdStorage 
 function sig(StdStorage storage self, string memory _sig) internal returns (StdStorage storage);
 ```
 
-### Description
+### 描述
 
-Sets the 4-byte selector of the function to static call.
+设置静态调用的函数 4 字节选择器。
 
-Default value: `hex"00000000"`
+默认值：`hex"00000000"`
 
-### Examples
+### 示例
 
 ```solidity
 uint256 slot = stdstore

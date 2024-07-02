@@ -1,15 +1,17 @@
+```markdown
 # cast to-hex
 
-Converts a number of one base to another
+将一个基数的数字转换为另一个基数
 
 ```bash
 $ cast to-hex --help
 Usage: cast to-hex [OPTIONS] [VALUE]
 
 Arguments:
-  [VALUE]  The value to convert
+  [VALUE]  要转换的值
 
 Options:
-  -i, --base-in <BASE_IN>  The input base
-  -h, --help               Print help
+  -i, --base-in <BASE_IN>  输入的基数
+  -h, --help               打印帮助信息
+```
 ```

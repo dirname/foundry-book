@@ -1,42 +1,42 @@
-## Documentation Generator
+## 文档生成器
 
-Configuration related to the behavior of the Forge documentation generator. These keys are set in `[doc]` section.
+与 Forge 文档生成器行为相关的配置。这些键设置在 `[doc]` 部分。
 
 ##### `out`
 
-- Type: string
-- Default: `docs`
-- Environment: `FOUNDRY_DOC_OUT`
+- 类型: 字符串
+- 默认值: `docs`
+- 环境变量: `FOUNDRY_DOC_OUT`
 
-An output path for generated documentation.
+生成文档的输出路径。
 
 ##### `title`
 
-- Type: string
-- Environment: `FOUNDRY_DOC_TITLE`
+- 类型: 字符串
+- 环境变量: `FOUNDRY_DOC_TITLE`
 
-Title for the generated documentation.
+生成文档的标题。
 
 ##### `book`
 
-- Type: string
-- Default: `./book.toml`
-- Environment: `FOUNDRY_DOC_BOOK`
+- 类型: 字符串
+- 默认值: `./book.toml`
+- 环境变量: `FOUNDRY_DOC_BOOK`
 
-Path to user provided `book.toml`. It will be merged with default settings during doc generation.
+用户提供的 `book.toml` 路径。在生成文档时，它将与默认设置合并。
 
 ##### `repository`
 
-- Type: string
-- Environment: `FOUNDRY_DOC_REPOSITORY`
+- 类型: 字符串
+- 环境变量: `FOUNDRY_DOC_REPOSITORY`
 
-The git repository URL. Used to provide links to git source files.
-If missing, `forge` will attempt to look up the current origin url and use its value.
+Git 仓库的 URL。用于提供指向 Git 源文件的链接。
+如果缺失，`forge` 将尝试查找当前的 origin URL 并使用其值。
 
 ##### `ignore`
 
-- Type: array of strings (patterns)
-- Default: `[]`
-- Environment: `FOUNDRY_DOC_IGNORE`
+- 类型: 字符串数组（模式）
+- 默认值: `[]`
+- 环境变量: `FOUNDRY_DOC_IGNORE`
 
-List of files to ignore when generating documentation. This is a comma separated list of glob patterns.
+生成文档时要忽略的文件列表。这是一个逗号分隔的 glob 模式列表。

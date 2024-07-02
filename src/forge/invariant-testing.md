@@ -1,42 +1,43 @@
-# Invariant Testing
-## Overview
+# 不变性测试
 
-Invariant testing allows for a set of invariant expressions to be tested against randomized sequences of pre-defined function calls from pre-defined contracts. After each function call is performed, all defined invariants are asserted.
+## 概述
 
-Invariant testing is a powerful tool to expose incorrect logic in protocols. Due to the fact that function call sequences are randomized and have fuzzed inputs, invariant testing can expose false assumptions and incorrect logic in edge cases and highly complex protocol states.
+不变性测试允许对一组不变性表达式进行测试，这些表达式针对预定义合约中的预定义函数调用的随机序列进行测试。在每次函数调用之后，都会断言所有定义的不变性。
 
-Invariant testing campaigns have two dimensions, `runs` and `depth`:
-- `runs`: Number of times that a sequence of function calls is generated and run.
-- `depth`: Number of function calls made in a given `run`. All defined invariants are asserted after each function call is made. If a function call reverts, the `depth` counter still increments.
+不变性测试是一种强大的工具，可以揭示协议中的逻辑错误。由于函数调用序列是随机的，并且输入是模糊的，不变性测试可以揭示边缘情况和高度复杂协议状态下的错误假设和不正确逻辑。
 
-These and other invariant configuration aspects are explained [`here`](#configuring-invariant-test-execution).
+不变性测试活动有两个维度，`runs` 和 `depth`：
+- `runs`：生成和运行的函数调用序列的次数。
+- `depth`：在给定的 `run` 中进行的函数调用次数。每次函数调用后都会断言所有定义的不变性。如果函数调用失败，`depth` 计数器仍然会增加。
 
-Similar to how standard tests are run in Foundry by prefixing a function name with `test`, invariant tests are denoted by prefixing the function name with `invariant` (e.g., `function invariant_A()`).
+这些和其他不变性配置方面在[这里](#configuring-invariant-test-execution)解释。
 
-`afterInvariant()` function is called at the end of each invariant run (if declared), allowing post campaign processing. This function can be used for logging campaign metrics (e.g. how many times a selector was called) and post fuzz campaign testing (e.g. close out all positions and assert all funds are able to exit the system).
+与在 Foundry 中通过在函数名称前加上 `test` 来运行标准测试类似，不变性测试通过在函数名称前加上 `invariant` 来表示（例如，`function invariant_A()`）。
 
-### Configuring invariant test execution
+`afterInvariant()` 函数在每次不变性运行结束时调用（如果声明了），允许进行后活动处理。此函数可用于记录活动指标（例如，选择器被调用的次数）和后模糊活动测试（例如，关闭所有头寸并断言所有资金能够退出系统）。
 
-Invariant tests execution is governed by parameters that can be controlled by users via Forge configuration primitives. Configs can be applied globally or on a per-test basis. For details on this topic please refer to
- 📚 [`Global config`](../reference/config/testing.md) and 📚 [`In-line config`](../reference/config/inline-test-config.md).
+### 配置不变性测试执行
 
-## Defining Invariants
+不变性测试执行由用户可以通过 Forge 配置原语控制的参数管理。配置可以全局应用或按测试应用。有关此主题的详细信息，请参阅
+ 📚 [`全局配置`](../reference/config/testing.md) 和 📚 [`内联配置`](../reference/config/inline-test-config.md)。
 
-Invariants are conditions expressions that should always hold true over the course of a fuzzing campaign. A good invariant testing suite should have as many invariants as possible, and can have different testing suites for different protocol states.
+## 定义不变性
 
-Examples of invariants are:
-- *"The xy=k formula always holds"* for Uniswap
-- *"The sum of all user balances is equal to the total supply"* for an ERC-20 token.
+不变性是应该在整个模糊活动过程中始终保持为真的条件表达式。一个好的不变性测试套件应该尽可能多地包含不变性，并且可以为不同的协议状态提供不同的测试套件。
 
-There are different ways to assert invariants, as outlined in the table below:
+不变性的例子包括：
+- *"xy=k 公式总是成立"* 对于 Uniswap
+- *"所有用户余额的总和等于总供应量"* 对于 ERC-20 代币。
+
+有不同的方式来断言不变性，如下表所述：
 
 <table>
-<tr><th>Type</th><th>Explanation</th><th>Example</th></tr>
+<tr><th>类型</th><th>解释</th><th>示例</th></tr>
 
 <tr>
 
-<td>Direct assertions</td>
-<td>Query a protocol smart contract and assert values are as expected.</td>
+<td>直接断言</td>
+<td>查询协议智能合约并断言值符合预期。</td>
 <td>
 
 ```solidity
@@ -51,8 +52,8 @@ assertGe(
 
 <tr>
 
-<td>Ghost variable assertions</td>
-<td>Query a protocol smart contract and compare it against a value that has been persisted in the test environment (ghost variable).</td>
+<td>幽灵变量断言</td>
+<td>查询协议智能合约并将其与测试环境中持久化的值（幽灵变量）进行比较。</td>
 <td>
 
 ```solidity
@@ -67,8 +68,8 @@ assertEq(
 
 <tr>
 
-<td>Deoptimizing (Naive implementation assertions)</td>
-<td>Query a protocol smart contract and compare it against a naive and typically highly gas-inefficient implementation of the same desired logic.</td>
+<td>去优化（朴素实现断言）</td>
+<td>查询协议智能合约并将其与相同逻辑的朴素且通常非常低效的实现进行比较。</td>
 <td>
 
 ```solidity
@@ -82,11 +83,11 @@ assertEq(
 </tr>
 </table>
 
-### Conditional Invariants
+### 条件不变性
 
-Invariants must hold over the course of a given fuzzing campaign, but that doesn't mean they must hold true in every situation. There is the possibility for certain invariants to be introduced/removed in a given scenario (e.g., during a liquidation).
+不变性必须在给定的模糊活动过程中保持，但这并不意味着它们必须在每种情况下都成立。在某些情况下，可能会有某些不变性被引入/移除（例如，在清算期间）。
 
-It is not recommended to introduce conditional logic into invariant assertions because they have the possibility of introducing false positives because of an incorrect code path. For example:
+不建议在不变性断言中引入条件逻辑，因为它们有可能引入误报，因为代码路径不正确。例如：
 
 ```solidity
 function invariant_example() external {
@@ -96,7 +97,7 @@ function invariant_example() external {
 }
 ```
 
-In this situation, if `protocolCondition == true`, the invariant is not asserted at all. Sometimes this can be desired behavior, but it can cause issues if the `protocolCondition` is true for the whole fuzzing campaign unexpectedly, or there is a logic error in the condition itself. For this reason its better to try and define an alternative invariant for that condition as well, for example:
+在这种情况下，如果 `protocolCondition == true`，则根本不会断言不变性。有时这可能是期望的行为，但如果 `protocolCondition` 在整个模糊活动中意外为真，或者条件本身存在逻辑错误，则可能会导致问题。因此，最好尝试为该条件定义一个替代不变性，例如：
 
 ```solidity
 function invariant_example() external {
@@ -109,31 +110,31 @@ function invariant_example() external {
 }
 ```
 
-Another approach to handle different invariants across protocol states is to utilize dedicated invariant testing contracts for different scenarios. These scenarios can be bootstrapped using the `setUp` function, but it is more powerful to leverage *invariant targets* to govern the fuzzer to behave in a way that will only yield certain results (e.g., avoid liquidations).
+处理不同协议状态下的不同不变性的另一种方法是利用针对不同场景的专用不变性测试合约。这些场景可以使用 `setUp` 函数进行引导，但更强大的方法是利用 *不变性目标* 来控制模糊器以某种方式行为，从而仅产生某些结果（例如，避免清算）。
 
-## Invariant Targets
+## 不变性目标
 
-**Target Contracts**: The set of contracts that will be called over the course of a given invariant test fuzzing campaign. This set of contracts defaults to all contracts that were deployed in the `setUp` function, but can be customized to allow for more advanced invariant testing.
+**目标合约**：在给定的不变性测试模糊活动中将被调用的一组合约。这组合约默认是 `setUp` 函数中部署的所有合约，但可以自定义以允许更高级的不变性测试。
 
-**Target Senders**: The invariant test fuzzer picks values for `msg.sender` at random when performing fuzz campaigns to simulate multiple actors in a system by default. If desired, the set of senders can be customized in the `setUp` function.
+**目标发送者**：不变性测试模糊器在执行模糊活动时随机选择 `msg.sender` 的值，以默认模拟系统中的多个参与者。如果需要，可以在 `setUp` 函数中自定义发送者集合。
 
-**Target Interfaces**: The set of addresses and their project identifiers that are not deployed during `setUp` but fuzzed in a forked environment (E.g. `[(0x1, ["IERC20"]), (0x2, ("IOwnable"))]`). This enables targeting of delegate proxies and contracts deployed with `create` or `create2`.
+**目标接口**：在 `setUp` 期间未部署但在分叉环境中模糊的地址及其项目标识符集合（例如，`[(0x1, ["IERC20"]), (0x2, ("IOwnable"))]`）。这使得可以针对代理和使用 `create` 或 `create2` 部署的合约进行模糊。
 
-**Target Selectors**: The set of function selectors that are used by the fuzzer for invariant testing. These can be used to use a subset of functions within a given target contract.
+**目标选择器**：模糊器用于不变性测试的函数选择器集合。这些可以用于在给定目标合约中使用函数子集。
 
-**Target Artifacts**: The desired ABI to be used for a given contract. These can be used for proxy contract configurations.
+**目标构件**：给定合约使用的所需 ABI。这些可以用于代理合约配置。
 
-**Target Artifact Selectors**: The desired subset of function selectors to be used within a given ABI to be used for a given contract. These can be used for proxy contract configurations.
+**目标构件选择器**：在给定 ABI 中使用的所需函数选择器子集。这些可以用于代理合约配置。
 
-Priorities for the invariant fuzzer in the cases of target clashes are:
+在目标冲突的情况下，不变性模糊器的优先级是：
 
 `targetInterfaces | targetSelectors > excludeSelectors | targetArtifactSelectors > excludeContracts | excludeArtifacts > targetContracts | targetArtifacts`
 
-### Function Call Probability Distribution
+### 函数调用概率分布
 
-Functions from these contracts will be called at random (with a uniformly distributed probability) with fuzzed inputs.
+这些合约中的函数将以随机（均匀分布的概率）调用，并带有模糊输入。
 
-For example:
+例如：
 
 ```text
 targetContract1:
@@ -146,35 +147,35 @@ targetContract2:
 └─ function3: 20%
 ```
 
-This is something to be mindful of when designing target contracts, as target contracts with less functions will have each function called more often due to this probability distribution.
+在设计目标合约时需要注意这一点，因为函数较少的合约中的每个函数会由于这种概率分布而被更频繁地调用。
 
-### Invariant Test Helper Functions
-Invariant test helper functions are included in [`forge-std`](https://github.com/foundry-rs/forge-std/blob/master/src/StdInvariant.sol) to allow for configurable invariant test setup. The helper functions are outlined below:
+### 不变性测试辅助函数
+不变性测试辅助函数包含在 [`forge-std`](https://github.com/foundry-rs/forge-std/blob/master/src/StdInvariant.sol) 中，以允许可配置的不变性测试设置。辅助函数如下所述：
 
-| Function | Description |
+| 函数 | 描述 |
 |-|-|
-| `excludeContract(address newExcludedContract_)` | Adds a given address to the `_excludedContracts` array. This set of contracts is explicitly excluded from the target contracts.|
-| `excludeSelector(FuzzSelector memory newExcludedSelector_)` | Adds a given `FuzzSelector` to the `_excludedSelectors` array. This set of `FuzzSelector`s is explicitly excluded from the target contract selectors. |
-| `excludeSender(address newExcludedSender_)` | Adds a given address to the `_excludedSenders` array. This set of addresses is explicitly excluded from the target senders. |
-| `excludeArtifact(string memory newExcludedArtifact_)` | Adds a given string to the `_excludedArtifacts` array. This set of strings is explicitly excluded from the target artifacts. |
-| `targetArtifact(string memory newTargetedArtifact_)` | Adds a given string to the `_targetedArtifacts` array. This set of strings is used for the target artifacts.  |
-| `targetArtifactSelector(FuzzArtifactSelector memory newTargetedArtifactSelector_)` | Adds a given `FuzzArtifactSelector` to the `_targetedArtifactSelectors` array. This set of `FuzzArtifactSelector`s is used for the target artifact selectors. |
-| `targetContract(address newTargetedContract_)` | Adds a given address to the `_targetedContracts` array. This set of addresses is used for the target contracts. This array overwrites the set of contracts that was deployed during the `setUp`. |
-| `targetSelector(FuzzSelector memory newTargetedSelector_)` | Adds a given `FuzzSelector` to the `_targetedSelectors` array. This set of `FuzzSelector`s is used for the target contract selectors. |
-| `targetSender(address newTargetedSender_)` | Adds a given address to the `_targetedSenders` array. This set of addresses is used for the target senders. |
-| `targetInterface(FuzzInterface memory newTargetedInterface_)` | Adds a given `FuzzInterface` to the `_targetedInterfaces` array. This set of `FuzzInterface` extends the contracts and selectors to fuzz and enables targeting of addresses that are not deployed during `setUp` such as when fuzzing in a forked environment. Also enables targeting of delegate proxies and contracts deployed with `create` or `create2`. |
+| `excludeContract(address newExcludedContract_)` | 将给定地址添加到 `_excludedContracts` 数组中。这组合约明确排除在目标合约之外。|
+| `excludeSelector(FuzzSelector memory newExcludedSelector_)` | 将给定 `FuzzSelector` 添加到 `_excludedSelectors` 数组中。这组 `FuzzSelector` 明确排除在目标合约选择器之外。 |
+| `excludeSender(address newExcludedSender_)` | 将给定地址添加到 `_excludedSenders` 数组中。这组地址明确排除在目标发送者之外。 |
+| `excludeArtifact(string memory newExcludedArtifact_)` | 将给定字符串添加到 `_excludedArtifacts` 数组中。这组字符串明确排除在目标构件之外。 |
+| `targetArtifact(string memory newTargetedArtifact_)` | 将给定字符串添加到 `_targetedArtifacts` 数组中。这组字符串用于目标构件。  |
+| `targetArtifactSelector(FuzzArtifactSelector memory newTargetedArtifactSelector_)` | 将给定 `FuzzArtifactSelector` 添加到 `_targetedArtifactSelectors` 数组中。这组 `FuzzArtifactSelector` 用于目标构件选择器。 |
+| `targetContract(address newTargetedContract_)` | 将给定地址添加到 `_targetedContracts` 数组中。这组地址用于目标合约。这数组覆盖了 `setUp` 期间部署的合约集合。 |
+| `targetSelector(FuzzSelector memory newTargetedSelector_)` | 将给定 `FuzzSelector` 添加到 `_targetedSelectors` 数组中。这组 `FuzzSelector` 用于目标合约选择器。 |
+| `targetSender(address newTargetedSender_)` | 将给定地址添加到 `_targetedSenders` 数组中。这组地址用于目标发送者。 |
+| `targetInterface(FuzzInterface memory newTargetedInterface_)` | 将给定 `FuzzInterface` 添加到 `_targetedInterfaces` 数组中。这组 `FuzzInterface` 扩展了要模糊的合约和选择器，并启用了在 `setUp` 期间未部署的地址的模糊，例如在分叉环境中模糊时。还启用了代理和使用 `create` 或 `create2` 部署的合约的模糊。 |
 
-### Target Contract Setup
+### 目标合约设置
 
-Target contracts can be set up using the following three methods:
-1. Contracts that are manually added to the `targetContracts` array are added to the set of target contracts.
-2. Contracts that are deployed in the `setUp` function are automatically added to the set of target contracts (only works if no contracts have been manually added using option 1).
-3. Contracts that are deployed in the `setUp` can be **removed** from the target contracts if they are added to the `excludeContracts` array.
+目标合约可以通过以下三种方法设置：
+1. 手动添加到 `targetContracts` 数组的合约将添加到目标合约集合中。
+2. 在 `setUp` 函数中部署的合约将自动添加到目标合约集合中（仅在未使用选项 1 手动添加合约时有效）。
+3. 在 `setUp` 中部署的合约可以**移除**目标合约，如果它们被添加到 `excludeContracts` 数组中。
 
 
-## Open Testing
+## 开放测试
 
-The default configuration for target contracts is set to all contracts that are deployed during the setup. For smaller modules and more arithmetic contracts, this works well. For example:
+目标合约的默认配置设置为在设置期间部署的所有合约。对于较小的模块和更多算术合约，这效果很好。例如：
 
 ```solidity
 contract ExampleContract1 {
@@ -196,7 +197,7 @@ contract ExampleContract1 {
 }
 ```
 
-This contract could be deployed and tested using the default target contract pattern:
+这个合约可以部署并使用默认目标合约模式进行测试：
 
 ```solidity
 contract InvariantExample1 is Test {
@@ -218,16 +219,16 @@ contract InvariantExample1 is Test {
 }
 ```
 
-This setup will call `foo.addToA()` and `foo.addToB()` with a 50%-50% probability distribution with fuzzed inputs. Inevitably, the inputs will start to cause overflows and the function calls will start reverting. Since the default configuration in invariant testing is `fail_on_revert = false`, this will not cause the tests to fail. The invariants will hold throughout the rest of the fuzzing campaign and the result is that the test will pass. The output will look something like this:
+这种设置将以 50%-50% 的概率分布调用 `foo.addToA()` 和 `foo.addToB()`，并带有模糊输入。不可避免地，输入将开始导致溢出，函数调用将开始失败。由于不变性测试中的默认配置是 `fail_on_revert = false`，这不会导致测试失败。不变性将在其余的模糊活动中保持，结果是测试将通过。输出将如下所示：
 
 ```text
 [PASS] invariant_A() (runs: 50, calls: 10000, reverts: 5533)
 [PASS] invariant_B() (runs: 50, calls: 10000, reverts: 5533)
 ```
 
-## Handler-Based Testing
+## 基于处理器的测试
 
-For more complex and integrated protocols, more sophisticated target contract usage is required to achieve the desired results. To illustrate how Handlers can be leveraged, the following contract will be used (an ERC-4626 based contract that accepts deposits of another ERC-20 token):
+对于更复杂和集成的协议，需要更复杂的目标合约使用才能达到预期结果。为了说明如何利用处理器，以下合约将被使用（一个基于 ERC-4626 的合约，接受另一个 ERC-20 代币的存款）：
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -248,7 +249,7 @@ interface IERC20Like {
 contract Basic4626Deposit {
 
     /**********************************************************************************************/
-    /*** Storage                                                                                ***/
+    /*** 存储                                                                                ***/
     /**********************************************************************************************/
 
     address public immutable asset;
@@ -263,7 +264,7 @@ contract Basic4626Deposit {
     mapping(address => uint256) public balanceOf;
 
     /**********************************************************************************************/
-    /*** Constructor                                                                            ***/
+    /*** 构造函数                                                                            ***/
     /**********************************************************************************************/
 
     constructor(address asset_, string memory name_, string memory symbol_, uint8 decimals_) {
@@ -274,7 +275,7 @@ contract Basic4626Deposit {
     }
 
     /**********************************************************************************************/
-    /*** External Functions                                                                     ***/
+    /*** 外部函数                                                                     ***/
     /**********************************************************************************************/
 
     function deposit(uint256 assets_, address receiver_) external returns (uint256 shares_) {
@@ -306,7 +307,7 @@ contract Basic4626Deposit {
     }
 
     /**********************************************************************************************/
-    /*** Public View Functions                                                                  ***/
+    /*** 公共视图函数                                                                  ***/
     /**********************************************************************************************/
 
     function convertToShares(uint256 assets_) public view returns (uint256 shares_) {
@@ -323,9 +324,9 @@ contract Basic4626Deposit {
 
 ```
 
-### Handler Functions
+### 处理器函数
 
-This contract's `deposit` function requires that the caller has a non-zero balance of the ERC-20 `asset`. In the Open invariant testing approach, `deposit()` and `transfer()` would be called with a 50-50% distribution, but they would revert on every call. This would cause the invariant tests to "pass", but in reality no state was manipulated in the desired contract at all. This is where target contracts can be leveraged. When a contract requires some additional logic in order to function properly, it can be added in a dedicated contract called a `Handler`.
+这个合约的 `deposit` 函数要求调用者拥有 ERC-20 `asset` 的非零余额。在开放不变性测试方法中，`deposit()` 和 `transfer()` 将以 50-50% 的分布调用，但它们会在每次调用时失败。这将导致不变性测试“通过”，但实际上根本没有在所需合约中操纵任何状态。这就是可以利用目标合约的地方。当合约需要一些额外的逻辑才能正常工作时，可以在一个称为 `Handler` 的专用合约中添加它。
 
 ```solidity
 function deposit(uint256 assets) public virtual {
@@ -337,21 +338,21 @@ function deposit(uint256 assets) public virtual {
 }
 ```
 
-This contract will provide the necessary setup before a function call is made in order to ensure it is successful.
+这个合约将在进行函数调用之前提供必要的设置，以确保其成功。
 
-Building on this concept, Handlers can be used to develop more sophisticated invariant tests. With Open invariant testing, the tests run as shown in the diagram below, with random sequences of function calls being made to the protocol contracts directly with fuzzed parameters. This will cause reverts for more complex systems as outlined above.
+在此概念的基础上，处理器可以用于开发更复杂的不变性测试。通过开放不变性测试，测试运行如下图所示，随机序列的函数调用直接使用模糊参数对协议合约进行调用。这将导致更复杂系统中的失败，如上所述。
 
 ![Blank diagram](https://user-images.githubusercontent.com/44272939/214752968-5f0e7653-d52e-43e6-b453-cac935f5d97d.svg)
 
-By manually adding all Handler contracts to the `targetContracts` array, all function calls made to protocol contracts can be made in a way that is governed by the Handler to ensure successful calls. This is outlined in the diagram below.
+通过手动将所有处理器合约添加到 `targetContracts` 数组中，可以确保对协议合约的所有函数调用都由处理器控制，以确保成功调用。这在下图中有详细说明。
 
 ![Invariant Diagrams - Page 2](https://user-images.githubusercontent.com/44272939/216420091-8a5c2bcc-d586-458f-be1e-a9ea0ef5961f.svg)
 
-With this layer between the fuzzer and the protocol, more powerful testing can be achieved.
+通过这种模糊器和协议之间的层，可以实现更强大的测试。
 
-### Handler Ghost Variables
+### 处理器幽灵变量
 
-Within Handlers, "ghost variables" can be tracked across multiple function calls to add additional information for invariant tests. A good example of this is summing all of the `shares` that each LP owns after depositing into the ERC-4626 token as shown above, and using that in the invariant (`totalSupply == sumBalanceOf`).
+在处理器中，可以跨多个函数调用跟踪“幽灵变量”，以为不变性测试添加额外信息。一个很好的例子是将在 ERC-4626 代币中存款后每个 LP 拥有的 `shares` 总和，并使用该不变性（`totalSupply == sumBalanceOf`）。
 
 ```solidity
 function deposit(uint256 assets) public virtual {
@@ -365,9 +366,9 @@ function deposit(uint256 assets) public virtual {
 }
 ```
 
-### Function-Level Assertions
+### 函数级断言
 
-Another benefit is the ability to perform assertions on function calls as they are happening. An example is asserting the ERC-20 balance of the LP has decremented by `assets` during the `deposit` function call, as well as their LP token balance incrementing by `shares`. In this way, handler functions are similar to fuzz tests because they can take in fuzzed inputs, perform state changes, and assert before/after state.
+另一个好处是能够在函数调用发生时进行断言。一个例子是在 `deposit` 函数调用期间断言 LP 的 ERC-20 余额减少了 `assets`，以及他们的 LP 代币余额增加了 `shares`。通过这种方式，处理器函数类似于模糊测试，因为它们可以接受模糊输入，执行状态更改，并在前后状态中断言。
 
 ```solidity
 function deposit(uint256 assets) public virtual {
@@ -385,9 +386,9 @@ function deposit(uint256 assets) public virtual {
 }
 ```
 
-### Bounded/Unbounded Functions
+### 有界/无界函数
 
-In addition, with Handlers, input parameters can be bounded to reasonable expected values such that `fail_on_revert` in `foundry.toml` can be set to `true`. This can be accomplished using the `bound()` helper function from `forge-std`. This ensures that every function call that is being made by the fuzzer must be successful against the protocol in order to get tests to pass. This is very useful for visibility and confidence that the protocol is being tested in the desired way.
+此外，通过处理器，输入参数可以被限制为合理的预期值，使得 `foundry.toml` 中的 `fail_on_revert` 可以设置为 `true`。这可以通过 `forge-std` 中的 `bound()` 辅助函数来实现。这确保了模糊器进行的每个函数调用都必须对协议成功，才能通过测试。这对于可见性和确保协议以期望的方式进行测试的信心非常有用。
 
 ```solidity
 function deposit(uint256 assets) external {
@@ -407,10 +408,10 @@ function deposit(uint256 assets) external {
 }
 ```
 
-This can also be accomplished by inheriting non-bounded functions from dedicated "unbounded" Handler contracts that can be used for `fail_on_revert = false` testing. This type of testing is also useful since it can expose issues in assumptions made with `bound` function usage.
+这也可以通过从专用“无界”处理器合约继承非有界函数来实现，这些合约可用于 `fail_on_revert = false` 测试。这种测试也很有用，因为它可以揭示 `bound` 函数使用中假设的问题。
 
 ```solidity
-// Unbounded
+// 无界
 function deposit(uint256 assets) public virtual {
     asset.mint(address(this), assets);
 
@@ -427,7 +428,7 @@ function deposit(uint256 assets) public virtual {
 ```
 
 ```solidity
-// Bounded
+// 有界
 function deposit(uint256 assets) external {
     assets = bound(assets, 0, 1e30);
 
@@ -435,9 +436,9 @@ function deposit(uint256 assets) external {
 }
 ```
 
-### Actor Management
+### 参与者管理
 
-In the function calls above, it can be seen that `address(this)` is the sole depositor in the ERC-4626 contract, which is not a realistic representation of its intended use. By leveraging the `prank` cheatcodes in `forge-std`, each Handler can manage a set of actors and use them to perform the same function call from different `msg.sender` addresses. This can be accomplished using the following modifier:
+在上面的函数调用中，可以看到 `address(this)` 是 ERC-4626 合约中的唯一存款者，这并不是其预期用途的真实表示。通过利用 `forge-std` 中的 `prank` 作弊代码，每个处理器可以管理一组参与者，并使用它们从不同的 `msg.sender` 地址执行相同的函数调用。这可以通过以下修饰符实现：
 
 ```solidity
 address[] public actors;
@@ -452,10 +453,10 @@ modifier useActor(uint256 actorIndexSeed) {
 }
 ```
 
-Using multiple actors allows for more granular ghost variable usage as well. This is demonstrated in the functions below:
+使用多个参与者还允许更细粒度的幽灵变量使用。这在下面的函数中有所展示：
 
 ```solidity
-// Unbounded
+// 无界
 function deposit(
     uint256 assets,
     uint256 actorIndexSeed
@@ -477,7 +478,7 @@ function deposit(
 ```
 
 ```solidity
-// Bounded
+// 有界
 function deposit(uint256 assets, uint256 actorIndexSeed) external {
     assets = bound(assets, 0, 1e30);
 

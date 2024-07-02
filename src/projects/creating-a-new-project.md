@@ -1,40 +1,40 @@
-## Creating a New Project
+## 创建一个新项目
 
-To start a new project with Foundry, use [`forge init`](../reference/forge/forge-init.md):
+要使用 Foundry 开始一个新项目，请使用 [`forge init`](../reference/forge/forge-init.md)：
 
 ```sh
 {{#include ../output/hello_foundry/forge-init:command}}
 ```
 
-This creates a new directory `hello_foundry` from the default template. This also initializes a new `git` repository.
+这将使用默认模板创建一个名为 `hello_foundry` 的新目录。这还会初始化一个新的 `git` 仓库。
 
-If you want to create a new project using a different template, you would pass the `--template` flag, like so:
+如果你想使用不同的模板创建一个新项目，可以传递 `--template` 标志，如下所示：
 
 ```sh
 $ forge init --template https://github.com/foundry-rs/forge-template hello_template
 ```
 
-For now, let's check what the default template looks like:
+现在，让我们看看默认模板是什么样子的：
 
 ```sh
 $ cd hello_foundry
 {{#include ../output/hello_foundry/tree:all}}
 ```
 
-The default template comes with one dependency installed: Forge Standard Library. This is the preferred testing library used for Foundry projects. Additionally, the template also comes with an empty starter contract and a simple test.
+默认模板带有一个已安装的依赖项：Forge 标准库。这是用于 Foundry 项目的首选测试库。此外，模板还带有一个空的入门合约和一个简单的测试。
 
-Let's build the project:
+让我们构建项目：
 
 ```sh
 {{#include ../output/hello_foundry/forge-build:all}}
 ```
 
-And run the tests:
+并运行测试：
 
 ```sh
 {{#include ../output/hello_foundry/forge-test:all}}
 ```
 
-You'll notice that two new directories have popped up: `out` and `cache`.
+你会注意到两个新目录已经出现：`out` 和 `cache`。
 
-The `out` directory contains your contract artifact, such as the ABI, while the `cache` is used by `forge` to only recompile what is necessary.
+`out` 目录包含你的合约工件，例如 ABI，而 `cache` 由 `forge` 使用，仅重新编译必要的部分。

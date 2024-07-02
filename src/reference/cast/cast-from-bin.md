@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-from-bin - Convert binary data into hex data.
+cast-from-bin - 将二进制数据转换为十六进制数据。
 
 ### SYNOPSIS
 
@@ -10,9 +10,9 @@ cast-from-bin - Convert binary data into hex data.
 
 ### DESCRIPTION
 
-Convert binary data into hex data.
+将二进制数据转换为十六进制数据。
 
-The input is taken from stdin.
+输入从标准输入读取。
 
 ### OPTIONS
 

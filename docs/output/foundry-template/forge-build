@@ -1,0 +1,10 @@
+// ANCHOR: all
+// ANCHOR: command
+$ forge build
+// ANCHOR_END: command
+// ANCHOR: output
+Compiling 28 files with Solc 0.8.25
+Solc 0.8.25 finished in 1.40s
+Compiler run successful!
+// ANCHOR_END: output
+// ANCHOR_END: all

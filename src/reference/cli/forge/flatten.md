@@ -1,6 +1,7 @@
+```markdown
 # forge flatten
 
-Flatten a source file and all of its imports into one file
+将源文件及其所有导入合并到一个文件中
 
 ```bash
 $ forge flatten --help
@@ -8,45 +9,46 @@ Usage: forge flatten [OPTIONS] <PATH>
 
 Arguments:
   <PATH>
-          The path to the contract to flatten
+          要合并的合约路径
 
 Options:
   -o, --output <PATH>
-          The path to output the flattened contract.
+          输出合并后合约的路径。
           
-          If not specified, the flattened contract will be output to stdout.
+          如果未指定，合并后的合约将输出到标准输出。
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
-Project options:
+项目选项:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下，如果在一个 Git 仓库中，则为 Git 仓库的根目录，否则为当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源代码目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的重映射
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境获取的项目重映射
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这等同于使用：`--contracts contracts --lib-paths node_modules`。
           
           [aliases: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件路径
+```
 ```

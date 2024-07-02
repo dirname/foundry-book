@@ -1,6 +1,7 @@
+```markdown
 # forge init
 
-Create a new Forge project
+创建一个新的 Forge 项目
 
 ```bash
 $ forge init --help
@@ -8,44 +9,43 @@ Usage: forge init [OPTIONS] [PATH]
 
 Arguments:
   [PATH]
-          The root directory of the new project
+          新项目的根目录
           
-          [default: .]
+          [默认值: .]
 
 Options:
   -t, --template <TEMPLATE>
-          The template to start from
+          从模板开始
 
   -b, --branch <BRANCH>
-          Branch argument that can only be used with template option. If not specified, the default
-          branch is used
+          只能与模板选项一起使用的分支参数。如果未指定，则使用默认分支
 
       --offline
-          Do not install dependencies from the network
+          不要从网络安装依赖项
           
-          [aliases: no-deps]
+          [别名: no-deps]
 
       --force
-          Create the project even if the specified root directory is not empty
+          即使指定的根目录不为空，也要创建项目
 
       --vscode
-          Create a .vscode/settings.json file with Solidity settings, and generate a remappings.txt
-          file
+          创建一个包含 Solidity 设置的 .vscode/settings.json 文件，并生成一个 remappings.txt 文件
 
       --shallow
-          Perform shallow clones instead of deep ones.
+          执行浅克隆而不是深克隆。
           
-          Improves performance and reduces disk usage, but prevents switching branches or tags.
+          提高性能并减少磁盘使用，但阻止切换分支或标签。
 
       --no-git
-          Install without adding the dependency as a submodule
+          安装时不将依赖项作为子模块添加
 
       --no-commit
-          Do not create a commit
+          不要创建提交
 
   -q, --quiet
-          Do not print any messages
+          不打印任何消息
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
+```
 ```

@@ -1,11 +1,11 @@
 ## `divisionError`
 
-### Signature
+### 签名
 
 ```solidity
 stdError.divisionError
 ```
 
-### Description
+### 描述
 
-The internal Solidity error when a division fails, e.g. division by zero.
+当除法失败时的内部 Solidity 错误，例如除以零。

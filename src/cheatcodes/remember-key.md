@@ -1,18 +1,18 @@
 ## `rememberKey`
 
-### Signature
+### 签名
 
 ```solidity
 function rememberKey(uint256 privateKey) external returns (address);
 ```
 
-### Description
+### 描述
 
-Stores a private key in forge's local wallet and returns the corresponding address which can later be used for [broadcasting](./broadcast.md).
+将私钥存储在 forge 的本地钱包中，并返回相应的地址，该地址稍后可用于[广播](./broadcast.md)。
 
-### Examples
+### 示例
 
-Derive the private key from the test mnemonic at path `m/44'/60'/0'/0/0`, remember it in forge's wallet and use it to start broadcasting transactions:
+从测试助记词路径 `m/44'/60'/0'/0/0` 派生私钥，将其存储在 forge 的钱包中，并使用它开始广播交易：
 
 ```solidity
 string memory mnemonic = "test test test test test test test test test test test junk";
@@ -24,7 +24,7 @@ vm.startBroadcast(deployer);
 vm.stopBroadcast();
 ```
 
-Load a private key from the `PRIVATE_KEY` environment variable and use it to start broadcasting transactions:
+从 `PRIVATE_KEY` 环境变量加载私钥，并使用它开始广播交易：
 
 ```solidity
 address deployer = vm.rememberKey(vm.envUint("PRIVATE_KEY"));
@@ -34,9 +34,9 @@ vm.startBroadcast(deployer);
 vm.stopBroadcast();
 ```
 
-### SEE ALSO
+### 参见
 
 - [deriveKey](./derive-key.md)
 
-Forge Standard Library:
+Forge 标准库：
 - [deriveRememberKey](../reference/forge-std/derive-remember-key.md)

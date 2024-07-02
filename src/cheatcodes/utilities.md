@@ -1,4 +1,4 @@
-## Utilities
+## 工具
 
 - [`addr`](./addr.md)
 - [`sign`](./sign.md)

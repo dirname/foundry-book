@@ -1,9 +1,11 @@
-#### Wallet Options - Hardware Wallet
+```markdown
+#### 钱包选项 - 硬件钱包
 
 `-t`  
 `--trezor`  
-&nbsp;&nbsp;&nbsp;&nbsp;Use a Trezor hardware wallet.
+&nbsp;&nbsp;&nbsp;&nbsp;使用 Trezor 硬件钱包。
 
 `-l`  
 `--ledger`  
-&nbsp;&nbsp;&nbsp;&nbsp;Use a Ledger hardware wallet.
+&nbsp;&nbsp;&nbsp;&nbsp;使用 Ledger 硬件钱包。
+```

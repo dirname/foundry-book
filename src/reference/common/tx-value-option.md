@@ -1,7 +1,7 @@
-`--value` *value*  
-&nbsp;&nbsp;&nbsp;&nbsp;Ether to send in the transaction.
+`--value` *值*  
+&nbsp;&nbsp;&nbsp;&nbsp;在交易中发送的以太币。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Either specified as an integer (wei), or as a string with a unit, for example:  
+&nbsp;&nbsp;&nbsp;&nbsp;可以指定为整数（wei），或指定为带有单位的字符串，例如：  
 &nbsp;&nbsp;&nbsp;&nbsp;- `1ether`  
 &nbsp;&nbsp;&nbsp;&nbsp;- `10gwei`  
 &nbsp;&nbsp;&nbsp;&nbsp;- `0.01ether`

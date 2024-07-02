@@ -1,13 +1,13 @@
 ## `find`
 
-### Signature
+### 签名
 
 ```solidity
 function find(StdStorage storage self) internal returns (uint256);
 ```
 
-### Description
+### 描述
 
-Finds an arbitrary storage slot given [`target`](../forge-std/target.md), [`sig`](../forge-std/sig.md), [`with_key`](../forge-std/with_key.md)(s), and [`depth`](../forge-std/depth.md).
+根据 [`target`](../forge-std/target.md)、[`sig`](../forge-std/sig.md)、[`with_key`](../forge-std/with_key.md)(s) 和 [`depth`](../forge-std/depth.md) 查找任意存储槽。
 
-Reverts with a message if unsuccessful.
+如果查找失败，则会回退并带有相应的消息。

@@ -1,6 +1,7 @@
+```markdown
 # cast to-unit
 
-Convert an ETH amount into another unit (ether, gwei or wei).
+将 ETH 金额转换为其他单位（ether、gwei 或 wei）。
 
 ```bash
 $ cast to-unit --help
@@ -8,14 +9,15 @@ Usage: cast to-unit [VALUE] [UNIT]
 
 Arguments:
   [VALUE]
-          The value to convert
+          要转换的值
 
   [UNIT]
-          The unit to convert to (ether, gwei, wei)
+          要转换到的单位（ether、gwei、wei）
           
           [default: wei]
 
 Options:
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
+```
 ```

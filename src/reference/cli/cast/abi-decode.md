@@ -1,6 +1,7 @@
+```markdown
 # cast abi-decode
 
-Decode ABI-encoded input or output data.
+解码 ABI 编码的输入或输出数据。
 
 ```bash
 $ cast abi-decode --help
@@ -8,16 +9,17 @@ Usage: cast abi-decode [OPTIONS] <SIG> <CALLDATA>
 
 Arguments:
   <SIG>
-          The function signature in the format `<name>(<in-types>)(<out-types>)`
+          函数签名，格式为 `<name>(<in-types>)(<out-types>)`
 
   <CALLDATA>
-          The ABI-encoded calldata
+          ABI 编码的 calldata
 
 Options:
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看简要帮助）
 
-Decode input data instead of output data:
+解码输入数据而不是输出数据：
   -i, --input
-          Whether to decode the input or output data
+          是否解码输入数据或输出数据
+```
 ```

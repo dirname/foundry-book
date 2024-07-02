@@ -1,6 +1,7 @@
+```markdown
 # forge remappings
 
-Get the automatically inferred remappings for the project
+获取项目自动推断的重映射
 
 ```bash
 $ forge remappings --help
@@ -8,13 +9,14 @@ Usage: forge remappings [OPTIONS]
 
 Options:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在 Git 仓库中），或者当前工作目录。
 
       --pretty
-          Pretty-print the remappings, grouping each of them by context
+          以分组形式美观地打印重映射
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
+```
 ```

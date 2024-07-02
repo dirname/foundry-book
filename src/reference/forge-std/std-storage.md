@@ -1,39 +1,39 @@
 ## Std Storage
 
-Std Storage is a library that makes manipulating storage easy.
+Std Storage 是一个使操作存储变得简单的库。
 
-To use Std Storage, import the following in your test contract:
+要在测试合约中使用 Std Storage，请导入以下内容：
 
 ```solidity
 import {stdStorage, StdStorage} from "forge-std/Test.sol";              
 ```
 
-Add the following line in your test contract:
+在测试合约中添加以下行：
 
 ```solidity
 using stdStorage for StdStorage;
 ```
 
-Then, access Std Storage via the `stdstore` instance.
+然后，通过 `stdstore` 实例访问 Std Storage。
 
-### Functions
+### 函数
 
-Query functions:
+查询函数：
 
-- [`target`](./target.md): Set the address of the target contract
-- [`sig`](./sig.md): Set the 4-byte selector of the function to static call
-- [`with_key`](./with_key.md): Pass an argument to the function (can be used multiple times)
-- [`depth`](./depth.md): Set the position of the value in the `tuple` (e.g. inside a `struct`)
+- [`target`](./target.md): 设置目标合约的地址
+- [`sig`](./sig.md): 设置要静态调用的函数的 4 字节选择器
+- [`with_key`](./with_key.md): 传递函数的参数（可以多次使用）
+- [`depth`](./depth.md): 设置值在 `tuple` 中的位置（例如在 `struct` 内部）
 
-Terminator functions:
+终止函数：
 
-- [`find`](./find.md): Return the slot number
-- [`checked_write`](./checked_write.md): Set the data to be written to the storage slot(s)
-- [`read_<type>`](./read.md): Read the value from the storage slot as `<type>`
+- [`find`](./find.md): 返回槽号
+- [`checked_write`](./checked_write.md): 设置要写入存储槽的数据
+- [`read_<type>`](./read.md): 以 `<type>` 类型从存储槽读取值
 
-### Example
+### 示例
 
-`playerToCharacter` tracks info about players' characters.
+`playerToCharacter` 跟踪玩家角色的信息。
 
 ```solidity
 // MetaRPG.sol
@@ -46,7 +46,7 @@ struct Character {
 mapping (address => Character) public playerToCharacter;
 ```
 
-Let's say we want to set the level of our character to 120.
+假设我们要将角色的等级设置为 120。
 
 ```solidity
 // MetaRPG.t.sol
@@ -59,10 +59,10 @@ stdstore
     .checked_write(120);
 ```
 
-### Limitations
+### 限制
 
-- Accessing packed slots is not supported
+- 不支持访问打包槽
 
-### Known issues
+### 已知问题
 
-- Slot(s) may not be found if the `tuple` contains types shorter than 32 bytes
+- 如果 `tuple` 包含短于 32 字节的类型，槽可能无法找到

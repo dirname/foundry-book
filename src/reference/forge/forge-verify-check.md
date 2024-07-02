@@ -2,29 +2,29 @@
 
 ### NAME
 
-forge-verify-check - Check verification status on a chosen verification provider.
+forge-verify-check - 检查所选验证提供商的验证状态。
 
 ### SYNOPSIS
 
 ``forge verify-check`` [*options*] *id* [*etherscan_key*]
 
-The *id* is the verification identifier. For Etherscan & Bloxroute - it is the submission GUID, for Sourcify - it's the contract address.
+*id* 是验证标识符。对于 Etherscan 和 Bloxroute - 它是提交 GUID，对于 Sourcify - 它是合约地址。
 
 ### DESCRIPTION
 
-Check verification status on a chosen verification provider.
+检查所选验证提供商的验证状态。
 
-For Etherscan, you must provide an Etherscan API key, either by passing it as an argument or setting `ETHERSCAN_API_KEY`
+对于 Etherscan，您必须提供一个 Etherscan API 密钥，可以通过作为参数传递或设置 `ETHERSCAN_API_KEY`。
 
 ### OPTIONS
 
-#### Verify Contract Options
+#### 验证合约选项
 
 {{#include ../common/verifier-options.md}}
 
 `--chain-id` *chain_id*  
-&nbsp;&nbsp;&nbsp;&nbsp;The chain ID the contract is deployed to (either a number or a chain name).  
-&nbsp;&nbsp;&nbsp;&nbsp;Default: mainnet
+&nbsp;&nbsp;&nbsp;&nbsp;合约部署到的链 ID（可以是数字或链名称）。  
+&nbsp;&nbsp;&nbsp;&nbsp;默认值：mainnet
 
 {{#include ../common/retry-options.md}}
 

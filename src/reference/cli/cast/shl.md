@@ -1,17 +1,19 @@
+```markdown
 # cast shl
 
-Perform a left shifting operation
+执行左移操作
 
 ```bash
 $ cast shl --help
 Usage: cast shl [OPTIONS] <VALUE> <BITS>
 
 Arguments:
-  <VALUE>  The value to shift
-  <BITS>   The number of bits to shift
+  <VALUE>  要移位的值
+  <BITS>   要移位的位数
 
 Options:
-      --base-in <BASE_IN>    The input base
-      --base-out <BASE_OUT>  The output base [default: 16]
-  -h, --help                 Print help
+      --base-in <BASE_IN>    输入基数
+      --base-out <BASE_OUT>  输出基数 [默认: 16]
+  -h, --help                 打印帮助信息
+```
 ```

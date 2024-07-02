@@ -1,89 +1,89 @@
 ## forge clone
 
-### NAME
+### 名称
 
-forge-clone - Clone a on-chain verified contract as a Forge project.
+forge-clone - 将链上已验证的合约克隆为 Forge 项目。
 
-### SYNOPSIS
+### 概要
 
-``forge clone`` [*options*] *address* [*root*]
+``forge clone`` [*选项*] *地址* [*根目录*]
 
-### DESCRIPTION
+### 描述
 
-Creates a new Forge project by cloning the source code of an on-chain verified contract in the directory *root* (by default the current working directory).
+通过克隆链上已验证合约的源代码，在 *根目录* 中创建一个新的 Forge 项目（默认情况下为当前工作目录）。
 
-By default, `forge clone` clones contracts from Ethereum mainnet (via Etherscan), but it is also possible to clone from other EVM-compatible blockchains that foundry supports, e.g., BNB Smart Chain (BSC), by specifying chain ID: `--chain <ChainID>`.
+默认情况下，`forge clone` 从以太坊主网（通过 Etherscan）克隆合约，但也可以通过指定链 ID：`--chain <ChainID>` 从 Foundry 支持的其他 EVM 兼容区块链克隆合约，例如 BNB 智能链（BSC）。
 
-Obtaining data from Etherscan is subject to rate limit. `forge clone` requires two API calls to Etherscan to collect source code and deployment information, respectively. By default, `forge clone` will wait for *5* seconds between the two Etherscan invocations to avoid rate limit errors. 
+从 Etherscan 获取数据受速率限制。`forge clone` 需要两次对 Etherscan 的 API 调用，分别用于收集源代码和部署信息。默认情况下，`forge clone` 会在两次 Etherscan 调用之间等待 *5* 秒，以避免速率限制错误。
 
-Specifying Etherscan API key via `--etherscan-api-key <API_KEY>` will increase Etherscan API rate limit and avoid the *5-second* wait time in `forge clone`.
+通过 `--etherscan-api-key <API_KEY>` 指定 Etherscan API 密钥将增加 Etherscan API 速率限制，并避免 `forge clone` 中的 *5 秒* 等待时间。
 
-Just as `forge init`, `forge clone` will by default initialize a new git repository, install some submodules and create an initial commit message.
+与 `forge init` 一样，`forge clone` 默认会初始化一个新的 git 仓库，安装一些子模块并创建一个初始提交信息。
 
-If you do not want this behavior, pass `--no-git`.
+如果你不希望这种行为，请传递 `--no-git`。
 
-### OPTIONS
+### 选项
 
-#### Clone Options
+#### 克隆选项
 
 `-c` *chain_id*  
 `--chain` *chain_id*  
-&nbsp;&nbsp;&nbsp;&nbsp;Specify the name or EIP-155 ID of the chain to clone contract from.
+&nbsp;&nbsp;&nbsp;&nbsp;指定要克隆合约的链名称或 EIP-155 ID。
 
 `-e` *api_key*  
 `--etherscan-api-key` *api_key*  
-&nbsp;&nbsp;&nbsp;&nbsp;Specify the API key of Etherscan (or equivalent).
+&nbsp;&nbsp;&nbsp;&nbsp;指定 Etherscan（或等效服务）的 API 密钥。
 
 `--no-remappings-txt`  
-&nbsp;&nbsp;&nbsp;&nbsp;Put remappings inside the `foundry.toml` configuration file, instead of generating a separate `remappings.txt` file.
+&nbsp;&nbsp;&nbsp;&nbsp;将重映射放在 `foundry.toml` 配置文件中，而不是生成单独的 `remappings.txt` 文件。
 
-#### VCS Options
+#### VCS 选项
 
 `--no-commit`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not create an initial commit.
+&nbsp;&nbsp;&nbsp;&nbsp;不要创建初始提交。
 
 `--no-git`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not create a git repository.
+&nbsp;&nbsp;&nbsp;&nbsp;不要创建 git 仓库。
 
-#### Display Options
+#### 显示选项
 
 `-q`  
 `--quiet`  
-&nbsp;&nbsp;&nbsp;&nbsp;Do not print any messages.
+&nbsp;&nbsp;&nbsp;&nbsp;不打印任何消息。
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Clone UniswapV3Pool contract from Ethereum mainnet:
+1. 从以太坊主网克隆 UniswapV3Pool 合约：
     ```sh
     forge clone 0x8f8EF111B67C04Eb1641f5ff19EE54Cda062f163 UniswapV3Pool 
     ```
 
-2. Clone a contract, but do not create a git repository:
+2. 克隆合约，但不创建 git 仓库：
     ```sh
     forge clone --no-git 0x8f8EF111B67C04Eb1641f5ff19EE54Cda062f163 UniswapV3Pool
     ```
 
-3. Clone a contract from BNB Smart Chain (BSC):
+3. 从 BNB 智能链（BSC）克隆合约：
     ```sh
     forge clone --chain bsc 0x7862D9B4bE2156B15d54F41ee4EDE2d5b0b455e4 UniswapV3Pool 
     ```
 
-### Metadata
+### 元数据
 
-The cloned Forge project comes with an additional `.clone.meta` metadata file in the root directory.
-`clone.meta` is a compact JSON data file that contains the information of the on-chain contract instance. 
-The metadata includes:
-- `path`: The path to the source file that contains the declaration of contract deployed on chain.
-- `targetContract`: The name of the on-chain contract in the source file.
-- `address`: The address of the contract deployed on chain.
-- `chainId`: EIP-155 ID of the chain where the contract is deployed.
-- `creationTransaction`: The hash of the transaction that deployed the contract.
-- `deployer`: The account address who is the sender of the `creationTransaction`.
-- `constructorArguments`: The constructor arguments that is used when deploying the contract.
-- `storageLayout`: The storage layout of the on-chain contract (if the corresponding contract compiler version supports exporting storage layout).
+克隆的 Forge 项目在根目录中带有一个额外的 `.clone.meta` 元数据文件。
+`clone.meta` 是一个紧凑的 JSON 数据文件，包含链上合约实例的信息。
+元数据包括：
+- `path`：包含链上合约声明的源文件路径。
+- `targetContract`：源文件中链上合约的名称。
+- `address`：链上合约的地址。
+- `chainId`：合约部署的链的 EIP-155 ID。
+- `creationTransaction`：部署合约的交易哈希。
+- `deployer`：`creationTransaction` 的发送者账户地址。
+- `constructorArguments`：部署合约时使用的构造函数参数。
+- `storageLayout`：链上合约的存储布局（如果相应的合约编译器版本支持导出存储布局）。
 
-### SEE ALSO
+### 另请参阅
 
 [forge](./forge.md)

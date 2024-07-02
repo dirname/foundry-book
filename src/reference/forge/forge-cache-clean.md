@@ -1,70 +1,70 @@
 ## `forge cache clean`
 
-### NAME
+### 名称
 
-forge-cache-clean - Cleans cached data from `~/.foundry`.
+forge-cache-clean - 清除 `~/.foundry` 中的缓存数据。
 
-### SYNOPSIS
+### 概要
 
-`forge cache clean` [*options*] [*--*] [*chains..*]
+`forge cache clean` [*选项*] [*--*] [*链..*]
 
-### DESCRIPTION
+### 描述
 
-Removes files in the `~/.foundry/cache` folder which is used to cache Etherscan verification status and block data.
+删除 `~/.foundry/cache` 文件夹中的文件，该文件夹用于缓存 Etherscan 验证状态和区块数据。
 
-### OPTIONS
+### 选项
 
 `-b`  
 `--blocks`  
-&nbsp;&nbsp;&nbsp;&nbsp;One or more block numbers separated by comma with no spaces
+&nbsp;&nbsp;&nbsp;&nbsp;一个或多个区块号，用逗号分隔，无空格
 
 `--etherscan`
-&nbsp;&nbsp;&nbsp;&nbsp;A boolean flag that specifies to only remove the block explorer portion of the cache
+&nbsp;&nbsp;&nbsp;&nbsp;一个布尔标志，指定仅删除缓存中的区块浏览器部分
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Remove the entire cache (also, `forge cache clean` is an alias for this)
+1. 删除整个缓存（也是 `forge cache clean` 的别名）
 
    ```sh
    forge cache clean all
    ```
 
-2. Remove the entire block explorer cache
+2. 删除整个区块浏览器缓存
 
    ```sh
    forge cache clean all --etherscan
    ```
 
-3. Remove cache data for a specific chain, by name
+3. 删除特定链的缓存数据，按名称
 
    ```sh
    forge cache clean rinkeby
    ```
 
-4. Remove cache data for a specific block number on a specific chain. Does not work if `chain` is `all`
+4. 删除特定链上特定区块号的缓存数据。如果 `chain` 是 `all`，则不适用
 
    ```sh
    forge cache clean rinkeby -b 150000
    ```
 
-5. Remove block explorer cache data for a specific chain. Does not work if `--blocks` are specified.
+5. 删除特定链的区块浏览器缓存数据。如果指定了 `--blocks`，则不适用
 
    ```sh
    forge cache clean rinkeby --etherscan
    ```
 
-6. Specify multiple chains
+6. 指定多条链
 
    ```sh
    forge cache clean rinkeby mainnet
    ```
 
-7. Specify multiple blocks
+7. 指定多个区块
    ```sh
    forge cache clean rinkeby --blocks 530000,9000000,9200000
    ```
 
-### SEE ALSO
+### 另见
 [forge](./forge.md), [forge cache](./forge-cache.md)

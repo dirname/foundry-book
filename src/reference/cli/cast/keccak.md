@@ -1,14 +1,16 @@
+```markdown
 # cast keccak
 
-Hash arbitrary data using Keccak-256
+使用 Keccak-256 哈希任意数据
 
 ```bash
 $ cast keccak --help
 Usage: cast keccak [DATA]
 
 Arguments:
-  [DATA]  The data to hash
+  [DATA]  要哈希的数据
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

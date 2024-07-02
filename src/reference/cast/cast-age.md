@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-age - Get the timestamp of a block.
+cast-age - 获取区块的时间戳。
 
 ### SYNOPSIS
 
@@ -10,13 +10,13 @@ cast-age - Get the timestamp of a block.
 
 ### DESCRIPTION
 
-Get the timestamp of a block.
+获取区块的时间戳。
 
-The specified *block* can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`. Default to `latest`.
+指定的 *block* 可以是区块号，或者是以下标签之一：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。默认为 `latest`。
 
 ### OPTIONS
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -24,12 +24,12 @@ The specified *block* can be a block number, or any of the tags: `earliest`, `fi
 
 ### EXAMPLES
 
-1. Get the timestamp of the latest block:
+1. 获取最新区块的时间戳：
     ```sh
     cast age
     ```
 
-2. Get the timestamp of the genesis block:
+2. 获取创世区块的时间戳：
     ```sh
     cast age 1
     ```

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-rlp - Encodes hex data to RLP.
+cast-to-rlp - 将十六进制数据编码为RLP。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-to-rlp - Encodes hex data to RLP.
 
 ### DESCRIPTION
 
-RLP encodes a hex string or a JSON array of hex strings.
+将十六进制字符串或十六进制字符串的JSON数组进行RLP编码。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ RLP encodes a hex string or a JSON array of hex strings.
 
 ### EXAMPLES
 
-1. Encoding RLP data:
+1. 编码RLP数据：
     ```sh
     cast to-rlp '["0xaa","0xbb","cc"]'
    

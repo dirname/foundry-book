@@ -1,6 +1,6 @@
 ## `makePersistent`
 
-### Signature
+### 签名
 
 ```solidity
 function makePersistent(address account) external;
@@ -9,16 +9,16 @@ function makePersistent(address account0, address account1, address account2) ex
 function makePersistent(address[] calldata accounts) external;
 ```
 
-### Description
+### 描述
 
-Each fork ([`createFork`](./create-fork.md)) has its own independent storage, which is also replaced when another fork is selected ([`selectFork`](./select-fork.md)).
-By default, only the test contract account and the caller are persistent across forks, which means that changes to the state of the test contract (variables) are preserved when different forks are selected. This way data can be shared by storing it in the contract's variables. 
+每个分叉（[`createFork`](./create-fork.md)）都有其独立的存储空间，当选择另一个分叉时（[`selectFork`](./select-fork.md)），存储空间也会被替换。
+默认情况下，只有测试合约账户和调用者是跨分叉持久的，这意味着当选择不同的分叉时，测试合约的状态（变量）变化会被保留。这样可以通过将数据存储在合约的变量中来共享数据。
 
-However, with this cheatcode, it is possible to mark the specified accounts as persistent, which means that their state is available regardless of which fork is currently active.
+然而，通过这个作弊码，可以将指定的账户标记为持久，这意味着无论当前激活的是哪个分叉，它们的状态都是可用的。
 
-### Examples
+### 示例
 
-Mark a new contract as persistent
+将新合约标记为持久
 
 ```solidity
 contract SimpleStorageContract {
@@ -30,39 +30,39 @@ contract SimpleStorageContract {
 }
 
 function testMarkPersistent() public {
-    // by default the `sender` and the contract itself are persistent
+    // 默认情况下，`sender` 和合约本身是持久的
     assert(cheats.isPersistent(msg.sender));
     assert(cheats.isPersistent(address(this)));
 
-    // select a specific fork
+    // 选择一个特定的分叉
     cheats.selectFork(mainnetFork);
     
-    // create a new contract that's stored in the `mainnetFork` storage
+    // 创建一个存储在 `mainnetFork` 存储空间中的新合约
     SimpleStorageContract simple = new SimpleStorageContract();
     
-    // `simple` is not marked as persistent
+    // `simple` 未被标记为持久
     assert(!cheats.isPersistent(address(simple)));
     
-    // contract can be used
+    // 合约可以使用
     uint256 expectedValue = 99;
     simple.set(expectedValue);
     assertEq(simple.value(), expectedValue);
     
-    // mark as persistent
+    // 标记为持久
     cheats.makePersistent(address(simple));
     
-    // select a different fork
+    // 选择一个不同的分叉
     cheats.selectFork(optimismFork);
     
-    // ensure contract is still persistent   
+    // 确保合约仍然是持久的   
     assert(cheats.isPersistent(address(simple)));
     
-    // value is set as expected
+    // 值设置如预期
     assertEq(simple.value(), expectedValue);
 }
 ```
 
-### SEE ALSO
+### 参见
 
 - [isPersistent](./is-persistent.md)
 - [revokePersistent](./revoke-persistent.md)

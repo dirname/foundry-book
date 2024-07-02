@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-access-list - Create an access list for a transaction.
+cast-access-list - 创建一个交易访问列表。
 
 ### SYNOPSIS
 
@@ -10,21 +10,21 @@ cast-access-list - Create an access list for a transaction.
 
 ### DESCRIPTION
 
-Create an access list for a transaction.
+创建一个交易访问列表。
 
-The destination (*to*) can be an ENS name or an address.
+目标地址（*to*）可以是 ENS 名称或地址。
 
 {{#include sig-description.md}}
 
 ### OPTIONS
 
-#### Query Options
+#### 查询选项
 
 `-B` *block*  
 `--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
+&nbsp;&nbsp;&nbsp;&nbsp;你想要查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，或以下任何标签：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。
 
 {{#include ../common/wallet-options.md}}
 

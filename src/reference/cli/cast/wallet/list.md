@@ -1,19 +1,19 @@
+```markdown
 # cast wallet list
 
-List all the accounts in the keystore default directory
+列出密钥库默认目录中的所有账户
 
 ```bash
 $ cast wallet list --help
 Usage: cast wallet list [OPTIONS]
 
 Options:
-      --dir [<DIR>]                List all the accounts in the keystore directory. Default keystore
-                                   directory is used if no path provided
-  -l, --ledger                     List accounts from a Ledger hardware wallet
-  -t, --trezor                     List accounts from a Trezor hardware wallet
-      --aws                        List accounts from AWS KMS
-      --all                        List all configured accounts
-  -m, --max-senders <MAX_SENDERS>  Max number of addresses to display from hardware wallets
-                                   [default: 3]
-  -h, --help                       Print help
+      --dir [<DIR>]                列出密钥库目录中的所有账户。如果没有提供路径，则使用默认密钥库目录
+  -l, --ledger                      列出来自 Ledger 硬件钱包的账户
+  -t, --trezor                      列出来自 Trezor 硬件钱包的账户
+      --aws                         列出来自 AWS KMS 的账户
+      --all                         列出所有已配置的账户
+  -m, --max-senders <MAX_SENDERS>   从硬件钱包中显示的最大地址数量 [默认: 3]
+  -h, --help                        打印帮助信息
+```
 ```

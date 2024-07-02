@@ -1,46 +1,46 @@
-## Forge Standard Library Reference
+## Forge 标准库参考
 
-Forge Standard Library (Forge Std for short) is a collection of helpful contracts that make writing tests easier, faster, and more user-friendly.
+Forge 标准库（简称 Forge Std）是一组有用的合约，使编写测试更容易、更快、更用户友好。
 
-Using Forge Std is the preferred way of writing tests with Foundry.
+使用 Forge Std 是使用 Foundry 编写测试的首选方式。
 
-What's included:
+包含的内容：
 
-- `Vm.sol`: Up-to-date [cheatcodes interface](../../cheatcodes/#cheatcodes-interface)
+- `Vm.sol`：最新的 [作弊码接口](../../cheatcodes/#cheatcodes-interface)
 
     ```solidity
     import "forge-std/Vm.sol";
     ```
 
-- [`console.sol`](./console-log.md) and `console2.sol`: Hardhat-style logging functionality
+- [`console.sol`](./console-log.md) 和 `console2.sol`：Hardhat 风格的日志功能
 
     ```solidity
     import "forge-std/console.sol";
     ```
 
-    **Note:** `console2.sol` contains patches to `console.sol` that allow Forge to decode traces for calls to the console, but it is not compatible with Hardhat.
+    **注意：** `console2.sol` 包含对 `console.sol` 的补丁，允许 Forge 解码对控制台的调用，但它与 Hardhat 不兼容。
 
     ```solidity
     import "forge-std/console2.sol";
     ```
 
-- `Script.sol`: Basic utilities for [Solidity scripting](../../tutorials/solidity-scripting.md)
+- `Script.sol`：[Solidity 脚本](../../tutorials/solidity-scripting.md) 的基本实用工具
 
     ```solidity
     import "forge-std/Script.sol";
     ```
 
-- `Test.sol`: The complete Forge Std experience (more details [below](#forge-stds-test))
+- `Test.sol`：完整的 Forge Std 体验（更多详情[如下](#forge-stds-test)）
 
     ```solidity
     import "forge-std/Test.sol";
     ```
 
-### Forge Std's `Test`
+### Forge Std 的 `Test`
 
-The `Test` contract in `Test.sol` provides all the essential functionality you need to get started writing tests.
+`Test.sol` 中的 `Test` 合约提供了开始编写测试所需的所有基本功能。
 
-Simply import `Test.sol` and inherit from `Test` in your test contract:
+只需导入 `Test.sol` 并在你的测试合约中继承 `Test`：
 
 ```solidity
 import "forge-std/Test.sol";
@@ -48,39 +48,39 @@ import "forge-std/Test.sol";
 contract ContractTest is Test { ...
 ```
 
-What's included:
+包含的内容：
 
-- Std Libraries
-  - [Std Logs](./std-logs.md): Expand upon the logging events from the DSTest library.
-  - [Std Assertions](./std-assertions.md): Expand upon the assertion functions from the DSTest library.
-  - [Std Cheats](./std-cheats.md): Wrappers around Forge cheatcodes for improved safety and DX.
-  - [Std Errors](./std-errors.md): Wrappers around common internal Solidity errors and reverts.
-  - [Std Storage](./std-storage.md): Utilities for storage manipulation.
-  - [Std Math](./std-math.md): Useful mathematical functions.
-  - [Script Utils](./script-utils.md): Utility functions which can be accessed in tests and scripts.
-  - [Console Logging](./console-log.md): Console logging functions.
+- 标准库
+  - [Std Logs](./std-logs.md)：扩展 DSTest 库的日志事件。
+  - [Std Assertions](./std-assertions.md)：扩展 DSTest 库的断言函数。
+  - [Std Cheats](./std-cheats.md)：围绕 Forge 作弊码的包装器，以提高安全性和开发体验。
+  - [Std Errors](./std-errors.md)：围绕常见内部 Solidity 错误和回滚的包装器。
+  - [Std Storage](./std-storage.md)：存储操作的实用工具。
+  - [Std Math](./std-math.md)：有用的数学函数。
+  - [Script Utils](./script-utils.md)：可以在测试和脚本中访问的实用函数。
+  - [Console Logging](./console-log.md)：控制台日志函数。
 
-- A cheatcodes instance `vm`, from which you invoke Forge cheatcodes (see [Cheatcodes Reference](../../cheatcodes/))
+- 作弊码实例 `vm`，从中你可以调用 Forge 作弊码（见 [作弊码参考](../../cheatcodes/)）
 
     ```solidity
     vm.startPrank(alice);
     ```
 
-- All Hardhat `console` functions for logging (see [Console Logging](./console-log.md))
+- 所有 Hardhat `console` 函数用于日志记录（见 [Console Logging](./console-log.md)）
 
     ```solidity
-    console.log(alice.balance); // or `console2`
+    console.log(alice.balance); // 或 `console2`
     ```
 
-- All Dappsys Test functions for asserting and logging (see [Dappsys Test reference](../ds-test.md))
+- 所有 Dappsys Test 函数用于断言和日志记录（见 [Dappsys Test 参考](../ds-test.md)）
 
     ```solidity
     assertEq(dai.balanceOf(alice), 10000e18);
     ```
 
-- Utility functions also included in `Script.sol` (see [Script Utils](./script-utils.md))
+- `Script.sol` 中也包含的实用函数（见 [Script Utils](./script-utils.md)）
 
     ```solidity
-    // Compute the address a contract will be deployed at for a given deployer address and nonce
+    // 计算给定部署者地址和 nonce 的合约地址
     address futureContract = computeCreateAddress(alice, 1);
     ```

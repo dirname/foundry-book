@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-compute-address - Compute the contract address from a given nonce and deployer address.
+cast-compute-address - 根据给定的nonce和部署者地址计算合约地址。
 
 ### SYNOPSIS
 
@@ -10,16 +10,16 @@ cast-compute-address - Compute the contract address from a given nonce and deplo
 
 ### DESCRIPTION
 
-Compute the contract address from a given nonce and deployer address.
+根据给定的nonce和部署者地址计算合约地址。
 
 ### OPTIONS
 
-#### Compute Options
+#### 计算选项
 
 `--nonce` *nonce*  
-&nbsp;&nbsp;&nbsp;&nbsp;The nonce of the account. Defaults to the latest nonce, fetched from the RPC.
+&nbsp;&nbsp;&nbsp;&nbsp;账户的nonce。默认为从RPC获取的最新nonce。
 
-#### RPC Options
+#### RPC选项
 
 {{#include ../common/rpc-url-option.md}}
 

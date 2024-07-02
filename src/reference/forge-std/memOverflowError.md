@@ -1,11 +1,11 @@
 ## `memOverflowError`
 
-### Signature
+### 签名
 
 ```solidity
 stdError.memOverflowError
 ```
 
-### Description
+### 描述
 
-The internal Solidity error when trying to allocate a dynamic memory array with more than 2^64-1 items.
+当尝试分配一个包含超过 2^64-1 个项目的动态内存数组时，Solidity 的内部错误。

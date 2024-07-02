@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-block-number - Get the latest block number.
+cast-block-number - 获取最新的区块号。
 
 ### SYNOPSIS
 
@@ -10,11 +10,11 @@ cast-block-number - Get the latest block number.
 
 ### DESCRIPTION
 
-Get the latest block number.
+获取最新的区块号。
 
 ### OPTIONS
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -22,7 +22,7 @@ Get the latest block number.
 
 ### EXAMPLES
 
-1. Get the latest block number:
+1. 获取最新的区块号：
     ```sh
     cast block-number
     ```

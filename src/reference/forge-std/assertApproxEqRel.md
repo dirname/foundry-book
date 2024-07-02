@@ -1,6 +1,6 @@
 ## `assertApproxEqRel`
 
-### Signature
+### 签名
 
 ```solidity
 function assertApproxEqRel(uint256 left, uint256 right, uint256 maxPercentDelta) internal;
@@ -18,13 +18,13 @@ function assertApproxEqRel(int256 left, int256 right, uint256 maxPercentDelta) i
 function assertApproxEqRel(int256 left, int256 right, uint256 maxPercentDelta, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `left` is approximately equal to `right` with delta in percentage, where `1e18` is 100%.
+断言 `left` 大约等于 `right`，允许的百分比偏差为 `maxPercentDelta`，其中 `1e18` 表示 100%。
 
-Optionally includes an error message in the revert string.
+可选地包含一个错误信息在回滚字符串中。
 
-### Examples
+### 示例
 
 ```solidity
 function testFail () external {
@@ -44,7 +44,7 @@ Logs:
        % Delta: 0.500000000000000000
 ```
 
-### SEE ALSO
+### 另请参阅
 
 - [`assertApproxEqRelDecimal`](./assertApproxEqRelDecimal.md)
 - [`assertApproxEqAbs`](./assertApproxEqAbs.md)

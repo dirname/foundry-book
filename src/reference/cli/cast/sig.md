@@ -1,15 +1,17 @@
+```markdown
 # cast sig
 
-Get the selector for a function
+获取函数的selector
 
 ```bash
 $ cast sig --help
 Usage: cast sig [SIG] [OPTIMIZE]
 
 Arguments:
-  [SIG]       The function signature, e.g. transfer(address,uint256)
-  [OPTIMIZE]  Optimize signature to contain provided amount of leading zeroes in selector
+  [SIG]       函数签名，例如 transfer(address,uint256)
+  [OPTIMIZE]  优化签名，使其包含指定数量的前导零
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

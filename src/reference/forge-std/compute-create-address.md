@@ -1,25 +1,25 @@
 ## `computeCreateAddress`
 
-### Signature
+### 签名
 
 ```solidity
 function computeCreateAddress(address deployer, uint256 nonce) internal pure returns (address)
 ```
 
-### Description
+### 描述
 
-Compute the address a contract will be deployed at for a given deployer address and nonce. Useful to precalculate the address a contract **will** be deployed at.
+计算给定部署者地址和随机数的合约部署地址。这对于预先计算合约将部署的地址非常有用。
 
-### Example
+### 示例
 
 ```solidity
 address governanceAddress = computeCreateAddress(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, 1);
 
-// this contract requires a governance contract which hasn't been deployed yet
+// 这个合约需要一个尚未部署的治理合约
 Contract contract = new Contract(governanceAddress);
-// now we deploy it
+// 现在我们部署它
 Governance governance = new Governance(contract);
 
-// assuming `contract` has a `governance()` accessor
+// 假设 `contract` 有一个 `governance()` 访问器
 assertEq(governanceAddress, address(governance)); // [PASS]
 ```

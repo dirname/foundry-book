@@ -1,5 +1,7 @@
+```markdown
 `--delay` *delay*  
-&nbsp;&nbsp;&nbsp;&nbsp;Optional timeout to apply in between attempts in seconds. Defaults to 3.
+&nbsp;&nbsp;&nbsp;&nbsp;可选的超时时间，以秒为单位，在每次尝试之间应用。默认为 3。
 
 `--retries` *retries*  
-&nbsp;&nbsp;&nbsp;&nbsp;Number of attempts for retrying. Defaults to 15.
+&nbsp;&nbsp;&nbsp;&nbsp;重试的尝试次数。默认为 15。
+```

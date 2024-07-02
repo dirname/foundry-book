@@ -1,13 +1,13 @@
 ## `assumePayable`
 
-### Signature
+### 签名
 
 ```solidity
 function assumePayable(address addr) public;
 ```
 
-### Description
+### 描述
 
-Uses [`assume`](../../cheatcodes/assume.md) to filter addresses that reject Ether transfers.
+使用 [`assume`](../../cheatcodes/assume.md) 过滤拒绝以太币转账的地址。
 
-This makes an external call to the specified `addr` with a no calldata and checks `assume` against the success of the call.
+这会向指定的 `addr` 地址发起一个没有调用数据的外部调用，并检查调用的成功与否。

@@ -1,6 +1,7 @@
+```markdown
 # cast parse-bytes32-address
 
-Parses a checksummed address from bytes32 encoding.
+从 bytes32 编码解析校验和地址。
 
 ```bash
 $ cast parse-bytes32-address --help
@@ -10,5 +11,6 @@ Arguments:
   [BYTES]  
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

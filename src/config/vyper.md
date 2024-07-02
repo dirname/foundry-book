@@ -1,21 +1,20 @@
-## Vyper support
+## Vyper 支持
 
-Foundry supports compiling and testing Vyper contracts.
+Foundry 支持编译和测试 Vyper 合约。
 
-### 1. Compilation
+### 1. 编译
 
-You can install Vyper by following the instructions [here](https://vyper.readthedocs.io/en/stable/installing-vyper.html). If you have `vyper` available in your PATH, foundry will automatically use it.
+您可以按照[这里](https://vyper.readthedocs.io/en/stable/installing-vyper.html)的说明安装 Vyper。如果您的 PATH 中有 `vyper`，Foundry 将自动使用它。
 
-Otherwise, you can set the path to `vyper` in your `foundry.toml` by adding the following:
+否则，您可以在 `foundry.toml` 中通过添加以下内容来设置 `vyper` 的路径：
 ```toml
 [vyper]
 path = "/path/to/vyper"
 ```
 
+### 2. Solidity 测试
 
-### 2. Solidity tests
-
-Let's write a test for this simple Counter contract:
+让我们为这个简单的 Counter 合约编写一个测试：
 
 ```vyper
 number: public(uint256)
@@ -34,7 +33,7 @@ def increment():
     self.number += 1
 ```
 
-We can deploy it by using the `deployCode` cheatcode from `forge-std` and test it with the following Solidity test:
+我们可以使用 `forge-std` 中的 `deployCode` 作弊码来部署它，并用以下 Solidity 测试来测试它：
 ```solidity
 import {Test} from "forge-std/Test.sol";
 
@@ -65,14 +64,14 @@ contract CounterTest is Test {
 }
 ```
 
-### 3. Deploying
+### 3. 部署
 
-You can deploy Vyper contracts via `forge create` command:
+您可以通过 `forge create` 命令部署 Vyper 合约：
 ```bash
 forge create Counter --constructor-args '1' --rpc-url $RPC_URL --private-key $PRIVATE_KEY
 ```
 
-And with `deployCode` you can deploy Vyper contracts in your scripts as well:
+通过 `deployCode`，您也可以在脚本中部署 Vyper 合约：
 ```solidity
 import {Script} from "forge-std/Script.sol";
 
@@ -84,9 +83,9 @@ contract CounterScript is Script {
 }
 ```
 
-### 4. Vyper scripts
+### 4. Vyper 脚本
 
-You can write Vyper scripts in the same way as Solidity scripts:
+您可以像编写 Solidity 脚本一样编写 Vyper 脚本：
 ```vyper
 interface Vm:
     def startBroadcast(): nonpayable
@@ -109,13 +108,13 @@ def run(counter: address):
     assert number_after == number_before + 1
 ```
 
-Such script can be run with the following command:
+这样的脚本可以通过以下命令运行：
 ```bash
 forge script script/Increment.s.vy  --sig 'run' '<counter address>' --rpc-url $RPC_URL --broadcast  --private-key $PRIVATE_KEY
 ```
 
-### 5. Limitations
+### 5. 限制
 
-- While you can write and run tests and scripts in Vyper, there is no `new` keyword in Vyper allowing you to deploy contracts. This will be addressed in the future with new cheatcodes.
-- Vyper does not allow overloads with the same names but different parameter types. Thus some cheatcode combinations might require workarounds to be used. (e.g. `startBroadcast(address sender))` and `startBroadcast(uint256 pk)`)
-- `forge coverage` currently does not support Vyper contracts.
+- 虽然您可以编写和运行 Vyper 测试和脚本，但 Vyper 中没有 `new` 关键字允许您部署合约。这将在未来通过新的作弊码得到解决。
+- Vyper 不允许具有相同名称但参数类型不同的重载。因此，某些作弊码组合可能需要使用变通方法。（例如 `startBroadcast(address sender)` 和 `startBroadcast(uint256 pk)`）
+- `forge coverage` 目前不支持 Vyper 合约。

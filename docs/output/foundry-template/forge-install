@@ -1,0 +1,8 @@
+// ANCHOR: all
+// ANCHOR: command
+$ forge install
+// ANCHOR_END: command
+// ANCHOR: output
+
+// ANCHOR_END: output
+// ANCHOR_END: all

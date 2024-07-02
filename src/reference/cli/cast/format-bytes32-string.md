@@ -1,14 +1,16 @@
+```markdown
 # cast format-bytes32-string
 
-Formats a string into bytes32 encoding
+将字符串格式化为 bytes32 编码
 
 ```bash
 $ cast format-bytes32-string --help
 Usage: cast format-bytes32-string [STRING]
 
 Arguments:
-  [STRING]  The string to format
+  [STRING]  要格式化的字符串
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

@@ -1,132 +1,129 @@
-## Soldeer as a Package Manager
+## Soldeer 作为包管理器
 
-As explained [here](./dependencies), Foundry has been using git submodules to handle dependencies up until now. 
+如[这里](./dependencies)所述，Foundry 迄今为止一直使用 git 子模块来处理依赖关系。
 
-The need for a native package manager started to emerge as projects became more complex.
+随着项目变得越来越复杂，对原生包管理器的需求开始显现。
 
-A new approach has been in the making, [soldeer.xyz](https://soldeer.xyz), which is a Solidity native dependency manager built in Rust and open sourced (check the repository [https://github.com/mario-eth/soldeer](https://github.com/mario-eth/soldeer)).
+一个新的方法正在开发中，[soldeer.xyz](https://soldeer.xyz)，这是一个用 Rust 构建的 Solidity 原生依赖管理器，并且是开源的（查看仓库 [https://github.com/mario-eth/soldeer](https://github.com/mario-eth/soldeer)）。
 
-### Adding a Dependency
+### 添加依赖
 
-#### Add a Dependency Stored in the Central Repository
+#### 添加存储在中央仓库的依赖
 
-To add a dependency, you can visit [soldeer.xyz](https://soldeer.xyz) and search for the dependency you want to add (e.g., openzeppelin 0.5.2).
+要添加依赖，您可以访问 [soldeer.xyz](https://soldeer.xyz) 并搜索您想要添加的依赖（例如，openzeppelin 0.5.2）。
 
 ![image](https://i.postimg.cc/Hm6R8MTs/Unknown-413.png)
 
-Then just run the forge command:
+然后只需运行 forge 命令：
 ```bash
 forge soldeer install @openzeppelin-contracts~5.0.2
 ```
 
-This will download the dependency from the central repository and install it into a `dependencies` directory.
+这将从中央仓库下载依赖并安装到 `dependencies` 目录中。
 
-Soldeer can manage two types of dependency configuration: using `soldeer.toml` or embedded in the `foundry.toml`. In order to work with Foundry, you have to define the `[dependencies]` config in the `foundry.toml`. This will tell the `soldeer CLI` to define the installed dependencies there.
-E.g.
+Soldeer 可以管理两种类型的依赖配置：使用 `soldeer.toml` 或嵌入在 `foundry.toml` 中。为了与 Foundry 一起工作，您必须在 `foundry.toml` 中定义 `[dependencies]` 配置。这将告诉 `soldeer CLI` 在该处定义已安装的依赖。例如：
 
 ```toml
-# Full reference https://github.com/foundry-rs/foundry/tree/master/crates/config
+# 完整参考 https://github.com/foundry-rs/foundry/tree/master/crates/config
 
 [profile.default]
 auto_detect_solc = false 
 bytecode_hash = "none" 
 fuzz = { runs = 1_000 } 
-libs = ["dependencies"] # <= This is important to be added
+libs = ["dependencies"] # <= 这很重要，需要添加
 gas_reports = ["*"] 
 
-[dependencies] # <= Dependencies will be added under this config
+[dependencies] # <= 依赖将添加到此配置下
 "@openzeppelin-contracts" = { version = "5.0.2" }
 "@uniswap-universal-router" = { version = "1.6.0" }
 "@prb-math" = { version = "4.0.2" }
 forge-std = { version = "1.8.1" }
 ```
 
-#### Add a Dependency Stored at a Specific Link
+#### 添加存储在特定链接的依赖
 
-If the central repository does not have a certain dependency, you can install it by providing a zip archive link.
+如果中央仓库没有某个依赖，您可以通过提供一个 zip 存档链接来安装它。
 
-E.g.
+例如：
 ```bash
 forge soldeer install @custom-dependency~1.0.0 https://my-website.com/custom-dependency-1-0-0.zip
 ```
 
-The above command will try to download the dependency from the provided link and install it as a normal dependency. For this, you will see in the config an additional field called `path`.
+上述命令将尝试从提供的链接下载依赖并将其安装为正常依赖。为此，您将在配置中看到一个额外的字段 `path`。
 
-E.g.
+例如：
 ```toml
 [dependencies]
 "@custom-dependency" = { version = "1.0.0", path = "https://my-website.com/custom-dependency-1-0-0.zip" }
 ```
 
-### Remapping Dependencies
+### 重映射依赖
 
-The remapping of a dependency is performed automatically, Soldeer is adding the dependency into the `remappings.txt`.
+依赖的重映射是自动执行的，Soldeer 会将依赖添加到 `remappings.txt` 中。
 
-E.g.
+例如：
 ```bash
 @openzeppelin-contracts-5.0.2=dependencies/@openzeppelin-contracts-5.0.2
 @uniswap-universal-router-1.6.0=dependencies/@uniswap-universal-router-1.6.0
 @prb-math-4.0.2=dependencies/@prb-math-4.0.2
 @forge-std-1.8.1=dependencies/forge-std-1.8.1
 ```
-These remappings mean:
+这些重映射意味着：
 
-- To import from `forge-std`, we would write: `import "forge-std-1.8.1/Contract.sol";`
-- To import from `@openzeppelin-contracts`, we would write: `import "@openzeppelin-contracts-5.0.2/Contract.sol";`
+- 要从 `forge-std` 导入，我们会写：`import "forge-std-1.8.1/Contract.sol";`
+- 要从 `@openzeppelin-contracts` 导入，我们会写：`import "@openzeppelin-contracts-5.0.2/Contract.sol";`
 
-### Updating Dependencies
+### 更新依赖
 
-Because Soldeer specifies the dependencies in a config file (foundry or soldeer toml), sharing a dependency configuration within the team is much easier.
+因为 Soldeer 在配置文件（foundry 或 soldeer toml）中指定依赖，所以在团队中共享依赖配置变得更加容易。
 
-For example, having this Foundry config file in a git repository, one can pull the repository and then run `forge soldeer update`. This command will automatically install all the dependencies specified under the `[dependencies]` tag.
+例如，在 git 仓库中有一个 Foundry 配置文件，可以拉取仓库然后运行 `forge soldeer update`。此命令将自动安装在 `[dependencies]` 标签下指定的所有依赖。
 
 ```toml
-# Full reference https://github.com/foundry-rs/foundry/tree/master/crates/config
+# 完整参考 https://github.com/foundry-rs/foundry/tree/master/crates/config
 
 [profile.default]
 auto_detect_solc = false 
 bytecode_hash = "none" 
 fuzz = { runs = 1_000 } 
-gas_reports = ["*"] # <= This is important to be added
+gas_reports = ["*"] # <= 这很重要，需要添加
 
-[dependencies] # <= Dependencies will be added under this config
+[dependencies] # <= 依赖将添加到此配置下
 "@openzeppelin-contracts" = { version = "5.0.2" }
 "@uniswap-universal-router" = { version = "1.6.0" }
 "@prb-math" = { version = "4.0.2" }
 forge-std = { version = "1.8.1" }
 ```
 
-### Removing Dependencies
+### 移除依赖
 
-To remove a dependency, you have to manually delete it from the `dependencies` directory and from the `[dependencies]` tag.
+要移除依赖，您必须手动从 `dependencies` 目录和 `[dependencies]` 标签中删除它。
 
-### Pushing a New Version to the Central Repository
+### 将新版本推送到中央仓库
 
-Soldeer acts like npmjs/crates.io, encouraging all developers to publish their projects to the central repository.
+Soldeer 类似于 npmjs/crates.io，鼓励所有开发者将他们的项目发布到中央仓库。
 
-To do that, you have to go to [soldeer.xyz](https://soldeer.xyz), create an account, verify it, then
+要做到这一点，您必须前往 [soldeer.xyz](https://soldeer.xyz)，创建一个账户，验证它，然后
 
 ![image](https://i.postimg.cc/G3VDpN2S/s1.png) 
 
-Just add a new project
+只需添加一个新项目
 
 ![image](https://i.postimg.cc/rsBRYd3L/s2.png) 
 
-After the project is created, you can go into your project source and:
-- Create a `.soldeerignore` file that acts as a `.gitignore` to exclude files that aren't needed. 
-- Run `forge soldeer login` to log into your account. 
-- Run `forge soldeer push my-project~1.0.0` in your terminal in the directory that you want to push to the central repository associated with the project `my-project` at version `1.0.0`. 
+项目创建后，您可以进入项目源并：
+- 创建一个 `.soldeerignore` 文件，该文件类似于 `.gitignore`，用于排除不需要的文件。
+- 运行 `forge soldeer login` 登录到您的账户。
+- 在您想要推送到中央仓库的目录中运行 `forge soldeer push my-project~1.0.0`。
 
-If you want to push a specific directory and not the current directory your terminal is in, you can use `forge soldeer push my-project~1.0.0 /path/to/directory`.
+如果您想推送特定目录而不是当前终端所在的目录，可以使用 `forge soldeer push my-project~1.0.0 /path/to/directory`。
 
-> **Warning** ⚠️
-> - Once a project is created, it cannot be deleted.
-> - Once a version is pushed, it cannot be deleted.
-> - You cannot push the same version twice.
-> - The project name in the command that you run in the terminal must match the project name that you created on the Soldeer website.
-> - We encourage everyone to use version pinning when importing them into the contracts, this will help with securing your code by knowing exactly what version of a dependency you are using. Furthermore, it will help security researchers in their work.
-e.g. instead of using
-`import '@openzeppelin-contracts/token/ERC20.sol'` you should do
-`import '@openzeppelin-contracts-5.0.2/token/ERC20.sol'`
+> **警告** ⚠️
+> - 一旦项目创建，无法删除。
+> - 一旦版本推送，无法删除。
+> - 您不能推送相同的版本两次。
+> - 在终端中运行的项目名称命令必须与在 Soldeer 网站上创建的项目名称匹配。
+> - 我们鼓励大家在导入依赖时使用版本固定，这将有助于通过确切知道正在使用的依赖版本来确保代码安全。此外，它将帮助安全研究人员进行工作。
+例如，不要使用 `import '@openzeppelin-contracts/token/ERC20.sol'`，而应使用 `import '@openzeppelin-contracts-5.0.2/token/ERC20.sol'`。
 
-- If a certain package is not present in the central repository, you can open an issue in the [Soldeer Repository](https://github.com/mario-eth/soldeer/issues) and the team will look into adding it.
+- 如果中央仓库中没有某个包，您可以在 [Soldeer Repository](https://github.com/mario-eth/soldeer/issues) 中打开一个问题，团队将考虑添加它。

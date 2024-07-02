@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-concat-hex - Concatenate hex strings.
+cast-concat-hex - 连接十六进制字符串。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-concat-hex - Concatenate hex strings.
 
 ### DESCRIPTION
 
-Concatenate hex strings.
+连接十六进制字符串。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Concatenate hex strings.
 
 ### EXAMPLES
 
-1. Concatenate hex strings:
+1. 连接十六进制字符串：
     ```sh
     cast concat-hex 0xa 0xb 0xc
     ```

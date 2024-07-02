@@ -1,15 +1,5 @@
-# cast wallet derive-private-key
-
-Derives private key from mnemonic
-
-```bash
-$ cast wallet derive-private-key --help
-Usage: cast wallet derive-private-key <MNEMONIC> [MNEMONIC_INDEX]
-
-Arguments:
-  <MNEMONIC>        
-  [MNEMONIC_INDEX]  
-
-Options:
-  -h, --help  Print help
+```json
+{
+  "translation": "# cast wallet derive-private-key\n\n从助记词派生私钥\n\n```bash\n$ cast wallet derive-private-key --help\nUsage: cast wallet derive-private-key <MNEMONIC> [MNEMONIC_INDEX]\n\nArguments:\n  <MNEMONIC>        \n  [MNEMONIC_INDEX]  \n\nOptions:\n  -h, --help  打印帮助信息\n```"
+}
 ```

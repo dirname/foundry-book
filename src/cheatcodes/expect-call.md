@@ -25,28 +25,28 @@ function expectCall(
 ) external;
 ```
 
-### Description
+### 描述
 
-Expects that a call to a specified address `callee`, where the call data either strictly or loosely matches `data`. The cheatcode can be called in two ways:
+期望对指定地址 `callee` 进行调用，其中调用数据要么严格匹配 `data`，要么宽松匹配 `data`。该作弊码有两种调用方式：
 
-- If no `count` parameter is specified, the call will be expected to be made at least the amount of times the cheatcode was called. For the same calldata, you cannot call the cheatcode with no `count` and then pass in a `count` parameter.
-- If `count` is specified, the call will be expected to be made strictly `count` times. For the same calldata, the `count` value cannot be overwritten with another cheatcode call, nor it can be increment by calling the cheatcode without a `count` parameter.
+- 如果没有指定 `count` 参数，则期望调用至少被调用的次数与作弊码被调用的次数相同。对于相同的调用数据，不能在没有 `count` 的情况下调用作弊码，然后传入 `count` 参数。
+- 如果指定了 `count`，则期望调用严格被调用 `count` 次。对于相同的调用数据，`count` 值不能通过另一个作弊码调用被覆盖，也不能通过不带 `count` 参数的作弊码调用增加。
 
-`count` can also be set to 0 to assert that a call is not made.
+`count` 也可以设置为 0，以断言不会进行调用。
 
-When a call is made to `callee` the call data is first checked to see if it matches in its entirety with `data`. If not, the call data is checked to see if there is a partial match, with the match starting at the first byte of the call data.
+当对 `callee` 进行调用时，首先检查调用数据是否与 `data` 完全匹配。如果没有，则检查调用数据是否存在部分匹配，匹配从调用数据的第一个字节开始。
 
-**Using the second signature** we can also check if the call was made with the expected `msg.value`.
+**使用第二个签名**，我们还可以检查调用是否使用预期的 `msg.value` 进行。
 
-If the test terminates without the call being made, the test fails.
+如果测试在没有进行调用的情况下终止，则测试失败。
 
-> ℹ️ **Internal calls**
+> ℹ️ **内部调用**
 >
-> This cheatcode does not currently work on internal calls. See issue [#432](https://github.com/foundry-rs/foundry/issues/432).
+> 该作弊码目前不适用于内部调用。请参见问题 [#432](https://github.com/foundry-rs/foundry/issues/432)。
 
-### Examples
+### 示例
 
-Expect that `transfer` is called on a token `MyToken` one time:
+期望在代币 `MyToken` 上调用 `transfer` 一次：
 
 ```solidity
 address alice = makeAddr("alice");
@@ -58,7 +58,7 @@ token.transfer(alice, 10);
 // [PASS]
 ```
 
-Expect that `transfer` is called on a token `MyToken` *at least* two times:
+期望在代币 `MyToken` 上调用 `transfer` *至少* 两次：
 
 ```solidity
 address alice = makeAddr("alice");
@@ -75,7 +75,7 @@ token.transfer(alice, 10);
 // [PASS]
 ```
 
-Expect that `transfer` is not called on a token `MyToken`:
+期望在代币 `MyToken` 上不调用 `transfer`：
 
 ```solidity
 address alice = makeAddr("alice");
@@ -87,7 +87,7 @@ token.transferFrom(alice, address(0), 10);
 // [PASS]
 ```
 
-Expect that `transfer` with any calldata is called on a token `MyToken` 2 times:
+期望在代币 `MyToken` 上调用 `transfer` 且任何调用数据被调用 2 次：
 
 ```solidity
 address alice = makeAddr("alice");
@@ -100,7 +100,7 @@ token.transfer(alice, 10);
 // [PASS]
 ```
 
-Expect that `pay` is called on a `Contract` with a specific `msg.value` and `calldata`:
+期望在 `Contract` 上调用 `pay` 且具有特定的 `msg.value` 和 `calldata`：
 
 ```solidity
 Contract target = new Contract();
@@ -113,7 +113,7 @@ target.pay{value: 1}(2);
 // [PASS]
 ```
 
-Expect that `pay` is called on a `Contract` with a specific `msg.value` and `calldata` 3 times:
+期望在 `Contract` 上调用 `pay` 且具有特定的 `msg.value` 和 `calldata` 3 次：
 
 ```solidity
 Contract target = new Contract();

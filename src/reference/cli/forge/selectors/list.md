@@ -1,6 +1,7 @@
+```markdown
 # forge selectors list
 
-List selectors from current workspace
+列出当前工作区的选择器
 
 ```bash
 $ forge selectors list --help
@@ -8,40 +9,41 @@ Usage: forge selectors list [OPTIONS] [CONTRACT]
 
 Arguments:
   [CONTRACT]
-          The name of the contract to list selectors for.
+          要列出选择器的合约名称。
 
 Options:
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看简要帮助）
 
-Project options:
+项目选项:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下，如果在一个 Git 仓库中，则为 Git 仓库的根路径，否则为当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源代码目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的重映射
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境变量中获取的项目重映射
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存的路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹的路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这等同于使用：`--contracts contracts --lib-paths node_modules`。
           
           [aliases: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件的路径
+```
 ```

@@ -1,6 +1,7 @@
+```markdown
 # forge soldeer push
 
-Push a dependency to the repository. The PATH_TO_DEPENDENCY is optional and if not provided, the
+将依赖项推送到仓库。PATH_TO_DEPENDENCY 是可选的，如果没有提供，则使用默认路径。
 
 ```bash
 $ forge soldeer push --help
@@ -11,7 +12,8 @@ Arguments:
   [PATH]        
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
 
-For more information, read the README.md
+更多信息，请阅读 README.md
+```
 ```

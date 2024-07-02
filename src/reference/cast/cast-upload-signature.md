@@ -10,7 +10,7 @@ cast-upload-signature
 
 ### DESCRIPTION
 
-Upload the given signatures to [https://sig.eth.samczsun.com](https://sig.eth.samczsun.com).
+将给定的签名上传到 [https://sig.eth.samczsun.com](https://sig.eth.samczsun.com)。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Upload the given signatures to [https://sig.eth.samczsun.com](https://sig.eth.sa
 
 ### EXAMPLES
 
-1. Upload signatures
+1. 上传签名
     ```sh
     cast upload-signature 'function approve(address,uint256)' \
    'transfer(uint256)' 'event Transfer(uint256,address)'

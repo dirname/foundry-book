@@ -1,298 +1,298 @@
-## Testing
+## 测试
 
-Configuration related to the behavior of `forge test`.
+与 `forge test` 行为相关的配置。
 
-**Sections**
+**章节**
 
-- [General](#general)
-- [Fuzz](#fuzz)
-- [Invariant](#invariant)
+- [通用](#general)
+- [模糊测试](#fuzz)
+- [不变性测试](#invariant)
 
 
-### General
+### 通用
 
 ##### `verbosity`
 
-- Type: integer
-- Default: 0
-- Environment: `FOUNDRY_VERBOSITY` or `DAPP_VERBOSITY`
+- 类型: 整数
+- 默认值: 0
+- 环境变量: `FOUNDRY_VERBOSITY` 或 `DAPP_VERBOSITY`
 
-The verbosity level to use during tests.
+测试期间使用的详细级别。
 
-- **Level 2 (`-vv`)**: Logs emitted during tests are also displayed.
-- **Level 3 (`-vvv`)**: Stack traces for failing tests are also displayed.
-- **Level 4 (`-vvvv`)**: Stack traces for all tests are displayed, and setup traces for failing tests are displayed.
-- **Level 5 (`-vvvvv`)**: Stack traces and setup traces are always displayed.
+- **级别 2 (`-vv`)**: 测试期间发出的日志也会显示。
+- **级别 3 (`-vvv`)**: 失败测试的堆栈跟踪也会显示。
+- **级别 4 (`-vvvv`)**: 所有测试的堆栈跟踪都会显示，并且失败测试的设置跟踪也会显示。
+- **级别 5 (`-vvvvv`)**: 堆栈跟踪和设置跟踪总是显示。
 
 ##### `ffi`
 
-- Type: boolean
-- Default: false
-- Environment: `FOUNDRY_FFI` or `DAPP_FFI`
+- 类型: 布尔值
+- 默认值: false
+- 环境变量: `FOUNDRY_FFI` 或 `DAPP_FFI`
 
-Whether or not to enable the `ffi` cheatcode.
+是否启用 `ffi` 作弊码。
 
-**Warning:** Enabling this cheatcode has security implications for your project, as it allows tests to execute arbitrary programs on your computer.
+**警告:** 启用此作弊码会对您的项目安全产生影响，因为它允许测试在您的计算机上执行任意程序。
 
 ##### `sender`
 
-- Type: string (address)
-- Default: 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38
-- Environment: `FOUNDRY_SENDER` or `DAPP_SENDER`
+- 类型: 字符串 (地址)
+- 默认值: 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38
+- 环境变量: `FOUNDRY_SENDER` 或 `DAPP_SENDER`
 
-The value of `msg.sender` in tests.
+测试中的 `msg.sender` 值。
 
 ##### `tx_origin`
 
-- Type: string (address)
-- Default: 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38
-- Environment: `FOUNDRY_TX_ORIGIN` or `DAPP_TX_ORIGIN`
+- 类型: 字符串 (地址)
+- 默认值: 0x1804c8AB1F12E6bbf3894d4083f33e07309d1f38
+- 环境变量: `FOUNDRY_TX_ORIGIN` 或 `DAPP_TX_ORIGIN`
 
-The value of `tx.origin` in tests.
+测试中的 `tx.origin` 值。
 
 ##### `initial_balance`
 
-- Type: string (hexadecimal)
-- Default: 0xffffffffffffffffffffffff
-- Environment: `FOUNDRY_INITIAL_BALANCE` or `DAPP_INITIAL_BALANCE`
+- 类型: 字符串 (十六进制)
+- 默认值: 0xffffffffffffffffffffffff
+- 环境变量: `FOUNDRY_INITIAL_BALANCE` 或 `DAPP_INITIAL_BALANCE`
 
-The initial balance of the test contracts in wei, written in hexadecimal.
+测试合约的初始余额，以 wei 为单位，用十六进制表示。
 
 ##### `block_number`
 
-- Type: integer
-- Default: 1
-- Environment: `FOUNDRY_BLOCK_NUMBER` or `DAPP_BLOCK_NUMBER`
+- 类型: 整数
+- 默认值: 1
+- 环境变量: `FOUNDRY_BLOCK_NUMBER` 或 `DAPP_BLOCK_NUMBER`
 
-The value of `block.number` in tests.
+测试中的 `block.number` 值。
 
 ##### `chain_id`
 
-- Type: integer
-- Default: 31337
-- Environment: `FOUNDRY_CHAIN_ID` or `DAPP_CHAIN_ID`
+- 类型: 整数
+- 默认值: 31337
+- 环境变量: `FOUNDRY_CHAIN_ID` 或 `DAPP_CHAIN_ID`
 
-The value of the `chainid` opcode in tests.
+测试中的 `chainid` 操作码值。
 
 ##### `gas_limit`
 
-- Type: integer or string
-- Default: 9223372036854775807
-- Environment: `FOUNDRY_GAS_LIMIT` or `DAPP_GAS_LIMIT`
+- 类型: 整数或字符串
+- 默认值: 9223372036854775807
+- 环境变量: `FOUNDRY_GAS_LIMIT` 或 `DAPP_GAS_LIMIT`
 
-The gas limit for each test case.
+每个测试用例的 gas 限制。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Due to a limitation in a dependency of Forge, you **cannot raise the gas limit** beyond the default without changing the value to a string.
+> 由于 Forge 依赖的一个限制，您**无法将 gas 限制**提高到默认值以上而不将值更改为字符串。
 >
-> In order to use higher gas limits use a string:
+> 为了使用更高的 gas 限制，请使用字符串：
  ```toml
 gas_limit = "18446744073709551615" # u64::MAX
 ```
 
 ##### `gas_price`
 
-- Type: integer
-- Default: 0
-- Environment: `FOUNDRY_GAS_PRICE` or `DAPP_GAS_PRICE`
+- 类型: 整数
+- 默认值: 0
+- 环境变量: `FOUNDRY_GAS_PRICE` 或 `DAPP_GAS_PRICE`
 
-The price of gas (in wei) in tests.
+测试中的 gas 价格（以 wei 为单位）。
 
 ##### `block_base_fee_per_gas`
 
-- Type: integer
-- Default: 0
-- Environment: `FOUNDRY_BLOCK_BASE_FEE_PER_GAS` or `DAPP_BLOCK_BASE_FEE_PER_GAS`
+- 类型: 整数
+- 默认值: 0
+- 环境变量: `FOUNDRY_BLOCK_BASE_FEE_PER_GAS` 或 `DAPP_BLOCK_BASE_FEE_PER_GAS`
 
-The base fee per gas (in wei) in tests.
+测试中的每 gas 基础费用（以 wei 为单位）。
 
 ##### `block_coinbase`
 
-- Type: string (address)
-- Default: 0x0000000000000000000000000000000000000000
-- Environment: `FOUNDRY_BLOCK_COINBASE` or `DAPP_BLOCK_COINBASE`
+- 类型: 字符串 (地址)
+- 默认值: 0x0000000000000000000000000000000000000000
+- 环境变量: `FOUNDRY_BLOCK_COINBASE` 或 `DAPP_BLOCK_COINBASE`
 
-The value of `block.coinbase` in tests.
+测试中的 `block.coinbase` 值。
 
 ##### `block_timestamp`
 
-- Type: integer
-- Default: 1
-- Environment: `FOUNDRY_BLOCK_TIMESTAMP` or `DAPP_BLOCK_TIMESTAMP`
+- 类型: 整数
+- 默认值: 1
+- 环境变量: `FOUNDRY_BLOCK_TIMESTAMP` 或 `DAPP_BLOCK_TIMESTAMP`
 
-The value of `block.timestamp` in tests.
+测试中的 `block.timestamp` 值。
 
 ##### `block_difficulty`
 
-- Type: integer
-- Default: 0
-- Environment: `FOUNDRY_BLOCK_DIFFICULTY` or `DAPP_BLOCK_DIFFICULTY`
+- 类型: 整数
+- 默认值: 0
+- 环境变量: `FOUNDRY_BLOCK_DIFFICULTY` 或 `DAPP_BLOCK_DIFFICULTY`
 
-The value of `block.difficulty` in tests.
+测试中的 `block.difficulty` 值。
 
 ##### `gas_reports`
 
-- Type: array of strings (contract names)
-- Default: ["*"]
-- Environment: `FOUNDRY_GAS_REPORTS` or `DAPP_GAS_REPORTS`
+- 类型: 字符串数组 (合约名称)
+- 默认值: ["*"]
+- 环境变量: `FOUNDRY_GAS_REPORTS` 或 `DAPP_GAS_REPORTS`
 
-The contracts to print gas reports for.
+要打印 gas 报告的合约。
 
 ##### `no_storage_caching`
 
-- Type: boolean
-- Default: false
-- Environment: `FOUNDRY_NO_STORAGE_CACHING` or `DAPP_NO_STORAGE_CACHING`
+- 类型: 布尔值
+- 默认值: false
+- 环境变量: `FOUNDRY_NO_STORAGE_CACHING` 或 `DAPP_NO_STORAGE_CACHING`
 
-If set to `true`, then block data from RPC endpoints in tests will not be cached. Otherwise, the data is cached to `$HOME/.foundry/cache/<chain id>/<block number>`.
+如果设置为 `true`，则测试中来自 RPC 端点的区块数据将不会被缓存。否则，数据会被缓存到 `$HOME/.foundry/cache/<chain id>/<block number>`。
 
 ##### `[rpc_storage_caching]`
 
-The `[rpc_storage_caching]` block determines what RPC endpoints are cached.
+`[rpc_storage_caching]` 块决定哪些 RPC 端点被缓存。
 
 ###### `rpc_storage_caching.chains`
 
-- Type: string or array of strings (chain names)
-- Default: all
-- Environment: N/A
+- 类型: 字符串或字符串数组 (链名称)
+- 默认值: all
+- 环境变量: 无
 
-Determines what chains are cached. By default, all chains are cached.
+决定哪些链被缓存。默认情况下，所有链都被缓存。
 
-Valid values are:
+有效值为：
 
 - "all"
-- A list of chain names, e.g. `["optimism", "mainnet"]`
+- 链名称列表，例如 `["optimism", "mainnet"]`
 
 ###### `rpc_storage_caching.endpoints`
 
-- Type: string or array of regex patterns (to match URLs)
-- Default: remote
-- Environment: N/A
+- 类型: 字符串或正则表达式模式数组 (匹配 URL)
+- 默认值: remote
+- 环境变量: 无
 
-Determines what RPC endpoints are cached. By default, only remote endpoints are cached.
+决定哪些 RPC 端点被缓存。默认情况下，只有远程端点被缓存。
 
-Valid values are:
+有效值为：
 
 - all
-- remote (default)
-- A list of regex patterns, e.g. `["localhost"]`
+- remote (默认)
+- 正则表达式模式列表，例如 `["localhost"]`
 
 ##### `eth_rpc_url`
 
-- Type: string
-- Default: none
-- Environment: `FOUNDRY_ETH_RPC_URL` or `DAPP_ETH_RPC_URL`
+- 类型: 字符串
+- 默认值: 无
+- 环境变量: `FOUNDRY_ETH_RPC_URL` 或 `DAPP_ETH_RPC_URL`
 
-The url of the rpc server that should be used for any rpc calls.
+应使用的 RPC 服务器的 URL。
 
 ##### `etherscan_api_key`
 
-- Type: string
-- Default: none
-- Environment: `FOUNDRY_ETHERSCAN_API_KEY` or `DAPP_ETHERSCAN_API_KEY`
+- 类型: 字符串
+- 默认值: 无
+- 环境变量: `FOUNDRY_ETHERSCAN_API_KEY` 或 `DAPP_ETHERSCAN_API_KEY`
 
-The etherscan API key for RPC calls.
+用于 RPC 调用的 Etherscan API 密钥。
 
 ##### `match-test`
 
-- Type: regex
-- Default: none
-- Environment: `FOUNDRY_MATCH_TEST` or `DAPP_MATCH_TEST`
+- 类型: 正则表达式
+- 默认值: 无
+- 环境变量: `FOUNDRY_MATCH_TEST` 或 `DAPP_MATCH_TEST`
 
-Only run test methods matching regex.
-Equivalent to `forge test --match-test <TEST_PATTERN>`
+仅运行匹配正则表达式的测试方法。
+等同于 `forge test --match-test <TEST_PATTERN>`
 
 ##### `no-match-test`
 
-- Type: regex
-- Default: none
-- Environment: `FOUNDRY_NO_MATCH_TEST` or `DAPP_NO_MATCH_TEST`
+- 类型: 正则表达式
+- 默认值: 无
+- 环境变量: `FOUNDRY_NO_MATCH_TEST` 或 `DAPP_NO_MATCH_TEST`
 
-Only run test methods not matching regex.
-Equivalent to `forge test --no-match-test <TEST_PATTERN_INVERSE>`
+仅运行不匹配正则表达式的测试方法。
+等同于 `forge test --no-match-test <TEST_PATTERN_INVERSE>`
 
 ##### `match-contract`
 
-- Type: regex
-- Default: none
-- Environment: `FOUNDRY_MATCH_CONTRACT` or `DAPP_MATCH_CONTRACT`
+- 类型: 正则表达式
+- 默认值: 无
+- 环境变量: `FOUNDRY_MATCH_CONTRACT` 或 `DAPP_MATCH_CONTRACT`
 
-Only run test methods in contracts matching regex.
-Equivalent to `forge test --match-contract <CONTRACT_PATTERN>`
+仅运行匹配正则表达式的合约中的测试方法。
+等同于 `forge test --match-contract <CONTRACT_PATTERN>`
 
 ##### `no-match-contract`
 
-- Type: regex
-- Default: none
-- Environment: `FOUNDRY_NO_MATCH_CONTRACT` or `DAPP_NO_MATCH_CONTRACT`
+- 类型: 正则表达式
+- 默认值: 无
+- 环境变量: `FOUNDRY_NO_MATCH_CONTRACT` 或 `DAPP_NO_MATCH_CONTRACT`
 
-Only run test methods in contracts not matching regex.
-Equivalent to `forge test --no-match-contract <CONTRACT_PATTERN_INVERSE>`
+仅运行不匹配正则表达式的合约中的测试方法。
+等同于 `forge test --no-match-contract <CONTRACT_PATTERN_INVERSE>`
 
 ##### `match-path`
 
-- Type: regex
-- Default: none
-- Environment: `FOUNDRY_MATCH_PATH` or `DAPP_MATCH_PATH`
+- 类型: 正则表达式
+- 默认值: 无
+- 环境变量: `FOUNDRY_MATCH_PATH` 或 `DAPP_MATCH_PATH`
 
-Only runs test methods on files matching the path.
-Equivalent to `forge test --match-path <PATH_PATTERN>`
+仅运行匹配路径的文件中的测试方法。
+等同于 `forge test --match-path <PATH_PATTERN>`
 
 ##### `no-match-path`
 
-- Type: regex
-- Default: none
-- Environment: `FOUNDRY_NO_MATCH_PATH` or `DAPP_NO_MATCH_PATH`
+- 类型: 正则表达式
+- 默认值: 无
+- 环境变量: `FOUNDRY_NO_MATCH_PATH` 或 `DAPP_NO_MATCH_PATH`
 
-Only runs test methods on files not matching the path.
-Equivalent to `forge test --no-match-path <PATH_PATTERN_INVERSE>`
+仅运行不匹配路径的文件中的测试方法。
+等同于 `forge test --no-match-path <PATH_PATTERN_INVERSE>`
 
 ##### `block_gas_limit`
 
-- Type: integer
-- Default: none
-- Environment: `FOUNDRY_BLOCK_GAS_LIMIT` or `DAPP_BLOCK_GAS_LIMIT`
+- 类型: 整数
+- 默认值: 无
+- 环境变量: `FOUNDRY_BLOCK_GAS_LIMIT` 或 `DAPP_BLOCK_GAS_LIMIT`
 
-The block.gaslimit value during EVM execution.
+EVM 执行期间的 `block.gaslimit` 值。
 
 ##### `memory_limit`
 
-- Type: integer
-- Default: 33554432
-- Environment: `FOUNDRY_MEMORY_LIMIT` or `DAPP_MEMORY_LIMIT`
+- 类型: 整数
+- 默认值: 33554432
+- 环境变量: `FOUNDRY_MEMORY_LIMIT` 或 `DAPP_MEMORY_LIMIT`
 
-The memory limit of the EVM in bytes.
+EVM 的内存限制（以字节为单位）。
 
 ##### `names`
 
-- Type: boolean
-- Default: false
-- Environment: `FOUNDRY_NAMES` or `DAPP_NAMES`
+- 类型: 布尔值
+- 默认值: false
+- 环境变量: `FOUNDRY_NAMES` 或 `DAPP_NAMES`
 
-Print compiled contract names.
+打印编译的合约名称。
 
 ##### `sizes`
 
-- Type: boolean
-- Default: false
-- Environment: `FOUNDRY_SIZES` or `DAPP_SIZES`
+- 类型: 布尔值
+- 默认值: false
+- 环境变量: `FOUNDRY_SIZES` 或 `DAPP_SIZES`
 
-Print compiled contract sizes.
+打印编译的合约大小。
 
 ##### `rpc_endpoints`
 
-- Type: table of RPC endpoints
-- Default: none
-- Environment: none
+- 类型: RPC 端点表
+- 默认值: 无
+- 环境变量: 无
 
-This section lives outside of profiles and defines a table of RPC endpoints, where the key specifies the RPC endpoints's name and the value is the RPC endpoint itself.
+此部分存在于配置文件之外，定义了一个 RPC 端点表，其中键指定了 RPC 端点的名称，值是 RPC 端点本身。
 
-The value can either be a valid RPC endpoint or a reference to an environment variable (wrapped with in `${}`).
+值可以是有效的 RPC 端点或对环境变量的引用（用 `${}` 包裹）。
 
-These RPC endpoints can be used in tests and Solidity scripts (see [`vm.rpc`](../../cheatcodes/rpc.md)).
+这些 RPC 端点可以在测试和 Solidity 脚本中使用（参见 [`vm.rpc`](../../cheatcodes/rpc.md)）。
 
-The following example defines an endpoint named `optimism` and an endpoint named `mainnet` that references an environment variable `RPC_MAINNET`:
+以下示例定义了一个名为 `optimism` 的端点和一个名为 `mainnet` 的端点，该端点引用了一个环境变量 `RPC_MAINNET`：
 
 ```toml
 [rpc_endpoints]
@@ -302,148 +302,109 @@ mainnet = "${RPC_MAINNET}"
 
 ##### `prompt_timeout`
 
-- Type: integer
-- Default: 120
-- Environment: `FOUNDRY_PROMPT_TIMEOUT`
+- 类型: 整数
+- 默认值: 120
+- 环境变量: `FOUNDRY_PROMPT_TIMEOUT`
 
-The number of seconds to wait before `vm.prompt` reverts with a timeout.
+`vm.prompt` 在超时前等待的秒数。
 
-### Fuzz
+### 模糊测试
 
-Configuration values for `[fuzz]` section.
+`[fuzz]` 部分的配置值。
 
 ##### `runs`
 
-- Type: integer
-- Default: 256
-- Environment: `FOUNDRY_FUZZ_RUNS` or `DAPP_FUZZ_RUNS`
+- 类型: 整数
+- 默认值: 256
+- 环境变量: `FOUNDRY_FUZZ_RUNS` 或 `DAPP_FUZZ_RUNS`
 
-The amount of fuzz runs to perform for each fuzz test case. Higher values gives more confidence in results at the cost of testing speed.
+每个模糊测试用例执行的模糊运行次数。更高的值在测试速度的代价下提供更多结果的置信度。
 
 ##### `max_test_rejects`
 
-- Type: integer
-- Default: 65536
-- Environment: `FOUNDRY_FUZZ_MAX_TEST_REJECTS`
+- 类型: 整数
+- 默认值: 65536
+- 环境变量: `FOUNDRY_FUZZ_MAX_TEST_REJECTS`
 
-The maximum number of combined inputs that may be rejected before the test as a whole aborts.
-"Global" filters apply to the whole test case. If the test case is rejected, the whole thing is regenerated.
+在测试整体中止之前可能被拒绝的组合输入的最大数量。
+“全局”过滤器适用于整个测试用例。如果测试用例被拒绝，整个测试用例将重新生成。
 
 ##### `seed`
 
-- Type: string (hexadecimal)
-- Default: none
-- Environment: `FOUNDRY_FUZZ_SEED`
+- 类型: 字符串 (十六进制)
+- 默认值: 无
+- 环境变量: `FOUNDRY_FUZZ_SEED`
 
-Optional seed for the fuzzing RNG algorithm.
+模糊测试 RNG 算法的可选种子。
 
 ##### `dictionary_weight`
 
-- Type: integer (between 0 and 100)
-- Default: 40
-- Environment: `FOUNDRY_FUZZ_DICTIONARY_WEIGHT`
+- 类型: 整数 (0 到 100 之间)
+- 默认值: 40
+- 环境变量: `FOUNDRY_FUZZ_DICTIONARY_WEIGHT`
 
-The weight of the dictionary. A higher dictionary weight will bias the fuzz inputs towards "interesting" values, e.g. boundary values like `type(uint256).max` or contract addresses from your environment.
+字典的权重。更高的字典权重将使模糊输入偏向“有趣的”值，例如边界值如 `type(uint256).max` 或来自您环境的合约地址。
 
 ##### `include_storage`
 
-- Type: boolean
-- Default: true
-- Environment: `FOUNDRY_FUZZ_INCLUDE_STORAGE`
+- 类型: 布尔值
+- 默认值: true
+- 环境变量: `FOUNDRY_FUZZ_INCLUDE_STORAGE`
 
-The flag indicating whether to include values from storage.
+指示是否包含存储值的标志。
 
 ##### `include_push_bytes`
 
-- Type: boolean
-- Default: true
-- Environment: `FOUNDRY_FUZZ_INCLUDE_PUSH_BYTES`
+- 类型: 布尔值
+- 默认值: true
+- 环境变量: `FOUNDRY_FUZZ_INCLUDE_PUSH_BYTES`
 
-The flag indicating whether to include push bytes values.
+指示是否包含 push bytes 值的标志。
 
-### Invariant
+### 不变性测试
 
-Configuration values for `[invariant]` section.
+`[invariant]` 部分的配置值。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Configuration for `[invariant]` section has the fallback logic
-> for common config entries (`runs`, `seed`, `dictionary_weight` etc).
+> `[invariant]` 部分的配置具有回退逻辑
+> 对于常见的配置条目（`runs`, `seed`, `dictionary_weight` 等）。
 >
-> * If the entries are not set in either section, then the defaults will be used.
-> * If the entries are set in the `[fuzz]` section, but are not set in the `[invariant]`
->   section, these values will automatically be set to the values specified in
->   the `[fuzz]` section.
-> * For any profile other than `default`:
->     * If at least one entry is set in the `[invariant]` (same as
->       `[profile.default.invariant]`) section, then the values from
->       `[invariant]` section will be used, including defaults.
->     * If no entry is set in the `[invariant]` section, but there are
->       entries in the `[fuzz]` (same as `[profile.default.fuzz]`) section,
->       then the values from the `[fuzz]` section will be used.
->     * If it's none of the cases described above, then the defaults
->       will be used.
+> * 如果条目在任一部分中未设置，则将使用默认值。
+> * 如果条目在 `[fuzz]` 部分中设置，但在 `[invariant]` 部分中未设置，这些值将自动设置为 `[fuzz]` 部分中指定的值。
+> * 对于 `default` 以外的任何配置文件：
+>     * 如果在 `[invariant]`（与 `[profile.default.invariant]` 相同）部分中至少设置了一个条目，则将使用 `[invariant]` 部分的值，包括默认值。
+>     * 如果在 `[invariant]` 部分中未设置任何条目，但在 `[fuzz]`（与 `[profile.default.fuzz]` 相同）部分中设置了条目，则将使用 `[fuzz]` 部分的值。
+>     * 如果上述情况均不适用，则将使用默认值。
 
 ##### `runs`
 
-- Type: integer
-- Default: 256
-- Environment: `FOUNDRY_INVARIANT_RUNS`
+- 类型: 整数
+- 默认值: 256
+- 环境变量: `FOUNDRY_INVARIANT_RUNS`
 
-The number of runs that must execute for each invariant test group. See also [fuzz.runs](#runs)
+每个不变性测试组必须执行的运行次数。另见 [fuzz.runs](#runs)
 
 ##### `depth`
 
-- Type: integer
-- Default: 500
-- Environment: `FOUNDRY_INVARIANT_DEPTH`
+- 类型: 整数
+- 默认值: 500
+- 环境变量: `FOUNDRY_INVARIANT_DEPTH`
 
-The number of calls executed to attempt to break invariants in one run.
+在一次运行中尝试破坏不变性的调用次数。
 
 ##### `fail_on_revert`
 
-- Type: boolean
-- Default: false
-- Environment: `FOUNDRY_INVARIANT_FAIL_ON_REVERT`
+- 类型: 布尔值
+- 默认值: false
+- 环境变量: `FOUNDRY_INVARIANT_FAIL_ON_REVERT`
 
-Fails the invariant fuzzing if a revert occurs.
+如果发生回滚，则失败不变性模糊测试。
 
 ##### `call_override`
 
-- Type: boolean
-- Default: false
-- Environment: `FOUNDRY_INVARIANT_CALL_OVERRIDE`
+- 类型: 布尔值
+- 默认值: false
+- 环境变量: `FOUNDRY_INVARIANT_CALL_OVERRIDE`
 
-Overrides unsafe external calls when running invariant tests, useful for e.g. performing reentrancy checks.
-
-##### `dictionary_weight`
-
-- Type: integer (between 0 and 100)
-- Default: 80
-- Environment: `FOUNDRY_INVARIANT_DICTIONARY_WEIGHT`
-
-The weight of the dictionary. See also [fuzz.dictionary_weight](#dictionary_weight)
-
-##### `include_storage`
-
-- Type: boolean
-- Default: true
-- Environment: `FOUNDRY_FUZZ_INCLUDE_STORAGE`
-
-The flag indicating whether to include values from storage. See also [fuzz.include_storage](#include_storage)
-
-##### `include_push_bytes`
-
-- Type: boolean
-- Default: true
-- Environment: `FOUNDRY_FUZZ_INCLUDE_PUSH_BYTES`
-
-The flag indicating whether to include push bytes values. See also [fuzz.include_push_bytes](#include_push_bytes)
-
-##### `shrink_run_limit`
-
-- Type: integer
-- Default: 5000
-- Environment: `FOUNDRY_INVARIANT_SHRINK_RUN_LIMIT`
-
-The maximum number of attempts to shrink a failed the sequence. Shrink process is disabled if set to 0.
+在运行不变性测试时覆盖不安全的

@@ -1,11 +1,5 @@
-# cast address-zero
-
-Prints the zero address
-
-```bash
-$ cast address-zero --help
-Usage: cast address-zero
-
-Options:
-  -h, --help  Print help
+```json
+{
+  "translation": "# 打印零地址\n\n打印零地址\n\n```bash\n$ cast address-zero --help\nUsage: cast address-zero\n\nOptions:\n  -h, --help  打印帮助信息\n```"
+}
 ```

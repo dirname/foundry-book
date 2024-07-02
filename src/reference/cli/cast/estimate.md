@@ -1,90 +1,89 @@
+```markdown
 # cast estimate
 
-Estimate the gas cost of a transaction
+估算交易的 gas 成本
 
 ```bash
 $ cast estimate --help
 Usage: cast estimate [OPTIONS] [TO] [SIG] [ARGS]... [COMMAND]
 
 Commands:
-  --create  Estimate gas cost to deploy a smart contract
-  help      Print this message or the help of the given subcommand(s)
+  --create  估算部署智能合约的 gas 成本
+  help      打印此消息或给定子命令的帮助信息
 
 Arguments:
   [TO]
-          The destination of the transaction
+          交易的接收地址
 
   [SIG]
-          The signature of the function to call
+          要调用的函数的签名
 
   [ARGS]...
-          The arguments of the function to call
+          要调用的函数的参数
 
 Options:
   -B, --block <BLOCK>
-          The block height to query at.
+          查询的区块高度。
           
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+          也可以是 earliest、finalized、safe、latest 或 pending 等标签。
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
 Transaction options:
       --gas-limit <GAS_LIMIT>
-          Gas limit for the transaction
+          交易的 gas 限制
           
           [env: ETH_GAS_LIMIT=]
 
       --gas-price <PRICE>
-          Gas price for legacy transactions, or max fee per gas for EIP1559 transactions
+          传统交易的 gas 价格，或 EIP1559 交易的每 gas 最大费用
           
           [env: ETH_GAS_PRICE=]
 
       --priority-gas-price <PRICE>
-          Max priority fee per gas for EIP1559 transactions
+          EIP1559 交易的每 gas 最大优先费用
           
           [env: ETH_PRIORITY_GAS_PRICE=]
 
       --value <VALUE>
-          Ether to send in the transaction, either specified in wei, or as a string with a unit
-          type.
+          交易中发送的以太币，可以是以 wei 为单位指定，或以带单位的字符串指定。
           
-          Examples: 1ether, 10gwei, 0.01ether
+          示例：1ether、10gwei、0.01ether
 
       --nonce <NONCE>
-          Nonce for the transaction
+          交易的 nonce
 
       --legacy
-          Send a legacy transaction instead of an EIP1559 transaction.
+          发送传统交易而不是 EIP1559 交易。
           
-          This is automatically enabled for common networks without EIP1559.
+          在没有 EIP1559 的常见网络上会自动启用。
 
       --blob
-          Send a EIP-4844 blob transaction
+          发送 EIP-4844 blob 交易
 
       --blob-gas-price <BLOB_PRICE>
-          Gas price for EIP-4844 blob transaction
+          EIP-4844 blob 交易的 gas 价格
           
           [env: ETH_BLOB_GAS_PRICE=]
 
 Ethereum options:
   -r, --rpc-url <URL>
-          The RPC endpoint
+          RPC 端点
           
           [env: ETH_RPC_URL=]
 
       --flashbots
-          Use the Flashbots RPC URL with fast mode (<https://rpc.flashbots.net/fast>).
+          使用 Flashbots RPC URL 并启用快速模式（<https://rpc.flashbots.net/fast>）。
           
-          This shares the transaction privately with all registered builders.
+          这将私密地与所有注册的构建者共享交易。
           
-          See: <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
+          参见：<https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
 
       --jwt-secret <JWT_SECRET>
-          JWT Secret for the RPC endpoint.
+          RPC 端点的 JWT 密钥。
           
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be
-          used to simulate a CL `engine_forkchoiceUpdated` call:
+          JWT 密钥将用于创建 RPC 的 JWT。例如，以下可以用于模拟 CL `engine_forkchoiceUpdated` 调用：
           
           cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
           '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
@@ -94,76 +93,76 @@ Ethereum options:
           [env: ETH_RPC_JWT_SECRET=]
 
   -e, --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
+          Etherscan（或类似）API 密钥
           
           [env: ETHERSCAN_API_KEY=]
 
   -c, --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+          链名称或 EIP-155 链 ID
           
           [env: CHAIN=]
 
 Wallet options - raw:
   -f, --from <ADDRESS>
-          The sender account
+          发送者账户
           
           [env: ETH_FROM=]
 
   -i, --interactive
-          Open an interactive prompt to enter your private key
+          打开交互式提示以输入您的私钥
 
       --private-key <RAW_PRIVATE_KEY>
-          Use the provided private key
+          使用提供的私钥
 
       --mnemonic <MNEMONIC>
-          Use the mnemonic phrase of mnemonic file at the specified path
+          使用指定路径的助记词文件的助记词短语
 
       --mnemonic-passphrase <PASSPHRASE>
-          Use a BIP39 passphrase for the mnemonic
+          使用助记词的 BIP39 密码
 
       --mnemonic-derivation-path <PATH>
-          The wallet derivation path.
+          钱包派生路径。
           
-          Works with both --mnemonic-path and hardware wallets.
+          适用于 --mnemonic-path 和硬件钱包。
 
       --mnemonic-index <INDEX>
-          Use the private key from the given mnemonic index.
+          使用给定助记词索引的私钥。
           
-          Used with --mnemonic-path.
+          与 --mnemonic-path 一起使用。
           
           [default: 0]
 
 Wallet options - keystore:
       --keystore <PATH>
-          Use the keystore in the given folder or file
+          使用给定文件夹或文件中的 keystore
           
           [env: ETH_KEYSTORE=]
 
       --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          通过其文件名从默认 keystores 文件夹（~/.foundry/keystores）中使用 keystore
           
           [env: ETH_KEYSTORE_ACCOUNT=]
 
       --password <PASSWORD>
-          The keystore password.
+          keystore 密码。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
 
       --password-file <PASSWORD_FILE>
-          The keystore password file path.
+          keystore 密码文件路径。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
           
           [env: ETH_PASSWORD=]
 
 Wallet options - hardware wallet:
   -l, --ledger
-          Use a Ledger hardware wallet
+          使用 Ledger 硬件钱包
 
   -t, --trezor
-          Use a Trezor hardware wallet
+          使用 Trezor 硬件钱包
 
 Wallet options - remote:
       --aws
-          Use AWS Key Management Service
+          使用 AWS Key Management Service
 ```

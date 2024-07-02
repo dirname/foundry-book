@@ -1,16 +1,16 @@
 ## `parseUint`
 
-### Signature
+### 签名
 
 ```solidity
 function parseUint(string calldata stringifiedValue) external pure returns (uint256 parsedValue);
 ```
 
-### Description
+### 描述
 
-Parses the value of `string` into `uint256`
+将 `string` 类型的值解析为 `uint256` 类型。
 
-### Examples
+### 示例
 
 ```solidity
 string memory uintAsString = "12345";

@@ -1,56 +1,56 @@
-## Cheatcodes Reference
+## 作弊码参考
 
-Cheatcodes give you powerful assertions, the ability to alter the state of the EVM, mock data, and more.
+作弊码提供了强大的断言功能，能够改变 EVM 的状态，模拟数据等。
 
-Cheatcodes are made available through use of the cheatcode address (`0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`). 
+作弊码通过作弊码地址（`0x7109709ECfa91a80626fF3989D68f67F5b1DD12D`）提供。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> If you encounter errors for this address when using fuzzed addresses in your tests, you may wish to 
-> exclude it from your fuzz tests by using the following line:
+> 如果在使用模糊测试地址时遇到此地址的错误，你可能希望通过以下行将其从模糊测试中排除：
 >
 > ```solidity
 > vm.assume(address_ != 0x7109709ECfa91a80626fF3989D68f67F5b1DD12D);
 > ```
 
-You can also access cheatcodes easily via `vm` available in Forge Standard Library's [`Test`](../reference/forge-std/#forge-stds-test) contract.
-### Forge Standard Library Cheatcodes
+你也可以通过 Forge 标准库的 [`Test`](../reference/forge-std/#forge-stds-test) 合约中可用的 `vm` 轻松访问作弊码。
 
-Forge Std implements wrappers around cheatcodes, which combine multiple standard cheatcodes to improve development experience. These are not technically cheatcodes, but rather compositions of Forge's cheatcodes.
+### Forge 标准库作弊码
 
-You can view the list of Forge Standard Library's cheatcode wrappers [in the references section](../reference/forge-std/std-cheats.md). You can reference the [Forge Std source code](https://github.com/foundry-rs/forge-std/blob/master/src/Test.sol) to learn more about how the wrappers work under the hood.
+Forge Std 实现了作弊码的包装器，这些包装器结合了多个标准作弊码以改善开发体验。这些并不是技术上的作弊码，而是 Forge 作弊码的组合。
 
-### Cheatcode Types
+你可以在[参考部分](../reference/forge-std/std-cheats.md)查看 Forge 标准库的作弊码包装器列表。你可以参考 [Forge Std 源代码](https://github.com/foundry-rs/forge-std/blob/master/src/Test.sol) 了解更多关于包装器如何在底层工作的信息。
 
-Below are some subsections for the different Forge cheatcodes.
+### 作弊码类型
 
-- [Environment](./environment.md): Cheatcodes that alter the state of the EVM.
-- [Assertions](./assertions.md): Cheatcodes that are powerful assertions
-- [Fuzzer](./fuzzer.md): Cheatcodes that configure the fuzzer
-- [External](./external.md): Cheatcodes that interact with external state (files, commands, ...)
-- [Utilities](./utilities.md): Smaller utility cheatcodes
-- [Forking](./forking.md): Forking mode cheatcodes
-- [Snapshots](./snapshots.md): Snapshot cheatcodes
-- [RPC](./rpc.md): RPC related cheatcodes
-- [File](./fs.md): Cheatcodes for working with files
+以下是不同 Forge 作弊码的子部分。
 
-### Add a new cheatcode
+- [环境](./environment.md)：改变 EVM 状态的作弊码。
+- [断言](./assertions.md)：强大的断言作弊码。
+- [模糊测试](./fuzzer.md)：配置模糊测试的作弊码。
+- [外部](./external.md)：与外部状态（文件、命令等）交互的作弊码。
+- [实用工具](./utilities.md)：较小的实用工具作弊码。
+- [分叉](./forking.md)：分叉模式作弊码。
+- [快照](./snapshots.md)：快照作弊码。
+- [RPC](./rpc.md)：与 RPC 相关的作弊码。
+- [文件](./fs.md)：处理文件的作弊码。
 
-If you need a new feature, consider [contributing to the Foundry's codebase](../contributing.md) to add the cheatcode.
+### 添加新的作弊码
 
-### Cheatcodes Interface
+如果你需要新功能，请考虑[为 Foundry 的代码库贡献](../contributing.md)以添加作弊码。
 
-This is a Solidity interface for all of the cheatcodes present in Forge.
+### 作弊码接口
+
+这是 Forge 中所有作弊码的 Solidity 接口。
 
 ```solidity
 interface CheatCodes {
-    // This allows us to getRecordedLogs()
+    // 这允许我们 getRecordedLogs()
     struct Log {
         bytes32[] topics;
         bytes data;
     }
 
-    // Possible caller modes for readCallers()
+    // readCallers() 的可能调用者模式
     enum CallerMode {
         None,
         Broadcast,
@@ -105,76 +105,76 @@ interface CheatCodes {
         bool reverted;
     }
 
-    // Derives a private key from the name, labels the account with that name, and returns the wallet
+    // 从名称派生私钥，用该名称标记账户，并返回钱包
     function createWallet(string calldata) external returns (Wallet memory);
 
-    // Generates a wallet from the private key and returns the wallet
+    // 从私钥生成钱包并返回钱包
     function createWallet(uint256) external returns (Wallet memory);
 
-    // Generates a wallet from the private key, labels the account with that name, and returns the wallet
+    // 从私钥生成钱包，用该名称标记账户，并返回钱包
     function createWallet(uint256, string calldata) external returns (Wallet memory);
 
-    // Signs data, (Wallet, digest) => (v, r, s)
+    // 签名数据，(Wallet, digest) => (v, r, s)
     function sign(Wallet calldata, bytes32) external returns (uint8, bytes32, bytes32);
 
-    // Get nonce for a Wallet
+    // 获取钱包的 nonce
     function getNonce(Wallet calldata) external returns (uint64);
 
-    // Set block.timestamp
+    // 设置 block.timestamp
     function warp(uint256) external;
 
-    // Set block.number
+    // 设置 block.number
     function roll(uint256) external;
 
-    // Set block.basefee
+    // 设置 block.basefee
     function fee(uint256) external;
 
-    // Set block.difficulty
-    // Does not work from the Paris hard fork and onwards, and will revert instead.
+    // 设置 block.difficulty
+    // 从巴黎硬分叉开始不再起作用，并将回滚。
     function difficulty(uint256) external;
     
-    // Set block.prevrandao
-    // Does not work before the Paris hard fork, and will revert instead.
+    // 设置 block.prevrandao
+    // 在巴黎硬分叉之前不起作用，并将回滚。
     function prevrandao(bytes32) external;
 
-    // Set block.chainid
+    // 设置 block.chainid
     function chainId(uint256) external;
 
-    // Loads a storage slot from an address
+    // 从地址加载存储槽
     function load(address account, bytes32 slot) external returns (bytes32);
 
-    // Stores a value to an address' storage slot
+    // 将值存储到地址的存储槽
     function store(address account, bytes32 slot, bytes32 value) external;
 
-    // Signs data
+    // 签名数据
     function sign(uint256 privateKey, bytes32 digest)
         external
         returns (uint8 v, bytes32 r, bytes32 s);
 
-    // Computes address for a given private key
+    // 从给定的私钥计算地址
     function addr(uint256 privateKey) external returns (address);
 
-    // Derive a private key from a provided mnemonic string,
-    // or mnemonic file path, at the derivation path m/44'/60'/0'/0/{index}.
+    // 从提供的助记词字符串或助记词文件路径派生私钥，
+    // 在派生路径 m/44'/60'/0'/0/{index}。
     function deriveKey(string calldata, uint32) external returns (uint256);
-    // Derive a private key from a provided mnemonic string, or mnemonic file path,
-    // at the derivation path {path}{index}
+    // 从提供的助记词字符串或助记词文件路径派生私钥，
+    // 在派生路径 {path}{index}
     function deriveKey(string calldata, string calldata, uint32) external returns (uint256);
 
-    // Gets the nonce of an account
+    // 获取账户的 nonce
     function getNonce(address account) external returns (uint64);
 
-    // Sets the nonce of an account
-    // The new nonce must be higher than the current nonce of the account
+    // 设置账户的 nonce
+    // 新的 nonce 必须高于账户的当前 nonce
     function setNonce(address account, uint64 nonce) external;
 
-    // Performs a foreign function call via terminal
+    // 通过终端执行外部函数调用
     function ffi(string[] calldata) external returns (bytes memory);
 
-    // Set environment variables, (name, value)
+    // 设置环境变量，(name, value)
     function setEnv(string calldata, string calldata) external;
 
-    // Read environment variables, (name) => (value)
+    // 读取环境变量，(name) => (value)
     function envBool(string calldata) external returns (bool);
     function envUint(string calldata) external returns (uint256);
     function envInt(string calldata) external returns (int256);
@@ -183,7 +183,7 @@ interface CheatCodes {
     function envString(string calldata) external returns (string memory);
     function envBytes(string calldata) external returns (bytes memory);
 
-    // Read environment variables as arrays, (name, delim) => (value[])
+    // 读取环境变量作为数组，(name, delim) => (value[])
     function envBool(string calldata, string calldata)
         external
         returns (bool[] memory);
@@ -206,7 +206,7 @@ interface CheatCodes {
         external
         returns (bytes[] memory);
 
-    // Read environment variables with default value, (name, value) => (value)
+    // 读取环境变量并提供默认值，(name, value) => (value)
     function envOr(string calldata, bool) external returns (bool);
     function envOr(string calldata, uint256) external returns (uint256);
     function envOr(string calldata, int256) external returns (int256);
@@ -215,7 +215,7 @@ interface CheatCodes {
     function envOr(string calldata, string calldata) external returns (string memory);
     function envOr(string calldata, bytes calldata) external returns (bytes memory);
     
-    // Read environment variables as arrays with default value, (name, value[]) => (value[])
+    // 读取环境变量作为数组并提供默认值，(name, value[]) => (value[])
     function envOr(string calldata, string calldata, bool[] calldata) external returns (bool[] memory);
     function envOr(string calldata, string calldata, uint256[] calldata) external returns (uint256[] memory);
     function envOr(string calldata, string calldata, int256[] calldata) external returns (int256[] memory);
@@ -224,7 +224,7 @@ interface CheatCodes {
     function envOr(string calldata, string calldata, string[] calldata) external returns (string[] memory);
     function envOr(string calldata, string calldata, bytes[] calldata) external returns (bytes[] memory);
 
-    // Convert Solidity types to strings
+    // 将 Solidity 类型转换为字符串
     function toString(address) external returns(string memory);
     function toString(bytes calldata) external returns(string memory);
     function toString(bytes32) external returns(string memory);
@@ -232,232 +232,230 @@ interface CheatCodes {
     function toString(uint256) external returns(string memory);
     function toString(int256) external returns(string memory);
 
-    // Sets the *next* call's msg.sender to be the input address
+    // 设置下一个调用的 msg.sender 为输入地址
     function prank(address) external;
 
-    // Sets all subsequent calls' msg.sender to be the input address
-    // until `stopPrank` is called
+    // 设置所有后续调用的 msg.sender 为输入地址
+    // 直到调用 `stopPrank`
     function startPrank(address) external;
 
-    // Sets the *next* call's msg.sender to be the input address,
-    // and the tx.origin to be the second input
+    // 设置下一个调用的 msg.sender 为输入地址，
+    // 并将 tx.origin 设置为第二个输入
     function prank(address, address) external;
 
-    // Sets all subsequent calls' msg.sender to be the input address until
-    // `stopPrank` is called, and the tx.origin to be the second input
+    // 设置所有后续调用的 msg.sender 为输入地址，直到
+    // 调用 `stopPrank`，并将 tx.origin 设置为第二个输入
     function startPrank(address, address) external;
 
-    // Resets subsequent calls' msg.sender to be `address(this)`
+    // 重置后续调用的 msg.sender 为 `address(this)`
     function stopPrank() external;
 
-    // Reads the current `msg.sender` and `tx.origin` from state and reports if there is any active caller modification
+    // 从状态中读取当前的 `msg.sender` 和 `tx.origin`，并报告是否有任何活动的调用者修改
     function readCallers() external returns (CallerMode callerMode, address msgSender, address txOrigin);
 
-    // Sets an address' balance
+    // 设置地址的余额
     function deal(address who, uint256 newBalance) external;
     
-    // Sets an address' code
+    // 设置地址的代码
     function etch(address who, bytes calldata code) external;
 
-    // Marks a test as skipped. Must be called at the top of the test.
+    // 标记测试为跳过。必须在测试顶部调用。
     function skip(bool skip) external;
 
-    // Expects an error on next call
+    // 预期下一个调用出现错误
     function expectRevert() external;
     function expectRevert(bytes calldata) external;
     function expectRevert(bytes4) external;
 
-    // Record all storage reads and writes
+    // 记录所有存储读取和写入
     function record() external;
 
-    // Gets all accessed reads and write slot from a recording session,
-    // for a given address
+    // 获取给定地址在记录会话期间访问的所有读取和写入槽，
     function accesses(address)
         external
         returns (bytes32[] memory reads, bytes32[] memory writes);
     
-    // Record all account accesses as part of CREATE, CALL or SELFDESTRUCT opcodes in order,
-    // along with the context of the calls.
+    // 记录作为 CREATE、CALL 或 SELFDESTRUCT 操作码的一部分的所有账户访问，
+    // 以及调用的上下文。
     function startStateDiffRecording() external;
 
-    // Returns an ordered array of all account accesses from a `startStateDiffRecording` session.
+    // 返回 `startStateDiffRecording` 会话中的所有账户访问的有序数组。
     function stopAndReturnStateDiff() external returns (AccountAccess[] memory accesses);
 
-    // Record all the transaction logs
+    // 记录所有交易日志
     function recordLogs() external;
 
-    // Gets all the recorded logs
+    // 获取所有记录的日志
     function getRecordedLogs() external returns (Log[] memory);
 
-    // Prepare an expected log with the signature:
+    // 准备一个预期日志，签名如下：
     //   (bool checkTopic1, bool checkTopic2, bool checkTopic3, bool checkData).
     //
-    // Call this function, then emit an event, then call a function.
-    // Internally after the call, we check if logs were emitted in the expected order
-    // with the expected topics and data (as specified by the booleans)
+    // 调用此函数，然后发出一个事件，然后调用一个函数。
+    // 内部在调用之后，我们检查是否按预期顺序发出了日志
+    // 带有预期的主题和数据（由布尔值指定）
     //
-    // The second form also checks supplied address against emitting contract.
+    // 第二种形式还检查提供的地址与发出事件的合约。
     function expectEmit(bool, bool, bool, bool) external;
     function expectEmit(bool, bool, bool, bool, address) external;
 
-    // Mocks a call to an address, returning specified data.
+    // 模拟对地址的调用，返回指定数据。
     //
-    // Calldata can either be strict or a partial match, e.g. if you only
-    // pass a Solidity selector to the expected calldata, then the entire Solidity
-    // function will be mocked.
+    // 调用数据可以是严格匹配或部分匹配，例如，如果你只
+    // 传递一个 Solidity 选择器到预期的调用数据，那么整个 Solidity
+    // 函数将被模拟。
     function mockCall(address, bytes calldata, bytes calldata) external;
 
-    // Reverts a call to an address, returning the specified error
+    // 模拟对地址的调用，返回指定的错误
     //
-    // Calldata can either be strict or a partial match, e.g. if you only
-    // pass a Solidity selector to the expected calldata, then the entire Solidity
-    // function will be mocked.
+    // 调用数据可以是严格匹配或部分匹配，例如，如果你只
+    // 传递一个 Solidity 选择器到预期的调用数据，那么整个 Solidity
+    // 函数将被模拟。
     function mockCallRevert(address where, bytes calldata data, bytes calldata retdata) external;
 
-    // Clears all mocked and reverted mocked calls
+    // 清除所有模拟和回滚的模拟调用
     function clearMockedCalls() external;
 
-    // Expect a call to an address with the specified calldata.
-    // Calldata can either be strict or a partial match
+    // 预期对地址的调用，带有指定的调用数据。
+    // 调用数据可以是严格匹配或部分匹配
     function expectCall(address callee, bytes calldata data) external;
-    // Expect a call to an address with the specified
-    // calldata and message value.
-    // Calldata can either be strict or a partial match
+    // 预期对地址的调用，带有指定的
+    // 调用数据和消息值。
+    // 调用数据可以是严格匹配或部分匹配
     function expectCall(address callee, uint256, bytes calldata data) external;
 
-    // Gets the _creation_ bytecode from an artifact file. Takes in the relative path to the json file
+    // 从 artifact 文件获取 _creation_ 字节码。传入 json 文件的相对路径
     function getCode(string calldata) external returns (bytes memory);
-    // Gets the _deployed_ bytecode from an artifact file. Takes in the relative path to the json file
+    // 从 artifact 文件获取 _deployed_ 字节码。传入 json 文件的相对路径
     function getDeployedCode(string calldata) external returns (bytes memory);
 
-    // Label an address in test traces
+    // 在测试跟踪中标记地址
     function label(address addr, string calldata label) external;
     
-    // Retrieve the label of an address
+    // 检索地址的标签
     function getLabel(address addr) external returns (string memory);
 
-    // When fuzzing, generate new inputs if conditional not met
+    // 在模糊测试时，如果条件不满足，生成新的输入
     function assume(bool) external;
 
-    // Set block.coinbase (who)
+    // 设置 block.coinbase (who)
     function coinbase(address) external;
 
-    // Using the address that calls the test contract or the address provided
-    // as the sender, has the next call (at this call depth only) create a
-    // transaction that can later be signed and sent onchain
+    // 使用调用测试合约的地址或提供的地址
+    // 作为发送者，使下一个调用（仅在此调用深度）创建一个
+    // 可以稍后签名并发送上链的交易
     function broadcast() external;
     function broadcast(address) external;
 
-    // Using the address that calls the test contract or the address provided
-    // as the sender, has all subsequent calls (at this call depth only) create
-    // transactions that can later be signed and sent onchain
+    // 使用调用测试合约的地址或提供的地址
+    // 作为发送者，使所有后续调用（仅在此调用深度）创建
+    // 可以稍后签名并发送上链的交易
     function startBroadcast() external;
     function startBroadcast(address) external;
     function startBroadcast(uint256 privateKey) external;
 
-    // Stops collecting onchain transactions
+    // 停止收集上链交易
     function stopBroadcast() external;
 
-    // Reads the entire content of file to string, (path) => (data)
+    // 将文件的全部内容读取为字符串，(path) => (data)
     function readFile(string calldata) external returns (string memory);
-    // Get the path of the current project root
+    // 获取当前项目根路径
     function projectRoot() external returns (string memory);
-    // Reads next line of file to string, (path) => (line)
+    // 将文件的下一行读取为字符串，(path) => (line)
     function readLine(string calldata) external returns (string memory);
-    // Writes data to file, creating a file if it does not exist, and entirely replacing its contents if it does.
+    // 将数据写入文件，如果不存在则创建文件，如果存在则完全替换其内容。
     // (path, data) => ()
     function writeFile(string calldata, string calldata) external;
-    // Writes line to file, creating a file if it does not exist.
+    // 将行写入文件，如果不存在则创建文件。
     // (path, data) => ()
     function writeLine(string calldata, string calldata) external;
-    // Closes file for reading, resetting the offset and allowing to read it from beginning with readLine.
+    // 关闭文件以读取，重置偏移量并允许从头开始读取。
     // (path) => ()
     function closeFile(string calldata) external;
-    // Removes file. This cheatcode will revert in the following situations, but is not limited to just these cases:
-    // - Path points to a directory.
-    // - The file doesn't exist.
-    // - The user lacks permissions to remove the file.
+    // 删除文件。此作弊码将在以下情况下回滚，但不限于这些情况：
+    // - 路径指向目录。
+    // - 文件不存在。
+    // - 用户缺乏删除文件的权限。
     // (path) => ()
     function removeFile(string calldata) external;
-    // Returns true if the given path points to an existing entity, else returns false
+    // 如果给定路径指向现有实体，则返回 true，否则返回 false
     // (path) => (bool)
     function exists(string calldata) external returns (bool);
-    // Returns true if the path exists on disk and is pointing at a regular file, else returns false
+    // 如果路径存在于磁盘上并且指向常规文件，则返回 true，否则返回 false
     // (path) => (bool)
     function isFile(string calldata) external returns (bool);
-    // Returns true if the path exists on disk and is pointing at a directory, else returns false
+    // 如果路径存在于磁盘上并且指向目录，则返回 true，否则返回 false
     // (path) => (bool)
     function isDir(string calldata) external returns (bool);
     
-    // Return the value(s) that correspond to 'key'
+    // 返回与 'key' 对应的值
     function parseJson(string memory json, string memory key) external returns (bytes memory);
-    // Return the entire json file
+    // 返回整个 json 文件
     function parseJson(string memory json) external returns (bytes memory);
-    // Check if a key exists in a json string
+    // 检查 json 字符串中是否存在键
     function keyExists(string memory json, string memory key) external returns (bytes memory);
-    // Get list of keys in a json string
+    // 获取 json 字符串中的键列表
     function parseJsonKeys(string memory json, string memory key) external returns (string[] memory);
 
-    // Snapshot the current state of the evm.
-    // Returns the id of the snapshot that was created.
-    // To revert a snapshot use `revertTo`
+    // 快照当前的 evm 状态。
+    // 返回创建的快照的 id。
+    // 要恢复快照，请使用 `revertTo`
     function snapshot() external returns (uint256);
-    // Revert the state of the evm to a previous snapshot
-    // Takes the snapshot id to revert to.
-    // This deletes the snapshot and all snapshots taken after the given snapshot id.
+    // 将 evm 状态恢复到之前的快照
+    // 传入要恢复的快照 id。
+    // 这将删除快照以及在此快照 id 之后拍摄的所有快照。
     function revertTo(uint256) external returns (bool);
 
-    // Creates a new fork with the given endpoint and block,
-    // and returns the identifier of the fork
+    // 使用给定的端点和块创建新的分叉，
+    // 并返回分叉的标识符
     function createFork(string calldata, uint256) external returns (uint256);
-    // Creates a new fork with the given endpoint and the _latest_ block,
-    // and returns the identifier of the fork
+    // 使用给定的端点和 _latest_ 块创建新的分叉，
+    // 并返回分叉的标识符
     function createFork(string calldata) external returns (uint256);
 
-    // Creates _and_ also selects a new fork with the given endpoint and block,
-    // and returns the identifier of the fork
+    // 创建并选择一个新的分叉，使用给定的端点和块，
+    // 并返回分叉的标识符
     function createSelectFork(string calldata, uint256)
         external
         returns (uint256);
-    // Creates _and_ also selects a new fork with the given endpoint and the
-    // latest block and returns the identifier of the fork
+    // 创建并选择一个新的分叉，使用给定的端点和
+    // 最新块，并返回分叉的标识符
     function createSelectFork(string calldata) external returns (uint256);
 
-    // Takes a fork identifier created by `createFork` and
-    // sets the corresponding forked state as active.
+    // 使用 `createFork` 创建的分叉标识符
+    // 并将相应的分叉状态设置为活动状态。
     function selectFork(uint256) external;
 
-    // Returns the currently active fork
-    // Reverts if no fork is currently active
+    // 返回当前活动的分叉
+    // 如果没有活动的分叉，则回滚
     function activeFork() external returns (uint256);
 
-    // Updates the currently active fork to given block number
-    // This is similar to `roll` but for the currently active fork
+    // 将当前活动的分叉更新到给定的块号
+    // 这类似于 `roll`，但对于当前活动的分叉
     function rollFork(uint256) external;
-    // Updates the given fork to given block number
+    // 将给定的分叉更新到给定的块号
     function rollFork(uint256 forkId, uint256 blockNumber) external;
 
-    // Fetches the given transaction from the active fork and executes it on the current state
+    // 从活动的分叉获取给定的交易并在当前状态下执行
     function transact(bytes32) external;
-    // Fetches the given transaction from the given fork and executes it on the current state
+    // 从给定的分叉获取给定的交易并在当前状态下执行
     function transact(uint256, bytes32) external;
 
-    // Marks that the account(s) should use persistent storage across
-    // fork swaps in a multifork setup, meaning, changes made to the state
-    // of this account will be kept when switching forks
+    // 标记账户应在使用多分叉设置时跨分叉使用持久存储，
+    // 这意味着对该状态的更改将在切换分叉时保留
     function makePersistent(address) external;
     function makePersistent(address, address) external;
     function makePersistent(address, address, address) external;
     function makePersistent(address[] calldata) external;
-    // Revokes persistent status from the address, previously added via `makePersistent`
+    // 撤销之前通过 `makePersistent` 添加的地址的持久状态
     function revokePersistent(address) external;
     function revokePersistent(address[] calldata) external;
-    // Returns true if the account is marked as persistent
+    // 如果账户被标记为持久状态，则返回 true
     function isPersistent(address) external returns (bool);
 
-    /// Returns the RPC url for the given alias
+    /// 返回给定别名的 RPC url
     function rpcUrl(string calldata) external returns (string memory);
-    /// Returns all rpc urls and their aliases `[alias, url][]`
+    /// 返回所有 rpc urls 及其别名 `[alias, url][]`
     function rpcUrls() external returns (string[2][] memory);
 }
 ```

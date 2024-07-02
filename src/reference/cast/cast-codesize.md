@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-codesize - Get the runtime bytecode size of a contract.
+cast-codesize - 获取合约的运行时代码大小。
 
 ### SYNOPSIS
 
@@ -10,21 +10,21 @@ cast-codesize - Get the runtime bytecode size of a contract.
 
 ### DESCRIPTION
 
-Get the runtime bytecode size of a contract.
+获取合约的运行时代码大小。
 
-The contract (*address*) can be an ENS name or an address.
+合约（*address*）可以是 ENS 名称或地址。
 
 ### OPTIONS
 
-#### Query Options
+#### 查询选项
 
 `-B` *block*  
 `--block` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;The block height you want to query at.
+&nbsp;&nbsp;&nbsp;&nbsp;你想查询的区块高度。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`.
+&nbsp;&nbsp;&nbsp;&nbsp;可以是区块号，或以下任一标签：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。
 
-#### RPC Options
+#### RPC 选项
 
 {{#include ../common/rpc-url-option.md}}
 
@@ -32,7 +32,7 @@ The contract (*address*) can be an ENS name or an address.
 
 ### EXAMPLES
 
-1. Get the runtime bytecode size of the WETH contract.
+1. 获取 WETH 合约的运行时代码大小。
 ```sh
 cast codesize 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
 ```

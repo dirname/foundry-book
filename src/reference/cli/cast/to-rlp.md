@@ -1,14 +1,16 @@
+```markdown
 # cast to-rlp
 
-RLP encodes hex data, or an array of hex data
+RLP 编码十六进制数据，或一个十六进制数据数组
 
 ```bash
 $ cast to-rlp --help
 Usage: cast to-rlp [VALUE]
 
 Arguments:
-  [VALUE]  The value to convert
+  [VALUE]  要转换的值
 
 Options:
-  -h, --help  Print help
+  -h, --help  打印帮助信息
+```
 ```

@@ -1,44 +1,43 @@
 ## forge flatten
 
-### NAME
+### 名称
 
-forge-flatten - Flatten a source file and all of its imports into one file.
+forge-flatten - 将一个源文件及其所有导入合并到一个文件中。
 
-### SYNOPSIS
+### 概要
 
-``forge flatten`` [*options*] *file*
+``forge flatten`` [*选项*] *文件*
 
-### DESCRIPTION
+### 描述
 
-Flatten a source file and all of its imports into one file.
+将一个源文件及其所有导入合并到一个文件中。
 
-If `--output <FILE>` is not set, then the flattened contract will be output to stdout.
+如果未设置 `--output <FILE>`，则合并后的合约将输出到标准输出。
 
-### OPTIONS
+### 选项
 
-#### Flatten Options
+#### 合并选项
 
-`-o` *file*  
-`--output` *file*  
-&nbsp;&nbsp;&nbsp;&nbsp;The path to output the flattened contract. If not specified, the flattened contract will be output to stdout.
+`-o` *文件*  
+`--output` *文件*  
+&nbsp;&nbsp;&nbsp;&nbsp;输出合并后合约的路径。如果未指定，合并后的合约将输出到标准输出。
 
 {{#include project-options.md}}
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Flatten `src/Contract.sol`:
+1. 合并 `src/Contract.sol`：
     ```sh
     forge flatten src/Contract.sol
     ```
 
-2. Flatten `src/Contract.sol` and write the result to `src/Contract.flattened.sol`:
+2. 合并 `src/Contract.sol` 并将结果写入 `src/Contract.flattened.sol`：
     ```sh
     forge flatten --output src/Contract.flattened.sol src/Contract.sol
     ```
 
-
-### SEE ALSO
+### 另请参阅
 
 [forge](./forge.md), [forge verify-contract](./forge-verify-contract.md)

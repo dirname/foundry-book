@@ -1,6 +1,7 @@
+```markdown
 # forge selectors upload
 
-Upload selectors to registry
+上传选择器到注册表
 
 ```bash
 $ forge selectors upload --help
@@ -8,43 +9,44 @@ Usage: forge selectors upload [OPTIONS] [CONTRACT]
 
 Arguments:
   [CONTRACT]
-          The name of the contract to upload selectors for
+          要上传选择器的合约名称
 
 Options:
       --all
-          Upload selectors for all contracts in the project
+          上传项目中所有合约的选择器
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
-Project options:
+项目选项:
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根路径（如果在 Git 仓库中），或者当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源代码目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的重映射
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境变量中获取项目的重映射
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这等同于使用：`--contracts contracts --lib-paths node_modules`。
           
           [aliases: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件路径
+```
 ```

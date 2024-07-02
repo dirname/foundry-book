@@ -1,43 +1,65 @@
-#### EVM Options
-
-`-f` *url*  
-`--rpc-url` *url*  
-`--fork-url` *url*  
-&nbsp;&nbsp;&nbsp;&nbsp;Fetch state over a remote endpoint instead of starting from an empty state.
-
-&nbsp;&nbsp;&nbsp;&nbsp;If you want to fetch state from a specific block number, see
-`--fork-block-number`.
-
-`--fork-block-number` *block*  
-&nbsp;&nbsp;&nbsp;&nbsp;Fetch state from a specific block number over a remote endpoint. See `--fork-url`.
-
-`--fork-retry-backoff <BACKOFF>`  
-&nbsp;&nbsp;&nbsp;&nbsp; Initial retry backoff on encountering errors.
-
-`--no-storage-caching`  
-&nbsp;&nbsp;&nbsp;&nbsp;Explicitly disables the use of RPC caching.
-
-&nbsp;&nbsp;&nbsp;&nbsp;All storage slots are read entirely from the endpoint. See `--fork-url`.
-
-`-v`  
-`--verbosity`  
-&nbsp;&nbsp;&nbsp;&nbsp;Verbosity of the EVM.
-
-&nbsp;&nbsp;&nbsp;&nbsp;Pass multiple times to increase the verbosity (e.g. `-v`, `-vv`, `-vvv`).
-
-&nbsp;&nbsp;&nbsp;&nbsp;Verbosity levels:  
-&nbsp;&nbsp;&nbsp;&nbsp;- 2: Print logs for all tests  
-&nbsp;&nbsp;&nbsp;&nbsp;- 3: Print execution traces for failing tests  
-&nbsp;&nbsp;&nbsp;&nbsp;- 4: Print execution traces for all tests, and setup traces for failing tests  
-&nbsp;&nbsp;&nbsp;&nbsp;- 5: Print execution and setup traces for all tests
-
-`--sender` *address*  
-&nbsp;&nbsp;&nbsp;&nbsp;The address which will be executing tests
-
-`--initial-balance` *balance*  
-&nbsp;&nbsp;&nbsp;&nbsp;The initial balance of deployed contracts
-
-`--ffi`  
-&nbsp;&nbsp;&nbsp;&nbsp;Enables the [FFI cheatcode][ffi-cheatcode]
-
-[ffi-cheatcode]: ../../cheatcodes/ffi.md
+```json
+{
+  "title": "EVM 选项",
+  "options": [
+    {
+      "name": "-f",
+      "alias": ["--rpc-url", "--fork-url"],
+      "description": "从远程端点获取状态，而不是从空状态开始。",
+      "note": "如果要从特定区块号获取状态，请参见 `--fork-block-number`。"
+    },
+    {
+      "name": "--fork-block-number",
+      "description": "从远程端点获取特定区块号的状态。请参见 `--fork-url`。"
+    },
+    {
+      "name": "--fork-retry-backoff",
+      "description": "遇到错误时的初始重试退避时间。"
+    },
+    {
+      "name": "--no-storage-caching",
+      "description": "显式禁用 RPC 缓存的使用。",
+      "note": "所有存储槽完全从端点读取。请参见 `--fork-url`。"
+    },
+    {
+      "name": "-v",
+      "alias": "--verbosity",
+      "description": "EVM 的详细程度。",
+      "note": "多次传递以增加详细程度（例如 `-v`, `-vv`, `-vvv`）。",
+      "levels": [
+        {
+          "level": 2,
+          "description": "打印所有测试的日志"
+        },
+        {
+          "level": 3,
+          "description": "打印失败测试的执行 traces"
+        },
+        {
+          "level": 4,
+          "description": "打印所有测试的执行 traces，以及失败测试的设置 traces"
+        },
+        {
+          "level": 5,
+          "description": "打印所有测试的执行和设置 traces"
+        }
+      ]
+    },
+    {
+      "name": "--sender",
+      "description": "将执行测试的地址"
+    },
+    {
+      "name": "--initial-balance",
+      "description": "已部署合约的初始余额"
+    },
+    {
+      "name": "--ffi",
+      "description": "启用 [FFI cheatcode][ffi-cheatcode]"
+    }
+  ],
+  "links": {
+    "ffi-cheatcode": "../../cheatcodes/ffi.md"
+  }
+}
+```

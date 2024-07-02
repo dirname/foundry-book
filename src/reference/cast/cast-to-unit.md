@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-unit - Convert an eth amount to another unit.
+cast-to-unit - 将以太币数量转换为另一种单位。
 
 ### SYNOPSIS
 
@@ -10,11 +10,11 @@ cast-to-unit - Convert an eth amount to another unit.
 
 ### DESCRIPTION
 
-Convert an eth amount to another unit.
+将以太币数量转换为另一种单位。
 
-The value to convert (*value*) can be a quantity of eth (in wei), or a number with a unit attached to it.
+要转换的值（*value*）可以是以太币的数量（以 wei 为单位），或者是带有单位的数字。
 
-Valid units are:
+有效的单位包括：
 
 - `ether`
 - `gwei`
@@ -26,12 +26,12 @@ Valid units are:
 
 ### EXAMPLES
 
-1. Convert 1000 wei to gwei
+1. 将 1000 wei 转换为 gwei
     ```sh
     cast to-unit 1000 gwei
     ```
 
-2. Convert 1 eth to gwei
+2. 将 1 eth 转换为 gwei
     ```sh
     cast to-unit 1ether gwei
     ```

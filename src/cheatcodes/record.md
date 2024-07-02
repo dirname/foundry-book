@@ -1,20 +1,20 @@
 ## `record`
 
-### Signature
+### 签名
 
 ```solidity
 function record() external;
 ```
 
-### Description
+### 描述
 
-Tell the VM to start recording all storage reads and writes. To access the reads and writes, use [`accesses`](./accesses.md).
+告诉虚拟机开始记录所有的存储读取和写入。要访问这些读取和写入，请使用 [`accesses`](./accesses.md)。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Every write also counts as an additional read.
+> 每次写入也会计为一次额外的读取。
 
-### Examples
+### 示例
 
 ```solidity
 /// contract NumsContract {
@@ -30,8 +30,8 @@ numsContract.num2();
 emit log_uint(uint256(reads[0])); // 1
 ```
 
-### SEE ALSO
+### 参见
 
-Forge Standard Library
+Forge 标准库
 
 [Std Storage](../reference/forge-std/std-storage.md)

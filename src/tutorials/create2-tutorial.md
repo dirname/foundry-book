@@ -1,34 +1,34 @@
-## Deterministic deployment using CREATE2
+## 使用 CREATE2 进行确定性部署
 
-### Introduction
+### 介绍
 
-Enshrined into the EVM as part of the [Constantinople fork](https://ethereum.org/en/history/#constantinople) of 2019, `CREATE2` is an opcode that started its journey as [EIP-1014](https://eips.ethereum.org/EIPS/eip-1014).
-`CREATE2` allows you to deploy smart contracts to deterministic addresses, based on parameters controlled by the deployer.
-As a result, it's often mentioned as enabling "counterfactual" deployments, where you can interact with an addresses that haven't been created yet because `CREATE2` guarantees known code can be placed at that address.
-This is in contrast to the `CREATE` opcode, where the address of the deployed contract is a function of the deployer's nonce.
- With `CREATE2`, you can use the same deployer account to deploy contracts to the same address across multiple networks, even if the address has varying nonces.
+作为 2019 年 [Constantinople 分叉](https://ethereum.org/en/history/#constantinople) 的一部分，`CREATE2` 操作码被纳入 EVM，其起源可以追溯到 [EIP-1014](https://eips.ethereum.org/EIPS/eip-1014)。
+`CREATE2` 允许你根据部署者控制的参数将智能合约部署到确定性的地址。
+因此，它经常被提及为启用“反事实”部署，你可以在尚未创建的地址上进行交互，因为 `CREATE2` 保证已知代码可以放置在该地址上。
+这与 `CREATE` 操作码形成对比，后者的部署合约地址是部署者 nonce 的函数。
+使用 `CREATE2`，你可以在多个网络上使用相同的部署者账户将合约部署到相同的地址，即使该地址的 nonce 不同。
 
-> ℹ️ **Note**
->This guide is intended to help understand `CREATE2`. In most use cases, you won't need to write and use your own deployer, and can use an existing deterministic deployer. In forge scripts, using `new MyContract{salt: salt}()` will use the deterministic deployer at [0x4e59b44847b379578588920ca78fbf26c0b4956c](https://github.com/Arachnid/deterministic-deployment-proxy).
+> ℹ️ **注意**
+> 本指南旨在帮助理解 `CREATE2`。在大多数用例中，你不需要编写和使用自己的部署者，可以使用现有的确定性部署者。在 forge 脚本中，使用 `new MyContract{salt: salt}()` 将使用位于 [0x4e59b44847b379578588920ca78fbf26c0b4956c](https://github.com/Arachnid/deterministic-deployment-proxy) 的确定性部署者。
 
-In this tutorial, we will:
+在本教程中，我们将：
 
-1. Look at a `CREATE2` factory implementation.
-2. Deploy the factory using the traditional deployment methods.
-3. Use this deployed factory to in turn deploy a simple counter contract at a deterministic address.
-4. Simulate this set of events by writing a simple test in Foundry.
+1. 查看一个 `CREATE2` 工厂实现。
+2. 使用传统的部署方法部署工厂。
+3. 使用这个已部署的工厂在确定性地址上部署一个简单的计数器合约。
+4. 通过在 Foundry 中编写一个简单的测试来模拟这一系列事件。
 
-### Prerequisites
+### 前提条件
 
-1. Some familiarity with Solidity and Foundry is required, and some familiarity with the inline assembly is recommended.
-Refer to the [official Solidity docs](https://docs.soliditylang.org/en/latest/assembly.html) for a primer on inline assembly.
-2. Make sure you have Foundry [installed](../getting-started/installation.md) on your system.
-3. [Initialize](../projects/creating-a-new-project.md) a new Foundry project.
+1. 需要对 Solidity 和 Foundry 有一定的了解，建议对内联汇编有一定的了解。
+   参考 [官方 Solidity 文档](https://docs.soliditylang.org/en/latest/assembly.html) 了解内联汇编的基础知识。
+2. 确保你的系统上已经 [安装](../getting-started/installation.md) 了 Foundry。
+3. [初始化](../projects/creating-a-new-project.md) 一个新的 Foundry 项目。
 
-### CREATE2 Factory
+### CREATE2 工厂
 
-Create a file named `Create2.sol` Inside the `src` directory.
-Initialize a contract named `Create2` like this:
+在 `src` 目录中创建一个名为 `Create2.sol` 的文件。
+初始化一个名为 `Create2` 的合约，如下所示：
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -42,15 +42,14 @@ contract Create2 {
 }
 ```
 
-These errors are meant to enforce some sanity checks on the factory deployment, and revert the whole transaction when triggered.
-The `Create2EmptyBytecode()` error triggers if the bytecode passed to the `deploy` function is empty, and the `Create2FailedDeployment()` error triggers if the deployment fails for any reason.
+这些错误旨在对工厂部署进行一些合理性检查，并在触发时回滚整个交易。
+如果传递给 `deploy` 函数的字节码为空，则触发 `Create2EmptyBytecode()` 错误，如果部署因任何原因失败，则触发 `Create2FailedDeployment()` 错误。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Please note that a `CREATE2` deployment may fail due to a number of reasons. For example, if the bytecode is invalid, or if a
-> contract is already deployed at the computed address. Your deployment may also fail if your constructor reverts for any reason.
+> 请注意，`CREATE2` 部署可能由于多种原因失败。例如，如果字节码无效，或者在计算的地址上已经部署了合约。如果你的构造函数因任何原因回滚，你的部署也可能失败。
 
-Next, create a function named `deploy`:
+接下来，创建一个名为 `deploy` 的函数：
 
 ```solidity
 function deploy(bytes32 salt, bytes memory creationCode) external payable returns (address addr) {
@@ -58,19 +57,19 @@ function deploy(bytes32 salt, bytes memory creationCode) external payable return
  }
 ```
 
-This function takes 2 inputs:
+该函数接受两个输入：
 
-1. The `salt` used to calculate the final address. This can basically be any random value we want it to be.
-2. The creation code of the contract that we want to deploy.
+1. 用于计算最终地址的 `salt`。这基本上可以是任何我们想要的随机值。
+2. 我们要部署的合约的创建代码。
 
-The address of the newly deployed contract is the returned after a successful deploy.
+新部署的合约地址在成功部署后返回。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> You can send ETH to a contract that is being deployed using `CREATE2`, but only if it has a payable constructor.
-> If you try to send ETH to it without a payable constructor, the transaction will revert.
+> 你可以使用 `CREATE2` 向正在部署的合约发送 ETH，但前提是它有一个可支付的构造函数。
+> 如果你尝试在没有可支付构造函数的情况下向其发送 ETH，交易将回滚。
 
-Add this revert statement at the top of the deploy function. We want our function to reject the deploy request if the following conditions are not met:
+在 deploy 函数的顶部添加这个回滚语句。我们希望如果以下条件不满足，函数拒绝部署请求：
 
 ```solidity
     if (creationCode.length == 0) {
@@ -78,9 +77,9 @@ Add this revert statement at the top of the deploy function. We want our functio
     }
 ```
 
-Next, we will call the `CREATE2` opcode using inline assembly, which can be done using the `assembly` keyword:
+接下来，我们将使用内联汇编调用 `CREATE2` 操作码，这可以使用 `assembly` 关键字完成：
 
-To call [the CREATE2 opcode from inline assembly](https://docs.soliditylang.org/en/latest/yul.html#evm-dialect), we need to pass in 4 parameters:
+要调用 [内联汇编中的 CREATE2 操作码](https://docs.soliditylang.org/en/latest/yul.html#evm-dialect)，我们需要传入四个参数：
 
 ```solidity
     assembly {
@@ -88,17 +87,15 @@ To call [the CREATE2 opcode from inline assembly](https://docs.soliditylang.org/
     }
 ```
 
-1. The amount of ETH that we want to send to the new address as part of the deployment. Here we just pass in the `callvalue()`, which is the amount of ETH sent to the factory contract as part of the transaction. Think of it as a lower level version of `msg.value`.
-2. The second and third parameters refer to the range of memory our bytecode is located in. `add(bytecode, 0x20)` takes in a reference to the location of the `bytes` variable bytecode in memory, and skips 32 bytes (0x20 in hex) to point to the actual bytecode.
+1. 作为部署的一部分，我们要发送到新地址的 ETH 数量。这里我们传入 `callvalue()`，这是作为交易的一部分发送到工厂合约的 ETH 数量。可以将其视为 `msg.value` 的低级版本。
+2. 第二个和第三个参数指的是我们的字节码所在的内存范围。`add(bytecode, 0x20)` 接受内存中 `bytes` 变量字节码位置的引用，并跳过 32 字节（十六进制的 0x20）以指向实际的字节码。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> The `bytes` type in Solidity is a dynamically sized byte array, where the first 32 bytes of memory
-> represent the length of the array, and the remaining bytes represent the actual data. Therefore, when we pass in a reference to
-> `bytes` variable, we need to skip the first 32 bytes to point to the actual data.
-> Read more about the `add` and `mload` opcodes at [evm.codes](https://www.evm.codes/?fork=shanghai).
+> Solidity 中的 `bytes` 类型是动态大小的字节数组，其中内存的前 32 字节表示数组的长度，其余字节表示实际数据。因此，当我们传入 `bytes` 变量的引用时，我们需要跳过前 32 字节以指向实际数据。
+> 在 [evm.codes](https://www.evm.codes/?fork=shanghai) 上阅读更多关于 `add` 和 `mload` 操作码的信息。
 
-Finally, we will revert the whole transaction if the deployment fails for any reason, in which case the `CREATE2` opcode will return a 0 address:
+最后，如果部署因任何原因失败，我们将回滚整个交易，在这种情况下，`CREATE2` 操作码将返回一个 0 地址：
 
 ```solidity
         if (addr == address(0)) {
@@ -106,7 +103,7 @@ Finally, we will revert the whole transaction if the deployment fails for any re
         }
 ```
 
-Lastly, let us create a view function named `computeAddress`. This function should take in the `salt` and `creationCode` as parameters, and return the address of the contract that would be deployed using the `deploy` function:
+最后，让我们创建一个名为 `computeAddress` 的视图函数。该函数应接受 `salt` 和 `creationCode` 作为参数，并返回使用 `deploy` 函数部署的合约地址：
 
 ```solidity
 function computeAddress(bytes32 salt, bytes32 creationCodeHash) external view returns (address addr) {
@@ -114,7 +111,7 @@ function computeAddress(bytes32 salt, bytes32 creationCodeHash) external view re
  }
 ```
 
-Inside the function, paste the following code that uses inline assembly to calculate the address by performing the same calculations as the `CREATE2` opcode would:
+在函数内部，粘贴以下代码，该代码使用内联汇编计算地址，执行与 `CREATE2` 操作码相同的计算：
 
 ```solidity
     address contractAddress = address(this);
@@ -131,44 +128,43 @@ Inside the function, paste the following code that uses inline assembly to calcu
     }
 ```
 
-Before trying to understand the assembly code here, let us take a look at the formula that the `CREATE2` opcode uses to calculate the address:
+在尝试理解这里的汇编代码之前，让我们看一下 `CREATE2` 操作码用于计算地址的公式：
 
 ```bash
 keccak256(0xff ++ address ++ salt ++ keccak256(bytecode))[12:]
 ```
 
-`0xff` is a hardcoded prefix that prevents hash-collision between addresses that are deployed using `CREATE` and `CREATE2`.
-The `address` param refers to the address of the contract that is calling the `CREATE2` opcode, in our case the factory contract.
-These 4 params are concatenated together, and `keccak256` is used to generate a 32 byte hash.
-The first 12 bytes are truncated, and the remaining 20 bytes are used as the address of the deployed contract.
+`0xff` 是一个硬编码的前缀，防止使用 `CREATE` 和 `CREATE2` 部署的地址之间的哈希碰撞。
+`address` 参数指的是调用 `CREATE2` 操作码的合约地址，在我们的例子中是工厂合约。
+这四个参数连接在一起，并使用 `keccak256` 生成一个 32 字节的哈希。
+前 12 字节被截断，剩下的 20 字节用作部署合约的地址。
 
-The entirety of the assembly code in the `computeAddress` function is an attempt at recreating the same formula, albeit without calling the `CREATE2` opcode:
+`computeAddress` 函数中的整个汇编代码试图在不调用 `CREATE2` 操作码的情况下重现相同的公式：
 
-1. `mload(0x40)` loads the free memory pointer into memory. This is the pointer that points to the next free memory slot in the memory array. Read more about this in [Solidity docs](https://docs.soliditylang.org/en/latest/assembly.html#memory-management).
-2. `mstore(add(ptr, 0x40), bytecodeHash)` stores the `bytecodeHash` starting at the memory location pointed to by `ptr + 0x40`, i.e. `ptr+ 64 bytes`.
-3. `mstore(add(ptr, 0x20), salt)` stores the `salt` at the memory location pointed to by `ptr + 0x20`.
-4. `mstore(ptr, contractAddress)` stores the `contractAddress` at the memory location pointed to by `ptr`.
+1. `mload(0x40)` 将自由内存指针加载到内存中。这是指向内存数组中下一个自由内存槽的指针。在 [Solidity 文档](https://docs.soliditylang.org/en/latest/assembly.html#memory-management) 中阅读更多关于这方面的信息。
+2. `mstore(add(ptr, 0x40), bytecodeHash)` 从 `ptr + 0x40` 指向的内存位置开始存储 `bytecodeHash`，即 `ptr + 64 字节`。
+3. `mstore(add(ptr, 0x20), salt)` 在 `ptr + 0x20` 指向的内存位置存储 `salt`。
+4. `mstore(ptr, contractAddress)` 在 `ptr` 指向的内存位置存储 `contractAddress`。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> Recall that all the params passed to the `computeAddress` function are 32 bytes long, and are stored in memory as 32 byte values. However
-> an address in Solidity is 20 bytes long, and is stored in memory as a 32 byte value, where the first 12 bytes are replaced by 0s.
-> Therefore, when we need to skip 12 bytes to point to the actual address.
+> 回想一下，传递给 `computeAddress` 函数的所有参数都是 32 字节长，并在内存中存储为 32 字节值。然而，Solidity 中的地址是 20 字节长，并在内存中存储为 32 字节值，其中前 12 字节被 0 替换。
+> 因此，当我们需要跳过 12 字节以指向实际地址时。
 
-5.`let start := add(ptr, 0x0b)` creates a new variable `start` that points to the memory location `ptr + 0x0b`, i.e. `ptr + 11 bytes`.
-6.Lastly, the mstore8 opcode can be used to store a single byte at a memory location. Here, we are storing the value `0xff` at the memory location pointed to by `start`, which occupies the 12th byte of the memory slot.
-7. With all the values packed into their correct memory locations, we can now call `keccak256` on the memory slot starting at `start`, and pass in the length of the memory slot as the second parameter. This will return a 32 byte hash, which we can truncate to get the final address.
+5. `let start := add(ptr, 0x0b)` 创建一个新变量 `start`，指向内存位置 `ptr + 0x0b`，即 `ptr + 11 字节`。
+6. 最后，mstore8 操作码可用于在内存位置存储单个字节。在这里，我们在 `start` 指向的内存位置存储值 `0xff`，该位置占用内存槽的第 12 字节。
+7. 将所有值打包到正确的内存位置后，我们现在可以对从 `start` 开始的内存槽调用 `keccak256`，并将内存槽的长度作为第二个参数传递。这将返回一个 32 字节的哈希，我们可以截断以获得最终地址。
 
-> ℹ️ **Note**
+> ℹ️ **注意**
 >
-> You can check out the complete code for this factory implementation [here](https://github.com/Genesis3800/CREATE2Factory/blob/main/src/Create2.sol).
-> Also check out OpenZeppelin's [CREATE2 library implementation](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/793d92a3331538d126033cbacb1ee5b8a7d95adc/contracts/utils/Create2.sol), which has been used as inspiration for this tutorial.
-> Finally, Forge offers some `CREATE2` address computation helper functions out of the box. [Check them out](https://github.com/foundry-rs/forge-std/blob/f73c73d2018eb6a111f35e4dae7b4f27401e9421/src/StdUtils.sol#L122-L134).
+> 你可以查看这个工厂实现的完整代码 [这里](https://github.com/Genesis3800/CREATE2Factory/blob/main/src/Create2.sol)。
+> 还可以查看 OpenZeppelin 的 [CREATE2 库实现](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/793d92a3331538d126033cbacb1ee5b8a7d95adc/contracts/utils/Create2.sol)，该实现为本教程提供了灵感。
+> 最后，Forge 提供了一些开箱即用的 `CREATE2` 地址计算辅助函数。[查看它们](https://github.com/foundry-rs/forge-std/blob/f73c73d2018eb6a111f35e4dae7b4f27401e9421/src/StdUtils.sol#L122-L134)。
 
-### Testing our factory
+### 测试我们的工厂
 
-Create a file named `Create2.t.sol` Inside the `test` directory.
-Initialize a contract named `Create2Test` like this:
+在 `test` 目录中创建一个名为 `Create2.t.sol` 的文件。
+初始化一个名为 `Create2Test` 的合约，如下所示：
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -183,7 +179,7 @@ contract Create2Test is Test {
 }
 ```
 
-Initialize the following state variables and the `setUp()` function:
+初始化以下状态变量和 `setUp()` 函数：
 
 ```solidity
     Create2 internal create2;
@@ -195,13 +191,13 @@ Initialize the following state variables and the `setUp()` function:
     }
 ```
 
-Create a new function named `testDeterministicDeploy()` that:
+创建一个名为 `testDeterministicDeploy()` 的新函数，该函数：
 
-1. Deploys a new instance of the `Create2` contract.
-2. Deals out a 100 ETH to the specific address that we will use to impersonate as the caller for all subsequent calls using the `prank` cheatcode.
-3. Sets up the `salt` and `bytecode` params
-4. Uses the previously deployed `Create2` contract to deploy the `Counter` contract at a deterministic address.
-5. Checks if the contract was deployed at the correct address, by asserting that the computed address is equal to the deployed address.
+1. 部署一个新的 `Create2` 合约实例。
+2. 向我们将用于模拟所有后续调用者的特定地址分配 100 ETH，使用 `prank` 作弊码。
+3. 设置 `salt` 和 `bytecode` 参数
+4. 使用之前部署的 `Create2` 合约在确定性地址上部署 `Counter` 合约。
+5. 通过断言计算的地址等于部署的地址，检查合约是否部署在正确的地址上。
 
 ```solidity
     function testDeterministicDeploy() public {
@@ -219,6 +215,5 @@ Create a new function named `testDeterministicDeploy()` that:
     }
 ```
 
-Save all your files, and run the test using `forge test --match-path test/Create2.t.sol -vvvv`.
-Your test should pass without any errors.
-
+保存所有文件，并使用 `forge test --match-path test/Create2.t.sol -vvvv` 运行测试。
+你的测试应该在没有错误的情况下通过。

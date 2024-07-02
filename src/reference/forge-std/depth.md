@@ -1,13 +1,13 @@
 ## `depth`
 
-### Signature
+### 签名
 
 ```solidity
 function depth(StdStorage storage self, uint256 _depth) internal returns (StdStorage storage);
 ```
 
-### Description
+### 描述
 
-Sets the position of the value in the `tuple` (e.g. inside a `struct`).
+设置值在 `tuple`（例如在 `struct` 内部）中的位置。
 
-Default value: `uint256(0)`
+默认值：`uint256(0)`

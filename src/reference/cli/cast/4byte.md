@@ -1,14 +1,16 @@
+```markdown
 # cast 4byte
 
-Get the function signatures for the given selector from https://openchain.xyz
+从 https://openchain.xyz 获取给定选择器的函数签名
 
 ```bash
 $ cast 4byte --help
-Usage: cast 4byte [SELECTOR]
+用法: cast 4byte [SELECTOR]
 
-Arguments:
-  [SELECTOR]  The function selector
+参数:
+  [SELECTOR]  函数选择器
 
-Options:
-  -h, --help  Print help
+选项:
+  -h, --help  打印帮助信息
+```
 ```

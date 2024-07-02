@@ -1,6 +1,7 @@
+```markdown
 # forge completions
 
-Generate shell completions script
+生成 shell 自动补全脚本
 
 ```bash
 $ forge completions --help
@@ -11,4 +12,5 @@ Arguments:
 
 Options:
   -h, --help  Print help
+```
 ```

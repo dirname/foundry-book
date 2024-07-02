@@ -1,16 +1,16 @@
 ## `load`
 
-### Signature
+### 签名
 
 ```solidity
 function load(address account, bytes32 slot) external returns (bytes32);
 ```
 
-### Description
+### 描述
 
-Loads the value from storage slot `slot` on account `account`.
+从账户 `account` 的存储槽 `slot` 中加载值。
 
-### Examples
+### 示例
 
 ```solidity
 /// contract LeetContract {
@@ -21,8 +21,8 @@ bytes32 leet = vm.load(address(leetContract), bytes32(uint256(0)));
 emit log_uint(uint256(leet)); // 1337
 ```
 
-### SEE ALSO
+### 参见
 
-Forge Standard Library
+Forge 标准库
 
 [Std Storage](../reference/forge-std/std-storage.md)

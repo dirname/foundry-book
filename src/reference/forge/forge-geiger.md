@@ -1,32 +1,30 @@
 ## forge geiger
 
-### NAME
+### 名称
 
-forge-geiger - Detects usage of unsafe cheat codes in a foundry project and its dependencies.
+forge-geiger - 检测 foundry 项目及其依赖项中不安全作弊代码的使用情况。
 
-### SYNOPSIS
+### 概要
 
-``forge geiger`` [*options*] [*path*]
+``forge geiger`` [*选项*] [*路径*]
 
-### DESCRIPTION
+### 描述
 
-Detects usage of unsafe cheat codes in a foundry project and its dependencies.
+检测 foundry 项目及其依赖项中不安全作弊代码的使用情况。
 
-### OPTIONS
+### 选项
 
-`--root` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;The project's root path. By default, this is the root directory of the current git repository, or the current working directory.
+`--root` *路径*  
+&nbsp;&nbsp;&nbsp;&nbsp;项目的根路径。默认情况下，这是当前 git 仓库的根目录，或者当前工作目录。
 
 `--check`      
-&nbsp;&nbsp;&nbsp;&nbsp;Run in 'check' mode. Exits with 0 if no unsafe cheat codes were found. Exits with 1 if unsafe cheat codes are detected.
+&nbsp;&nbsp;&nbsp;&nbsp;以 'check' 模式运行。如果没有发现不安全的作弊代码，则退出代码为 0。如果检测到不安全的作弊代码，则退出代码为 1。
 
 `--full`  
-&nbsp;&nbsp;&nbsp;&nbsp;Print a full report of all files even if no unsafe functions are found.
+&nbsp;&nbsp;&nbsp;&nbsp;打印所有文件的完整报告，即使没有发现不安全的函数。
 
 {{#include common-options.md}}
 
-### SEE ALSO
+### 参见
 
 [forge](./forge.md)
-
-

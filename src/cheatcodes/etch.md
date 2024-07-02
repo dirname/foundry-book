@@ -1,16 +1,16 @@
 ## `etch`
 
-### Signature
+### 签名
 
 ```solidity
 function etch(address who, bytes calldata code) external;
 ```
 
-### Description
+### 描述
 
-Sets the bytecode of an address `who` to `code`.
+将地址 `who` 的字节码设置为 `code`。
 
-### Examples
+### 示例
 
 ```solidity
 bytes memory code = address(awesomeContract).code;
@@ -19,9 +19,9 @@ vm.etch(targetAddr, code);
 log_bytes(address(targetAddr).code); // 0x6080604052348015610010...
 ```
 
-#### Using `vm.etch` for enabling custom precompiles
+#### 使用 `vm.etch` 启用自定义预编译
 
-Some chains, like Blast or Arbitrum, run with custom precompiles. Foundry is operating on vanilla EVM and is not aware of those. If you are encountering reverts due to not available precompile, you can use `vm.etch` cheatcode to inject mock of the missing precompile to the address it is expected to appear at.
+某些链，如 Blast 或 Arbitrum，运行时带有自定义预编译。Foundry 在 vanilla EVM 上操作，并不知道这些预编译。如果你遇到由于预编译不可用而导致的回滚，可以使用 `vm.etch` 作弊码将缺失预编译的模拟注入到预期出现的地址。
 
 ```solidity
 {{#include ../../projects/cheatcodes/test/BlastMock.t.sol:all}}
@@ -29,16 +29,16 @@ Some chains, like Blast or Arbitrum, run with custom precompiles. Foundry is ope
 
 <div class="warning">
 
-Injecting mocks of precompiles might be tricky as such mocks will not fully emulate the actual precompile behavior on-chain.
+注入预编译的模拟可能很棘手，因为这样的模拟不会完全模拟链上实际预编译的行为。
 
-Mock in the case above will not cause the actual yield to be accrued if any yield mode is configured.
+在上面的例子中，模拟不会导致实际收益的累积，如果配置了任何收益模式。
 
 </div>
 
 
-### SEE ALSO
+### 另请参阅
 
-Forge Standard Library
+Forge 标准库
 
 - [`deployCode`](../reference/forge-std/deployCode.md)
-- [`deployCodeTo`](../reference/forge-std/deployCodeTo.md) 
+- [`deployCodeTo`](../reference/forge-std/deployCodeTo.md)

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-parse-bytes32-address - Parses a checksummed address from bytes32 encoding.
+cast-parse-bytes32-address - 从 bytes32 编码中解析出校验和地址。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-parse-bytes32-address - Parses a checksummed address from bytes32 encoding.
 
 ### DESCRIPTION
 
-Parses a checksummed address from its bytes32 encoding representation.
+从其 bytes32 编码表示中解析出校验和地址。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Parses a checksummed address from its bytes32 encoding representation.
 
 ### EXAMPLES
 
-1. Parse the bytes32 encoding of the WETH9 contract address to its address representation:
+1. 将 WETH9 合约地址的 bytes32 编码解析为其地址表示：
     ```sh
     cast parse-bytes32-address 0x000000000000000000000000C02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2
     ```

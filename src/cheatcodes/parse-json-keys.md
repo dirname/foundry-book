@@ -1,17 +1,17 @@
 ## `parseJsonKeys`
 
-### Signature
+### 签名
 
 ```solidity
-// Get list of keys present in a JSON string
+// 获取 JSON 字符串中存在的键列表
 function parseJsonKeys(string calldata json, string calldata key) external pure returns (string[] memory keys);
 ```
 
-### Description
+### 描述
 
-Gets list of keys present in a JSON string
+获取 JSON 字符串中存在的键列表。
 
-### Examples
+### 示例
 
 ```solidity
 string memory json = '{"key": {"a": 1, "b": 2}}';

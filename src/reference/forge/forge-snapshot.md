@@ -2,7 +2,7 @@
 
 ### NAME
 
-forge-snapshot - Create a snapshot of each test's gas usage.
+forge-snapshot - 创建每个测试的 gas 使用情况快照。
 
 ### SYNOPSIS
 
@@ -10,49 +10,47 @@ forge-snapshot - Create a snapshot of each test's gas usage.
 
 ### DESCRIPTION
 
-Create a snapshot of each test's gas usage.
+创建每个测试的 gas 使用情况快照。
 
-The results are written to a file named `.gas-snapshot`. You can change the name of the file
-by passing `--snap <PATH>`.
+结果会写入一个名为 `.gas-snapshot` 的文件。你可以通过传递 `--snap <PATH>` 来更改文件名。
 
-Fuzz tests are included by default in the snapshot. They use a static seed to achieve deterministic results.
+默认情况下，快照中包含 fuzz 测试。它们使用静态种子以实现确定性结果。
 
-Snapshots can be compared with `--diff` and `--check`. The first flag will output a diff, and the second
-will output a diff *and* exit with code 1 if the snapshots do not match.
+可以使用 `--diff` 和 `--check` 来比较快照。第一个标志会输出差异，第二个标志会输出差异并如果快照不匹配则退出并返回代码 1。
 
 ### OPTIONS
 
 #### Snapshot Options
 
 `--asc`  
-Sort results by gas used (ascending).
+按 gas 使用量升序排序结果。
 
 `--desc`  
-&nbsp;&nbsp;&nbsp;&nbsp;Sort results by gas used (descending).
+&nbsp;&nbsp;&nbsp;&nbsp;按 gas 使用量降序排序结果。
 
 `--min` *min_gas*  
-&nbsp;&nbsp;&nbsp;&nbsp;Only include tests that used more gas that the given amount.
+&nbsp;&nbsp;&nbsp;&nbsp;仅包含使用 gas 量超过给定数量的测试。
 
 `--max` *max_gas*  
-&nbsp;&nbsp;&nbsp;&nbsp;Only include tests that used less gas that the given amount.
+&nbsp;&nbsp;&nbsp;&nbsp;仅包含使用 gas 量少于给定数量的测试。
 
 `--tolerance` *threshold*  
-&nbsp;&nbsp;&nbsp;&nbsp;Tolerates gas deviations up to the specified percentage (0-100).
+&nbsp;&nbsp;&nbsp;&nbsp;容忍 gas 偏差高达指定百分比（0-100）。
 
 `--diff` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;Output a diff against a pre-existing snapshot.
+&nbsp;&nbsp;&nbsp;&nbsp;与预先存在的快照输出差异。
 
-&nbsp;&nbsp;&nbsp;&nbsp;By default the comparison is done with `.gas-snapshot`.
+&nbsp;&nbsp;&nbsp;&nbsp;默认情况下，比较使用 `.gas-snapshot`。
 
 `--check` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;Compare against a pre-existing snapshot, exiting with code 1 if they do not match.
+&nbsp;&nbsp;&nbsp;&nbsp;与预先存在的快照进行比较，如果不匹配则退出并返回代码 1。
 
-&nbsp;&nbsp;&nbsp;&nbsp;Outputs a diff if the snapshots do not match.
+&nbsp;&nbsp;&nbsp;&nbsp;如果快照不匹配，则输出差异。
 
-&nbsp;&nbsp;&nbsp;&nbsp;By default the comparison is done with `.gas-snapshot`.
+&nbsp;&nbsp;&nbsp;&nbsp;默认情况下，比较使用 `.gas-snapshot`。
 
 `--snap` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;Output file for the snapshot. Default: `.gas-snapshot`.
+&nbsp;&nbsp;&nbsp;&nbsp;快照的输出文件。默认：`.gas-snapshot`。
 
 {{#include test-options.md}}
 
@@ -68,17 +66,17 @@ Sort results by gas used (ascending).
 
 ### EXAMPLES
 
-1. Create a snapshot:
+1. 创建快照：
     ```sh
     forge snapshot
     ```
 
-2. Generate a diff:
+2. 生成差异：
     ```sh
     forge snapshot --diff
     ```
 
-3. Check that the snapshots match:
+3. 检查快照是否匹配：
     ```sh
     forge snapshot --check
     ```

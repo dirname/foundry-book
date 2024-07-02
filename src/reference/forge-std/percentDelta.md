@@ -1,6 +1,6 @@
 ## `percentDelta`
 
-### Signature
+### 签名
 
 ```solidity
 function percentDelta(uint256 a, uint256 b) internal pure returns (uint256)
@@ -10,12 +10,12 @@ function percentDelta(uint256 a, uint256 b) internal pure returns (uint256)
 function percentDelta(int256 a, int256 b) internal pure returns (uint256)
 ```
 
-### Description
+### 描述
 
-Returns the difference between two numbers in percentage, where `1e18` is 100%.
-More precisely, `percentDelta(a, b)` computes `abs((a-b) / b) * 1e18`.
+返回两个数字之间的百分比差异，其中 `1e18` 表示 100%。
+更确切地说，`percentDelta(a, b)` 计算 `abs((a-b) / b) * 1e18`。
 
-### Example
+### 示例
 
 ```solidity
 uint256 percent150 = stdMath.percentDelta(uint256(125), 50);

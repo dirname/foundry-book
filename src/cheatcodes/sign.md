@@ -1,6 +1,6 @@
 ## `sign`
 
-### Signature
+### 签名
 
 ```solidity
 function sign(uint256 privateKey, bytes32 digest) external returns (uint8 v, bytes32 r, bytes32 s);
@@ -10,13 +10,13 @@ function sign(uint256 privateKey, bytes32 digest) external returns (uint8 v, byt
 function sign(Wallet memory wallet, bytes32 digest) external returns (uint8 v, bytes32 r, bytes32 s);
 ```
 
-### Description
+### 描述
 
-Signs a digest `digest` with private key `privateKey` or [Wallet](./create-wallet.md`) `wallet`, returning `(v, r, s)`.
+使用私钥 `privateKey` 或 [Wallet](./create-wallet.md) `wallet` 对摘要 `digest` 进行签名，返回 `(v, r, s)`。
 
-This is useful for testing functions that take signed data and perform an `ecrecover` to verify the signer.
+这对于测试需要签名数据并执行 `ecrecover` 以验证签名者的函数非常有用。
 
-### Examples
+### 示例
 
 ```solidity
 (address alice, uint256 alicePk) = makeAddrAndKey("alice");
@@ -27,7 +27,7 @@ address signer = ecrecover(hash, v, r, s);
 assertEq(alice, signer); // [PASS]
 ```
 
-This is useful for testing functions that require a signature:
+这对于测试需要签名的函数非常有用：
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -111,7 +111,7 @@ contract SigningExampleTest is Test {
 
 #### `Wallet`
 
-The Wallet overload is a simple wrapper that uses the wallet's private key to sign the digest
+Wallet 重载是一个简单的包装器，使用钱包的私钥对摘要进行签名
 
 ```solidity
 Wallet memory alice = vm.createWallet("alice");

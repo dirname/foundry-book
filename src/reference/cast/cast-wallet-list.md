@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-wallet-list - List all the accounts in the keystore default directory.
+cast-wallet-list - 列出密钥库默认目录中的所有账户。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-wallet-list - List all the accounts in the keystore default directory.
 
 ### DESCRIPTION
 
-List all the accounts in the keystore default directory `~/.foundry/keystores`.
+列出密钥库默认目录 `~/.foundry/keystores` 中的所有账户。
 
 ### OPTIONS
 

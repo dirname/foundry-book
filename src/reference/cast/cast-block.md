@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-block - Get information about a block.
+cast-block - 获取区块信息。
 
 ### SYNOPSIS
 
@@ -10,15 +10,15 @@ cast-block - Get information about a block.
 
 ### DESCRIPTION
 
-Get information about a block.
+获取区块信息。
 
-The specified *block* can be a block number, or any of the tags: `earliest`, `finalized`, `safe`, `latest` or `pending`. Default to `latest`.
+指定的 *block* 可以是区块号，或者是以下标签之一：`earliest`、`finalized`、`safe`、`latest` 或 `pending`。默认为 `latest`。
 
 ### OPTIONS
 
 `-f` *field*  
 `--field` *field*  
-&nbsp;&nbsp;&nbsp;&nbsp; If specified, only get the given field of the block.
+&nbsp;&nbsp;&nbsp;&nbsp; 如果指定，仅获取区块的指定字段。
 
 {{#include ../common/display-options.md}}
 
@@ -30,17 +30,17 @@ The specified *block* can be a block number, or any of the tags: `earliest`, `fi
 
 ### EXAMPLES
 
-1. Get the latest block:
+1. 获取最新区块：
     ```sh
     cast block
     ```
 
-2. Get the `finalized` block:
+2. 获取 `finalized` 区块：
     ```sh
     cast block finalized
     ```
 
-3. Get the hash of the latest block:
+3. 获取最新区块的哈希：
     ```sh
     cast block latest -f hash
     ```

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-keccak - Hash arbitrary data using keccak-256.
+cast-keccak - 使用 keccak-256 哈希任意数据。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-keccak - Hash arbitrary data using keccak-256.
 
 ### DESCRIPTION
 
-Hash arbitrary data using keccak-256.
+使用 keccak-256 哈希任意数据。
 
 ### OPTIONS
 

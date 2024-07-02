@@ -1,77 +1,75 @@
 ## forge script
 
-### NAME
+### 名称
 
-forge-script - Run a smart contract as a script, building transactions that can be sent onchain.
+forge-script - 将智能合约作为脚本运行，构建可以发送到链上的交易。
 
-### SYNOPSIS
+### 概要
 
-``forge script`` [*options*] *path* [*args...*]
+``forge script`` [*选项*] *路径* [*参数...*]
 
-### DESCRIPTION
+### 描述
 
+将智能合约作为脚本运行，构建可以发送到链上的交易。
 
-Run a smart contract as a script, building transactions that can be sent onchain.
+脚本可以用于在实时合约上应用状态转换，或者使用 Solidity 部署和初始化一组复杂的智能合约。
 
-Scripts can be used to apply state transitions on live contracts, or deploy and initialize a complex set of smart contracts using Solidity.
-
-### OPTIONS
+### 选项
 
 `--broadcast`  
-&nbsp;&nbsp;&nbsp;&nbsp;Broadcasts the transactions.
+&nbsp;&nbsp;&nbsp;&nbsp;广播交易。
 
 `--debug`  
-&nbsp;&nbsp;&nbsp;&nbsp;Open the script in the [debugger][debugger]. Takes precedence over broadcast.
+&nbsp;&nbsp;&nbsp;&nbsp;在 [调试器][debugger] 中打开脚本。优先于广播。
 
 `-g`  
-`--gas-estimate-multiplier` *multiplier*  
-&nbsp;&nbsp;&nbsp;&nbsp;Relative percentage by which to multiply all gas estimates. (i.e. set to 200 to double them)
-&nbsp;&nbsp;&nbsp;&nbsp;Default: 130
+`--gas-estimate-multiplier` *乘数*  
+&nbsp;&nbsp;&nbsp;&nbsp;按相对百分比乘以所有 gas 估计值。（例如，设置为 200 以加倍它们）
+&nbsp;&nbsp;&nbsp;&nbsp;默认值：130
 
 `--json`  
-&nbsp;&nbsp;&nbsp;&nbsp;Output results in JSON format.  
-&nbsp;&nbsp;&nbsp;&nbsp;Note: The output is under development and prone to change.
+&nbsp;&nbsp;&nbsp;&nbsp;以 JSON 格式输出结果。  
+&nbsp;&nbsp;&nbsp;&nbsp;注意：输出正在开发中，容易发生变化。
 
 `--legacy`  
-&nbsp;&nbsp;&nbsp;&nbsp;Use legacy transactions instead of EIP1559 ones. This is auto-enabled for common networks without EIP1559.
+&nbsp;&nbsp;&nbsp;&nbsp;使用传统交易而不是 EIP1559 交易。对于没有 EIP1559 的常见网络会自动启用。
 
 `--resume`  
-&nbsp;&nbsp;&nbsp;&nbsp;Resumes submitting transactions that failed or timed-out previously.
+&nbsp;&nbsp;&nbsp;&nbsp;恢复提交之前失败或超时的交易。
 
 `-s`  
-`--sig` *signature*  
-&nbsp;&nbsp;&nbsp;&nbsp;The signature of the function you want to call in the contract, or raw calldata.  
-&nbsp;&nbsp;&nbsp;&nbsp;Default: `run()`  
+`--sig` *签名*  
+&nbsp;&nbsp;&nbsp;&nbsp;你想要在合约中调用的函数的签名，或原始 calldata。  
+&nbsp;&nbsp;&nbsp;&nbsp;默认值：`run()`  
 
 `--skip-simulation`  
-&nbsp;&nbsp;&nbsp;&nbsp;Skips on-chain simulation.
+&nbsp;&nbsp;&nbsp;&nbsp;跳过链上模拟。
 
 `--skip`  
-&nbsp;&nbsp;&nbsp;&nbsp;Skip compilation of non-essential contract directories like test or script (usage `--skip test`).
+&nbsp;&nbsp;&nbsp;&nbsp;跳过非必要合约目录的编译，如 test 或 script（用法 `--skip test`）。
 
 `--non-interactive`  
-&nbsp;&nbsp;&nbsp;&nbsp;Remove interactive prompts which appear if the contract is near the [EIP-170](https://eips.ethereum.org/EIPS/eip-170) size limit.
+&nbsp;&nbsp;&nbsp;&nbsp;移除如果合约接近 [EIP-170](https://eips.ethereum.org/EIPS/eip-170) 大小限制时出现的交互提示。
 
 `--slow`  
-&nbsp;&nbsp;&nbsp;&nbsp;Makes sure a transaction is sent, only after its previous one has been confirmed and succeeded.
+&nbsp;&nbsp;&nbsp;&nbsp;确保交易在之前的交易被确认并成功后才发送。
 
-
-`--target-contract` *contract_name*  
-&nbsp;&nbsp;&nbsp;&nbsp;The name of the contract you want to run.
+`--target-contract` *合约名称*  
+&nbsp;&nbsp;&nbsp;&nbsp;你想要运行的合约的名称。
 
 `--priority-gas-price`  
-&nbsp;&nbsp;&nbsp;&nbsp;Sets the priority gas price for EIP1559 transactions. Useful for when gas prices are volatile and you want to get your transaction included.
+&nbsp;&nbsp;&nbsp;&nbsp;设置 EIP1559 交易的优先 gas 价格。在 gas 价格波动时，用于确保交易被包含。
 
-`--with-gas-price` *price*  
-&nbsp;&nbsp;&nbsp;&nbsp;Sets the gas price for **broadcasted** legacy transactions, or the max fee for broadcasted EIP1559 transactions.  
-&nbsp;&nbsp;&nbsp;&nbsp;Note: To set the gas price in the execution environment of the script use `--gas-price` instead (see below).
+`--with-gas-price` *价格*  
+&nbsp;&nbsp;&nbsp;&nbsp;设置 **广播** 传统交易的 gas 价格，或广播 EIP1559 交易的最大费用。  
+&nbsp;&nbsp;&nbsp;&nbsp;注意：要在脚本执行环境中设置 gas 价格，请使用 `--gas-price` 代替（见下文）。
 
 {{#include ../common/etherscan-options.md}}
 
-#### Verification Options
+#### 验证选项
 
 `--verify`  
-&nbsp;&nbsp;&nbsp;&nbsp;If it finds a matching broadcast log, it tries to verify every contract found in the receipts.
+&nbsp;&nbsp;&nbsp;&nbsp;如果找到匹配的广播日志，尝试验证收据中找到的每个合约。
 
 {{#include ../common/verifier-options.md}}
 
@@ -79,13 +77,13 @@ Scripts can be used to apply state transitions on live contracts, or deploy and 
 
 {{#include core-build-options.md}}
 
-#### Build Options
+#### 构建选项
 
 `--names`  
-&nbsp;&nbsp;&nbsp;&nbsp;Print compiled contract names.
+&nbsp;&nbsp;&nbsp;&nbsp;打印编译的合约名称。
 
 `--sizes`  
-&nbsp;&nbsp;&nbsp;&nbsp;Print compiled non-test contract sizes, exiting with code 1 if any of them are above the size limit.
+&nbsp;&nbsp;&nbsp;&nbsp;打印编译的非测试合约大小，如果任何合约超过大小限制，则退出并返回代码 1。
 
 {{#include watch-options.md}}
 
@@ -97,29 +95,29 @@ Scripts can be used to apply state transitions on live contracts, or deploy and 
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Run `BroadcastTest` as a script, broadcasting generated transactions on-chain
+1. 将 `BroadcastTest` 作为脚本运行，在链上广播生成的交易
     ```sh
     forge script ./test/Broadcast.t.sol --tc BroadcastTest --sig "deploy()" \
         -vvv --fork-url $SEPOLIA_RPC_URL
     ```
 
-2. Deploy a contract on Polygon [(see scripting tutorial for an example script)](../../tutorials/solidity-scripting.md). *The verifier url is different for every network.*
+2. 在 Polygon 上部署合约（[参见脚本教程中的示例脚本](../../tutorials/solidity-scripting.md)）。*每个网络的验证器 URL 不同。*
     ```sh
     forge script script/NFT.s.sol:MyScript --chain-id 137 --rpc-url $RPC_URL \
         --etherscan-api-key $POLYGONSCAN_API_KEY --verifier-url https://api.polygonscan.com/api \
         --broadcast --verify -vvvv
     ```
 
-3. Resume a failed script. Using the above as an example, remove `--broadcast` add `--resume`
+3. 恢复失败的脚本。以上述为例，移除 `--broadcast` 添加 `--resume`
     ```sh
     forge script script/NFT.s.sol:MyScript --chain-id 137 --rpc-url $RPC_URL \
         --etherscan-api-key $POLYGONSCAN_API_KEY --verifier-url https://api.polygonscan.com/api \
         --verify -vvvv --resume
     ```
 
-4. Verify contracts that were just deployed with a script
+4. 验证刚刚使用脚本部署的合约
     ```sh
     forge script script/NFT.s.sol --rpc-url $RPC_URL --verify --resume
     ```

@@ -1,6 +1,6 @@
 ## `assertNotEq`
 
-### Signature
+### 签名
 
 #### `bool`
 
@@ -142,7 +142,7 @@ function assertNotEq(bytes[] memory left, bytes[] memory right) internal;
 function assertNotEq(bytes[] memory left, bytes[] memory right, string memory err) internal;
 ```
 
-#### Legacy
+#### 遗留
 
 ```solidity
 function assertNotEq32(bytes32 left, bytes32 right) internal;
@@ -152,13 +152,13 @@ function assertNotEq32(bytes32 left, bytes32 right) internal;
 function assertNotEq32(bytes32 left, bytes32 right, string memory err) internal;
 ```
 
-### Description
+### 描述
 
-Asserts `left` is not equal to `right`.
+断言 `left` 不等于 `right`。
 
-Optionally includes an error message in the revert string.
+可选地包含一个错误信息在回滚字符串中。
 
-### SEE ALSO
+### 另请参阅
 
 - [`assertNotEqDecimal`](./assertNotEqDecimal.md)
 - [`assertEq`](./assertEq.md)

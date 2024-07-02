@@ -1,6 +1,6 @@
 ## `deal`
 
-### Signature
+### 签名
 
 ```solidity
 function deal(address to, uint256 give) public;
@@ -14,13 +14,13 @@ function deal(address token, address to, uint256 give) public;
 function deal(address token, address to, uint256 give, bool adjust) public;
 ```
 
-### Description
+### 描述
 
-A wrapper around the [`deal`](../../cheatcodes/deal.md) cheatcode that also works for most ERC-20 tokens.
+这是 [`deal`](../../cheatcodes/deal.md) cheatcode 的一个封装，也适用于大多数 ERC-20 代币。
 
-If the alternative signature of `deal` is used, adjusts the token's total supply after setting the balance.
+如果使用 `deal` 的替代签名，则在设置余额后调整代币的总供应量。
 
-### Examples
+### 示例
 
 ```solidity
 deal(address(dai), alice, 10000e18);

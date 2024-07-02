@@ -1,17 +1,17 @@
 ## `changePrank`
 
-### Status
+### 状态
 
-`changePrank` is deprecated.
+`changePrank` 已被弃用。
 
-### Signature
+### 签名
 
 ```solidity
 function changePrank(address who) internal;
 ```
 
-### Description
+### 描述
 
-Stops the active prank with `stopPrank` and passes address to `startPrank`.  
+停止当前的恶作剧（prank）并使用 `stopPrank`，然后将地址传递给 `startPrank`。
 
-Useful for starting a global prank in the `setUp` function and deactivating it in certain tests.
+这对于在 `setUp` 函数中启动全局恶作剧并在某些测试中停用它非常有用。

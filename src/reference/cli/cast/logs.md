@@ -1,6 +1,7 @@
-# cast logs
+```markdown
+# 查询日志
 
-Get logs by signature or topic
+通过签名或主题获取日志
 
 ```bash
 $ cast logs --help
@@ -8,56 +9,52 @@ Usage: cast logs [OPTIONS] [SIG_OR_TOPIC] [TOPICS_OR_ARGS]...
 
 Arguments:
   [SIG_OR_TOPIC]
-          The signature of the event to filter logs by which will be converted to the first topic or
-          a topic to filter on
+          要过滤日志的事件签名，将转换为第一个主题，或是一个要过滤的主题
 
   [TOPICS_OR_ARGS]...
-          If used with a signature, the indexed fields of the event to filter by. Otherwise, the
-          remaining topics of the filter
+          如果与签名一起使用，则是要过滤的事件的索引字段。否则，是过滤器的剩余主题
 
 Options:
       --from-block <FROM_BLOCK>
-          The block height to start query at.
+          开始查询的区块高度。
           
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+          也可以是 earliest, finalized, safe, latest, 或 pending 这些标签。
 
       --to-block <TO_BLOCK>
-          The block height to stop query at.
+          停止查询的区块高度。
           
-          Can also be the tags earliest, finalized, safe, latest, or pending.
+          也可以是 earliest, finalized, safe, latest, 或 pending 这些标签。
 
       --address <ADDRESS>
-          The contract address to filter on
+          要过滤的合约地址
 
       --subscribe
-          If the RPC type and endpoints supports `eth_subscribe` stream logs instead of printing and
-          exiting. Will continue until interrupted or TO_BLOCK is reached
+          如果 RPC 类型和端点支持 `eth_subscribe`，则流式传输日志而不是打印并退出。将继续直到中断或达到 TO_BLOCK
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
 Display options:
   -j, --json
-          Print the logs as JSON.s
+          以 JSON 格式打印日志
 
 Ethereum options:
   -r, --rpc-url <URL>
-          The RPC endpoint
+          RPC 端点
           
           [env: ETH_RPC_URL=]
 
       --flashbots
-          Use the Flashbots RPC URL with fast mode (<https://rpc.flashbots.net/fast>).
+          使用 Flashbots RPC URL 并启用快速模式（<https://rpc.flashbots.net/fast>）。
           
-          This shares the transaction privately with all registered builders.
+          这将私密地与所有注册的构建者共享交易。
           
-          See: <https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
+          参见：<https://docs.flashbots.net/flashbots-protect/quick-start#faster-transactions>
 
       --jwt-secret <JWT_SECRET>
-          JWT Secret for the RPC endpoint.
+          RPC 端点的 JWT 密钥。
           
-          The JWT secret will be used to create a JWT for a RPC. For example, the following can be
-          used to simulate a CL `engine_forkchoiceUpdated` call:
+          JWT 密钥将用于创建 RPC 的 JWT。例如，以下可以用于模拟 CL `engine_forkchoiceUpdated` 调用：
           
           cast rpc --jwt-secret <JWT_SECRET> engine_forkchoiceUpdatedV2
           '["0x6bb38c26db65749ab6e472080a3d20a2f35776494e72016d1e339593f21c59bc",
@@ -67,76 +64,77 @@ Ethereum options:
           [env: ETH_RPC_JWT_SECRET=]
 
   -e, --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
+          Etherscan（或等效）API 密钥
           
           [env: ETHERSCAN_API_KEY=]
 
   -c, --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+          链名称或 EIP-155 链 ID
           
           [env: CHAIN=]
 
 Wallet options - raw:
   -f, --from <ADDRESS>
-          The sender account
+          发送者账户
           
           [env: ETH_FROM=]
 
   -i, --interactive
-          Open an interactive prompt to enter your private key
+          打开一个交互式提示以输入您的私钥
 
       --private-key <RAW_PRIVATE_KEY>
-          Use the provided private key
+          使用提供的私钥
 
       --mnemonic <MNEMONIC>
-          Use the mnemonic phrase of mnemonic file at the specified path
+          使用指定路径的助记词或助记词文件
 
       --mnemonic-passphrase <PASSPHRASE>
-          Use a BIP39 passphrase for the mnemonic
+          使用 BIP39 助记词的密码
 
       --mnemonic-derivation-path <PATH>
-          The wallet derivation path.
+          钱包派生路径。
           
-          Works with both --mnemonic-path and hardware wallets.
+          适用于 --mnemonic-path 和硬件钱包。
 
       --mnemonic-index <INDEX>
-          Use the private key from the given mnemonic index.
+          使用给定助记词索引的私钥。
           
-          Used with --mnemonic-path.
+          与 --mnemonic-path 一起使用。
           
           [default: 0]
 
 Wallet options - keystore:
       --keystore <PATH>
-          Use the keystore in the given folder or file
+          使用给定文件夹或文件中的 keystore
           
           [env: ETH_KEYSTORE=]
 
       --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          通过文件名从默认 keystores 文件夹（~/.foundry/keystores）中使用 keystore
           
           [env: ETH_KEYSTORE_ACCOUNT=]
 
       --password <PASSWORD>
-          The keystore password.
+          keystore 密码。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
 
       --password-file <PASSWORD_FILE>
-          The keystore password file path.
+          keystore 密码文件路径。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
           
           [env: ETH_PASSWORD=]
 
 Wallet options - hardware wallet:
   -l, --ledger
-          Use a Ledger hardware wallet
+          使用 Ledger 硬件钱包
 
   -t, --trezor
-          Use a Trezor hardware wallet
+          使用 Trezor 硬件钱包
 
 Wallet options - remote:
       --aws
-          Use AWS Key Management Service
+          使用 AWS 密钥管理服务
+```
 ```

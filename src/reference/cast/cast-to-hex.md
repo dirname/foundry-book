@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-hex - Converts a number of one base to another
+cast-to-hex - 将一个基数的数字转换为另一个基数
 
 ### SYNOPSIS
 
@@ -10,12 +10,12 @@ cast-to-hex - Converts a number of one base to another
 
 ### DESCRIPTION
 
-Converts a number of one base to another
+将一个基数的数字转换为另一个基数
 
 ### OPTIONS
 
 `--base-in` *base_in*
-&nbsp;&nbsp;&nbsp;&nbsp;The input base.
+&nbsp;&nbsp;&nbsp;&nbsp;输入的基数。
 
 {{#include common-options.md}}
 

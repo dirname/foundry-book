@@ -1,6 +1,7 @@
+```markdown
 # cast call --create
 
-ignores the address field and simulates creating a contract
+忽略地址字段并模拟创建合约
 
 ```bash
 $ cast call --create --help
@@ -8,22 +9,23 @@ Usage: cast call --create [OPTIONS] <CODE> [SIG] [ARGS]...
 
 Arguments:
   <CODE>
-          Bytecode of contract
+          合约的字节码
 
   [SIG]
-          The signature of the constructor
+          构造函数的签名
 
   [ARGS]...
-          The arguments of the constructor
+          构造函数的参数
 
 Options:
       --value <VALUE>
-          Ether to send in the transaction.
+          交易中发送的以太币数量。
           
-          Either specified in wei, or as a string with a unit type.
+          可以以wei为单位指定，或以带单位类型的字符串指定。
           
-          Examples: 1ether, 10gwei, 0.01ether
+          示例：1ether, 10gwei, 0.01ether
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用'-h'查看摘要）
+```
 ```

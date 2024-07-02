@@ -1,44 +1,44 @@
-# cast interface
+# cast 接口
 
-Generate a Solidity interface from a given ABI.
+从给定的 ABI 生成一个 Solidity 接口。
 
 ```bash
 $ cast interface --help
-Usage: cast interface [OPTIONS] <PATH_OR_ADDRESS>
+用法: cast interface [选项] <路径或地址>
 
-Arguments:
-  <PATH_OR_ADDRESS>
-          The contract address, or the path to an ABI file.
+参数:
+  <路径或地址>
+          合约地址或 ABI 文件的路径。
           
-          If an address is specified, then the ABI is fetched from Etherscan.
+          如果指定地址，则从 Etherscan 获取 ABI。
 
-Options:
-  -n, --name <NAME>
-          The name to use for the generated interface
+选项:
+  -n, --name <名称>
+          用于生成的接口的名称
 
-  -p, --pragma <VERSION>
-          Solidity pragma version
+  -p, --pragma <版本>
+          Solidity 编译器版本
           
-          [default: ^0.8.4]
+          [默认值: ^0.8.4]
 
-  -o, --output <PATH>
-          The path to the output file.
+  -o, --output <路径>
+          输出文件的路径。
           
-          If not specified, the interface will be output to stdout.
+          如果未指定，接口将输出到标准输出。
 
   -j, --json
-          If specified, the interface will be output as JSON rather than Solidity
+          如果指定，接口将以 JSON 格式输出，而不是 Solidity 格式
 
-  -e, --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
+  -e, --etherscan-api-key <密钥>
+          Etherscan（或类似）API 密钥
           
-          [env: ETHERSCAN_API_KEY=]
+          [环境变量: ETHERSCAN_API_KEY=]
 
-  -c, --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+  -c, --chain <链>
+          链名称或 EIP-155 链 ID
           
-          [env: CHAIN=]
+          [环境变量: CHAIN=]
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看简要帮助）
 ```

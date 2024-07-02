@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-4byte - Get the function signatures for the given selector from <https://sig.eth.samczsun.com>.
+cast-4byte - 从 <https://sig.eth.samczsun.com> 获取给定选择器的函数签名。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-4byte - Get the function signatures for the given selector from <https://si
 
 ### DESCRIPTION
 
-Get the function signatures for the given selector from <https://sig.eth.samczsun.com>.
+从 <https://sig.eth.samczsun.com> 获取给定选择器的函数签名。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Get the function signatures for the given selector from <https://sig.eth.samczsu
 
 ### EXAMPLES
 
-1. Get the function signature for the selector `0x8cc5ce99`:
+1. 获取选择器 `0x8cc5ce99` 的函数签名：
     ```sh
     cast 4byte 0x8cc5ce99
     ```

@@ -1,6 +1,6 @@
 # forge test
 
-Run the project's tests
+运行项目的测试
 
 ```bash
 $ forge test --help
@@ -8,377 +8,365 @@ Usage: forge test [OPTIONS]
 
 Options:
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 '-h' 查看摘要）
 
 Test options:
       --debug <TEST_FUNCTION>
-          Run a test in the debugger.
+          在调试器中运行测试。
           
-          The argument passed to this flag is the name of the test function you want to run, and it
-          works the same as --match-test.
+          传递给此标志的参数是要运行的测试函数的名称，其工作方式与 --match-test 相同。
           
-          If more than one test matches your specified criteria, you must add additional filters
-          until only one test is found (see --match-contract and --match-path).
+          如果多个测试匹配指定的标准，则必须添加额外的过滤器，直到找到一个测试（参见 --match-contract 和 --match-path）。
           
-          The matching test will be opened in the debugger regardless of the outcome of the test.
+          匹配的测试将在调试器中打开，无论测试结果如何。
           
-          If the matching test is a fuzz test, then it will open the debugger on the first failure
-          case. If the fuzz test does not fail, it will open the debugger on the last fuzz case.
+          如果匹配的测试是模糊测试，则它将在第一个失败案例上打开调试器。如果模糊测试没有失败，它将在最后一个模糊案例上打开调试器。
           
-          For more fine-grained control of which fuzz case is run, see forge run.
+          有关更精细的模糊案例控制，请参见 forge run。
 
       --gas-report
-          Print a gas report
+          打印 gas 报告
           
           [env: FORGE_GAS_REPORT=]
 
       --allow-failure
-          Exit with code 0 even if a test fails
+          即使测试失败也退出代码 0
           
           [env: FORGE_ALLOW_FAILURE=]
 
       --fail-fast
-          Stop running tests after the first failure
+          在第一次失败后停止运行测试
 
       --etherscan-api-key <KEY>
-          The Etherscan (or equivalent) API key
+          Etherscan（或等效）API 密钥
           
           [env: ETHERSCAN_API_KEY=]
 
       --fuzz-seed <FUZZ_SEED>
-          Set seed used to generate randomness during your fuzz runs
+          设置用于生成模糊运行随机性的种子
 
       --fuzz-runs <RUNS>
           [env: FOUNDRY_FUZZ_RUNS=]
 
       --fuzz-input-file <FUZZ_INPUT_FILE>
-          File to rerun fuzz failures from
+          从文件中重新运行模糊失败
 
       --max-threads <MAX_THREADS>
-          Max concurrent threads to use. Default value is the number of available CPUs
+          使用的最大并发线程数。默认值是可用 CPU 的数量
 
 Display options:
   -j, --json
-          Output test results in JSON format
+          以 JSON 格式输出测试结果
 
   -l, --list
-          List tests instead of running them
+          列出测试而不是运行它们
 
       --summary
-          Print test summary table
+          打印测试摘要表
 
       --detailed
-          Print detailed test summary table
+          打印详细的测试摘要表
 
 Test filtering:
       --match-test <REGEX>
-          Only run test functions matching the specified regex pattern
+          仅运行匹配指定正则表达式的测试函数
           
           [aliases: mt]
 
       --no-match-test <REGEX>
-          Only run test functions that do not match the specified regex pattern
+          仅运行不匹配指定正则表达式的测试函数
           
           [aliases: nmt]
 
       --match-contract <REGEX>
-          Only run tests in contracts matching the specified regex pattern
+          仅运行匹配指定正则表达式的合约中的测试
           
           [aliases: mc]
 
       --no-match-contract <REGEX>
-          Only run tests in contracts that do not match the specified regex pattern
+          仅运行不匹配指定正则表达式的合约中的测试
           
           [aliases: nmc]
 
       --match-path <GLOB>
-          Only run tests in source files matching the specified glob pattern
+          仅运行匹配指定全局模式的源文件中的测试
           
           [aliases: mp]
 
       --no-match-path <GLOB>
-          Only run tests in source files that do not match the specified glob pattern
+          仅运行不匹配指定全局模式的源文件中的测试
           
           [aliases: nmp]
 
 EVM options:
   -f, --fork-url <URL>
-          Fetch state over a remote endpoint instead of starting from an empty state.
+          通过远程端点获取状态，而不是从空状态开始。
           
-          If you want to fetch state from a specific block number, see --fork-block-number.
+          如果要从特定块号获取状态，请参见 --fork-block-number。
           
           [aliases: rpc-url]
 
       --fork-block-number <BLOCK>
-          Fetch state from a specific block number over a remote endpoint.
+          通过远程端点从特定块号获取状态。
           
-          See --fork-url.
+          参见 --fork-url。
 
       --fork-retries <RETRIES>
-          Number of retries.
+          重试次数。
           
-          See --fork-url.
+          参见 --fork-url。
 
       --fork-retry-backoff <BACKOFF>
-          Initial retry backoff on encountering errors.
+          遇到错误时的初始重试退避。
           
-          See --fork-url.
+          参见 --fork-url。
 
       --no-storage-caching
-          Explicitly disables the use of RPC caching.
+          显式禁用 RPC 缓存。
           
-          All storage slots are read entirely from the endpoint.
+          所有存储槽完全从端点读取。
           
-          This flag overrides the project's configuration file.
+          此标志覆盖项目的配置文件。
           
-          See --fork-url.
+          参见 --fork-url。
 
       --initial-balance <BALANCE>
-          The initial balance of deployed test contracts
+          部署测试合约的初始余额
 
       --sender <ADDRESS>
-          The address which will be executing tests
+          将执行测试的地址
 
       --ffi
-          Enable the FFI cheatcode
+          启用 FFI 作弊码
 
       --always-use-create-2-factory
-          Use the create 2 factory in all cases including tests and non-broadcasting scripts
+          在所有情况下使用 create 2 工厂，包括测试和非广播脚本
 
   -v, --verbosity...
-          Verbosity of the EVM.
+          EVM 的详细程度。
           
-          Pass multiple times to increase the verbosity (e.g. -v, -vv, -vvv).
+          多次传递以增加详细程度（例如 -v, -vv, -vvv）。
           
-          Verbosity levels:
-          - 2: Print logs for all tests
-          - 3: Print execution traces for failing tests
-          - 4: Print execution traces for all tests, and setup traces for failing tests
-          - 5: Print execution and setup traces for all tests
+          详细程度级别：
+          - 2: 打印所有测试的日志
+          - 3: 打印失败测试的执行 traces
+          - 4: 打印所有测试的执行 traces，以及失败测试的设置 traces
+          - 5: 打印所有测试的执行和设置 traces
 
 Fork config:
       --compute-units-per-second <CUPS>
-          Sets the number of assumed available compute units per second for this provider
+          设置此提供商假设的可用计算单元数每秒
           
-          default value: 330
+          默认值：330
           
-          See also --fork-url and
+          参见 --fork-url 和
           <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
 
       --no-rpc-rate-limit
-          Disables rate limiting for this node's provider.
+          禁用此节点提供商的速率限制。
           
-          See also --fork-url and
+          参见 --fork-url 和
           <https://docs.alchemy.com/reference/compute-units#what-are-cups-compute-units-per-second>
           
           [aliases: no-rate-limit]
 
 Executor environment config:
       --gas-limit <GAS_LIMIT>
-          The block gas limit
+          区块 gas 限制
 
       --code-size-limit <CODE_SIZE>
-          EIP-170: Contract code size limit in bytes. Useful to increase this because of tests. By
-          default, it is 0x6000 (~25kb)
+          EIP-170: 合约代码大小限制（字节）。增加此值有助于测试。默认值为 0x6000（~25kb）
 
       --chain <CHAIN>
-          The chain name or EIP-155 chain ID
+          链名称或 EIP-155 链 ID
           
           [aliases: chain-id]
 
       --gas-price <GAS_PRICE>
-          The gas price
+          gas 价格
 
       --block-base-fee-per-gas <FEE>
-          The base fee in a block
+          区块的基础费用
           
           [aliases: base-fee]
 
       --tx-origin <ADDRESS>
-          The transaction origin
+          交易发起者
 
       --block-coinbase <ADDRESS>
-          The coinbase of the block
+          区块的 coinbase
 
       --block-timestamp <TIMESTAMP>
-          The timestamp of the block
+          区块的时间戳
 
       --block-number <BLOCK>
-          The block number
+          区块号
 
       --block-difficulty <DIFFICULTY>
-          The block difficulty
+          区块难度
 
       --block-prevrandao <PREVRANDAO>
-          The block prevrandao value. NOTE: Before merge this field was mix_hash
+          区块的 prevrandao 值。注意：合并前此字段为 mix_hash
 
       --block-gas-limit <GAS_LIMIT>
-          The block gas limit
+          区块 gas 限制
 
       --memory-limit <MEMORY_LIMIT>
-          The memory limit per EVM execution in bytes. If this limit is exceeded, a `MemoryLimitOOG`
-          result is thrown.
+          EVM 执行的内存限制（字节）。如果超过此限制，将抛出 `MemoryLimitOOG` 结果。
           
-          The default is 128MiB.
+          默认值为 128MiB。
 
       --disable-block-gas-limit
-          Whether to disable the block gas limit checks
+          是否禁用区块 gas 限制检查
           
           [aliases: no-gas-limit]
 
       --isolate
-          Whether to enable isolation of calls. In isolation mode all top-level calls are executed
-          as a separate transaction in a separate EVM context, enabling more precise gas accounting
-          and transaction state changes
+          是否启用调用的隔离。在隔离模式下，所有顶级调用作为单独的交易在单独的 EVM 上下文中执行，实现更精确的 gas 计算和交易状态变化
 
 Cache options:
       --force
-          Clear the cache and artifacts folder and recompile
+          清除缓存和 artifacts 文件夹并重新编译
 
 Build options:
       --no-cache
-          Disable the cache
+          禁用缓存
 
       --skip <SKIP>...
-          Skip building files whose names contain the given filter.
+          跳过构建文件名包含给定过滤器的文件。
           
-          `test` and `script` are aliases for `.t.sol` and `.s.sol`.
+          `test` 和 `script` 是 `.t.sol` 和 `.s.sol` 的别名。
 
 Linker options:
       --libraries <LIBRARIES>
-          Set pre-linked libraries
+          设置预链接的库
           
           [env: DAPP_LIBRARIES=]
 
 Compiler options:
       --ignored-error-codes <ERROR_CODES>
-          Ignore solc warnings by error code
+          忽略 solc 警告的错误代码
 
       --deny-warnings
-          Warnings will trigger a compiler error
+          警告将触发编译器错误
 
       --no-auto-detect
-          Do not auto-detect the `solc` version
+          不自动检测 `solc` 版本
 
       --use <SOLC_VERSION>
-          Specify the solc version, or a path to a local solc, to build with.
+          指定用于构建的 solc 版本或本地 solc 的路径。
           
-          Valid values are in the format `x.y.z`, `solc:x.y.z` or `path/to/solc`.
+          有效值格式为 `x.y.z`、`solc:x.y.z` 或 `path/to/solc`。
 
       --offline
-          Do not access the network.
+          不访问网络。
           
-          Missing solc versions will not be installed.
+          缺失的 solc 版本将不会被安装。
 
       --via-ir
-          Use the Yul intermediate representation compilation pipeline
+          使用 Yul 中间表示编译管道
 
       --no-metadata
-          Do not append any metadata to the bytecode.
+          不在字节码中附加任何元数据。
           
-          This is equivalent to setting `bytecode_hash` to `none` and `cbor_metadata` to `false`.
+          这相当于将 `bytecode_hash` 设置为 `none` 并将 `cbor_metadata` 设置为 `false`。
 
       --silent
-          Don't print anything on startup
+          启动时不打印任何内容
 
       --ast
-          Includes the AST as JSON in the compiler output
+          在编译器输出中包含 AST 为 JSON
 
       --evm-version <VERSION>
-          The target EVM version
+          目标 EVM 版本
 
       --optimize
-          Activate the Solidity optimizer
+          激活 Solidity 优化器
 
       --optimizer-runs <RUNS>
-          The number of optimizer runs
+          优化器运行次数
 
       --extra-output <SELECTOR>...
-          Extra output to include in the contract's artifact.
+          在合约的 artifact 中包含额外的输出。
           
-          Example keys: evm.assembly, ewasm, ir, irOptimized, metadata
+          示例键：evm.assembly、ewasm、ir、irOptimized、metadata
           
-          For a full description, see
+          完整描述请参见
           <https://docs.soliditylang.org/en/v0.8.13/using-the-compiler.html#input-description>
 
       --extra-output-files <SELECTOR>...
-          Extra output to write to separate files.
+          写入单独文件的额外输出。
           
-          Valid values: metadata, ir, irOptimized, ewasm, evm.assembly
+          有效值：metadata、ir、irOptimized、ewasm、evm.assembly
 
 Project options:
   -o, --out <PATH>
-          The path to the contract artifacts folder
+          合约 artifacts 文件夹的路径
 
       --revert-strings <REVERT>
-          Revert string configuration.
+          回退字符串配置。
           
-          Possible values are "default", "strip" (remove), "debug" (Solidity-generated revert
-          strings) and "verboseDebug"
+          可能的值为 "default"、"strip"（移除）、"debug"（Solidity 生成的回退字符串）和 "verboseDebug"
 
       --build-info
-          Generate build info files
+          生成构建信息文件
 
       --build-info-path <PATH>
-          Output path to directory that build info files will be written to
+          构建信息文件将写入的目录输出路径
 
       --root <PATH>
-          The project's root path.
+          项目的根路径。
           
-          By default root of the Git repository, if in one, or the current working directory.
+          默认情况下是 Git 仓库的根目录（如果在 Git 仓库中），否则是当前工作目录。
 
   -C, --contracts <PATH>
-          The contracts source directory
+          合约源目录
 
   -R, --remappings <REMAPPINGS>
-          The project's remappings
+          项目的 remappings
 
       --remappings-env <ENV>
-          The project's remappings from the environment
+          从环境获取项目的 remappings
 
       --cache-path <PATH>
-          The path to the compiler cache
+          编译器缓存的路径
 
       --lib-paths <PATH>
-          The path to the library folder
+          库文件夹的路径
 
       --hardhat
-          Use the Hardhat-style project layout.
+          使用 Hardhat 风格的项目布局。
           
-          This is the same as using: `--contracts contracts --lib-paths node_modules`.
+          这相当于使用：`--contracts contracts --lib-paths node_modules`。
           
           [aliases: hh]
 
       --config-path <FILE>
-          Path to the config file
+          配置文件的路径
 
 Watch options:
   -w, --watch [<PATH>...]
-          Watch the given files or directories for changes.
+          监视给定的文件或目录以进行更改。
           
-          If no paths are provided, the source and test directories of the project are watched.
+          如果未提供路径，则监视项目的源和测试目录。
 
       --no-restart
-          Do not restart the command while it's still running
+          不重新启动命令，即使它仍在运行
 
       --run-all
-          Explicitly re-run all tests when a change is made.
+          明确地在更改时重新运行所有测试。
           
-          By default, only the tests of the last modified test file are executed.
+          默认情况下，仅执行上次修改的测试文件的测试。
 
       --watch-delay <DELAY>
-          File update debounce delay.
+          文件更新防抖延迟。
           
-          During the delay, incoming change events are accumulated and only once the delay has
-          passed, is an action taken. Note that this does not mean a command will be started: if
-          --no-restart is given and a command is already running, the outcome of the action will be
-          to do nothing.
+          在延迟期间，传入的更改事件被累积，只有在延迟过去后才采取行动。注意，这并不意味着命令将启动：如果给出了 --no-restart 并且命令已经在运行，行动的结果将是不做任何事情。
           
-          Defaults to 50ms. Parses as decimal seconds by default, but using an integer with the `ms`
-          suffix may be more convenient.
+          默认值为 50ms。默认情况下解析为十进制秒，但使用带有 `ms` 后缀的整数可能更方便。
           
-          When using --poll mode, you'll want a larger duration, or risk overloading disk I/O.
+          在使用 --poll 模式时，您可能需要更大的持续时间，以避免过度加载磁盘 I/O。
 
       --show-progress
-          Show test execution progress
+          显示测试执行进度
 ```

@@ -1,16 +1,16 @@
 ## `rewind`
 
-### Signature
+### 签名
 
 ```solidity
 function rewind(uint256 time) public;
 ```
 
-### Description
+### 描述
 
-Rewinds `block.timestamp` by the specified number of seconds.
+将 `block.timestamp` 回退指定的秒数。
 
-### Examples
+### 示例
 
 ```solidity
 assertEq(block.timestamp, 3600);

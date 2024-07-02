@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-to-fixed-point - Convert an integer into a fixed point number.
+cast-to-fixed-point - 将整数转换为定点数。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-to-fixed-point - Convert an integer into a fixed point number.
 
 ### DESCRIPTION
 
-Convert an integer into a fixed point number.
+将整数转换为定点数。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Convert an integer into a fixed point number.
 
 ### EXAMPLES
 
-1. Convert 250 to a fixed point number with 2 decimals:
+1. 将250转换为带有2位小数的定点数：
     ```sh
     cast to-fixed-point 2 250
     ```

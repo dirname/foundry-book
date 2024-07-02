@@ -1,11 +1,11 @@
 ## `getLabel`
 
-### Signature
+### 签名
 
 ```solidity
 function getLabel(address) external returns (string memory);
 ```
 
-### Description
+### 描述
 
-Retrieves the label for an address if it was previously labeled. If not, it returns the address prefixed with `unlabeled:`.
+如果之前已经标记了地址，则检索该地址的标签。如果没有标记，则返回前缀为 `unlabeled:` 的地址。

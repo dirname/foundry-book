@@ -1,29 +1,29 @@
 ## `bound`
 
-### Signature
+### 签名
 
 ```solidity
 function bound(uint256 x, uint256 min, uint256 max) public returns (uint256 result);
 ```
 
-### Description
+### 描述
 
-A mathematical function for wrapping inputs of fuzz tests into a certain range.
+一个用于将模糊测试输入包装到特定范围的数学函数。
 
-You can use it instead of the `assume` cheatcode to get better performance in some cases. Read more [here](../../cheatcodes/assume.md).
+在某些情况下，您可以使用它来代替 `assume` 作弊码以获得更好的性能。更多信息请阅读[这里](../../cheatcodes/assume.md)。
 
-### Examples
+### 示例
 
 ```solidity
 input = bound(input, 99, 101);
 ```
 
-Returns `99` for input `0`.
+对于输入 `0`，返回 `99`。
 <br>
-Returns `100` for input `1`.
+对于输入 `1`，返回 `100`。
 <br>
-Returns `101` for input `2`.
+对于输入 `2`，返回 `101`。
 <br>
-Returns `99` for input `3`.
+对于输入 `3`，返回 `99`。
 <br>
-And so on.
+依此类推。

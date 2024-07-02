@@ -1,54 +1,54 @@
 ## forge doc
 
-### NAME
+### 名称
 
-forge-doc - Generate documentation for Solidity source files.
+forge-doc - 生成 Solidity 源文件的文档。
 
-### SYNOPSIS
+### 概要
 
-``forge doc`` [*options*]
+``forge doc`` [*选项*]
 
-### DESCRIPTION
+### 描述
 
-Generates and builds an mdbook from Solidity source files.
+从 Solidity 源文件生成并构建一个 mdbook。
 
-### OPTIONS
+### 选项
 
-`--root` *path*  
-&nbsp;&nbsp;&nbsp;&nbsp;The project's root path. By default, this is the root directory of the current git repository, or the current working directory.
+`--root` *路径*  
+&nbsp;&nbsp;&nbsp;&nbsp;项目的根路径。默认情况下，这是当前 git 仓库的根目录，或者当前工作目录。
 
-`--out` *path*
-&nbsp;&nbsp;&nbsp;&nbsp;The output path for the generated mdbook. By default, it is the `docs/` in project root.
+`--out` *路径*
+&nbsp;&nbsp;&nbsp;&nbsp;生成 mdbook 的输出路径。默认情况下，它是项目根目录下的 `docs/`。
 
 `--build`
-&nbsp;&nbsp;&nbsp;&nbsp;Build the `mdbook` from generated files.
+&nbsp;&nbsp;&nbsp;&nbsp;从生成的文件构建 `mdbook`。
 
 `--serve`
-&nbsp;&nbsp;&nbsp;&nbsp;Serve the documentation locally.
+&nbsp;&nbsp;&nbsp;&nbsp;在本地提供文档服务。
 
-`--hostname` *hostname*
-&nbsp;&nbsp;&nbsp;&nbsp;Hostname for serving documentation. Requires `--serve`.
+`--hostname` *主机名*
+&nbsp;&nbsp;&nbsp;&nbsp;用于提供文档的主机名。需要 `--serve`。
 
-`--port` *port*
-&nbsp;&nbsp;&nbsp;&nbsp;Port for serving documentation. Requires `--serve`.
+`--port` *端口*
+&nbsp;&nbsp;&nbsp;&nbsp;用于提供文档的端口。需要 `--serve`。
 
 {{#include common-options.md}}
 
-### EXAMPLES
+### 示例
 
-1. Generate documentation.
+1. 生成文档。
     ```sh
     forge doc
     ```
-2. Generate and build documentation with specified output directory.
+2. 生成并构建文档，指定输出目录。
     ```sh
     forge doc --build --out ./documentation
     ```
-3. Generate and serve documentation locally on port 4000.
+3. 生成并在本地端口 4000 上提供文档服务。
     ```sh
     forge doc --serve --port 4000
     ```
 
-### SEE ALSO
+### 另请参阅
 
-[Doc config](../config/doc-generator.md)
+[文档配置](../config/doc-generator.md)

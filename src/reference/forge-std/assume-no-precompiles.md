@@ -1,6 +1,6 @@
 ## `assumeNotPrecompile`
 
-### Signature
+### 签名
 
 ```solidity
 function assumeNotPrecompile(address addr) public;
@@ -10,17 +10,17 @@ function assumeNotPrecompile(address addr) public;
 function assumeNotPrecompile(address addr, uint256 chainid) public;
 ```
 
-### Description
+### 描述
 
-Uses [`assume`](../../cheatcodes/assume.md) to filter precompile addresses from the fuzz tests.
+使用 [`assume`](../../cheatcodes/assume.md) 从模糊测试中过滤预编译地址。
 
-Optionally, a `chainid` may be specified to filter known precompiles on the respective chain.
+可选地，可以指定一个 `chainid` 来过滤相应链上的已知预编译。
 
-### Registry
+### 注册表
 
-These are all the precompile addresses known to the `assumeNotPrecompile` functions.
+这些是 `assumeNotPrecompile` 函数已知的所有预编译地址。
 
-| Chain ID      | Address                                      | Name                             |
+| 链 ID        | 地址                                         | 名称                             |
 | ------------- | -------------------------------------------- | -------------------------------- |
 | ALL           | `0x01`                                       | ECRecover                        |
 | ALL           | `0x02`                                       | SHA-256                          |
@@ -66,11 +66,11 @@ These are all the precompile addresses known to the `assumeNotPrecompile` functi
 | ALL           | `0x7109709ECfa91a80626fF3989D68f67F5b1DD12D` | (Foundry) VM                     |
 | ALL           | `0x000000000000000000636F6e736F6c652e6c6f67` | (Foundry) Console                |
 
-### Reserved Ranges
+### 保留范围
 
-Some chains also include reserved ranges for precompile contracts.
+某些链还包括预编译合约的保留范围。
 
-| Chain ID      | Start                                        | Stop                                         |
+| 链 ID        | 起始                                         | 终止                                         |
 | ------------- | -------------------------------------------- | -------------------------------------------- |
 | ALL           | `0x00`                                       | `0xff`                                       |
 | 433114, 43113 | `0x0100000000000000000000000000000000000000` | `0x01000000000000000000000000000000000000ff` |

@@ -2,7 +2,7 @@
 
 ### NAME
 
-cast-from-utf8 - Convert UTF8 text to hex.
+cast-from-utf8 - 将 UTF8 文本转换为十六进制。
 
 ### SYNOPSIS
 
@@ -10,7 +10,7 @@ cast-from-utf8 - Convert UTF8 text to hex.
 
 ### DESCRIPTION
 
-Convert UTF8 text to hex.
+将 UTF8 文本转换为十六进制。
 
 ### OPTIONS
 
@@ -18,7 +18,7 @@ Convert UTF8 text to hex.
 
 ### EXAMPLES
 
-1. Convert UTF8 text to hex:
+1. 将 UTF8 文本转换为十六进制：
     ```sh
     cast from-utf8 "hello"
     ```

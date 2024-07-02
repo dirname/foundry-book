@@ -1,6 +1,7 @@
+```markdown
 # cast wallet sign
 
-Sign a message or typed data
+签名消息或类型化数据
 
 ```bash
 $ cast wallet sign --help
@@ -8,93 +9,89 @@ Usage: cast wallet sign [OPTIONS] <MESSAGE>
 
 Arguments:
   <MESSAGE>
-          The message, typed data, or hash to sign.
+          要签名的消息、类型化数据或哈希。
           
-          Messages starting with 0x are expected to be hex encoded, which get decoded before being
-          signed.
+          以0x开头的消息预期为十六进制编码，会在签名前进行解码。
           
-          The message will be prefixed with the Ethereum Signed Message header and hashed before
-          signing, unless `--no-hash` is provided.
+          消息会在签名前加上以太坊签名消息头并进行哈希处理，除非提供了 `--no-hash`。
           
-          Typed data can be provided as a json string or a file name. Use --data flag to denote the
-          message is a string of typed data. Use --data --from-file to denote the message is a file
-          name containing typed data. The data will be combined and hashed using the EIP712
-          specification before signing. The data should be formatted as JSON.
+          类型化数据可以作为JSON字符串或文件名提供。使用 `--data` 标志表示消息是类型化数据的字符串。使用 `--data --from-file` 表示消息是包含类型化数据的文件名。数据将按照EIP712规范组合并进行哈希处理后再签名。数据应格式化为JSON。
 
 Options:
       --data
-          Treat the message as JSON typed data
+          将消息视为JSON类型化数据
 
       --from-file
-          Treat the message as a file containing JSON typed data. Requires `--data`
+          将消息视为包含JSON类型化数据的文件。需要 `--data`
 
       --no-hash
-          Treat the message as a raw 32-byte hash and sign it directly without hashing it again
+          将消息视为原始的32字节哈希并直接签名，不再进行哈希处理
 
   -h, --help
-          Print help (see a summary with '-h')
+          打印帮助信息（使用 `-h` 查看摘要）
 
 Wallet options - raw:
   -f, --from <ADDRESS>
-          The sender account
+          发送者账户
           
           [env: ETH_FROM=]
 
   -i, --interactive
-          Open an interactive prompt to enter your private key
+          打开一个交互式提示以输入您的私钥
 
       --private-key <RAW_PRIVATE_KEY>
-          Use the provided private key
+          使用提供的私钥
 
       --mnemonic <MNEMONIC>
-          Use the mnemonic phrase of mnemonic file at the specified path
+          使用指定路径的助记词或助记词文件
 
       --mnemonic-passphrase <PASSPHRASE>
-          Use a BIP39 passphrase for the mnemonic
+          使用BIP39助记词的密码
 
       --mnemonic-derivation-path <PATH>
-          The wallet derivation path.
+          钱包派生路径。
           
-          Works with both --mnemonic-path and hardware wallets.
+          适用于 --mnemonic-path 和硬件钱包。
 
       --mnemonic-index <INDEX>
-          Use the private key from the given mnemonic index.
+          使用给定助记词索引的私钥。
           
-          Used with --mnemonic-path.
+          与 --mnemonic-path 一起使用。
           
           [default: 0]
 
 Wallet options - keystore:
       --keystore <PATH>
-          Use the keystore in the given folder or file
+          使用给定文件夹或文件中的keystore
           
           [env: ETH_KEYSTORE=]
 
       --account <ACCOUNT_NAME>
-          Use a keystore from the default keystores folder (~/.foundry/keystores) by its filename
+          通过文件名从默认keystore文件夹（~/.foundry/keystores）中使用keystore
           
           [env: ETH_KEYSTORE_ACCOUNT=]
 
       --password <PASSWORD>
-          The keystore password.
+          keystore密码。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
 
       --password-file <PASSWORD_FILE>
-          The keystore password file path.
+          keystore密码文件路径。
           
-          Used with --keystore.
+          与 --keystore 一起使用。
           
           [env: ETH_PASSWORD=]
 
 Wallet options - hardware wallet:
   -l, --ledger
-          Use a Ledger hardware wallet
+          使用Ledger硬件钱包
 
   -t, --trezor
-          Use a Trezor hardware wallet
+          使用Trezor硬件钱包
 
 Wallet options - remote:
       --aws
-          Use AWS Key Management Service
+          使用AWS Key Management Service
+```
 ```
